@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<order_xml>
+
+    <item
+        name="前进"
+        focus="cmdfront"
+        messagetype="1001"
+        voicecode="F4 4F 01 04 00 00 02 03 00 00 01 ED">
+    </item>
+
+    <item
+        name="后退"
+        focus="cmdback"
+        messagetype="1002"
+        voicecode="F4 4F 01 04 00 00 02 03 00 00 02 ED">
+    </item>
+
+    <item
+        name="左转"
+        focus="cmdleft"
+        messagetype="1003"
+        voicecode="F4 4F 01 04 00 00 02 03 00 00 03 ED">
+    </item>
+
+    <item
+        name="右转"
+        focus="cmdright"
+        messagetype="1004"
+        voicecode="F4 4F 01 04 00 00 02 03 00 00 04 ED">
+    </item>
+
+    <item
+        name="停止"
+        focus="cmdstop"
+        messagetype="1005"
+        voicecode="F4 4F 01 04 00 00 02 03 00 00 05 ED">
+    </item>
+
+    <!-- zdy -->
+
+</order_xml>
