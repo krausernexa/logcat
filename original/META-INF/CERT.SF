@@ -1,0 +1,934 @@
+Signature-Version: 1.0
+SHA-256-Digest-Manifest: nGEwr2R1Ktcudbc1OtkgZQ/7ZobhymMBkaO44RNDDxk=
+Created-By: 1.0 (Android SignApk)
+
+Name: raw/vcd/VaDialer/grammars/VaInCallPress.0409.vad.xml
+SHA-256-Digest: /32haHKmf6EBmRu86Kg9G8z75KDjl44oJCgQKwGWHnw=
+
+Name: res/drawable/this_lib_write_line.png
+SHA-256-Digest: Im7R0bLn53o6Qh2Sxxl3y7EtIsoq5iFvGDY4RGgQlxA=
+
+Name: assets/html-pt/about2d.html
+SHA-256-Digest: eTwcfpqCBv7XT/1cWjCX3meR13bnBMENCk/yrnVTqtI=
+
+Name: assets/html-ja/license.html
+SHA-256-Digest: S7pq5nCqU5qAoMruh7MDQ/SCNzLileJnuX+zupRCxj0=
+
+Name: assets/html-zh-rCN/scanning.html
+SHA-256-Digest: vz9j9RfuEYGZyK5OuGIY0zMJ6lqR2ZIaGnPJQME6KQ4=
+
+Name: assets/vocon/clc_enu_cfg3_v6_0_4.dat.jpg
+SHA-256-Digest: yLzJV4FqpZyuAOi2vOIer6WCnx1EkIUyNCJLxv+iueY=
+
+Name: lib/armeabi-v7a/libdmt_vocon.so
+SHA-256-Digest: CAqARW5hDGYufDb70tv+u6zapj4Bux724Xclnu/WNA8=
+
+Name: lib/armeabi/libApkPatchLibrary.so
+SHA-256-Digest: N+R16z4ql6zCmlsPYe5jc1itLsEINTiIK4uk8rL0aXM=
+
+Name: raw/vcd/VaReminder/grammars/mappings.txt
+SHA-256-Digest: 3bHKA0kSsRYsUus6suHtPls43XmlrOY+0biuVaWxcrU=
+
+Name: raw/vcd/VaCalendar/grammars/VaCalendar.0804.vad.xml
+SHA-256-Digest: j1XkEKziw0aBvyQCpgkvum/HgZ6b0sTNrgSlY1mmLoQ=
+
+Name: lib/armeabi-v7a/libhead_touch_key.so
+SHA-256-Digest: S8JM0e2ZKTyc6DzY+6iV/90FIOv3M3ppPfEY/blRkek=
+
+Name: META-INF/INDEX.LIST
+SHA-256-Digest: bVowEBhB9TeoTDlRWXOdUeQkxFv6VZGfRqsIjaiauIA=
+
+Name: org.jivesoftware.smack.im/smackim.providers
+SHA-256-Digest: UGxCwPEHcufe8bj1oqnH81qYeFF0cE5rEbrSpcqrh2I=
+
+Name: assets/html-de/whatsnew.html
+SHA-256-Digest: HSSni1XruDWTbYqxb4Z12bIbcIJzw4KWQ6L+xuSW190=
+
+Name: assets/html-it/scanning.html
+SHA-256-Digest: Sh2xMoTLtnjimC4a9lGnL2qnAg73CZ87oU9Vjxjy6Wo=
+
+Name: assets/html/apache-license.txt
+SHA-256-Digest: iOOk5SRJ8ddTCYJ39NZCvAUEOohzT2Cc4b2jFTlsdno=
+
+Name: raw/vcd/VaCommon/grammars/VaCommon.0409.vad.xml
+SHA-256-Digest: ng8Dh7ZhkZ5kDsch9dPPbrTBb9vwg6D2ST8wh7fAo+0=
+
+Name: raw/vcd/common/grammar/Date.0409.vad.xml
+SHA-256-Digest: 480yjReU7hhqRhmkB9yu1d/+T69/RtlWCYJ4jU3B9vA=
+
+Name: org.jivesoftware.smack.legacy/workgroup.providers
+SHA-256-Digest: ttV2ZMo8JgYjK0D6KQniCqL64YW6PRXXwwtzpvMxRgw=
+
+Name: lib/armeabi-v7a/libdmt_opus.so
+SHA-256-Digest: 9g98C7Q0nz6QCVpplIW3nryO2e1hTVyN4HCyK7b/ueY=
+
+Name: assets/asr/common.jet
+SHA-256-Digest: 1H3rW31y3LUo4vq6AiJwyH1Nup67zpEHqD5P9MgziII=
+
+Name: assets/html-es/whatsnew.html
+SHA-256-Digest: OS0XJGDS4bKmGgEinzzYv8bl/9+Poz+CBqjfuwUF7Gs=
+
+Name: lib/armeabi/libcae.so
+SHA-256-Digest: rZx8HOGW1icXsZfspzSXe1yaa5wcHLHanhFf/zpbScw=
+
+Name: raw/vcd/VaCalendar/grammars/VaCreateAppointment.0804.vad.xml
+SHA-256-Digest: i7jv9/DQOu89sjXUs+krYGlpg60kVWibYgFar1dU8Q0=
+
+Name: lib/armeabi/libencae.so
+SHA-256-Digest: VgOCSB/PkVFSTRVps/NbBRaUu8pa91o82NTN6R0Nf7s=
+
+Name: res/drawable/this_lib_yello_line.png
+SHA-256-Digest: mRq87UFAfFUzFotRqGN21YS8uuCCyCUZi1vaUTxBNOc=
+
+Name: assets/html-it/sharing.html
+SHA-256-Digest: BEX+v+1S47t+4wKFbTT5lMtb+LtX+4TK7e8kHyJnhRw=
+
+Name: res/drawable/this_lib_back_logo.png
+SHA-256-Digest: r/t10Be2tLATv9qeiAkQrLQYZeCtrhmOvPT08zVcKqo=
+
+Name: assets/images/scan-from-phone.png
+SHA-256-Digest: bNnTJQlgNOdxoDcYlRv+Jexp3t9cQex7thwdoEudjgY=
+
+Name: raw/vcd/VaAlarms/grammars/vad-mappings.txt
+SHA-256-Digest: l10lXw6iVykV9/ac7VvqEkBjrxL8b3kHS7lBKptfMEY=
+
+Name: lib/armeabi-v7a/libalsa-jni.so
+SHA-256-Digest: N3kOkCjBpHcmSUa6TogiGrLjAVTuparC+IacoTYUo8o=
+
+Name: org.jivesoftware.smack.experimental/experimental.providers
+SHA-256-Digest: W8xOiaiP1/yUBvbqz5hwFf67FfJaoEfAPzKEnFcy1X4=
+
+Name: assets/html-en/whatsnew.html
+SHA-256-Digest: pUm8EDgE1Vg/Pvw5Wg7CkTaXDF05J/4WhqWkUIScUKA=
+
+Name: assets/vexpressive/clc_enu_samantha_cfg3.dat.jpg
+SHA-256-Digest: 8w2tKzv27EstdOfBtKn/I4EELXgk5h/mGpeHQMieylo=
+
+Name: resources.arsc
+SHA-256-Digest: dgnNKGR+tICUo7EwY4t/hXq8RH2z3WsLzn6HsqGd9Lo=
+
+Name: org/xbill/DNS/windows/DNSServer_fr.properties
+SHA-256-Digest: aPvjePTYMH4BW0kVLaYBkWnxvxUMRqBPy0+aKp8U0oQ=
+
+Name: lib/armeabi-v7a/libdmt_native_utils.so
+SHA-256-Digest: tPCMft5QqZ7rqKhl+d+R27ctkUrWj9J+QRhITZLZOz8=
+
+Name: assets/html-ru/license.html
+SHA-256-Digest: NrOlspM3qsoSVDyaBfGWocmtWIDL0QqU+jTFoCtZRs8=
+
+Name: AndroidManifest.xml
+SHA-256-Digest: 4O/GWMBNxPT2ifLDgy0L44cEmbWmZ3fdIcs/jcXr8IM=
+
+Name: assets/html-ja/whatsnew.html
+SHA-256-Digest: 9XQEtFFbp+f5X6drhb/HuYCUareRfPSHuooOr1A5SKg=
+
+Name: lib/armeabi/libdmt_speex.so
+SHA-256-Digest: 7dJ56wbJdIYvhWXYrfnASkA4zSCJC5ZZM0NB6fZoshQ=
+
+Name: lib/armeabi-v7a/libIWM.so
+SHA-256-Digest: ZOywdGuLkFUKuZzPU7pV4v+FCu1huyMp+lMjpWkiMFM=
+
+Name: lib/armeabi/libhead_led.so
+SHA-256-Digest: E88QknHf6CkbtBVHX/243uuLmcHp+3fUFcfRyxPhOHM=
+
+Name: assets/tts/catherine.jet
+SHA-256-Digest: mqlSMyIjHFB+VIawP2vt20eGm7TF8ImdBOPONrbzWCo=
+
+Name: raw/vcd/VaCommon/grammars/VaCommon.0804.vad.xml
+SHA-256-Digest: nXVTFm9CyqB/13XQvla4Z1RQEdAVx5OiXQ9qUAxqUKE=
+
+Name: assets/grammar_sample.abnf
+SHA-256-Digest: S9+S0tsN0W2kioQSA4WvZ3rb8VEX3t4CEvTkLCqtOak=
+
+Name: META-INF/services/sun.net.spi.nameservice.NameServiceDescriptor
+SHA-256-Digest: +mJuxd1EqGW/XsEmKe2xiHfmVmFXecdwYKwk4piBKt4=
+
+Name: assets/images/big-datamatrix.png
+SHA-256-Digest: o08T+AfSanz846JghsR7PAqnhIfyYDgp4slMlE60mzw=
+
+Name: raw/vcd/VaReminder/grammars/VaReminder.0804.vad.xml
+SHA-256-Digest: gkDqrsI8J20nz5uCyjKyfI21+pF6jn9P6OqqDX3KhW8=
+
+Name: assets/iflytek/voice_empty.png
+SHA-256-Digest: rMbiqT2wZrxiw1wKbp1EbfnPzRA5+6WtABnce4lA3Xg=
+
+Name: assets/html-nl/sharing.html
+SHA-256-Digest: lFRTC4N/N2Vl0+eq5Mo9YyWDIveTSrra2pTVIm495BA=
+
+Name: assets/html-zh-rCN/license.html
+SHA-256-Digest: JKE+c1BwrBxWmAX0zdONjrBuhGczDzvu4q36bMmhMq8=
+
+Name: assets/vexpressive/ve_pipeline_enu_samantha_22_bet3.hdr.jpg
+SHA-256-Digest: UQUrkcB1gb1imsWMmaPYkdvuM5UasEY+AwCf5NMNNrY=
+
+Name: assets/html-fr/whatsnew.html
+SHA-256-Digest: BzlESGLya9gC1G6AMa5M496aScU15hhx9jHCfF3kb1g=
+
+Name: assets/html-ru/about1d.html
+SHA-256-Digest: +ifxy/FcGPInjvEyi1T14On+FUJ98Z7bQ5c85+pf/IE=
+
+Name: assets/html-en/sharing.html
+SHA-256-Digest: J37+zad9wXTpQytrotpFN6Pjt95jhMc0OnhT04QYlrc=
+
+Name: assets/ivw/hello_alpha_en_three.jet
+SHA-256-Digest: nr63EyIUxrQTjWolU56Ekn3P4WxrvCKYqhDzsHfluSw=
+
+Name: assets/wake.bnf
+SHA-256-Digest: Gh/92gMP0xKADuvjkAk490bwrCeMQS37ic0W2HR4X7w=
+
+Name: raw/vcd/common/grammar/Date.0804.vad.xml
+SHA-256-Digest: rqlF16gBYfi/WlG7UlrXVgGnXQOcyjrqHMXzXzcHz0E=
+
+Name: res/layout/main_music.xml
+SHA-256-Digest: nXy+yvJ5VvdKq2UDE+QLPXUJU68f1X0xjcBUXbcqlh0=
+
+Name: assets/html-zh-rTW/sharing.html
+SHA-256-Digest: rLaqcgML0SHItoOQ1rq3zTsa7m6QsitZbBYBtn68zUY=
+
+Name: assets/userwords
+SHA-256-Digest: Z9mKKuYVnsiM/5lMBOjfahNNAgwVGgexzym3F8cotuU=
+
+Name: assets/vexpressive/ve_pipeline_enu_allison_22_bet3.hdr.jpg
+SHA-256-Digest: zwjWncjDuwGDOJA9Eup2/IB6rxXAsd2+FjJv9TsPjnA=
+
+Name: org/xbill/DNS/windows/DNSServer_de.properties
+SHA-256-Digest: rOeP67twwI+HACt6hSmo/idoRUSi5E7s4p9Wd6FCZH8=
+
+Name: assets/html-es/about2d.html
+SHA-256-Digest: thIwFoxJDo3gUpWhQAbL9l76lOeb46jctvDvPfFXdFw=
+
+Name: assets/html-ko/whatsnew.html
+SHA-256-Digest: jJDxw9Ss0JBGeBdNrrpjRGfpw/IxL16GMEmVDr4aQ9U=
+
+Name: assets/html-zh-rTW/whatsnew.html
+SHA-256-Digest: lQwcXrcxXc4SFvjyU9DENdrIwDVLO+Dpom2TOhLYecE=
+
+Name: raw/hostconfig.json
+SHA-256-Digest: tnlnldKitp9Tq5we6pQd8TCu+mPls4RESMCb1K9MuP4=
+
+Name: assets/ivw/ivw_resource_three_cn.jet
+SHA-256-Digest: upjTMy2YUY8hRG+7gfT8CcnC6nOgdPBI4BOz6ACIgRU=
+
+Name: res/layout/activity_main.xml
+SHA-256-Digest: /tEfZxEXlOWywOvMqZIErg4PW8cMn1tGbwELSZys8GU=
+
+Name: raw/vcd/VaCalendar/grammars/VaCreateAppointment.0409.vad.xml
+SHA-256-Digest: iSbQC/Hz+3PEucvIG+UDIab+MMH+58Sc4F9CSmYRe5A=
+
+Name: assets/html-ru/index.html
+SHA-256-Digest: uRPTgYMkwYYA4lyv7IDzV+71x4LewYwLCSYgm+949KU=
+
+Name: assets/html-ko/sharing.html
+SHA-256-Digest: YUS2rIjTkfzRvBLdJUbAtqq9mWRJcy4YAhQ3HoenTHg=
+
+Name: raw/vcd/web/Reminder.png
+SHA-256-Digest: lLcChZBx41G+eORG6cbf6LLkJEzm0K0LyLRKxAwwlXI=
+
+Name: raw/vcd/VaDialer/grammars/VaDialer.0409.vad.xml
+SHA-256-Digest: LNKZa5W6bMeetxxaunTO4LNvENkdlsP8iw3Q20ocy3Y=
+
+Name: raw/vcd/VaTextMessage/grammars/VaTextMessage.0804.vad.xml
+SHA-256-Digest: CoL0awlE9AKAvOELhZk7fa3e3kg4Ut/IiaTfB8gRyvI=
+
+Name: assets/html-nl/whatsnew.html
+SHA-256-Digest: v7GNzNX0IyxU3vggX5ZlyWHcMg4axG6Gp1A8PMHDaBQ=
+
+Name: assets/tts/nannan.jet
+SHA-256-Digest: gDNKeLJWLyMkgivLJeLIHUp+Q76hKPVy62NbJyBQyDo=
+
+Name: assets/config.properties
+SHA-256-Digest: vtB9/+pUvbfq8QxzC/Vkh+NreS8AHnoOKrAo9bfOhfI=
+
+Name: assets/html-es/scanning.html
+SHA-256-Digest: ppbWlSoEyzE/XzbBOrWoTxI5kStMPdrG5WcNBv7EGhE=
+
+Name: assets/html-pt/scanning.html
+SHA-256-Digest: T9VtaFzE/mkeQJgODKb2X7OwOlMOt2LA4MxA3IH6Mqc=
+
+Name: assets/html-zh-rCN/about1d.html
+SHA-256-Digest: ayyo5yCaFZxY/l4g4j89F8BzZ4uTeMkrpiSufuUrCtk=
+
+Name: lib/armeabi-v7a/libgesture.so
+SHA-256-Digest: 9AdOKB/7uV9wWy7LyHgAUmdR6OE/pev77SiHAuJB1jc=
+
+Name: assets/html-de/sharing.html
+SHA-256-Digest: ba2zvQt6bMWEYcxym22sPbH05DfOlIQFCjvYR/Wmw+Q=
+
+Name: raw/vcd/common/grammar/Common.0804.vad.xml
+SHA-256-Digest: SrgL+0A75w43W4sAIO9A1iP80zeQKSGucExILUjRpeM=
+
+Name: assets/images/scan-example.png
+SHA-256-Digest: iZR60FircYnj0+Ymdjy2EYg0pfnCA2HAJXLndVW+DnM=
+
+Name: res/layout/activity_main_hareware_test1.xml
+SHA-256-Digest: hupfyLK0xS3VMewOkIRh8aeUjB/QdRahz9MKlac91VE=
+
+Name: raw/vcd/common/grammar/Prompts.0409.vad.xml
+SHA-256-Digest: H1eVFGmWzNVnvuhlVjSv9MhAVpQsegYGqrWz8fTj3b8=
+
+Name: assets/html-ru/about2d.html
+SHA-256-Digest: lZ1fAgA8ENPuG1tSJMU9uvhrtvf/yMMPNYO/lJ3gG9g=
+
+Name: raw/vcd/web/vcd.js
+SHA-256-Digest: xvxeBCoGtn256LeYi8Me5MfpDn3kvluXma89kDN5rOo=
+
+Name: assets/vexpressive/select_tian-tian_bet3f22.dat.jpg
+SHA-256-Digest: WXOEHwaUhG+SSpZOY7t1A8p8xRdCaxbZlx0yQPjpEBc=
+
+Name: lib/armeabi/libhead_touch_key.so
+SHA-256-Digest: z9eCd/afC2VaVKlmUV9dajHGqgzfa1AX6ABhdeRR3vg=
+
+Name: lib/armeabi-v7a/libencae.so
+SHA-256-Digest: B7ofG7S2qk4kaVCEPX3sB9EOikDRHPY/t2+1EHk3i8c=
+
+Name: instant-run.zip
+SHA-256-Digest: +ZvyDPQs2RKJLKJbMnswjXMr8gFPvc/kuftihCbmbcY=
+
+Name: assets/html-zh-rCN/about2d.html
+SHA-256-Digest: TLdokBAQYsrkPmux1Xs0RE0VBhDarCplC3w22A7KFMg=
+
+Name: assets/call.bnf
+SHA-256-Digest: Ywtm1sKLH3y+iAvIm+n7YH+O4xcvV469i9fK+29DabE=
+
+Name: assets/order.xml
+SHA-256-Digest: wP/Il62t8B297QFRnlT3g6/K5OK+0vZegCT8cQelP2M=
+
+Name: res/layout/encode.xml
+SHA-256-Digest: 8d5zcnjLpKgSg7i0cFYcBTJV4/LwONcaVZPtm8heXdc=
+
+Name: res/layout/this_lib_capture_zxing.xml
+SHA-256-Digest: leJu4mkLvputA7CecbCAxPXhewsXKQXsxKu5Yt3ttRw=
+
+Name: assets/vexpressive/select_allison_bet3f22.dat.jpg
+SHA-256-Digest: +HXEa6kXgMqZ4O74cTZP05cmeJIGTfadgjnBu9Lz6jg=
+
+Name: res/drawable-xhdpi-v4/qr_icon.png
+SHA-256-Digest: G0VBuebhv7yiH3M7TR+Cv/uukYCzjtMonneyoJ7lnZw=
+
+Name: lib/armeabi-v7a/libsingle_wakeup_cae.so
+SHA-256-Digest: gtoJS+3PjmHysHHwg6h4n7SYml/GRlzFgCsgLMBieSU=
+
+Name: assets/html-de/license.html
+SHA-256-Digest: j15J/bgDh04dxctg9V5y5MqpkGHGT1tk35On/pa6JmM=
+
+Name: org/xbill/DNS/windows/DNSServer_ja.properties
+SHA-256-Digest: llS9whhCtqxKrVtNFhMMIk2vujL+Vq5N1xxoiJLhSYM=
+
+Name: assets/ivw/56652373_alexa_BeginSil.jet
+SHA-256-Digest: huzZ3R96D+25SCD00uiAZLlyNT69YxZiu02EH9hEN1M=
+
+Name: assets/html-ru/whatsnew.html
+SHA-256-Digest: yslv3aYO1u0+r7oS1L/G6QRGvnklZ21uxzgMs/hGJEQ=
+
+Name: assets/html-nl/scanning.html
+SHA-256-Digest: /3t6FSBrHzRAPQc3KdFp5ZliPeYjezU9NdGDb3zXBN0=
+
+Name: raw/vcd/common/grammar/Numbers.0409.vad.xml
+SHA-256-Digest: OJZQwu3qtF3SVxENGgsaU4xuK60BprcPqYUCVOsEWbE=
+
+Name: assets/vexpressive/clc_enu_mpthreevadml.dat.jpg
+SHA-256-Digest: v6scMvFmUJC5s0ZcTu5sBHPFMZCrY3agMdd8vRro/eY=
+
+Name: assets/html-de/about1d.html
+SHA-256-Digest: vKEsivY41peGQKimOLGn+QPGQ0q63OFGdIaN856m4AY=
+
+Name: res/xml/chinese.xml
+SHA-256-Digest: Ph2/bdJ29P3Gp+T81c+CYwvuU+BLvxAmOY7KZmKucgQ=
+
+Name: assets/iflytek/warning.png
+SHA-256-Digest: 9+fkMXYAf+LrKGvJqYoq7F07vh3DNgoEziiSsdy1L3E=
+
+Name: lib/armeabi-v7a/libandroid_platform.so
+SHA-256-Digest: ELROMiRpbl5pJuzP+ZfIQdYMfv0X+k+E4Vpf5be04JU=
+
+Name: assets/vexpressive/synth_med_fxd_bet3f22.dat.jpg
+SHA-256-Digest: TyCzRtacLM8nJDbhy+OAjUcLl3g+/Mn2LiQWp04RZ6U=
+
+Name: assets/images/big-qr.png
+SHA-256-Digest: kV0Sek1rrU7BDw8/qwNOv4gae7riDEEfI9+fVZ2MjCQ=
+
+Name: raw/vcd/VaDialer/grammars/VaDialer.0804.vad.xml
+SHA-256-Digest: kxR1W5nGj5Qaxd9tWj+AyhhrSk6j/ASnux+Mf7eWNHk=
+
+Name: assets/html-ko/scanning.html
+SHA-256-Digest: r13DfQqwT1mgUPyzqcgYSrRxrJyZyRwoOftZoazAyzk=
+
+Name: assets/vexpressive/clc_enu_allison_cfg3.dat.jpg
+SHA-256-Digest: jtJuEOgP+508DJOJTQZAlerdkyXe+vg8IucAbcyqjDs=
+
+Name: assets/tts/john.jet
+SHA-256-Digest: V/8E2eyiOhckSDClhXXqDF3WBTENVk5huE7kduPvPoI=
+
+Name: assets/vocon/clc_enu_mpthreevadml.dat.jpg
+SHA-256-Digest: fCBsNm3w1gi5xLzixPW6mAulf1hgyTAPrZLRDx5s/gQ=
+
+Name: raw/vcd/VaCalendar/grammars/VaCalendar.0409.vad.xml
+SHA-256-Digest: BYjXMFA6R/Qlcq34K/uhd14rGMbmeviHz0M9HUBsGsw=
+
+Name: assets/html-ko/about2d.html
+SHA-256-Digest: P76hIrRkOaCVxBwAu+Kz956JjruC3z+hGEN4CtAos/I=
+
+Name: lib/armeabi-v7a/libaudiodev.so
+SHA-256-Digest: +ochFsERAzJ4OWYe5HsAiYnj4XU4rhAPf4CZ2xlxrzM=
+
+Name: raw/vcd/common/grammar/Common.0409.vad.xml
+SHA-256-Digest: f8Ql4BFXBfi/vyb7ozZWqKBV9yebOIkuCfKIc009an8=
+
+Name: assets/html-zh-rHK
+SHA-256-Digest: xC8eOmtOedorsT45BGi+hznzkyopJL4BS+RTYe2RAdE=
+
+Name: raw/vcd/VaDialer/grammars/VaInCallPress.0804.vad.xml
+SHA-256-Digest: lL1ma5sATiwJ3lCX8zldSgoLb8viFMSISJ5N1NejL7Y=
+
+Name: lib/x86/libgesture.so
+SHA-256-Digest: x5mFM480tsYeziG2V0j40RF8OhWtO6lWlC1AHBkx1RU=
+
+Name: org/apache/http/version.properties
+SHA-256-Digest: P9pJSB8l17rbd3UKL1d23J0/6jCeRoanQcbTODJsBwo=
+
+Name: assets/html-zh-rTW/index.html
+SHA-256-Digest: fwM84j1Dnj/Rwt/D/mny4TFJ8gMARG9+40UVkArKhZs=
+
+Name: assets/html-en/about1d.html
+SHA-256-Digest: T9GPQjAj+OB7YxoF2UwumRpsg6YxXOuge0JLKToFXrE=
+
+Name: assets/images/big-pdf417.png
+SHA-256-Digest: 9hrziNMSdtGYY9bNE+sPs9ENTmCAeCogPdUDIQKtB30=
+
+Name: assets/vexpressive/select_ava_bet3f22.dat.jpg
+SHA-256-Digest: HjIxPrNNdLbGrBK2tXdxXUHFVwZBzSR9QurY7WojbdE=
+
+Name: assets/html-fr/license.html
+SHA-256-Digest: nlueqUB75j5qMlIb2FMrAuNTMmUqd/debzNuwObbwk0=
+
+Name: lib/armeabi-v7a/libserial_port.so
+SHA-256-Digest: fcz6z3sj1QUI+2MKGyOwPmlvNqSZSJcCq8ie0Exb3RM=
+
+Name: assets/tts/xiaofeng.jet
+SHA-256-Digest: 2RX81P9cfTEXmrdmr1pOhgiM9e4XRjD47GOylGTtOAI=
+
+Name: lib/armeabi-v7a/libdmt_vocon_neon.so
+SHA-256-Digest: yGvkt+jNlXw4wZTrKbeBwcreH1jXctRB3HarX8IQLik=
+
+Name: lib/x86/libaudiodev.so
+SHA-256-Digest: FuH/P5rp8+DNKwR5bXKozfxv1DrAhPL6rrZcDDJpVZY=
+
+Name: lib/armeabi/libdmt_native_utils.so
+SHA-256-Digest: Ga+k4XQ0DI7eWSl+bDcPRYNVg3HRLVaREEJ6bJUK3Lo=
+
+Name: assets/style.css
+SHA-256-Digest: mC0NnduLvZAbFXElnciORXQlINl1NaXCIOjHqvRj+Go=
+
+Name: assets/html-nl/about1d.html
+SHA-256-Digest: Re5w7u9+LEHyGvJkhdQxsYLEF+bbZAuPBSBCJjezrX0=
+
+Name: assets/html-pt/license.html
+SHA-256-Digest: mlLzpcUtUur5L/PGHJYtaVZw9H7DX2y7N+C0N9ZnoDc=
+
+Name: assets/vexpressive/clc_mnc_tian-tian_cfg4.dat.jpg
+SHA-256-Digest: zwJKCQ8RAahooeds00xmJCm1PoDMiSd+uD2S53qoq2o=
+
+Name: assets/html-en/index.html
+SHA-256-Digest: mxoiYN8lc/ay97ilqJkBM1xGpuppLm/0azB2hdIT3M0=
+
+Name: raw/vcd/web/Alarm.png
+SHA-256-Digest: jZbJ5eaHaaCTgddalMZeJP0NcZUKeIJK8R5quHt9LIQ=
+
+Name: assets/html-fr/about1d.html
+SHA-256-Digest: BxKZLK8rkHVr2aP4ncgMiV5WI9xjt/BJM0TPlnXK1MI=
+
+Name: raw/vcd/web/Calendar.png
+SHA-256-Digest: 9dXd8vJz11f57mJ4H+SQFFmlBmEzq9gOxP7SIREUgac=
+
+Name: raw/vcd/common/grammar/Numbers.0804.vad.xml
+SHA-256-Digest: qG7Ldvg1sJPThj/W9d8GvOUUbXr19aIUGdLE76iEBQw=
+
+Name: assets/html-en/about2d.html
+SHA-256-Digest: YstOdDRX/ImkPO+d4LelmfOcrbJqqvUS1blNwoI8CM0=
+
+Name: assets/images/demo-no.png
+SHA-256-Digest: WT7j7nB766nPXUpZG0Zj7JbeekcSvDz9+2NUJhXUl2M=
+
+Name: raw/vcd/common/grammar/Time.0804.vad.xml
+SHA-256-Digest: zE+XHWO5Jd/fevwXj5LN38m2QvNtDv6xm0C6xAuhNP8=
+
+Name: assets/html-ko/about1d.html
+SHA-256-Digest: QHm48EGp4MTRS8BETGPZas5S56ZZzg4wBqA7qd8u09o=
+
+Name: assets/tts/xiaoyan.jet
+SHA-256-Digest: wObzITine5i0AXLkQxtP0UPbf2JITAxZp/kPsf+8pCg=
+
+Name: assets/html-pt/about1d.html
+SHA-256-Digest: HUurrt+xa8kA1n940nAKiG/AXcIuoZZiJ4O9hydbVy0=
+
+Name: lib/armeabi-v7a/libzl380.so
+SHA-256-Digest: 0fazql8kHGCu7RbsgN+KIQ4C+3xVsFoKaJgcP8qYDA4=
+
+Name: lib/armeabi/libalsa-jni.so
+SHA-256-Digest: azT/MB5jzkIRILrrmarMSsNfRR3pCIM4dTEWxhhNEvg=
+
+Name: org.jivesoftware.smack.experimental/experimental.xml
+SHA-256-Digest: YEmoGbDrFYECTz0uXUr0lUNmLMBbhy19HumB3d/hLno=
+
+Name: org/apache/http/entity/mime/version.properties
+SHA-256-Digest: g1dP8hMTbjXyPkJa6sbzmXqTQ5/KTsyLqqL+79Jl91E=
+
+Name: assets/html-nl/about2d.html
+SHA-256-Digest: YMrRtCoFysfQqh2cT4+QQS1/tqacA6K90gPWZ4VDYOY=
+
+Name: assets/vexpressive/ve_pipeline_mnc_tian-tian_22_bet3.hdr.jpg
+SHA-256-Digest: 8ZWv0DLeydyEQ7s++JXPvDzIAhrqO6KatHgQqQ8ZhTk=
+
+Name: assets/html-fr/about2d.html
+SHA-256-Digest: Noo4MoK+O0uTI2dbGDx1Zdh6HkUtpa4Aq3YqlP4njVk=
+
+Name: res/raw/qrcode.wav
+SHA-256-Digest: gI0G2ZnDAqdaJ9lnplHQDU0gHZvH2oedV0z/KDYVfZI=
+
+Name: org/xbill/DNS/windows/DNSServer_pl.properties
+SHA-256-Digest: XW/M9EkE2W25AG+s6aCR94+tlzw6snSRnV+Mx99d4V0=
+
+Name: lib/x86/libserial_port.so
+SHA-256-Digest: QmIHSyNtqZqcXbeaCTQpbTU1UswTtauG+z/eYKmSTMo=
+
+Name: raw/vcd/web/templates/vcd.html
+SHA-256-Digest: dgm5VyoJRrA6KwjzakFpRbRnLGrtOvXBDpXd4XURGIg=
+
+Name: assets/vexpressive/clc_enu_susan_cfg3.dat.jpg
+SHA-256-Digest: tcA960fXTOFrkOjLLmiuxWHYnMjarmz8AMzXENDujSo=
+
+Name: assets/tts/common.jet
+SHA-256-Digest: njkP/02Ab3VAqJ7l0im5O0sMsg9Iz8kOtvQ/xmmK+Qg=
+
+Name: org/xbill/DNS/windows/DNSServer.properties
+SHA-256-Digest: +pnptRPsekXDqD5x/kxfIK8lLGJDHKb9w6teMOCJ6H0=
+
+Name: raw/vcd/common/grammar/PhoneNumber.0409.vad.xml
+SHA-256-Digest: eyuqWvWPS7E9noMfitiT3A6djnARBQtdVBHMn1CiVDs=
+
+Name: assets/html-zh-rTW/about2d.html
+SHA-256-Digest: OEXS/E+47n2qxBiMU+gByyKEUuXqPa8PGn9w0lSc50k=
+
+Name: assets/html-ja/index.html
+SHA-256-Digest: 2RpDJ7MBfs8Eku6WVTMFW1djEnz/F5xKWWzGldwVd3A=
+
+Name: raw/vcd/VaTextMessage/grammars/mapping.txt
+SHA-256-Digest: Og4EYLYVvmlvlRkCc/9KQ4nBOz6L0+zVO9NJpV9ZOJA=
+
+Name: assets/images/big-aztec.png
+SHA-256-Digest: FQMIDt8b1gSnau/iOftBcSv+fxcvu+yAnjAcFIrtC1I=
+
+Name: assets/html-ko/license.html
+SHA-256-Digest: IW5vdSsBUrFGrWdWq0sQH0LVTbfg32XnQ8FEe4j082k=
+
+Name: lib/armeabi-v7a/libNativeClassJni.so
+SHA-256-Digest: BZFvFpLwBjOHi9LUgE0W8HMfDmuiPkDxByWnOrpOdlY=
+
+Name: assets/html-it/license.html
+SHA-256-Digest: 7VFO1vayVoSi2e+0Qd3m0yG0ccBaP4RiRHJCY0aaIRg=
+
+Name: assets/vexpressive/select_susan_bet3f22.dat.jpg
+SHA-256-Digest: 6CP82nk4+sdpFUlk6OlR/0f0d2BURhFGIy4lNdcOoXU=
+
+Name: assets/html-it/about1d.html
+SHA-256-Digest: 0AtLmaU+KS2jB1veYPKQxQuqqu3eioKPPdMIg/sis1s=
+
+Name: assets/html-ru/sharing.html
+SHA-256-Digest: iYOxrGqYmYhtuXqBvTndaRQaxCM2eC8WNq+hrHUJgFo=
+
+Name: lib/armeabi-v7a/libcae.so
+SHA-256-Digest: xYgCgNYuTowGkXbVvQ2X4RnSS9xqEZiNFQu8S9SICmM=
+
+Name: res/raw/app_switch_hint.mp3
+SHA-256-Digest: 9OBj0SacW4YKHktDIi7QYkHRIZjJbIN8lx8kzwKYOVc=
+
+Name: classes2.dex
+SHA-256-Digest: XXP5cGzpj2lvs8nLlRqi0696scsjOjG1ifTFyPlUWvQ=
+
+Name: assets/html-nl/license.html
+SHA-256-Digest: I5dWnq9fPdaz2Fe6aijajyc6gNxxmSBIfNdPE9aXNJA=
+
+Name: lib/armeabi/libdmt_vocon_neon.so
+SHA-256-Digest: jsmXJpwxyKvsvWDKXbsgMRbQNtN2xK9SQfpQRhs+zNo=
+
+Name: raw/vcd/common/grammar/Time.0409.vad.xml
+SHA-256-Digest: g6pyjtIWwhsZRB3Htj5hosHMNDeN+uJrM0CSnBmrt4o=
+
+Name: assets/html-ja/scanning.html
+SHA-256-Digest: 0QDH94hqQ7Wp/oSB91OrDw88eUaZeoblwM3/hsj812A=
+
+Name: assets/html-en/license.html
+SHA-256-Digest: ElaCspPcD27aPwm92WKmN8YbesqbV9kPesIya4/Dihc=
+
+Name: lib/armeabi/libthree_wakeup_cae.so
+SHA-256-Digest: 8f+x9QtZmvqNq4hxsjjeECz44Mfe7OO6QUbW1Z8O/Bk=
+
+Name: assets/html-es/index.html
+SHA-256-Digest: kSU+raANDKtaokIZXHu7wgd4YcECVFBTThmEIUwT+tw=
+
+Name: raw/vcd/VaCalendar/grammars/vacreate-vad-mappings.txt
+SHA-256-Digest: p7o8Oxv6gRNCJrz6s0jb8SBTmF3LA1ObCIlWrm2p5cU=
+
+Name: res/drawable/btn_geting.9.png
+SHA-256-Digest: vL3tfF9IwTCwgyrPw+PuBtqBggEjiQeu7hV4Jxw041Q=
+
+Name: assets/audio/audio_wait.mp3
+SHA-256-Digest: 9kzuGK84/fpG+Z/6eMzBLoPk5A/7xmItgKNj/ujO7tw=
+
+Name: assets/images/contact-results-screen.jpg
+SHA-256-Digest: MjSLyR9s9whddPWrPy3n3qjKXcjeikw6ZUA6HTurhq8=
+
+Name: assets/vocon/acmod5_4000_enu_gen_car_f16_v2_0_0.dat.jpg
+SHA-256-Digest: iD/DC7Al1eRB9iF205vj7kmc+J+eMzf76qXSOrPlWjg=
+
+Name: assets/asr/common_en.jet
+SHA-256-Digest: ostzOmzdb4zIidjuvsXSrJs2UlGupR9z5q3FoxG6VpI=
+
+Name: assets/vexpressive/clc_enu_cfg3.dat.jpg
+SHA-256-Digest: 0Dd5cKmW+Sd/ptRyuodc/HJg17cLGWWcXkiZsFodVJY=
+
+Name: assets/images/demo-yes.png
+SHA-256-Digest: FbXobU6MZ7EXp5rLOjTYxlWzND/JiDqQeiVc/ApVfh0=
+
+Name: raw/vcd/VaDialer/grammars/VaSpeedDial.0409.vad.xml
+SHA-256-Digest: ID3Lqvqg8fhu/YdJ9/af+e5ZIQj9dVKmAtrQf0RtPZg=
+
+Name: assets/iflytek/waiting.png
+SHA-256-Digest: Ic23pDCDLt0DYaPdFGVXz2SWBUPkXsTJxhriQtFJaG8=
+
+Name: assets/html-zh-rTW/license.html
+SHA-256-Digest: V3hULLoGHOORR3RRrP9I4FZTOnh4NgSNCuM7KzmVJOk=
+
+Name: raw/vcd/VaDialer/grammars/VaCallForward.0409.vad.xml
+SHA-256-Digest: ScwHOW2WRpGSaM0J6UopsvJwGy/aAwtIyk7ypMBGHBM=
+
+Name: raw/vcd/common/grammar/PhoneNumber.0804.vad.xml
+SHA-256-Digest: ajDIgYhOnBq2glNajQTVeP74xx6rOpq/rMlTLZq1j6k=
+
+Name: lib/armeabi/libIWM.so
+SHA-256-Digest: RIFpZiz9fbrROuQAtDfZUN38g1X+o4vpygJqtvCjgoY=
+
+Name: lib/armeabi/libaudiodev.so
+SHA-256-Digest: nUi4lAqRxQRTbxXTLFWQQqbKPvp/0lszDK4BTOlbsWc=
+
+Name: assets/html-it/about2d.html
+SHA-256-Digest: Rzk8qcNJ61d/s5JGoLogDpp1d4z2rrzzAT5Ln34VS5g=
+
+Name: assets/html-pt/index.html
+SHA-256-Digest: V2OSOZAGFma7MxVXf8pDm4zSAuaxmFuFtMmbu/4qm8I=
+
+Name: assets/iflytek/voice_bg.9.png
+SHA-256-Digest: sqEyykjZWJAPtvlYPoT9ViRYjcdnP+feW4maONypjT8=
+
+Name: assets/vexpressive/clc_mnc_li-li_cfg4.dat.jpg
+SHA-256-Digest: uzU/K/LhlEkujQBk+mPx8NnwLruRpyBv6djaZXtysJg=
+
+Name: raw/vcd/common/grammar/Prompts.0804.vad.xml
+SHA-256-Digest: MeaNDXCHlViZABe+OEfIVuRJ3sSSJSo6nhLzftAe628=
+
+Name: res/drawable/input_nomal2.9.png
+SHA-256-Digest: 8y51SqrQuPqNmuGgo+ki3yiQADTkpbWddIqn7FEqqr0=
+
+Name: res/xml/english.xml
+SHA-256-Digest: FtB0Rj7R8EaWrwSvqc29HySTreaxLHaadRYE/Fp2ulM=
+
+Name: assets/html-it/index.html
+SHA-256-Digest: W8Qo/eHfT5QwVbiSL9wlmrufrqQul+DQoX/RTyaYKgo=
+
+Name: res/drawable-xhdpi-v4/btn_geting.9.png
+SHA-256-Digest: iBYSaekW5SwWeXL/ZhG1KScMnuSxwAs+MKDEyllgTuk=
+
+Name: raw/vcd/web/templates/alarm.html
+SHA-256-Digest: 3GN2y0Tsl4Z6UJ6OPj8/7oe3qQnsufdRZLKWD6xV3GI=
+
+Name: assets/html-zh-rTW/scanning.html
+SHA-256-Digest: 1cBKJcvh1H7P4DaPb9HRlFlrchZjdC89N0G6G5g8Pwo=
+
+Name: lib/armeabi/libdmt_vex.so
+SHA-256-Digest: wuDlaySlteeUMmaECe9YAqLSMUI2653kZkqMjNZ6g0s=
+
+Name: raw/vcd/VaOnDeviceSearch/grammars/VaOnDeviceSearch.0409.vad.xml
+SHA-256-Digest: nhYgdtsKvbbYExcXE64ve/wVr+TGCuHgHtfwrlv5htk=
+
+Name: assets/html-ja/sharing.html
+SHA-256-Digest: jHUD/OPF7dWjpjYYo5Ehzg6BBamK0GHgona5uIEWRzs=
+
+Name: assets/vocon/ubt_grammar.fcf.jpg
+SHA-256-Digest: ZuaeRdnYYt5HIur70pz7YYXKkl5VFkubtq5cZ6ZWSUM=
+
+Name: assets/html-fr/sharing.html
+SHA-256-Digest: 30tnlIvugbUEnNixqPumC09JqTGWY4wxuo4zyOmKpcg=
+
+Name: values/strings.xml
+SHA-256-Digest: ReAHlnOEQyHnKARdKXk2pcL0dLJc1eQviyPMgze/mwE=
+
+Name: assets/images/search-book-contents.jpg
+SHA-256-Digest: rK2jADHFLUb+HDbvSFerDO0X46feOCpmtwm6TdkP4r0=
+
+Name: assets/html-de/scanning.html
+SHA-256-Digest: sVlOCWWDyeXjFlUMX2ggN8cRQmaSdDuHBnQHeFz2jjs=
+
+Name: assets/html-pt/sharing.html
+SHA-256-Digest: JTPiFEe+u92ZId+n07QNofcOEoBCqLuRmiZ5i4PgWi8=
+
+Name: res/drawable-xhdpi-v4/btn_back.png
+SHA-256-Digest: E/PFzOrKle8Z4PqX/W3jX7gltWECgCmqT3Sr+8mQviM=
+
+Name: assets/ivw/56652373_helloalpha_BeginSil.jet
+SHA-256-Digest: cY8m69IMCO0w61Y6AijOvIMSA0wdxzwbi/dPw2Dyegw=
+
+Name: assets/html-de/about2d.html
+SHA-256-Digest: Lr3T1JtULbL0Ih8bhkr+c/ud6OromLOAHdt+bwxLjkk=
+
+Name: org.jivesoftware.smack.legacy/legacy.providers
+SHA-256-Digest: bwo9m/2YkWkLjtobxXCTIiC1y7Gy4xZs/fjFtPPpy9Y=
+
+Name: assets/html-ru/scanning.html
+SHA-256-Digest: 9/mfMGRQnAqfW9uHIyLW8FScBtrG0esosOiNDfIJ8xQ=
+
+Name: raw/vcd/VaDialer/grammars/VaSpeedDial.0804.vad.xml
+SHA-256-Digest: LKM0/oBON7zcrZKmR0saSvsvwAfoWbJV7yzgjfVV5Hg=
+
+Name: assets/html-it/whatsnew.html
+SHA-256-Digest: 4KQDRhOBaB/RdpoDe1uHrk8VSkSzml2sfRZrB/ALI+Q=
+
+Name: assets/vexpressive/clc_enu_cfg4.dat.jpg
+SHA-256-Digest: XEa7sx2lFg1jXdPBswGXtDY96khQBZkACtSr45zQ/eQ=
+
+Name: raw/vcd/web/vcd.css
+SHA-256-Digest: sYQS23rumAiP5/KjWG/0WW/LZz+EdzSnGPvI1uuB7Po=
+
+Name: raw/vcd/VaDialer/grammars/VaCallForward.0804.vad.xml
+SHA-256-Digest: MYIBhQcfNDx5Rpics5u5fm2Yp7cogkA5hSyELOt2sVw=
+
+Name: raw/vcd/VaOnDeviceSearch/grammars/VaOnDeviceSearch.0804.vad.xml
+SHA-256-Digest: 18BJvcFx9GRUIzd21wszID8pq1wMvFgyJegnmqmxAEE=
+
+Name: lib/armeabi/libsingle_wakeup_cae.so
+SHA-256-Digest: EVOo6csiVCXTY0BBv03mwWIjydC51U7E/igemCO1N9s=
+
+Name: raw/vcd/VaAlarms/grammars/VaAlarms.0804.vad.xml
+SHA-256-Digest: xCN8RljnEksnxBqZx6TGKE6emv/+utXFr7fTuK/lzBA=
+
+Name: assets/ivw/56652373.jet
+SHA-256-Digest: CwM9G7RNS/dXtycJnC89kAvxlXzj8x8O+bERTkDvpxk=
+
+Name: assets/html-fr/index.html
+SHA-256-Digest: euq2xqGEf8KwsN1I5wFFTIRRN9hMWi/QIHK+l0lAAY0=
+
+Name: raw/vcd/VaReminder/grammars/VaReminder.0409.vad.xml
+SHA-256-Digest: cnskH6jKKFen3+D24IVVjr0G1taYwcJX+zGPIKGRgYM=
+
+Name: assets/html-zh-rCN/whatsnew.html
+SHA-256-Digest: bzUKJQSxflqKYle79UvFNi4IWhwqQwBDyABI35BHoEk=
+
+Name: res/raw/shoot.mp3
+SHA-256-Digest: EXYG+yzlu8ujoiUSi22kFK4k7I/Oa4o/0/ZzmHtxSoY=
+
+Name: assets/html-es/sharing.html
+SHA-256-Digest: ba7R0iIVk7g2obN94qLmVV0siVAFO4pQo27WZx0bJ4E=
+
+Name: lib/armeabi-v7a/libdmt_vex.so
+SHA-256-Digest: Fm+RCe1pS4mrPgGpUrew6ryjnlFoa4uqilJWNS8z3C0=
+
+Name: org.jivesoftware.smack.tcp/smacktcp.providers
+SHA-256-Digest: AnuSqTfyb/sh1ohZcD4jrpSdTbQ0bk9IAR0pkWLXE/g=
+
+Name: lib/armeabi-v7a/libdmt_speex.so
+SHA-256-Digest: qBZ8fv0DTTPDAe5wejh5ug4Wcc5E5qHdw00WJUvQYr8=
+
+Name: res/layout/activity_yuyong_test.xml
+SHA-256-Digest: r+pm0BeEGp5f4xWPS6+q5iyFeR09/1zKmtzD/E2CCC4=
+
+Name: lib/armeabi/libNativeClassJni.so
+SHA-256-Digest: e3pvFi3getp4KFYS1QPAEghD3aTzNvphvKRKWKisH28=
+
+Name: lib/armeabi/libmsc.so
+SHA-256-Digest: 5VyWGJJPGbHTvr0Vps3UuoBaSPb1zfE+rVKPR7LonBA=
+
+Name: lib/armeabi-v7a/libmsc.so
+SHA-256-Digest: hBvQZsPeQmCVQJgxr1tF9FmHWkhsiO5BafDZMUKjNBc=
+
+Name: assets/nuance_data.zip
+SHA-256-Digest: 3KCPEUwZStyDxN5O0kUb9gH2+AjownUmGHmimRud49c=
+
+Name: res/raw/media_volume.ogg
+SHA-256-Digest: E7Zlo6Vu65S4sQw0/spPxTPgIX5BOqtK0WuTbWG5VnE=
+
+Name: assets/vexpressive/lid.dat.jpg
+SHA-256-Digest: ECSaRTjt0kFZrKJ5oAUs+bw0iWE+jEiMmr8HqUWAqj4=
+
+Name: assets/html-pt/whatsnew.html
+SHA-256-Digest: OAqy1RYcIf0cW/cvnxvZ+4kbHAFyiUYDC6jwWKKhGZg=
+
+Name: raw/vcd/VaNotes/grammars/VaNotes.0409.vad.xml
+SHA-256-Digest: VR3JfExk/A6xKsmN9nB6L6YGsZf9HOr6Bi++mt5Ex+I=
+
+Name: assets/html-es/license.html
+SHA-256-Digest: ruqzo/GLxu2Tp5yzW8F4AxpWMRmj1EzSfxE4Yqi5fm0=
+
+Name: raw/vcd/VaDialer/grammars/VaRedial.0804.vad.xml
+SHA-256-Digest: o22zAbOy3TlqGszpx6Lyt8kP5hCr/aWukBkrgp4+mPI=
+
+Name: res/raw/wavefail.mp3
+SHA-256-Digest: c0xjQeswazcABYl8H3BDEjstW+GaKVRFBr6VkwqCJF4=
+
+Name: assets/ivw/57c8d9ee.jet
+SHA-256-Digest: Es0n2EDgFzSKQjPzVHB9i2ZczAgpfX7GQqQnxzZn/f4=
+
+Name: res/drawable-xhdpi-v4/ic_launcher.png
+SHA-256-Digest: deP093v+L/8bGTDrbGGvI8v9kQLP6Fe9qiXUE3j1NNo=
+
+Name: raw/vcd/VaTextMessage/grammars/VaTextMessage.0409.vad.xml
+SHA-256-Digest: VhoSfEPQtuZIj0nzv8Y13UIHdCmnp2Pgd8leUw11iQA=
+
+Name: assets/html-de/index.html
+SHA-256-Digest: zEUjyBs3KlTMth4TaBlyppM2DjRNiFUWr9boBJ1Lmic=
+
+Name: lib/armeabi/libdmt_opus.so
+SHA-256-Digest: Xq3eYdbw8EYHim0y4k4ZWFCswCmoFeeFMVmgtEe7a1w=
+
+Name: assets/iflytek/voice_full.png
+SHA-256-Digest: 9YwcQx1fCVGHlxsyA2RzhzOIk4P0el4kycQ0Oh6299w=
+
+Name: org.jivesoftware.smack.extensions/extensions.providers
+SHA-256-Digest: UVYTQTcSib5QceGfSW/BtRqoNMotb7Iv6CgRl8tWJu0=
+
+Name: assets/html-zh-rTW/about1d.html
+SHA-256-Digest: L0F9didwzDe3UGrAq3sG6nwOl04BL32bdQeoYopq/J4=
+
+Name: assets/ivw/56652373_three_en.jet
+SHA-256-Digest: nAcq2SmQW4w+9jrB135u41bC7tu2+tiu70fSlGlN8ug=
+
+Name: assets/vexpressive/clc_mnc_cfg4.dat.jpg
+SHA-256-Digest: Pu6LnHGM0dCuc33IwdqdoTMQxlzQCCLcgSak7ZnAbUA=
+
+Name: assets/html-es/about1d.html
+SHA-256-Digest: L/92StrLby8HZ80a5pQHkavYCcXDntnsqEf8XG3b/8E=
+
+Name: lib/armeabi-v7a/libApkPatchLibrary.so
+SHA-256-Digest: sIK6As+6rSef9PL23ps9SafbDv+Brv+QxbksGrxKLTc=
+
+Name: lib/armeabi-v7a/libhead_led.so
+SHA-256-Digest: twbaFjQbJCq4GLNLn1NM0bjM/JB74aL7a9717G+vizY=
+
+Name: raw/vcd/VaNotes/grammars/vad-mappings.txt
+SHA-256-Digest: TDFZlSkZb/FzhnFpPRU3ucw8c6lnRKxlffSsOfOg1Qw=
+
+Name: assets/vexpressive/ve_pipeline_mnc_li-li_22_bet3.hdr.jpg
+SHA-256-Digest: YMICVJx/XR0oL3+9gNQJtLpMmmsoIuT1A+hDWPAZQps=
+
+Name: res/drawable-xhdpi-v4/zx_code_kuang.png
+SHA-256-Digest: Pkoet5T2jjL6kOEbvtyYcnQrrHMvuj1py1CS8FJxeqU=
+
+Name: raw/vcd/VaAlarms/grammars/VaAlarms.0409.vad.xml
+SHA-256-Digest: 5OWPEJh7zw0fxk0vFsnaO6fyojkKPD5NKYsupJW1/iA=
+
+Name: org.jivesoftware.smack/smack-config.xml
+SHA-256-Digest: jYAezLz5JUbP+TVU3AGb2XGWYHMZ/uyg+pvzSUbCA/E=
+
+Name: assets/ivw/57c5963c.jet
+SHA-256-Digest: Y2SOZ2UILeAfsWN6lXVX3Z47AH9KpslYn05t5UiAeKA=
+
+Name: assets/html-ja/about2d.html
+SHA-256-Digest: /9TAG28cG7CiBTm12fMRchYLZwS6H8ETo+YhwmEFXmI=
+
+Name: res/layout/activity_camera.xml
+SHA-256-Digest: 1vV+sbrYoAP/oZqJ41KF/AAdXs5HP3mIJNVOgin5ABQ=
+
+Name: res/menu/main.xml
+SHA-256-Digest: X6hPIccs9JBtTLLkC4Ra8eN3eFo2jZtzAByvLJxuD4M=
+
+Name: assets/iflytek/recognize.xml
+SHA-256-Digest: NCOjVnn1enpY/zUHi7mZCpx8ccVyHQWLjdB6OvHVZZ0=
+
+Name: org.jivesoftware.smack.extensions/extensions.xml
+SHA-256-Digest: 0VTPK0GYFKu2Kfh/u47/+1fim1vszayeMhsPhNGMvfM=
+
+Name: org.jivesoftware.smack.im/smackim.xml
+SHA-256-Digest: xctdhNQlrxeaS8dCplVEyrPz8UQgqiTX9ryTotBf0cU=
+
+Name: assets/vexpressive/ve_pipeline_enu_susan_22_bet3.hdr.jpg
+SHA-256-Digest: 4UgiMG6JTbdv3Ze9hOMwKrMFSgydnNjgMLWBQFhJxY8=
+
+Name: assets/vexpressive/clc_enu_ava_cfg4.dat.jpg
+SHA-256-Digest: 0GkN7sdttyBakSzPd9hmZM7X4XIpswJFJ0aRGb8MNsE=
+
+Name: lib/armeabi/libzl380.so
+SHA-256-Digest: V/0RCcya/l3a+C2V2RcmA90QLTOaH+VDP+jDAf1BLf0=
+
+Name: assets/html-fr/scanning.html
+SHA-256-Digest: spyxYwt3ua1wyD8sSN/9jBGNFY9FtaRFeODT+kwu/2w=
+
+Name: org.jivesoftware.smack/jul.properties
+SHA-256-Digest: 9hneRgEJW7I00AGjme37B+NmC1+nYBNFQvqJb1hjNJg=
+
+Name: lib/armeabi-v7a/libthree_wakeup_cae.so
+SHA-256-Digest: 0JATywjzkP4YWvkjTtXwPXLkmqQI1PN22OiRRC45id4=
+
+Name: org.jivesoftware.smack/version
+SHA-256-Digest: F2QA1lsJUjk255Pqpxd9x3LTSdQe8ui5TJsj9U+NBPU=
+
+Name: assets/audio/qr_ding.mp3
+SHA-256-Digest: yiP8kWQQ3J0mPNv4brqGzHVI3YfAD2leqFdRPmt7Cg0=
+
+Name: META-INF/ASL2.0
+SHA-256-Digest: CGiNvUcICwqKQ2HCyJ2uWrz8qHNRbqFw5SJ8MpLRpGI=
+
+Name: assets/html-nl/index.html
+SHA-256-Digest: q3uY6kWPMhQ6FPyX/9vYGTUV9nJwKIRA9A/NoF6mv2A=
+
+Name: lib/armeabi/libserial_port.so
+SHA-256-Digest: Zr7xQxOKK6jojvEbUIQeL0iYAotMW9qLx36Oo1IFigk=
+
+Name: assets/html-zh-rCN/sharing.html
+SHA-256-Digest: 7Bs7YNYf940uvcbJzIkgRskVp3c6KoDtt6piFUgRMrU=
+
+Name: raw/vcd/VaNotes/grammars/VaNotes.0804.vad.xml
+SHA-256-Digest: gTdjttOXtHfYsCLy803biB/+tDmD199OYebjPMFYTI8=
+
+Name: raw/vcd/web/templates/reminder.html
+SHA-256-Digest: IdvDS7gzO5TI8G9x2tIVjOMY3VOsPQeYGeBf21FJveY=
+
+Name: lib/armeabi/libgesture.so
+SHA-256-Digest: K887tucZgvHyMq0Tri75Q2iLCWQp7FaBhtn6aqqIidg=
+
+Name: raw/vcd/VaDialer/grammars/VaRedial.0409.vad.xml
+SHA-256-Digest: n2cH5XN8CikO7j7R11uVRmhDeiZ3USLKGdew3XJ5jcE=
+
+Name: lib/armeabi/libdmt_vocon.so
+SHA-256-Digest: LM/f4Xc90u8Nwzz+InwPfHgvlOzQTfF88B9S67p5F8I=
+
+Name: assets/images/big-1d.png
+SHA-256-Digest: gRxOaWwk+D6CFg0rmpvFG1ZpiMzFK4nDjgSGTKnPmKw=
+
+Name: assets/html-ko/index.html
+SHA-256-Digest: DR+HI183Jr35oMWXI/lPMBtrJ5TX5YQHUCpMgVV8I+8=
+
+Name: assets/html-ja/about1d.html
+SHA-256-Digest: OgXhWyDTUHziTeZ3vUDCxWcPOS2mpnUt5+CoxrcbQEc=
+
+Name: raw/vcd/VaDialer/grammars/mapping.txt
+SHA-256-Digest: 2dJJLlNBq9fzNxhS9hQe9kY3sUQUoIsIv3lMOuwXr9I=
+
+Name: assets/html-zh-rCN/index.html
+SHA-256-Digest: MkExo4QrUKTbrAyzuPXje9XN5a5wANuQurnR4HiX6Q4=
+
+Name: assets/vexpressive/ve_pipeline_enu_ava_22_bet3.hdr.jpg
+SHA-256-Digest: p6y9Iq8PUEG8G+0kPVf9O7u4l4guhWnOli0hUbc/eMg=
+
+Name: assets/html-en/scanning.html
+SHA-256-Digest: 3GxBIU7wx1bw2sggIxi+y/ejRxdG3xSbukkYyLeVl9E=
+
+Name: assets/vexpressive/select_li-li_bet3f22.dat.jpg
+SHA-256-Digest: rIO2wObA7SxRYp/QCTaRJKehqh1Gtnsos6kgzvJ2Cwk=
+
+Name: assets/vexpressive/select_samantha_bet3f22.dat.jpg
+SHA-256-Digest: LMcXHwPmgxibL2Q/3/8y18SXtdKCZsSy9JthdunCJic=
+
+Name: assets/wake_grammar_sample.abnf
+SHA-256-Digest: g73RWEDflhSgpg6GvyWSxVNu3xvB9UtRGng2rxOq0gU=
+
+Name: classes.dex
+SHA-256-Digest: EEzHn9tnNTZJnkVLW24YPgycXUjkWUzGzYjDFU9rW/s=
+
