@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="SecondTitleText">
+        <item name="android:textSize">40.0sp</item>
+    </style>
+    <style name="TopTitleText">
+        <item name="android:textSize">45.0sp</item>
+    </style>
+    <style name="contentTitleText">
+        <item name="android:textSize">30.0sp</item>
+    </style>
+    <style name="modelButton">
+        <item name="android:height">120.0dip</item>
+        <item name="android:width">120.0dip</item>
+    </style>
+    <style name="smallTitleText">
+        <item name="android:textSize">25.0sp</item>
+    </style>
+    <style name="thirdTitleText">
+        <item name="android:textSize">35.0sp</item>
+    </style>
+</resources>

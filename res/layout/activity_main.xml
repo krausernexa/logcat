@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:id="@id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/hello_world" />
+    <Button android:id="@id/button1" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="17.0dip" android:text="Button" android:layout_below="@id/textView1" android:layout_alignParentLeft="true" />
+    <Button android:id="@id/button2" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="蓝牙状态查询" android:layout_below="@id/button1" android:layout_alignParentLeft="true" android:onClick="onQueryStatu" />
+    <Button android:id="@id/button3" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="模拟蓝牙开关（开）" android:layout_below="@id/button2" android:layout_alignParentLeft="true" android:onClick="onCall" />
+    <Button android:id="@id/button4" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="TTS播报" android:layout_below="@id/button3" android:layout_alignParentLeft="true" android:onClick="onPlay" />
+    <Button android:id="@id/button5" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="听写" android:layout_below="@id/button4" android:layout_alignParentLeft="true" android:onClick="onSpeech" />
+    <Button android:id="@id/button6" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="onConnection绑定到service" android:layout_below="@id/button5" android:layout_alignParentLeft="true" android:onClick="onConnection" />
+    <Button android:id="@id/button7" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nuance TTS" android:layout_below="@id/button6" android:layout_alignParentLeft="true" android:onClick="onPlay1" />
+    <Button android:id="@id/button8" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="19.0dip" android:text="Nuance sirf" android:layout_below="@id/button7" android:layout_alignParentLeft="true" android:onClick="onSpeech1" />
+</RelativeLayout>

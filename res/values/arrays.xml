@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="netShutdown">
+        <item>My connection was interrupted, please help me re-connect to the network</item>
+        <item>ah! Network unavailable now. Help me connect to it</item>
+        <item>oops, the network broke down, please try to restore it</item>
+        <item>look! no network, could you help me connect to it</item>
+    </string-array>
+    <string-array name="netSuccess">
+        <item>connection successful</item>
+        <item>"yeah I'm already on line,feel like being smarter"</item>
+        <item>connection succeed, thank you and kiss you</item>
+        <item>I have accessed to network, feel so good</item>
+    </string-array>
+    <string-array name="offline_HasPicture">
+        <item>Sure, you can check it on your phone now</item>
+        <item>Sure, just a second</item>
+        <item>Sure, here you go</item>
+        <item>No problem, wait a moment</item>
+        <item>yes, you can check it on your phone</item>
+    </string-array>
+    <string-array name="offline_NoPicture">
+        <item>No new photo</item>
+        <item>"you just didn't take any pictures"</item>
+        <item>"I'm sorry, it seems you haven't taken any photo"</item>
+        <item>"well, you didn't take any pictures"</item>
+        <item>"buddy, you just didn't take any pictures, you can take one now"</item>
+    </string-array>
+    <string-array name="offline_app">
+        <item>I am using %s</item>
+        <item>%s, this is the app I am using</item>
+        <item>"good question, what i'm using is %s"</item>
+    </string-array>
+    <string-array name="offline_bound_to">
+        <item>I have been bound to %s</item>
+        <item>I am now bound to %s</item>
+        <item>yeah, already binded by %s</item>
+        <item>Actually %s has bound me now</item>
+    </string-array>
+    <string-array name="offline_capacity_higher">
+        <item>%s G of storage now availble</item>
+        <item>still have %s G, feel so cool</item>
+        <item>there is %s G of storage available,enough for now</item>
+        <item>not bad, %s G is quite enough</item>
+    </string-array>
+    <string-array name="offline_capacity_lower">
+        <item>only %s G storage left, please clean up</item>
+        <item>only %s G of storage left, you need to clean up some space</item>
+        <item>%s G of storage left now, why not free up more space</item>
+        <item>my storage has only %s G left, definitely not cool, could you free up some space</item>
+    </string-array>
+    <string-array name="offline_have_loginned">
+        <item>login completed</item>
+        <item>I have logined</item>
+        <item>I have logged in the server</item>
+        <item>Yes, I have login in the server</item>
+        <item>Ho ho, login succeed,so easy</item>
+    </string-array>
+    <string-array name="offline_have_notlogin">
+        <item>login failed, let me access to the server please</item>
+        <item>"oh well, I couldn't log in. Could you try again?"</item>
+        <item>"I couldn't log in, let's try again"</item>
+    </string-array>
+    <string-array name="offline_net_connect_fail">
+        <item>No, my connection was interrupted</item>
+        <item>no connection now, oh baby blue</item>
+    </string-array>
+    <string-array name="offline_net_connect_success">
+        <item>I have been connected to the network</item>
+        <item>I am connected to the Internet now</item>
+        <item>Network connection successful</item>
+        <item>yeah, i have access to the network</item>
+    </string-array>
+    <string-array name="offline_power_40_75">
+        <item>I still have %s percent of power</item>
+        <item>I got %s percent of power left, take it easy</item>
+        <item>I am still energetic with %s percent of power</item>
+        <item>let me see... Um... %s percent is left</item>
+    </string-array>
+    <string-array name="offline_power_5_40">
+        <item>only %s percent of power is available.</item>
+        <item>there are only %s percent of power left</item>
+        <item>Well, %s percent, charge me if you love me</item>
+        <item>oh wow, %s percent of power is left, you gotta charge me</item>
+    </string-array>
+    <string-array name="offline_power_full">
+        <item>%s percent of power is available, I feel powerful</item>
+        <item>Plenty. I still have %s percent of power</item>
+        <item>"There is still %s percent of power now, don't worry"</item>
+        <item>still %s percent of power, i feel good</item>
+    </string-array>
+    <string-array name="offline_power_lower">
+        <item>only %s percent of electricity is available. please recharge me</item>
+        <item>I am out of battery. I need to be charged</item>
+        <item>I only have %s percent of power now. Please recharge me</item>
+        <item>I am running out of power. Only %s percent of power left</item>
+        <item>I need recharging. only %s percent of power is left</item>
+        <item>lacking power,only %s percent, you need to charge me</item>
+    </string-array>
+    <string-array name="offline_unbounded">
+        <item>"I haven't been bound to any one"</item>
+        <item>No one, I am available now</item>
+        <item>No one is binding me now</item>
+        <item>no one bound me. Absolutely no one</item>
+    </string-array>
+    <string-array name="offline_wifi">
+        <item>I am connected to %s</item>
+        <item>I have been connected to %s</item>
+        <item>the Wifi I am connected to is %s</item>
+        <item>well, I think it should be %s</item>
+    </string-array>
+    <string-array name="robotGuideAPP">
+        <item>please download our app from instructions and help me connect to the internet,and you will find a lot of fun</item>
+        <item>hey, follow the instruction, scan the QR code and help me connect to network, then we can download apps to explore more functions</item>
+    </string-array>
+    <string-array name="robotIntroduced">
+        <item>"hello, I'm Alpha, a robot with charm and talent, my wish is to be with you"</item>
+        <item>"hello,I'm Alpha, my only mission is to accomny you because you are my best friend"</item>
+        <item>"Nice to see you, I'm Alpha, your personal robot with good looking and a smart brain, my hobby is to be with you."</item>
+        <item>"Hi, finally you bring me home, I'm Alpha, I enjoy having fun with you and never quarrel with you."</item>
+    </string-array>
+    <string-array name="robotManualShutDown">
+        <item>See you!</item>
+        <item>Catch you later.</item>
+        <item>So long!</item>
+        <item>Good bye!</item>
+    </string-array>
+    <string-array name="robotSayHello">
+        <item>hello，I am alpha</item>
+        <item>hi, nice to meet you</item>
+    </string-array>
+    <string-array name="robotShutDown">
+        <item>Ok, see you next time</item>
+        <item>No problem. Bye now</item>
+        <item>Sure, Good bye</item>
+        <item>"well, I'm gonna sleep."</item>
+        <item>OK, I gotta have a sleep and dream of you</item>
+    </string-array>
+    <string-array name="robotWakeup">
+        <item>I am here</item>
+        <item>"Hey, what's up?"</item>
+        <item>hey, I see you, boss</item>
+        <item>How can I help?</item>
+        <item>oh, you looking for me?</item>
+    </string-array>
+    <string-array name="sleep">
+        <item>ok, talk to you later</item>
+        <item>fine, I will take a break, bye</item>
+        <item>"alright, I'm gonna take a nap, see you"</item>
+    </string-array>
+</resources>

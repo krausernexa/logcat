@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="preview" />
+    <item type="id" name="textView1" />
+    <item type="id" name="button1" />
+    <item type="id" name="button2" />
+    <item type="id" name="button3" />
+    <item type="id" name="button4" />
+    <item type="id" name="button5" />
+    <item type="id" name="button6" />
+    <item type="id" name="button7" />
+    <item type="id" name="button8" />
+    <item type="id" name="view_state" />
+    <item type="id" name="btn_start" />
+    <item type="id" name="btn_stop" />
+    <item type="id" name="btn_play" />
+    <item type="id" name="btn_finish" />
+    <item type="id" name="edt_text" />
+    <item type="id" name="start_encode" />
+    <item type="id" name="lay_title" />
+    <item type="id" name="image_view" />
+    <item type="id" name="alplah_no" />
+    <item type="id" name="scan_tips" />
+    <item type="id" name="btn_save" />
+    <item type="id" name="textviewshowmusicname" />
+    <item type="id" name="seekbarmusic" />
+    <item type="id" name="textviewstarttime" />
+    <item type="id" name="textviewalltime" />
+    <item type="id" name="btnup" />
+    <item type="id" name="btnend" />
+    <item type="id" name="buttonplay" />
+    <item type="id" name="btnstop" />
+    <item type="id" name="btnnext" />
+    <item type="id" name="btnshowmusiclist" />
+    <item type="id" name="preview_view" />
+    <item type="id" name="viewfinder_view" />
+    <item type="id" name="lay_bottom" />
+    <item type="id" name="img_qr_code" />
+    <item type="id" name="txt_note" />
+    <item type="id" name="line_spi" />
+    <item type="id" name="txt_other_way" />
+</resources>

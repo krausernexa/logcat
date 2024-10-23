@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:fitsSystemWindows="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <SurfaceView android:id="@id/preview_view" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        <com.google.zxing.client.android.ViewfinderView android:id="@id/viewfinder_view" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    </RelativeLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@id/lay_title" android:background="@color/top_title_red" android:paddingTop="10.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="@dimen/top_title_heigh" android:layout_alignParentTop="true">
+        <LinearLayout android:orientation="horizontal" android:paddingLeft="10.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:minWidth="50.0dip" android:onClick="onBack">
+            <Button android:layout_gravity="center_vertical" android:background="@drawable/btn_back" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView android:textColor="@color/white" android:gravity="center" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/bound_alpha" android:layout_weight="1.0" android:layout_centerInParent="true" style="@style/TopTitleText" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@id/lay_bottom" android:background="@color/this_lib_page_bottom" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="@dimen/action_image_height" android:layout_alignParentBottom="true">
+        <ImageView android:layout_gravity="center_vertical" android:id="@id/img_qr_code" android:background="@drawable/qr_icon" android:layout_width="@dimen/app_image_size" android:layout_height="fill_parent" android:layout_margin="10.0dip" android:scaleType="fitXY" android:layout_alignParentLeft="true" />
+        <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="3.0">
+            <TextView android:textColor="@color/white" android:gravity="center" android:id="@id/txt_note" android:layout_width="fill_parent" android:layout_height="0.0dip" android:text="@string/find_and_scan" android:layout_weight="1.0" style="@style/thirdTitleText" />
+            <ImageView android:id="@id/line_spi" android:background="@drawable/this_lib_yello_line" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="2.0dip" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:layout_below="@id/txt_note" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+            <TextView android:textColor="@color/this_lib_note_other" android:gravity="center|right" android:id="@id/txt_other_way" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="0.0dip" android:text="@string/other_bound" android:layout_weight="1.0" android:layout_below="@id/line_spi" android:layout_alignParentRight="true" android:layout_alignParentBottom="true" style="@style/thirdTitleText" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
