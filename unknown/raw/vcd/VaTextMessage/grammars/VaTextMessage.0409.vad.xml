@@ -1,0 +1,860 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.0" xmlns:x="http://schemas.thinkman.com/voicecommands/extensions/1.0">
+
+  <Domain Name="Communication" ClassName="TextMessageRes">
+      
+     <!--
+        **********************************************************************
+        *
+        * Send a text message
+        *
+        **********************************************************************  
+      -->
+    <Intent Name="TextMessage" Scope="g:SpeechRoot, g:TextRoot">      
+      <ListenFor> [{TextPrefixes1}] {TextType1} [to] {AllContactNames}              [[{PhoneNumberPrefixes}] {PhoneNumberType}] [[{MessagePrefixes}] {MessageBody}]    </ListenFor> 
+      <ListenFor> send                               {AllContactNames} {TextType1}  [[{PhoneNumberPrefixes}] {PhoneNumberType}] [[{MessagePrefixes}] {MessageBody}]    </ListenFor>
+      <ListenFor> [{TextPrefixes1}] {TextType1} [to] {PhoneNumber}                  [{MessageBody}]             </ListenFor>                      
+      <ListenFor> send                               {PhoneNumber}     {TextType1}  [{MessageBody}]             </ListenFor>                      
+      <ListenFor> [{TextPrefixes1}] {TextType1} [to] [someone]                                                      </ListenFor>
+        
+      <!-- not msg or call -->
+      <String Name="Cancelled">         <Gui> {g:PromptCancelled{}}Cancelled.    </Gui></String>      
+    </Intent>
+
+    <PhraseList Label="TextPrefixes1">
+      <Item>      {send|start|create}                      </Item>
+    </PhraseList>
+      
+    <PhraseList Label="TextType1">
+      <Item>      [an] s m s [text] [message]               </Item>
+      <Item>      [a] [text] message                        </Item>
+      <Item>      [a] text                                  </Item>
+    </PhraseList>
+      
+    <PhraseList Label="TextType2">
+      <Item>      s m s [text] [message]                    </Item>
+      <Item>      [text] message                            </Item>
+      <Item>      text                                      </Item>
+    </PhraseList>
+      
+    <PhraseList Label="PhoneNumberPrefixes">
+        <Item>      {on|at|[and] use} [{her|his|the}]       </Item>
+    </PhraseList>
+      
+    <PhraseList Label="MessagePrefixes">
+      <Item>      saying                                    </Item>
+      <Item>      with {a|the} message [saying] [that]      </Item>
+      <Item>      that                                      </Item>
+      <Item>      and tell [{him|her|them}] [that]          </Item>
+      <Item>      and let {him|her|them} know [that]        </Item>
+    </PhraseList>
+
+      
+    <!--
+        **********************************************************************
+        *
+        * Strings for both speech & text input mode
+        *
+        **********************************************************************  
+      -->
+    <Intent Name="TextMessage" Scope="g:Nop">      
+    
+      <!-- misg error responses -->  
+      <String Name="NoMobileNumbers1">  <Gui> {g:PromptSorry{}}I can't find a mobile number for {SelectedContact}.                                          </Gui></String>
+      <String Name="NoMobileNumbersN">  <Gui> {g:PromptSorry{}}I found {SelectedCount} matches for {GrammarMatch}, but none with mobile phone numbers.      </Gui></String>
+      <String Name="NoTextingInACall">  <Gui> {g:PromptSorry{}}I can't send a text while you're on a call.                                                  </Gui></String>
+          
+          
+      <!-- strings for ui elements -->      
+      <String Name="FormMsgBody">       <Gui> Message:              </Gui></String>  
+      <String Name="FormSendButton">    <Gui> Send                  </Gui></String>  
+      <String Name="FormCancelButton">  <Gui> Cancel                </Gui></String>
+
+      <String Name="MsgCancelled">
+        <Value Weight="1.0"> <Gui>    {g:PromptCancelled{}}I've cancelled that.                             </Gui> </Value>
+        <Value Weight="1.0"> <Gui>    {g:PromptCancelled{}}Message cancelled.                               </Gui> </Value>
+        <Value Weight="0.0"> <Gui>    {g:PromptTapered{}}{PromptFlowComplete}Cancelled.{EarConCancel}       </Gui> </Value>
+      </String>
+        
+        
+      <String Name="TextMessagePlaceholder">
+        <Gui> Enter your message.                                   </Gui>
+      </String>
+      
+      <String Name="PickContact"> <Gui> Pick Contact       </Gui></String>
+
+    </Intent>
+      
+    
+    <PhraseList Label="TextNoneOfThose" SlotName="TextNoneOfThose">
+      <Item Value="true"> {g:NoneOfThosePeople}                                                                             </Item>
+      <Item Value="true"> [no]   {g:DoNot}         [{TextPrefixes1}] {TextType1} [{any|either} of] {g:ThemThosePeople}      </Item>
+      <Item Value="true"> [no] I {g:DoNot} want to [{TextPrefixes1}] {TextType1} {any|either} of {g:ThemThosePeople}        </Item>
+        
+    </PhraseList>
+      
+    <!--
+        **********************************************************************
+        *
+        * Pick from the global list
+        * E.g., send a text with no names selected yet
+        *
+        **********************************************************************  
+    -->
+    <Intent Name="TextMessage" Scope="SelectAnyContact">
+      <ListenFor> {AllContactNames} </ListenFor>
+      <ListenFor> {PhoneNumber} </ListenFor>
+        
+      <String Name="AskForNameTextMessage">
+        <Value>
+          <Gui>       {g:PromptAck{}}Who do you want to text?                                               </Gui>
+          <Tts>       {g:PromptAck{}}Who do you wanna text?                                                 </Tts>
+        </Value>
+        <Value><Gui>       {g:PromptAck{}}Who's the text going to?                                          </Gui></Value>
+      </String>
+        
+      <String Name="AskForNameTextMessage_RetryX">
+        <Value>
+          <Gui>      {g:PromptSorry{}}{Who_{PromptNoReco}}Who did you want to text?                         </Gui>
+          <Tts>      {g:PromptSorry{}}{Who_{PromptNoReco}}Who did you wanna text?                           </Tts>
+        </Value>
+      </String>
+        
+      <String Name="AskForNameTextMessage_Tip">
+          <Value><Gui>      try {RandomContact}                                   </Gui></Value>
+          <Value><Gui>      you can say Cancel                                    </Gui></Value>
+      </String>
+                
+      <String Name="Who_IsNotNoReco">     
+          <Gui> </Gui> 
+      </String>
+        
+      <String Name="Who_IsNoReco">
+          <Value><Tts>I can't find that contact.{ }                                    </Tts> <Gui> </Gui> </Value>
+      </String>
+    </Intent>
+
+      
+    <!--
+        **********************************************************************
+        *
+        * Select from a list of contact to text
+        *
+        **********************************************************************  
+    -->
+    <Intent Name="TextMessage" Scope="SelectContactFromList, SelectPhone">
+      <ListenFor>                                {SelectedContacts}               [[{PhoneNumberPrefixes}] {PhoneNumberType}] [[{MessagePrefixes}] {MessageBody}]   </ListenFor>
+      <ListenFor> [{TextPrefixes1}] {TextType1}  {SelectedContacts}               [[{PhoneNumberPrefixes}] {PhoneNumberType}] [[{MessagePrefixes}] {MessageBody}]   </ListenFor>
+      <ListenFor> send                           {SelectedContacts}  {TextType1}  [[{PhoneNumberPrefixes}] {PhoneNumberType}] [[{MessagePrefixes}] {MessageBody}]   </ListenFor>
+      <ListenFor> {TextNoneOfThose}                                                                                                                                     </ListenFor>
+        
+      <String Name="SelectWho">
+        <Value><Gui>      {g:PromptAck{}}Which one?                                                         </Gui>
+               <Tts>      {g:PromptAck{}}Which one? {Contacts}                                              </Tts></Value>
+      </String>
+            
+      <!-- this could be better, but for now something basic.  todo.. add code to make a good random tip and use that answer here -->
+      <String Name="SelectWhoDoYouWantToText_Tip">
+        <Value Weight="1.0"><Gui>      try {Contacts:@}                                                     </Gui></Value>
+        <Value Weight="1.0"><Gui>      you can say Cancel                                                   </Gui></Value>
+      </String> 
+        
+      <String Name="TooManyMatches">
+        <Value><Gui>      {g:PromptAck{}}Which one?                                                         </Gui>
+               <Tts>      {g:PromptAck{}}Which {GrammarMatch}?                                              </Tts></Value>
+      </String>
+        
+      <String Name="TooManyMatches_Tip">
+        <Value><Gui>      {SelectWhoDoYouWantToText_Tip{}}                                                  </Gui></Value>
+      </String>
+    </Intent>
+
+      
+    <!--
+        **********************************************************************
+        *
+        * Select which phone for the contact 
+        *
+        **********************************************************************  
+    -->
+    <Intent Name="TextMessage" Scope="SelectPhone">
+      <ListenFor> {PhoneNumberType} </ListenFor>
+        
+        <String Name="WhichNumber">          
+          <Value><Gui>      {g:PromptAck{}}Which number?                                                </Gui>
+                 <Tts>      {g:PromptAck{}}{SelectedContact}, which number? {PhoneTypes}                </Tts></Value>
+      
+          <Value Weight="0"><Gui>      {g:PromptAck{}}Which number?                                     </Gui>
+                            <Tts>      {g:PromptAck{}}{SelectedContact}. {PhoneTypes}?                  </Tts></Value>          
+      </String>
+              
+      <String Name="WhichNumber_Tip">
+            <Value><Gui>    try {PhoneTypes:@}                              </Gui></Value>
+            <Value><Gui>    you can say Cancel                              </Gui></Value>
+      </String>
+        
+        
+      <!-- requested # isn't a text target -->
+      <String Name="SelectMobileNumber">
+        <Value><Gui>      {g:PromptAck{}}Which number?                                                  </Gui>
+               <Tts>      {g:PromptAck{}}{SelectedContact}, which number?  {PhoneTypes}                 </Tts></Value>
+      </String>      
+        
+      <!-- strings used by WhichNumber -->
+      <String Name="PhoneNumber" AssignResourceId="false">
+          <Value><Gui> phone number                             </Gui></Value>
+          <Value><Gui> number                                   </Gui></Value>
+          <Value><Gui> line                                     </Gui></Value>
+      </String>
+      
+        
+      <String Name="PhoneTypeDefault">
+         <Value><Gui> {PhoneType}                               </Gui></Value>
+      </String>
+        
+      <String Name="PhoneTypeWithStoreName">
+         <Value><Gui> {PhoneType} ({StoreName})                 </Gui>
+                <Tts> {PhoneType} {StoreName}                   </Tts></Value>
+      </String>
+        
+    </Intent>
+
+      
+    <!--
+        **********************************************************************
+        *
+        * Get the text message
+        *
+        **********************************************************************  
+    -->
+    <Intent Name="TextMessage" Scope="MessageBody">
+      <ListenFor> {MessageBody} </ListenFor>
+        
+      <String Name="AskForMessageBody"> 
+        <Value Weight="1.0"><Gui>    {g:PromptAck{}}Text {SelectedContact}. {WhatIsYourMessage{}}               </Gui></Value>
+        <Value Weight="1.0"><Gui>    {g:PromptAck{}}Send a text to {SelectedContact}. {WhatIsYourMessage{}}     </Gui></Value>
+        <Value Weight="0.0"><Gui>    {g:PromptTapered{}}Text {SelectedContact}. {WhatIsYourMessage{}}           </Gui></Value>
+      </String>
+        
+      <String Name="AskForMessageBody_RetryX"> 
+        <Value Weight="1.0"><Gui>    {g:Reprompt{}}What was your message?                                       </Gui></Value>
+      </String>  
+        
+      <String Name="AskForMessageBody_Title">
+          <Value><Gui>  {TitleImageTextMessage} MESSAGE                                                         </Gui></Value>
+      </String>
+        
+      <String Name="WhatIsYourMessage" AssignResourceId="false"> 
+        <Value>  <Gui>    What do you want to say?                              </Gui>
+                 <Tts>    What do you wanna say?                                </Tts> </Value>
+        <Value>  <Gui>    What would you like to say?                           </Gui> </Value>
+        <Value>  <Gui>    What's your message?                                  </Gui> </Value>
+      </String>
+        
+        
+      <String Name="SayWhatGroup">
+        <Value Weight="1.0"><Gui>   {g:PromptAck{}}Text group {SelectedContact}. {WhatIsYourMessage{}}           </Gui></Value>
+        <Value Weight="1.0"><Gui>   {g:PromptAck{}}Send a group text to {SelectedContact}. {WhatIsYourMessage{}} </Gui></Value>
+        <Value Weight="0.0"><Gui>   {g:PromptTapered{}}Text group {SelectedContact}. {WhatIsYourMessage{}}       </Gui></Value>
+      </String>
+
+      <String Name="SayWhatGroup_Title">
+          <Value><Gui>  {TitleImageTextMessage} MESSAGE                                                         </Gui></Value>
+      </String>
+      
+          
+      <String Name="SayWhatRoom">
+        <Value Weight="1.0"><Gui>   {g:PromptAck{}}Text room {SelectedContact}. {WhatIsYourMessage{}}           </Gui></Value>
+        <Value Weight="1.0"><Gui>   {g:PromptAck{}}Send a text to room {SelectedContact}. {WhatIsYourMessage{}} </Gui></Value>
+        <Value Weight="0.0"><Gui>   {g:PromptTapered{}}Text room {SelectedContact}. {WhatIsYourMessage{}}       </Gui></Value>
+      </String>
+
+      <String Name="SayWhatRoom_Title">
+          <Value><Gui>  {TitleImageTextMessage} MESSAGE                                                         </Gui></Value>
+      </String> 
+     
+     <!--
+       *
+       * Reply versions
+       *
+     -->
+        
+     <String Name="ReplyWhat"> 
+        <Value Weight="1.0"><Gui>    {g:PromptAck{}}{WhatIsYourMessage{}}                                       </Gui></Value>
+      </String>
+        
+      <String Name="ReplyWhat_RetryX"> 
+        <Value Weight="1.0"><Gui>    {g:Reprompt{}}What was your message?                                       </Gui></Value>
+      </String>  
+        
+      <String Name="ReplyWhat_Title">
+          <Value><Gui>              {TitleImageTextMessage} MESSAGE                                             </Gui></Value>
+      </String>
+
+        
+      <String Name="ReplyWhatGroup">
+        <Value Weight="1.0"><Gui>   {g:PromptAck{}}{WhatIsYourMessage{}}                                        </Gui></Value>
+      </String>
+
+      <String Name="ReplyWhatGroup_Title">
+          <Value><Gui>              {TitleImageTextMessage} MESSAGE                                             </Gui></Value>
+      </String>
+      
+          
+      <String Name="ReplyWhatRoom">
+        <Value Weight="1.0"><Gui>   {g:PromptAck{}}{WhatIsYourMessage{}}                                        </Gui></Value>
+      </String>
+
+      <String Name="ReplyWhatRoom_Title">
+          <Value><Gui>              {TitleImageTextMessage} MESSAGE                                             </Gui></Value>
+      </String> 
+        
+      <String Name="SelectedContact"> 
+        <Value>  
+            <Gui>{NoReco}{Name}</Gui>
+            <Tts>{NoReco}{Name}</Tts> 
+        </Value>
+      </String>
+        
+    </Intent>
+
+
+    <!--
+        **********************************************************************
+        *
+        * Append text to the message
+        *
+        **********************************************************************  
+    -->
+    <Intent Name="TextMessage" Scope="TextMessageAppend">
+      <ListenFor> {TextMessageAppend} </ListenFor>
+        
+      <String Name="AddWhat">
+        <Value Weight="1.0"> <Gui>    {g:PromptAck{}}What do you want to add?                                   </Gui>
+                             <Tts>    {g:PromptAck{}}What do you wanna add?                                     </Tts></Value>
+        <Value Weight="1.0"> <Gui>    {g:PromptAck{}}What would you like to add?                                </Gui></Value>
+        <Value weight="0.0"> <Gui>    {g:PromptTapered{}}What would you like to add?                            </Gui></Value>
+      </String>
+
+      <String Name="AddWhat_RetryX">
+        <Value Weight="1.0"> <Gui>    {g:Reprompt{}}What did you want to add?                                   </Gui>
+                             <Tts>    {g:Reprompt{}}What do you wanna add?                                      </Tts></Value>
+      </String>
+        
+      <String Name="AddWhat_Title">
+        <Value><Gui>    {TitleImageTextMessage} MESSAGE                                                         </Gui></Value>
+      </String>
+        
+      <String Name="AddWhatTryAgain">
+        <Value Weight="1.0"> <Gui>    {g:PromptAck{}}Can you say that last part again?                          </Gui></Value>
+      </String>
+
+      <String Name="AddWhatTryAgain_RetryX">
+        <Value Weight="1.0"> <Gui>    {g:Reprompt{}}What was that last part?                                    </Gui></Value>
+      </String>
+        
+      <String Name="AddWhatTryAgain_Title">
+        <Value><Gui>    {TitleImageTextMessage} MESSAGE                                                         </Gui></Value>
+      </String>
+    </Intent>
+      
+      
+    <!--
+        **********************************************************************
+        *
+        * Confirm it it's time to send the message
+        *
+        **********************************************************************  
+    -->
+    <Intent Name="TextMessage" Scope="TextMessageConfirmation">
+      <ListenFor> {Confirm} </ListenFor>
+        
+      <String Name="ConfirmTextMessage">
+        <Value> <Gui>   {g:PromptAck{}}Send it, add more, or try again?                                         </Gui>
+                <Tts>   {g:PromptAck{}}I'll text {SelectedContact}, {MessageBody}. {SendItOrAddMore{}}          </Tts></Value>
+          
+        <Value> <Gui>   {g:PromptAck{}}Send it, add more, or try again?                                         </Gui>
+                <Tts>   {g:PromptAck{}}You wanna text {SelectedContact}, {MessageBody}. {SendItOrAddMore{}}     </Tts></Value>
+          
+        <Value> <Gui>   {g:PromptAck{}}Send it, add more, or try again?                                         </Gui>
+                <Tts>   {g:PromptAck{}}Text {SelectedContact}, {MessageBody}. {SendItOrAddMore{}}               </Tts></Value>
+      </String>
+        
+      <!-- provide specific retries (that don't re-read the message body) -->
+      <String Name="ConfirmTextMessage_RetryX">
+        <Value Weight="1.0"><Gui>    {g:Reprompt{}}Send it, add more, or try again?                              </Gui>
+                            <Tts>    {g:Reprompt{}}{SendItOrAddMore{}}                                          </Tts></Value>
+      </String>
+        
+      <String Name="SendItOrAddMore" AssignResourceId="false">
+        <Value Weight="1.0"> <Gui>    Send it, add more, or try again?                                          </Gui></Value>
+        <Value Weight="0.0"> <Gui>    Send, add more, or try again?                                             </Gui></Value>
+      </String>
+        
+        
+      <String Name="Confirm_Title">
+        <Value><Gui>    {TitleImageTextMessage} MESSAGE                                                         </Gui></Value>
+      </String>
+            
+      <String Name="Confirm_Tip">
+        <Value><Gui>    try Send it                                                                             </Gui></Value>
+        <Value><Gui>    try Add more                                                                            </Gui></Value>
+        <Value><Gui>    you can say Cancel                                                                      </Gui></Value>
+        <Value><Gui>    try Let's try again                                                                     </Gui></Value>
+      </String>
+
+        
+      <!--
+        **********************************************************************
+        *
+        * Use this prompt if the user went already confirmed the contact somehow 
+        *
+        **********************************************************************  
+      --> 
+      <String Name="ConfirmNotOneShot">
+        <Value> <Gui>   {g:PromptAck{}}Send it, add more, or try again?                                         </Gui>
+                <Tts>   {g:PromptAck{}}Here's what I have, {MessageBody}. {SendItOrAddMore{}}                   </Tts></Value>
+          
+        <Value> <Gui>   {g:PromptAck{}}Send it, add more, or try again?                                         </Gui>
+                <Tts>   {g:PromptAck{}}I've got, {MessageBody}. {SendItOrAddMore{}}                             </Tts></Value>
+          
+        <Value> <Gui>   {g:PromptAck{}}Send it, add more, or try again?                                          </Gui>
+                <Tts>   {g:PromptAck{}}Here's your message, {MessageBody}. {SendItOrAddMore{}}                  </Tts></Value>
+      </String>
+
+      <String Name="ConfirmNotOneShot_RetryX">
+        <Value> <Gui>    {g:Reprompt{}}Send it, add more, or try again?                                         </Gui>
+                <Tts>    {g:Reprompt{}}{SendItOrAddMore{}}                                                      </Tts></Value>
+      </String>
+        
+      <String Name="ConfirmNotOneShot_Title">
+        <Value><Gui>    {Confirm_Title{}}                                                                       </Gui></Value>
+      </String>
+            
+      <String Name="ConfirmNotOneShot_Tip">
+        <Value><Gui>    {Confirm_Tip{}}                                                                         </Gui></Value>
+      </String>
+
+        
+      <!--
+        **********************************************************************
+        *
+        * Use this prompt if the user just added to the message
+        *
+        **********************************************************************  
+      -->
+      <String Name="ConfirmAddition">
+        <Value> <Gui>   {g:PromptAck{}}Send it, add more, or try again?                                          </Gui>
+                <Tts>   {g:PromptAck{}}So now I have, {MessageBody}. {SendItOrAddMore{}}                         </Tts>
+        </Value>
+
+        <Value> <Gui>   {g:PromptAck{}}Send it, add more, or try again?                                          </Gui>
+                <Tts>   {g:PromptAck{}}Now I've got, {MessageBody}. {SendItOrAddMore{}}                          </Tts></Value>
+
+        <Value> <Gui>   {g:PromptAck{}}Send it, add more, or try again?                                          </Gui>
+                <Tts>   {g:PromptAck{}}Now it says, {MessageBody}. {SendItOrAddMore{}}                           </Tts></Value>
+      </String>
+
+      <String Name="ConfirmAddition_RetryX">
+        <Value> <Gui>   {g:Reprompt{}}Send it, add more, or try again?                                           </Gui>
+                <Tts>   {g:Reprompt{}}{SendItOrAddMore{}}                                                        </Tts></Value>
+      </String>  
+        
+      <String Name="ConfirmAddition_Title">
+        <Value><Gui>    {Confirm_Title{}}                                                                        </Gui></Value>
+      </String>
+        
+      <String Name="ConfirmAddition_Tip">
+        <Value><Gui>    {Confirm_Tip{}}                                                                          </Gui></Value>
+      </String>
+        
+
+      <!--
+        **********************************************************************
+        *
+        * 
+        *
+      -->
+      <String Name="Sent">
+        <Value><Gui>    {g:PromptAck{}}I've sent that.{EarConSuccess}                                           </Gui></Value>
+        <Value><Gui>    {g:PromptAck{}}Sent!{EarConSuccess}                                                        </Gui></Value>
+        <Value><Gui>    {g:Prompt{}}Message sent.{EarConSuccess}                                                </Gui></Value>
+        <Value><Gui>    {g:Prompt{}}I sent your message.{EarConSuccess}                                         </Gui></Value>
+          
+        <Value Weight="0.0"><Gui>    {g:PromptTapered{}}Sent!{EarConSuccess}                                    </Gui></Value>
+      </String>
+    </Intent>
+
+
+    <!--
+        **********************************************************************
+        *
+        * Modal for deciding if we should read an incoming text message.
+        *
+        **********************************************************************  
+    -->
+    <Intent Name="TextMessage" Scope="QueryRead">
+      <ListenFor> {ReadIt} </ListenFor>
+              
+      <!-- what to say on an incoming text -->
+      <String Name="ShortMessageToast">
+          <Value Weight="1.0"><Gui>  {g:Prompt{}}You got a text from {IncomingSender}. {ReadItOrIgnore{}}                               </Gui>
+                              <Tts>  {g:Prompt{}}You gotta text from {IncomingSender}. {ReadItOrIgnore{}}                               </Tts></Value>
+          <Value Weight="1.0"><Tts>  {g:Prompt{}}Text from {IncomingSender}. {ReadItOrIgnore{}}                                         </Tts></Value>
+          <Value Weight="0.0"><Tts>  {g:PromptTapered{}}Text from {IncomingSender}. Read it or ignore it?                               </Tts></Value>
+      </String> 
+        
+      <String Name="ReadItOrIgnore" AssignResourceId="false">
+          <Value Weight="1.0"><Tts>  Wanna read it or ignore it?                                                 </Tts></Value>
+          <Value Weight="1.0"><Tts>  Should I read it or ignore it?                                              </Tts></Value> 
+          <Value Weight="0.5"><Tts>  Read it or ignore it?                                                       </Tts></Value> 
+      </String>
+        
+      <String Name="ShortMessageToast_Retry1"> 
+        <Value><Tts>        {g:Reprompt{}}Did you wanna read it or ignore it?                                    </Tts></Value>
+      </String>
+        
+      <String Name="ShortMessageToast_RetryX"> 
+        <Value><Tts>        {g:Reprompt{}}Read it or ignore it?                                                                         </Tts></Value>
+      </String>
+        
+      <String Name="ShortMessageToast_RetryEnd">
+        <Value><Tts>        {g:PromptTooManyNoTap{}}                                                                                    </Tts>   </Value>
+      </String>
+        
+        
+      <String Name="GroupMessageToast">
+          <Value><Gui>      {g:Prompt{}}You've got a group text from {IncomingSender}. {ReadItOrIgnore{}}                               </Gui>
+                 <Tts>      {g:Prompt{}}You've gotta group text from {IncomingSender}. {ReadItOrIgnore{}}                               </Tts></Value>
+          <Value><Tts>      {g:Prompt{}}Group text from {IncomingSender}. {ReadItOrIgnore{}}                                            </Tts></Value>
+          <Value Weight="0.0"><Tts>     {g:PromptTapered{}}Group text from {IncomingSender}. {ReadItOrIgnore{}}                         </Tts></Value>
+      </String>
+        
+      <String Name="GroupMessageToast_Retry1"> 
+        <Value><Tts>        {g:Reprompt{}}Did you wanna read the group text from {IncomingSender} or ignore it?                         </Tts></Value>
+      </String>
+        
+      <String Name="GroupMessageToast_RetryX"> 
+        <Value><Tts>        {g:Reprompt{}}}Read it or ignore it?                                                                        </Tts></Value>
+      </String>
+      
+      <String Name="GroupMessageToast_RetryEnd">
+        <Value><Tts>        {g:PromptTooManyNoTap{}}                                                                                    </Tts>   </Value>
+      </String>
+        
+        
+      <String Name="RoomMessageToast" CortanaOnly="true">
+          <Value><Gui>      {g:Prompt{}}You've got a text from {IncomingSender} in room {IncomingRoom}. {ReadItOrIgnore{}}              </Gui>
+                 <Tts>      {g:Prompt{}}You've gotta text from {IncomingSender} in room {IncomingRoom}. {ReadItOrIgnore{}}              </Tts></Value>
+          <Value><Tts>      {g:Prompt{}}Text from {IncomingSender} in room {IncomingRoom}. {ReadItOrIgnore{}}                           </Tts></Value>
+          <Value weight="0.0"> <Tts>  {g:Prompt{}}Text from {IncomingSender} in room {IncomingRoom}. {ReadItOrIgnore{}}                 </Tts></Value>
+      </String>
+        
+      <String Name="RoomMessageToast_Retry1"> 
+        <Value><Tts>        {g:Reprompt{}}Did you wanna read the text in {IncomingRoom} or ignore it?                                   </Tts></Value>
+      </String>
+        
+      <String Name="RoomMessageToast_RetryX"> 
+        <Value><Tts>        {g:Reprompt{}}Read it or ignore it?                                                                         </Tts></Value>
+      </String>
+      
+      <String Name="RoomMessageToast_RetryEnd">
+        <Value><Tts>        {g:PromptTooManyNoTap{}}                                                                                    </Tts>   </Value>
+      </String>
+        
+    </Intent>
+
+
+    <!--
+        **********************************************************************
+        *
+        * Modal for deciding if we should call back or reply to an incoming text message.
+        *
+        **********************************************************************  
+    -->
+    <Intent Name="TextMessage" Scope="ShortMessageCallReply"> 
+      <ListenFor> {IncomingResponseCallReply} [{SpeakerPhone}]                      </ListenFor>
+
+      <String Name="ShortMessageIntro">
+         <!-- The break time below is needed, as TTS will say ShortMessageCallReply right after this. -->        
+         <Value><Gui> </Gui> <Tts>      It says "{IncomingMessage}"[break time='250ms' /]{ }                            </Tts></Value>
+         <Value><Gui> </Gui> <Tts>      The message is "{IncomingMessage}"[break time='250ms' /]{ }                     </Tts></Value>
+      </String>
+        
+      <String Name="ShortMessageCallReply">
+        <Value><Gui>                 {g:Prompt{}}{ShortMessageIntro{}}Reply, call back, or are you done?                </Gui></Value>
+        <Value weight="0.0"><Gui>    {g:Prompt{}}{ShortMessageIntro{}}Reply to this?                                    </Gui></Value>
+      </String>
+
+      <String Name="ShortMessageCallReply_Title">
+        <Value><Gui>    {TitleImageTextMessage} MESSAGE                                                                 </Gui></Value>
+      </String>
+
+      <String Name="ShortMessageCallReply_ButtonCancel">
+        <Value><Gui>    Cancel                                                                                          </Gui></Value>
+      </String>
+
+      <String Name="ShortMessageCallReply_ButtonSubmit">
+        <Value><Gui>    Reply                                                                                           </Gui></Value>
+      </String>
+        
+      <String Name="ShortMessageCallReply_RetryX">
+          <Value>
+            <Gui>      {g:Reprompt{}}Did you want to reply, call back or are you done?                                  </Gui>
+            <Tts>      {g:Reprompt{}}Did you wanna reply, call back or are you done?                                    </Tts>
+          </Value>
+      </String>
+
+      <String Name="IncomingImDone">
+          <Value>
+            <Gui>      {g:Prompt{}}{PromptFlowComplete}Done.                      </Gui>
+            <Tts>      {g:Prompt{}}{PromptFlowComplete}{EarConCancel}             </Tts>
+          </Value>
+      </String>
+        
+    </Intent>
+      
+      
+    <Intent Name="TextMessage" Scope="ShortMessageCall">
+      <ListenFor> {ShortMessageCall} [{SpeakerPhone}]                               </ListenFor>
+        
+      <String Name="ShortMessageCall">
+        <Value><Gui>    {g:Prompt{}}{ShortMessageIntro{}}Do you want to call them back?                                 </Gui>
+               <Tts>    {g:Prompt{}}{ShortMessageIntro{}}Do you wanna call them back?                                   </Tts></Value>
+      </String>
+
+      <String Name="ShortMessageCall_Title">
+        <Value><Gui>    {TitleImageTextMessage} MESSAGE                                                                 </Gui></Value>
+      </String>
+    
+      <String Name="ShortMessageCall_ButtonCancel">
+        <Value><Gui>    Cancel                                                                                          </Gui></Value>
+      </String>
+
+      <String Name="ShortMessageCall_ButtonSubmit">
+        <Value><Gui>    Call                                                                                            </Gui></Value>
+      </String>
+        
+
+      <String Name="ShortMessageCall_RetryX">
+        <Value><Gui>        {ShortMessageCallPrompt{}}                                                                  </Gui>
+               <Tts>        {g:Reprompt{}}You can say call or I'm done.                                                 </Tts></Value>
+      </String>
+    </Intent>
+      
+      
+    <Intent Name="TextMessage" Scope="ShortMessageReply">
+      <ListenFor> {ShortMessageReply} [{SpeakerPhone}]                              </ListenFor>
+      
+      <String Name="ShortMessageReply">
+          <Value><Gui>        {g:Prompt{}}{ShortMessageIntro{}}Reply to this?                                           </Gui>
+                 <Tts>        {g:Prompt{}}{ShortMessageIntro{}}Reply to this?                                           </Tts></Value>
+      </String>
+
+      <String Name="ShortMessageReply_Title">
+        <Value><Gui>    {TitleImageTextMessage} MESSAGE                                                                 </Gui></Value>
+      </String>
+
+      <String Name="ShortMessageReply_ButtonCancel">
+        <Value><Gui>    Cancel                                                                                          </Gui></Value>
+      </String>
+
+      <String Name="ShortMessageReply_ButtonSubmit">
+        <Value><Gui>    Reply                                                                                           </Gui></Value>
+      </String>
+                
+      <String Name="ShortMessageReply_RetryX">
+        <Value><Gui>        {ShortMessageReplyPrompt{}}                                                                 </Gui>
+               <Tts>        {g:Prompt{}}You can say reply or I'm done.                                                  </Tts></Value>
+      </String>
+    </Intent>
+
+
+    <Intent Name="TextMessage" Scope="ShortMessage">
+        <ListenFor> {ShortMsgNoReply}       </ListenFor>
+
+        <String Name="ShortMessage">
+        <Value><Tts>    {g:Prompt{}}{ShortMessageIntro{}} You can say I'm done.                                         </Tts></Value>
+      </String>
+
+      <String Name="ShortMessage_Title">
+        <Value><Gui>    {TitleImageTextMessage} MESSAGE                                                                 </Gui></Value>
+      </String>
+
+      <String Name="ShortMessage_ButtonCancel">
+        <Value><Gui>    Cancel                                                                                          </Gui></Value>
+      </String>
+
+      <String Name="ShortMessage_ButtonSubmit">
+        <Value><Gui>    Call                                                                                                </Gui></Value>
+      </String>
+        
+      <String Name="ConfirmCall">
+        <Value Weight="1.0"><Gui>        {g:PromptAck{}}Calling them back.                                              </Gui></Value>
+      </String>                      
+    
+      <String Name="ConfirmCall_Title">
+         <Gui> CALLING                                              </Gui>
+      </String>      
+
+      <String Name="ConfirmCall_HeaderImage">
+          <Gui> {SelectedContactImage}                              </Gui>
+      </String>
+        
+      <String Name="ConfirmCall_Header">
+          <Gui> {SelectedContact}                                   </Gui>
+      </String>
+        
+      <!-- button labels -->
+      <String Name="ConfirmCall_ButtonCancel">  <Gui> Cancel        </Gui></String>
+      <String Name="ConfirmCall_ButtonSubmit">  <Gui> Call          </Gui></String>
+        
+      <!-- user pressed the cancel button -->
+      <String Name="CallCancelled">
+          <Value><Gui>      {g:PromptCancelled{}}Cancelled.         </Gui></Value>
+      </String>
+        
+      <!-- user pressed the call button (aborting the wait) -->
+      <String Name="CallNow">
+          <Value><Gui>      {g:PromptAck{}}               </Gui></Value>
+      </String>
+       
+        
+      <String Name="NoCallbackNumber">
+        <Value><Gui>        {g:PromptSorry{}}I can't find a callback number for the message.                            </Gui></Value>
+      </String>                
+        
+    </Intent>
+
+
+
+    <!--
+        **********************************************************************
+        *
+        * Support grammars
+        *
+        **********************************************************************  
+    -->
+      
+    <PhraseList Label="ReadIt" SlotName="IncomingAction">
+      <Item value="Read">       [yes] read it [to me]                                   </Item>
+      <Item value="Read">       [yes] read the {TextType2}                              </Item>
+      <Item value="Ignore">     [no] ignore [it]                                        </Item>
+      <Item value="Ignore">     [no] ignore the {TextType2}                             </Item>
+    </PhraseList>
+
+    <PhraseList Label="IncomingResponseCallReply" SlotName="IncomingResponse1">
+      <Item value="Reply">      {g:Affirmative}                                         </Item>
+      <Item value="Reply">      [{make|create|start} a] reply [{to this|to it|to him|to her|to them}]  </Item>
+      <Item value="Reply">      [{make|create|start}] {TextType1}                       </Item>
+      <Item value="Call">       [{make|create} a] call [[{them|him|her}] back]          </Item>
+      <Item value="Done">       [{I'm|I am}] done                                         </Item>
+      <Item value="Done">       {g:Negative}                                            </Item>
+    </PhraseList>
+      
+    <PhraseList Label="ShortMessageCall" SlotName="IncomingResponse2">
+      <Item value="Call">       [{make|create} a] call [{them|him|her}] [back]          </Item>
+      <Item value="Call">       {g:Affirmative}                                         </Item>
+      <Item value="Done">       {g:Negative}                                            </Item>
+      <Item value="Done">       [{I'm|I am}] done                                         </Item>
+    </PhraseList>
+      
+    <PhraseList Label="ShortMessageReply" SlotName="IncomingResponse3">
+      <Item value="Reply">      [{make|create|start} a] reply [{to this|to it|to him|to her|to them}] </Item>
+      <Item value="Reply">      [{make|create|start}] {TextType1}                       </Item>
+      <Item value="Reply">      {g:Affirmative}                                         </Item>
+      <Item value="Done">       {g:Negative}                                            </Item>
+      <Item value="Done">       [{I'm|I am}] done                                         </Item>
+    </PhraseList>
+
+    <PhraseList Label="ShortMsgNoReply" SlotName="IncomingResponse4">
+      <Item value="Done">       {g:Affirmative}                                         </Item>
+      <Item value="Done">       {g:Negative}                                            </Item>
+      <Item value="Done">       [{I'm|I am}] done                                         </Item>
+    </PhraseList>
+      
+    <PhraseList Label="Confirm" SlotName="ConfirmAction">
+      <Item value="AddMore">    add more                                                </Item>
+      <Item value="Send">       send [it] [{now|right now|immediately}]                 </Item>
+    </PhraseList>
+
+      
+    <PhraseList Label="SpeakerPhone" SlotName="SpeakerPhone">
+      <Item out="rules.latest()">    {g:SpeakerPhone}                                   </Item>
+    </PhraseList>
+
+
+    <!-- StoreName are the pim store names.  E.g., "facebook"     -->
+    <PhraseList Label="PhoneNumberType">
+        <Item>        {PhoneNumberType2} [{StoreName}]                    </Item>
+    </PhraseList>
+    
+    <PhraseList Label="PhoneNumberType2" SlotName="PhoneNumberType">
+      <Item value="Mobile">         {mobile|cell|cellular|wireless}      [{ phone [number] | line | number }]      </Item>
+      <Item value="Mobile2">        {mobile|cell|cellular|wireless} two  [{ phone [number] | line | number }]      </Item>
+    </PhraseList>
+
+      
+    <PhraseList Label="PhoneNumber" SlotName="PhoneNumber">
+      <Item out="rules.latest()"> {g:PhoneNumber}  </Item>
+    </PhraseList>
+
+    <PhraseList Label="StoreName" SlotName="StoreName">
+        <Item out="rules.latest()">   {s:PimStoreNames}                 </Item>
+    </PhraseList>
+      
+    <PhraseList Label="AllContactNames" SlotName="Name">
+      <Item Weight="1.00">      {AllContactNames2}                      </Item>
+      <Item Weight="0.70">      [room]  {RoomNames}                     </Item>
+      <Item Weight="0.70">      the     {RoomNames}  room               </Item>
+      <Item Weight="0.70">      [group] {GroupNames}                    </Item>
+      <Item Weight="0.70">      the     {GroupNames} group              </Item>
+      <Item Weight="0.50"> [my] {WellKnownContactNicknames}             </Item>
+      <Item Weight="0.10">      {NoReco}                                </Item>
+    </PhraseList>
+
+    <PhraseList Label="AllContactNames2">
+      <Item Weight="1.00">      {AllContactNames3}                      </Item>
+    </PhraseList>
+
+    <PhraseList Label="AllContactNames3">
+      <Item out="rules.latest()">   {s:Contacts}                        </Item>
+    </PhraseList>
+      
+    <PhraseList Label="RoomNames" SlotName="RoomIds">
+      <Item out="rules.latest()">   {s:PimRoomNames}                    </Item>
+    </PhraseList>
+
+    <PhraseList Label="GroupNames" SlotName="GroupIds">
+      <Item out="rules.latest()">   {s:PimGroupNames}                   </Item>
+    </PhraseList>
+
+    <PhraseList Label="NoReco">
+       <Item Value="true">          {*}                                 </Item>
+    </PhraseList>
+      
+    <!-- This grammar is used to detect Nicknames that aren't yet defined by the user -->
+    <PhraseList Label="WellKnownContactNicknames" SlotName="ContactNickname">
+      <Item out="rules.latest()">   {g:WellKnownNicknames}              </Item>  
+    </PhraseList>
+
+      
+    <!-- Wraps the "by name" and "by number" selection grammar list. Used by modal for contact picking -->
+    <PhraseList Label="SelectedContacts">
+       <Item >   {SelectedContactByName}                                </Item>
+    </PhraseList>
+
+    <Dictation Label="MessageBody"      SlotName="MessageBody"      />
+    <Dictation Label="TextMessageAppend"    SlotName="TextMessageAppend"    />
+
+    <!-- The dynamic grammars used by the code -->
+    <DynamicPhraseList Label="SelectedContactByName"   SlotName="ContactsByName"    HackId="1" />
+
+  </Domain>
+
+    
+</VoiceCommands>
+
+
+
+  

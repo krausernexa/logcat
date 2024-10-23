@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.0" xmlns:x="http://schemas.thinkman.com/voicecommands/extensions/1.0">
+
+  <Domain Name="Common"  ClassName="CommonRes" AssignResourceIds="false">
+
+    <!-- Common strings -->
+    <Intent Name="Strings" Scope="g:Nop">
+        
+        <!--
+            ****************************************************************************************************************
+            *
+            * When possible include 1 Prompt type in any string that's a prompt (so that we can tell which strings are 
+            * prompts).  By default each of these only decorate the Tts string.  There's no need to make  a Gui & Tts 
+            * just because a prompt string was included.
+            *
+            * For first prompts (expect in a couple of edge cases):
+            *       Prompt          - No default first prompt.
+            *       PromptTapered   - Same as prompt with a different name 
+            *       PromptAck       - Default (first) prompt of "Sure, Ok..".  
+            *       PromptSuccess   - Default (first) prompt of "Great, ...".  Includes EarConSuccess & EmoteSatisfied.
+            *       PromptSorry     - Default (first) prompt of "Sorry, ...".  Includes EarConError & EmoteSensitive.
+            *       PromptError     - Default and reprompts of "Failure, ...". Includes EarConError & EmoteSensitive.
+            *       PromptChange    - Default (first) prompt to lead into a change request.
+            *
+            * For reprompts:
+            *       Reprompt        - No default first prompt, or first reprompt.  "Sorry, ..." on second reprompt.
+            *
+            * Prompt to ending repeating before the normal system default kicks in:
+            *       PromptTooMany   - Speaks the reason for stopping the repeats.  E.g., "I didn't understand that", ... ). Includes EmoteSorry.
+            *
+            * The follow "GT" versions are just like the non-GT versions expect they produce output on both Gui and Tts.
+            * Note only a subset are available because currently that's all that's used.
+            *       GTPromptSuccess
+            *       GTPromptTooMany
+            *
+            ****************************************************************************************************************
+        -->
+        
+        <!-- deprecating Ack.  Replaced by PromptAck -->
+        <String Name="Ack">  <Gui>  {g:PromptAck{}}             </Gui></String>
+        
+        <!-- Wrappers to dispatch to by type, and (for the non GT cases) to not include a Gui version  -->
+        <String Name="Prompt">              <Tts>   {g:Prompt_{PromptType}}                     </Tts>      <Gui></Gui>     </String>
+        <String Name="PromptTapered">       <Tts>   {g:Prompt_{PromptType}}                     </Tts>      <Gui></Gui>     </String> 
+        <String Name="PromptAck">           <Tts>   {g:PromptAck_{PromptType}}                  </Tts>      <Gui></Gui>     </String> 
+        <String Name="PromptSuccess">       <Tts>   {g:PromptSuccess_{PromptType}}              </Tts>      <Gui></Gui>     </String> 
+        <String Name="GTPromptSuccess">     <Tts>   {g:PromptSuccess_{PromptType}}              </Tts>      <!--allow-->    </String>
+        <String Name="PromptSorry">         <Tts>   {g:PromptSorry_{PromptType}}                </Tts>      <Gui></Gui>     </String> 
+        <String Name="GTPromptSorry">       <Tts>   {g:PromptSorry_{PromptType}}                </Tts>      <!--allow-->    </String> 
+        <String Name="PromptError">         <Tts>   {g:PromptError_{PromptType}}                </Tts>      <Gui></Gui>     </String> 
+        <String Name="GTPromptError">       <Tts>   {g:PromptError_{PromptType}}                </Tts>      <!--allow-->    </String> 
+        <String Name="PromptChange">        <Tts>   {g:PromptChange_{PromptType}}               </Tts>      <Gui></Gui>     </String> 
+        <String Name="Reprompt">            <Tts>   {g:Reprompt_{PromptType}{PromptCount}}      </Tts>      <Gui></Gui>     </String> 
+        <String Name="PromptYield">         <Tts>   {g:PromptYield_{PromptType}}                </Tts>      <Gui></Gui>     </String> 
+        <String Name="PromptCancelled">     <Tts>   {g:PromptCancelled_{}}{PromptFlowComplete}  </Tts>      <Gui></Gui>     </String> 
+        <String Name="PromptTooMany">       <Tts>   {g:PromptTooMany_{}}                        </Tts>      <Gui></Gui>     </String> 
+        <String Name="GTPromptTooMany">     <Tts>   {g:PromptTooMany_{}}{PromptFlowComplete}    </Tts>      <!--allow-->    </String> 
+        <String Name="PromptTooManyNoTap">  <Tts>   {g:PromptTooManyNoTap_{}}                   </Tts>      <Gui></Gui>     </String> 
+        
+        <!-- These are here for any scripts that are using Prompt as their reprompt for some reason  -->
+        <String Name="Prompt_Reprompt">         <Gui>   {g:Reprompt_Reprompt{PromptCount}}      </Gui>  </String>
+        <String Name="PromptAck_Reprompt">      <Gui>   {g:Reprompt_Reprompt{PromptCount}}      </Gui>  </String>
+        <String Name="PromptSuccess_Reprompt">  <Gui>   {g:Reprompt_Reprompt{PromptCount}}      </Gui>  </String>
+        <String Name="PromptSorry_Reprompt">    <Gui>   {g:Reprompt_Reprompt{PromptCount}}      </Gui>  </String>
+        <String Name="PromptError_Reprompt">    <Gui>   {g:PromptError_Reprompt{PromptCount}}   </Gui>  </String>
+        <String Name="PromptChange_Reprompt">   <Gui>   {g:Reprompt_Reprompt{PromptCount}}      </Gui>  </String>
+        <String Name="Reprompt_Reprompt">       <Gui>   {g:Reprompt_Reprompt{PromptCount}}      </Gui>  </String>
+
+        
+        <!--
+         * 
+         * Prompt: No default first prompt.
+         *
+        -->
+        <String Name="Prompt_Prompt">             
+          <Value Weight="1.0">  <Gui>                                                       </Gui> </Value>
+        </String>
+
+        
+        <!--
+         *
+         * PromptAck: Default (first) prompt of "Sure, Ok..".  
+         *
+        -->
+        <String Name="PromptAck_Prompt">
+          <Value Weight="1.0">  <Gui>                                                       </Gui>    </Value>
+          <Value Weight="1.0">  <Gui>     {g:OK{}}                                          </Gui>    </Value>
+          <Value Weight="1.0">  <Gui>     Alright,{ }                                       </Gui>    </Value>
+          <Value Weight="1.0">  <Gui>     Sure,{ }                                          </Gui>    </Value>
+          <Value Weight="0.5">  <Gui>     Sure thing,{ }                                    </Gui>    </Value>
+        </String>
+
+        
+        <!--
+         *
+         * PromptSuccess: Default (first) prompt of "Great, ...".
+         *
+        -->
+        <String Name="PromptSuccess_Prompt">
+          <Value Weight="1.0">  <Gui>     {EndEarConSuccess}{EmoteSatisfied}Great,{ }          </Gui>    </Value>
+          <Value Weight="1.0">  <Gui>     {EndEarConSuccess}{EmoteSatisfied}{g:OK{}}           </Gui>    </Value>
+          <Value Weight="0.1">  <Gui>     {EndEarConSuccess}{EmoteSatisfied}Excellent,{ }      </Gui>    </Value>
+          <Value Weight="0.1">  <Gui>     {EndEarConSuccess}{EmoteSatisfied}Super,{ }          </Gui>    </Value>  
+        </String>
+        
+        
+        <!--
+         *
+         *  PromptSorry: Default (first) prompt of "Sorry, ...".  Includes EarConError & EmoteSorry.
+         *
+        -->
+        <String Name="PromptSorry_Prompt">
+          <Value Weight="1.0">  <Gui>     {EndEarConError}{EmoteSensitive}Sorry,{ }        </Gui>    </Value>
+          <Value Weight="1.0">  <Gui>     {EndEarConError}{EmoteSensitive}I'm sorry,{ }    </Gui>    </Value>
+        </String>
+        
+        
+        <!--
+         *
+         * PromptError: Default and reprompts of "Failure, ...". Includes EarConError & EmoteSorry.
+         *
+        -->
+        <String Name="PromptError_Prompt">
+          <Value Weight="1.0">  <Gui>     {EndEarConError}{EmoteAbashed}Sorry,{ }        </Gui>    </Value>
+          <Value Weight="1.0">  <Gui>     {EndEarConError}{EmoteAbashed}I'm sorry,{ }    </Gui>    </Value>
+        </String>                                     
+        
+        <String Name="PromptError_Reprompt1">
+          <Value> <Gui>  {g:PromptError_Prompt{}}                                           </Gui>    </Value>
+        </String>
+        
+        <String Name="PromptError_Reprompt2">
+          <Value> <Gui>  {g:PromptError_Prompt{}}                                           </Gui>    </Value>
+        </String>
+                
+
+        <!--
+         *
+         * PromptChange: Default (first) prompt to lead into a change request.
+         *
+        -->
+        <String Name="PromptChange_Prompt">
+          <Value Weight="1.0">   <Gui>                                          </Gui>    </Value>
+          <Value Weight="1.0">   <Gui>    {g:OK{}}                              </Gui>    </Value>
+          <Value Weight="1.0">   <Gui>    So,{ }                                </Gui>    </Value>
+          <Value Weight="1.0">   <Gui>    Alright,{ }                           </Gui>    </Value>
+        </String>
+        
+        
+        <!--
+         *
+         * Reprompt: No default first prompt, or first reprompt.  "Sorry, ..." on second reprompt.
+         *
+        -->
+        <String Name="Reprompt_Reprompt1">
+          <Value Weight="1.0">  <Gui>   {EmoteSensitive}                        </Gui>    </Value>
+        </String>
+        
+        <!-- break reprompt 2 out by the reason to get the proper "sorry" phrase -->
+        <String Name="Reprompt_Reprompt2">
+          <Value>  <Gui>    {g:Reprompt2_{PromptUpdateReason}}{EmoteAbashed}    </Gui>    </Value>
+        </String>
+        
+        <String Name="Reprompt2_Prompt">    
+          <Value Weight="1.0"> <Gui>    Sorry,{ }                               </Gui> </Value>
+        </String>
+    
+        <String Name="Reprompt2_Reprompt">
+          <Value Weight="1.0"> <Gui>    Sorry,{ }                               </Gui> </Value>
+        </String>
+
+        <String Name="Reprompt2_Silence">
+          <Value Weight="1.0"> <Gui>    Sorry,{ }                               </Gui> </Value>
+        </String>
+
+        <String Name="Reprompt2_NoReco">
+          <Value Weight="1.0"> <Gui>    Sorry,{ }                               </Gui> </Value>
+        </String>
+
+        <String Name="Reprompt2_Repeat">
+          <Value Weight="1.0"> <Gui>                                            </Gui> </Value>
+        </String>
+    
+        <String Name="Reprompt2_Help">
+          <Value Weight="1.0"> <Gui>                                            </Gui> </Value>
+        </String>
+            
+        <String Name="Reprompt2_Network">
+          <Value Weight="1.0"> <Gui>    Sorry, having trouble connecting, ({PromptErrorCode:08x}){ }    </Gui>
+                               <Tts>    Sorry, having trouble connecting,{ }                            </Tts> </Value>
+        </String>
+
+        
+        <!--
+         *
+         *  PromptYield: speak the prompt but don't automatically listen (if the va supplies a listening state)
+         *
+        -->
+        
+        <String Name="PromptYield_Prompt">
+            <Value> <Gui> {PromptOutOfRepeats}{ }                                               </Gui>  </Value>
+        </String>
+        
+        <String Name="PromptYield_Reprompt">
+            <Value> <Gui> {PromptOutOfRepeats}{ }{g:Reprompt_Reprompt{PromptCount}}             </Gui>  </Value>
+        </String>
+
+        
+        <!--
+         *
+         *  PromptCancelled: last stop (dispacher has PromptFlowComplete in it)
+         *
+        -->
+        <String Name="PromptCancelled_"> <Gui>  {PromptOutOfRepeats}{ }{EndEarConCancel}{ }{g:PromptCancelled_{PromptType}}     </Gui> </String>
+        <String Name="PromptCancelled_Reprompt"> <Gui>   {g:PromptCancelled_Prompt{}}           </Gui> </String>
+        
+        <String Name="PromptCancelled_Prompt">    
+          <Value Weight="1.0">   <Gui>                                                          </Gui>  </Value>
+        </String>
+
+        
+        
+        <!--
+         * 
+         *  PromptTooMany: Speaks the reason for stopping the repeats.  E.g., "I didn't understand that", ... ). Includes EmoteSorry.
+         *
+         *  Current failure reason:
+         *
+         *      PromptTooMany_Prompt        - not expected here
+         *      PromptTooMany_Reprompt      - user has been on the same prompt too many times
+         *      PromptTooMany_Silence       - didn't hear anything
+         *      PromptTooMany_NoReco        - got noreco
+         *      PromptTooMany_Network       - retryable network error
+         *      PromptTooMany_Repeat        - user said "repeat that"
+         *      PromptTooMany_Help          - user said "help" 
+         *
+        -->        
+        
+        <!-- OutOfRepeats and EmoteSorry for all of them -->
+        <String Name="PromptTooMany_"> <Gui> {PromptOutOfRepeats}{ }{g:PromptTooMany_{PromptUpdateReason}}  </Gui> </String>
+        
+        <String Name="PromptTooMany_Prompt">    
+          <Value Weight="1.0"> <Gui>    {EmoteAbashed}Sorry I can't do that.{ }                                                           </Gui> </Value>
+        </String>
+    
+        <String Name="PromptTooMany_Reprompt">
+          <Value Weight="1.0"> <Gui>    {EmoteAbashed}Sorry, I'm not getting it. Help me complete this by tapping below.{ }               </Gui> </Value>
+        </String>
+
+        <String Name="PromptTooMany_Silence">
+          <Value Weight="1.0"> <Gui>                                                                                        </Gui> </Value>
+        </String>
+
+        <String Name="PromptTooMany_NoReco">
+          <Value Weight="1.0"> <Gui>    {EmoteAbashed}Sorry, I'm not getting it. Help me complete this by tapping below.{ }               </Gui> </Value>
+        </String>
+
+        <String Name="PromptTooMany_Repeat">
+          <Value Weight="1.0"> <Gui>    {EmoteAbashed}Sorry, I can't do that.{ }                                                          </Gui> </Value>
+        </String>
+    
+        <String Name="PromptTooMany_Help">
+          <Value Weight="1.0"> <Gui>    {EmoteAbashed}I'm sorry.{ }                                                                       </Gui> </Value>
+        </String>
+            
+        <String Name="PromptTooMany_Network">
+          <Value Weight="1.0"> <Gui>    Sorry, the internet and I aren't talking right now. ({PromptErrorCode:08x}).{ }     </Gui>
+                               <Tts>    {EmoteSensitive}Sorry, the internet and I aren't talking right now.{ }                              </Tts> </Value>
+        </String>
+
+        
+        <!--
+         * 
+         *  PromptTooManyNoTap: Same as PromptTooMany but doesn't tell the user that he can interact with the ux
+         *
+        -->
+        
+        <String Name="PromptTooManyNoTap_"> <Gui> {PromptOutOfRepeats}{ }{g:PromptTooManyNoTap_{PromptUpdateReason}}  </Gui> </String>
+        <String Name="PromptTooManyNoTap_Prompt">       <Gui>    {g:PromptTooMany_Prompt{}}         </Gui> </String>
+        <String Name="PromptTooManyNoTap_Silence">      <Gui>    {g:PromptTooMany_Silence{}}        </Gui> </String>
+        <String Name="PromptTooManyNoTap_Repeat">       <Gui>    {g:PromptTooMany_Repeat{}}         </Gui> </String>
+        <String Name="PromptTooManyNoTap_Help">         <Gui>    {g:PromptTooMany_Help{}}           </Gui> </String>
+        <String Name="PromptTooManyNoTap_Network">      <Gui>    {g:PromptTooMany_Network{}}        </Gui> </String>
+    
+        <String Name="PromptTooManyNoTap_Reprompt">
+          <Value Weight="1.0"> <Gui>    {EmoteAbashed}Sorry, I'm not getting it.{ }                                                       </Gui> </Value>
+        </String>
+
+        <String Name="PromptTooManyNoTap_NoReco">
+          <Value Weight="1.0"> <Gui>    {EmoteAbashed}Sorry, I'm not getting it.{ }                                                       </Gui> </Value>
+        </String>
+        
+    </Intent>
+        
+  </Domain>    
+    
+</VoiceCommands>
+
+            

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="vcd.css" />
+        <script type="text/javascript" src="vcd.js"></script>
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
+        <meta http-equiv="Pragma" content="no-cache">
+    </head>
+    <body style="background:#{BgColor};color:#{FgColor};">
+        <div style="margin: 0px 0px 0px 12px; ">
+            <div id="WeSaid" class="AccentHighBrush TitleTextBlockStyle">
+                {Gui}
+            </div>
+            <div id="TitleContent" class="SecondaryForegroundBrush_Dark CaptionTextBlockStyle"/>
+            <div>
+                <div id="HeaderTitle" class="SecondaryForegroundBrush_Dark CaptionTextBlockStyle">
+                </div>
+            </div>
+            <div>
+                <ul class="b_vList">
+                    [for-each {Location} [
+                    <li>
+                        <div class="b_vPanel">
+                            <h2><a href="bing://local?lid={Id}&id={Id}&q={Name} {Address.AddressLocality} {Address.AddressRegion}">{Name}</a></h2>
+                            <p><span class="b_address">{Address.StreetAddress}, {Address.AddressLocality}, {Address.AddressRegion} {Address.PostalCode}</span></p>
+                        </div>
+                        <!--
+                <div>
+                    <a href="bing://nav/dial?number=6509614868&amp;name=Safeway" class="nowrap">(650) 961-4868</a>
+                    <a href="maps:Mode=Directions&amp;End.Latitude=37.4027709960938&amp;End.Longitude=-122.078178405762&amp;End.Title=Safeway" title="570 N Shoreline Blvd, Mountain View, CA 94043" h="ID=SERP,5387.1">Directions</a>
+                </div>
+                -->
+                    </li>
+                    ]]
+                </ul>
+            </div>
+            <span style="line-height:5"><a style="color:#{FgColor}" href="bing://search?q={UserSaid}">{SerpLinkLabel}</a></span>
+        </div>
+    </body>
+</html>

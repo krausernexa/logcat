@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.0" xmlns:x="http://schemas.thinkman.com/voicecommands/extensions/1.0">
+
+  <Domain Name="WpDialer" ClassName="RedialRes">
+
+    <Intent Name="Redial" Scope="g:SpeechRoot, g:TextRoot">
+        
+      <!-- todo, redial using speakphone ?  -->
+      <ListenFor>   {redial|re dial} [ {that|the} {last|previous} [phone] number [[I] {called|dialed}] ]      </ListenFor>
+
+      <String Name="Redial">
+          <Value><Gui>      {g:PromptAck{}}Calling {DisplayName}.           </Gui></Value>
+      </String>
+
+      <String Name="Redial_Title">
+           <Gui>    CALLING                                                 </Gui>
+      </String>
+
+      <String Name="Redial_HeaderImage">
+          <Gui>     {DisplayImage}                                          </Gui>
+      </String>
+
+      <String Name="Redial_Header">
+          <Gui>     {DisplayName}                                           </Gui>
+      </String>
+
+      <String Name="Redial_Header2">
+          <Gui>     {PhoneNumber}                                           </Gui>
+      </String>
+       
+      <String Name="Redial_ButtonCancel">   
+          <Gui>     Cancel        </Gui>
+      </String>
+                
+        
+      <String Name="NotFound">
+          <Value><Gui>      {g:PromptSorry{}}There's no number to redial.   </Gui></Value>
+      </String>
+
+      <!-- user pressed the cancel button -->
+      <String Name="Cancelled">
+          <Value><Gui>      {g:PromptCancelled{}}Cancelled.                 </Gui></Value>
+          <Value><Gui>      {g:PromptCancelled{}}Call cancelled.            </Gui></Value>
+      </String>
+        
+      <!-- user pressed the call button (aborting the wait) -->
+      <String Name="Calling">
+          <Value><Gui>      {g:PromptAck{}}                                 </Gui></Value>
+      </String>
+       
+    </Intent>
+
+
+  </Domain>
+
+    
+</VoiceCommands>
+
+
+
+  

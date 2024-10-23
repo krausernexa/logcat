@@ -1,0 +1,368 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.0" xmlns:x="http://schemas.thinkman.com/voicecommands/extensions/1.0">
+
+  <Domain Name="FrameworkSettings"  ClassName="FrameworkSettings" AssignResourceIds="false">
+    <Intent Name="Strings" Scope="g:Nop">
+      <String Name="GarbageFramePenalty">     <Gui>  -2000            </Gui>  </String>
+      <String Name="NoRecoPriority">          <Gui>   -127            </Gui>  </String>
+      <String Name="NoRecoRuleWeight">        <Gui>   0.10            </Gui>  </String>
+      <String Name="MinConfidenceThreshold">  <Gui>   0.1             </Gui>  </String>
+    </Intent>
+  </Domain> 
+
+  <Domain Name="Common"  ClassName="CommonRes" AssignResourceIds="false">
+
+    <!-- Global sayings -->
+    <PhraseList Label="g:MyName">
+        <Item> cortana </Item>
+    </PhraseList>
+      
+    <!--  This grammar is implicity in front of every ListenFor as an optional phrase -->
+    <PhraseList Label="g:Prefix">
+        <Item> [hey] [{g:MyName}] [please] [{let us|let's}] [please]            </Item>
+        <Item> [hey] [{g:MyName}] [please] {can|could|would} you [please]       </Item>
+        <Item> [hey] [{g:MyName}] [please] I would like [you] to [please]       </Item>
+        <Item> [hey] [{g:MyName}] [please] I {want to|wanna} [please]           </Item>
+    </PhraseList>
+
+    <!--  This grammar is implicity at the tail of every ListenFor as an optional phrase -->
+    <PhraseList Label="g:Suffix">
+        <Item> [for me] [please] [{g:MyName}]  </Item>
+    </PhraseList>
+      
+
+    <PhraseList Label="g:SpeakerPhone">
+      <Item value="true">    [{on|with|using} [the]] speaker [phone]                        </Item>
+      <Item value="true">    [and] put it on [the] speaker [phone]                          </Item>
+      <Item value="true">    [and] put it on [the] hands free [speaker [phone]]             </Item>
+      <Item value="true">    [and] use the [hands free] speaker [phone]                     </Item>
+      <Item value="true">    [and] use hands free                                           </Item>
+      <Item value="true">    hands free                                                     </Item>
+      <Item value="true">    using hands free                                               </Item>
+      <Item value="true">    using the hands free speaker [phone]                           </Item>
+
+      <Item value="false">   not [{on|with|using} [the]] [hands free] speaker [phone]       </Item>
+      <Item value="false">   [and] {g:DoNot} use [the] [hands free] speaker [phone]         </Item>
+    </PhraseList>
+
+
+    <PhraseList Label="g:WhatIs">
+        <Item> what is </Item>
+        <Item> what's  </Item>
+    </PhraseList>
+        
+        
+    <PhraseList Label="g:DoNot">
+        <Item> do not </Item>
+        <Item> don't  </Item>
+    </PhraseList>
+
+      
+    <PhraseList Label="g:CommonRestartPrefixes">
+        <Item> abort [that] [and]       </Item>
+        <Item> cancel [that] [and]      </Item>
+        <Item> stop [that] [and]        </Item>
+        <Item> {g:DoNot} do that        </Item>
+    </PhraseList>
+
+
+    <PhraseList Label="g:ThemThose">
+        <Item> them   </Item>
+        <Item> those  </Item>
+        <Item> these  </Item>
+    </PhraseList>
+
+
+    <PhraseList Label="g:People">
+        <Item>  guys    </Item>
+        <Item>  boys    </Item>
+        <Item>  men     </Item>
+        <Item>  gals    </Item>
+        <Item>  girls   </Item>
+        <Item>  ladies  </Item>
+        <Item>  folks   </Item>
+        <Item>  people  </Item>
+    </PhraseList>
+
+
+    <PhraseList Label="g:ThemThosePeople">
+      <Item> {g:ThemThose} [{g:People}] </Item>
+    </PhraseList>
+
+
+    <PhraseList Label="g:NoneOfThose">
+      <Item> [no] none [of {g:ThemThose}]       </Item>
+      <Item> [no] neither [of {g:ThemThose}]    </Item>
+      <Item> [no] not [any of] {g:ThemThose}    </Item>
+    </PhraseList>
+
+    <PhraseList Label="g:AnyOrAllOfThose">
+      <Item> any [of {g:ThemThose}]             </Item>
+      <Item> whichever [of {g:ThemThose}]       </Item>
+      <Item> either [of {g:ThemThose}]          </Item>
+      <Item> all [of {g:ThemThose}]             </Item>
+      <Item> both [of {g:ThemThose}]            </Item>
+    </PhraseList>
+
+
+    <PhraseList Label="g:NoneOfThosePeople">
+      <Item> {g:NoneOfThose} [{g:People}]       </Item>
+    </PhraseList>
+      
+
+    <PhraseList Label="g:Affirmative">
+      <Item> confirm              </Item>
+      <Item> ok                   </Item>
+      <Item> [[it] sounds] good   </Item>
+      <Item> right                </Item>
+      <Item> yes                  </Item>
+      <Item> correct              </Item>
+      <Item> [[it] is] okay       </Item>
+      <Item> save                 </Item>
+      <Item> affirmative          </Item>
+      <Item> amen                 </Item>
+      <Item> awesome              </Item>
+      <Item> aye                  </Item>
+      <Item> certainly            </Item>
+      <Item> cheers               </Item>
+      <Item> definitively         </Item>
+      <Item> exactly              </Item>
+      <Item> fine                 </Item>
+      <Item> good                 </Item>
+      <Item> good enough          </Item>
+      <Item> good work            </Item>
+      <Item> great                </Item>
+      <Item> heck yeah            </Item>
+      <Item> heck yea             </Item>
+      <Item> heck yes             </Item>
+      <Item> hell yea             </Item>
+      <Item> hell yeah             </Item>
+      <Item> indubitably          </Item>
+      <Item> let's do it          </Item>
+      <Item> of course            </Item>
+      <Item> okay                 </Item>
+      <Item> positively           </Item>
+      <Item> precisely            </Item>
+      <Item> sounds awesome       </Item>
+      <Item> sounds good          </Item>
+      <Item> sounds great         </Item>
+      <Item> thank you            </Item>
+      <Item> thanks               </Item>
+      <Item> totally              </Item>
+      <Item> yea                  </Item>
+      <Item> yeah                 </Item>
+      <Item> yup                  </Item>
+      <Item> sure                 </Item>
+      <Item> absolutely           </Item>
+    </PhraseList>
+
+
+    <PhraseList Label="g:Negative">
+      <Item> no         </Item>
+      <Item> not really </Item>
+      <Item> nope       </Item>
+      <Item> wrong      </Item>
+      <Item> incorrect  </Item>
+    </PhraseList>
+
+
+      <!-- Common strings -->
+    <Intent Name="Strings" Scope="g:Nop">
+        
+        <!-- This ListenFor is a workaround to get the Vad2Grxml compiler to include g:Prefix and g:Suffix into the grammar file -->
+        <!-- this work around don't need to be copied to anyplace else -->
+        <ListenFor> {g:Prefix} {g:Suffix} </ListenFor>
+            
+        <String Name="LastItemInListSeperator"> <Gui>      or        </Gui>
+                                                <Tts>      or        </Tts></String>
+
+        <String Name="OK">
+          <Gui>   OK,{ }                                    </Gui>
+          <Tts>   OK,{ }                                    </Tts>
+        </String>
+        
+        
+        <!--
+            **********************************************************************
+            *
+            *   Date and Time strings
+            *
+            **********************************************************************  
+        -->
+        
+        <!-- Time miscellany -->
+        <!-- Capitalization on the TTS version of AM/PM is important to ensure the text is spoken properly -->
+        <String Name="HourType_am"> <Gui>          am                  </Gui>
+                                    <Tts>          AM                  </Tts></String>
+        <String Name="HourType_pm"> <Gui>          pm                  </Gui>
+                                    <Tts>          PM                  </Tts></String>
+
+        <!-- Day of the week -->
+        <String Name="DayOfWeek_0"> <Tts>          Sunday              </Tts></String>
+        <String Name="DayOfWeek_1"> <Tts>          Monday              </Tts></String>
+        <String Name="DayOfWeek_2"> <Tts>          Tuesday             </Tts></String>
+        <String Name="DayOfWeek_3"> <Tts>          Wednesday           </Tts></String>
+        <String Name="DayOfWeek_4"> <Tts>          Thursday            </Tts></String>
+        <String Name="DayOfWeek_5"> <Tts>          Friday              </Tts></String>
+        <String Name="DayOfWeek_6"> <Tts>          Saturday            </Tts></String>
+
+        <String Name="Today">       <Tts>          Today               </Tts></String>
+        <String Name="Tomorrow">    <Tts>          Tomorrow            </Tts></String>
+
+        <!-- Months -->
+        <String Name="Month_1">     <Tts>          January             </Tts></String>
+        <String Name="Month_2">     <Tts>          February            </Tts></String>
+        <String Name="Month_3">     <Tts>          March               </Tts></String>
+        <String Name="Month_4">     <Tts>          April               </Tts></String>
+        <String Name="Month_5">     <Tts>          May                 </Tts></String>
+        <String Name="Month_6">     <Tts>          June                </Tts></String>
+        <String Name="Month_7">     <Tts>          July                </Tts></String>
+        <String Name="Month_8">     <Tts>          August              </Tts></String>
+        <String Name="Month_9">     <Tts>          September           </Tts></String>
+        <String Name="Month_10">    <Tts>          October             </Tts></String>
+        <String Name="Month_11">    <Tts>          November            </Tts></String>
+        <String Name="Month_12">    <Tts>          December            </Tts></String>
+
+        <!-- Day of the month -->
+        <String Name="DayOfMonth_1"><Tts>           1st                </Tts></String>
+        <String Name="DayOfMonth_2"><Tts>           2nd                </Tts></String>
+        <String Name="DayOfMonth_3"><Tts>           3rd                </Tts></String>
+        <String Name="DayOfMonth_4"><Tts>           4th                </Tts></String>
+        <String Name="DayOfMonth_5"><Tts>           5th                </Tts></String>
+        <String Name="DayOfMonth_6"><Tts>           6th                </Tts></String>
+        <String Name="DayOfMonth_7"><Tts>           7th                </Tts></String>
+        <String Name="DayOfMonth_8"><Tts>           8th                </Tts></String>
+        <String Name="DayOfMonth_9"><Tts>           9th                </Tts></String>
+        <String Name="DayOfMonth_10"><Tts>         10th                </Tts></String>
+        <String Name="DayOfMonth_11"><Tts>         11th                </Tts></String>
+        <String Name="DayOfMonth_12"><Tts>         12th                </Tts></String>
+        <String Name="DayOfMonth_13"><Tts>         13th                </Tts></String>
+        <String Name="DayOfMonth_14"><Tts>         14th                </Tts></String>
+        <String Name="DayOfMonth_15"><Tts>         15th                </Tts></String>
+        <String Name="DayOfMonth_16"><Tts>         16th                </Tts></String>
+        <String Name="DayOfMonth_17"><Tts>         17th                </Tts></String>
+        <String Name="DayOfMonth_18"><Tts>         18th                </Tts></String>
+        <String Name="DayOfMonth_19"><Tts>         19th                </Tts></String>
+        <String Name="DayOfMonth_20"><Tts>         20th                </Tts></String>
+        <String Name="DayOfMonth_21"><Tts>         21st                </Tts></String>
+        <String Name="DayOfMonth_22"><Tts>         22nd                </Tts></String>
+        <String Name="DayOfMonth_23"><Tts>         23rd                </Tts></String>
+        <String Name="DayOfMonth_24"><Tts>         24th                </Tts></String>
+        <String Name="DayOfMonth_25"><Tts>         25th                </Tts></String>
+        <String Name="DayOfMonth_26"><Tts>         26th                </Tts></String>
+        <String Name="DayOfMonth_27"><Tts>         27th                </Tts></String>
+        <String Name="DayOfMonth_28"><Tts>         28th                </Tts></String>
+        <String Name="DayOfMonth_29"><Tts>         29th                </Tts></String>
+        <String Name="DayOfMonth_30"><Tts>         30th                </Tts></String>
+        <String Name="DayOfMonth_31"><Tts>         31st                </Tts></String>
+
+        <!--
+            **********************************************************************
+            *
+            *   Misc enum types
+            *
+            **********************************************************************  
+        -->
+
+        <!-- convert phone types to gui & tts strings -->
+        <String Name="PhoneType_Home">   <Gui>    home                </Gui></String>
+        <String Name="PhoneType_Home2">  <Gui>    home 2              </Gui></String>
+        <String Name="PhoneType_Mobile"> <Gui>    mobile              </Gui></String>
+        <String Name="PhoneType_Mobile2"><Gui>    mobile 2            </Gui></String>
+        <String Name="PhoneType_Work">   <Gui>    work                </Gui></String>
+        <String Name="PhoneType_Work2">  <Gui>    work 2              </Gui></String>
+        <String Name="PhoneType_Company"><Gui>    company             </Gui></String>
+        <String Name="PhoneType_Pager">  <Gui>    pager               </Gui></String>
+        <String Name="PhoneType_Voip">   <Gui>    voip                </Gui></String>
+        <String Name="PhoneType_Other">  <Gui>                        </Gui></String>    <!-- other is not a specific phone type -->
+
+        
+        <String Name="InformIntro">
+          <Value>               <Gui> Just so you know,                          </Gui>    </Value>
+          <Value>               <Gui> By the way,                                </Gui>    </Value>
+        </String>
+
+        
+        <!--
+            **********************************************************************
+            *
+            *   small number selection strings
+            *
+            **********************************************************************  
+        -->
+        <String Name="num_1"><Tts>          one                         </Tts></String>
+        <String Name="num_2"><Tts>          two                         </Tts></String>
+        <String Name="num_3"><Tts>          three                       </Tts></String>
+        <String Name="num_4"><Tts>          four                        </Tts></String>
+        <String Name="num_5"><Tts>          five                        </Tts></String>
+        <String Name="num_6"><Tts>          six                         </Tts></String>
+        <String Name="num_7"><Tts>          seven                       </Tts></String>
+        <String Name="num_8"><Tts>          eight                       </Tts></String>
+        <String Name="num_9"><Tts>          nine                        </Tts></String>
+        <String Name="num_10"><Tts>         ten                         </Tts></String>
+        <String Name="num_11"><Tts>         eleven                      </Tts></String>
+        <String Name="num_12"><Tts>         twelve                      </Tts></String>
+        <String Name="num_13"><Tts>         thirteen                    </Tts></String>
+        <String Name="num_14"><Tts>         fourteen                    </Tts></String>
+        <String Name="num_15"><Tts>         fifteen                     </Tts></String>
+        <String Name="num_16"><Tts>         sixteen                     </Tts></String>
+        <String Name="num_17"><Tts>         seventeen                   </Tts></String>
+        <String Name="num_18"><Tts>         eighteen                    </Tts></String>
+        <String Name="num_19"><Tts>         nineteen                    </Tts></String>
+        <String Name="num_20"><Tts>         twenty                      </Tts></String>
+        
+        <String Name="numth_1"><Tts>        first                       </Tts></String>
+        <String Name="numth_2"><Tts>        second                      </Tts></String>
+        <String Name="numth_3"><Tts>        third                       </Tts></String>
+        <String Name="numth_4"><Tts>        fourth                      </Tts></String>
+        <String Name="numth_5"><Tts>        fifth                       </Tts></String>
+        <String Name="numth_6"><Tts>        sixth                       </Tts></String>
+        <String Name="numth_7"><Tts>        seventh                     </Tts></String>
+        <String Name="numth_8"><Tts>        eighth                      </Tts></String>
+        <String Name="numth_9"><Tts>        nineth                      </Tts></String>
+        <String Name="numth_10"><Tts>       tenth                       </Tts></String>
+        <String Name="numth_11"><Tts>       eveleth                     </Tts></String>
+        <String Name="numth_12"><Tts>       twelfth                     </Tts></String>
+        <String Name="numth_13"><Tts>       thirteenth                  </Tts></String>
+        <String Name="numth_14"><Tts>       fourteenth                  </Tts></String>
+        <String Name="numth_15"><Tts>       fifteenth                   </Tts></String>
+        <String Name="numth_16"><Tts>       sixteenth                   </Tts></String>
+        <String Name="numth_17"><Tts>       seventeenth                 </Tts></String>
+        <String Name="numth_18"><Tts>       eighteenth                  </Tts></String>
+        <String Name="numth_19"><Tts>       nineteenth                  </Tts></String>
+        <String Name="numth_20"><Tts>       twentieth                   </Tts></String>
+
+        
+        <!--
+            **********************************************************************
+            *
+            *   Misc strings
+            *
+            **********************************************************************  
+        -->
+        
+        <String Name="CancelButtonText">
+          <Value><Gui> Cancel </Gui></Value>
+        </String>
+
+        <String Name="RequestConfirmation">
+          <Value><Gui> Is that right?     </Gui></Value>
+          <Value><Gui> Sound good?        </Gui></Value>
+        </String>
+        
+        <String Name="SerpLinkLabel">
+            <Gui>  Search for "{UserSaid}"            </Gui>
+        </String>
+
+        <String Name="UnlockNeeded">  
+            <Value><Gui> </Gui><Tts> {g:Prompt{}}{EmoteSensitive}You just need to unlock your phone first.      </Tts></Value>  
+            <Value><Gui> </Gui><Tts> {g:Prompt{}}{EmoteSensitive}Please unlock your phone.                      </Tts></Value>  
+        </String>
+        
+    </Intent>
+        
+  </Domain>    
+    
+</VoiceCommands>
+
+            

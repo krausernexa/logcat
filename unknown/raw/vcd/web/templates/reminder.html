@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="vcd.css" />
+    <script type="text/javascript" src="vcd.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
+    <meta http-equiv="Pragma" content="no-cache">
+</head>
+<body style="background:#{BgColor};color:#{FgColor};">
+    <div style="margin: 0px 0px 0px 12px; ">
+        <div id="WeSaid" class="AccentHighBrush TitleTextBlockStyle">
+            {Gui}
+        </div>
+        <div id="TitleContent" class="SecondaryForegroundBrush_Dark CaptionTextBlockStyle">
+        </div>
+        <div>
+            <div id="HeaderTitle" class="SecondaryForegroundBrush_Dark CaptionTextBlockStyle">
+                <img id="ImageSrc" class="Invert" src="{Domain}.png" /><div id="Title">{Domain}</div>
+            </div>
+        </div>
+        <form action="ms-app://{Domain}/{Intent}">
+            <!--- create a reminder to buy milk at 3 pm -->
+            <input id="ReminderBody" name="ReminderBody" type="text" />
+            <!-- REMINDER WILL OCCUR -->
+            <select id="ReminderFrequency" name="ReminderFrequency">
+                <option>{OnlyOnce}</option>
+                <option>{Everyday}</option>
+                <option>{DayOfWeek_Sundays}</option>
+                <option>{DayOfWeek_Mondays}</option>
+                <option>{DayOfWeek_Tuesdays}</option>
+                <option>{DayOfWeek_Wednesdays}</option>
+                <option>{DayOfWeek_Thursdays}</option>
+                <option>{DayOfWeek_Fridays}</option>
+                <option>{DayOfWeek_Saturdays}</option>
+            </select>
+            <!-- time picker-->
+            <input id="Time" name="Time" type="text" style="visibility:hidden;" />
+            <!-- date picker-->
+            <input id="Date" name="Date" type="text" style="visibility:hidden;" />
+            <input type="submit" name="Result" value="{FormConfirmButton}" />
+            <input type="submit" name="Result" value="{FormCancelButton}" />
+        </form>
+        <span style="line-height:5"><a style="color:#{FgColor}" href="bing://search?q={UserSaid}">{SerpLinkLabel}</a></span>
+    </div>
+
+    <script type="text/javascript">
+        setFormArgs();
+    </script>
+</body>
+</html>

@@ -1,0 +1,498 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.0" xmlns:x="http://schemas.thinkman.com/voicecommands/extensions/1.0">
+
+  <Domain Name="Communication" ClassName="DialerRes">
+
+    <!--
+        **********************************************************************
+        *
+        * Make a Phone Call 
+        *
+        **********************************************************************  
+    -->
+    <Intent Name="Call" Scope="g:SpeechRoot, g:TextRoot">
+      <ListenFor> {CallPrefixes} {AllContactNames}  [[{PhoneNumberPrefixes}] {PhoneNumberType}]  [{SpeakerPhone}]               </ListenFor>
+      <ListenFor> {CallPrefixes} {PhoneNumber} [{SpeakerPhone}]                                                                 </ListenFor>
+      <ListenFor> {CallPrefixes} [someone] [{SpeakerPhone}]                                                                     </ListenFor>
+      <ListenFor> {get|put} {AllContactNames} on the {phone|line|horn} [{now|right now|immediately}]                                  </ListenFor> 
+      <ListenFor> give {AllContactNames} a [{VoipName}] call [[{PhoneNumberPrefixes}] {PhoneNumberType}]  [{SpeakerPhone}]      </ListenFor>
+    </Intent>
+
+   <PhraseList Label="CallPrefixes">
+        <Item>      [{make|start|place} a] [{VoipName}] [{phone|telephone}] call [to]                                           </Item>
+        <Item>      dial                                                                                            </Item>
+        <Item>      telephone                                                                                            </Item>     
+    </PhraseList>
+
+    <PhraseList Label="PhoneNumberPrefixes">
+        <Item>      {on|at|[and] use} [{her|his|the}]                                                               </Item>
+    </PhraseList>
+      
+    <!-- StoreName are the pim store names.  E.g., "facebook"     -->
+    <PhraseList Label="PhoneNumberType">
+        <Item>        {PhoneNumberType2} [{StoreName}]                                                              </Item>
+        <Item>        {VoipName} [line]                                                                             </Item>
+    </PhraseList>
+
+    <PhraseList Label="PhoneNumberType2" SlotName="PhoneNumberType">
+      <Item value="Mobile">         {mobile|cell|cellular|wireless}      [{ phone [number] | line | number }]       </Item>
+      <Item value="Mobile2">        {mobile|cell|cellular|wireless} two  [{ phone [number] | line | number }]       </Item>
+      <Item value="Home">           home                                 [{ phone [number] | line | number }]       </Item>
+      <Item value="Home2">          home two                             [{ phone [number] | line | number }]       </Item>
+      <Item value="Work">           {work|office}                        [{ phone [number] | line | number }]       </Item>
+      <Item value="Work2">          {work|office} two                    [{ phone [number] | line | number }]       </Item>
+      <Item value="Company">        company                              [{ phone [number] | line | number }]       </Item>
+      <Item value="Pager">          pager                                [{ phone [number] | line | number }]       </Item>
+    </PhraseList>
+
+    <PhraseList Label="SpeakerPhone" SlotName="SpeakerPhone">
+      <Item out="rules.latest()">    {g:SpeakerPhone}                                                               </Item>
+    </PhraseList>
+
+      
+    <!--
+        **********************************************************************
+        *
+        * Common strings for speech & text input mode
+        *
+        **********************************************************************  
+    -->
+    <Intent Name="Call" Scope="g:Nop">
+      <String Name="InvokeCall">
+        <Value weight="1.0"><Gui>     {g:PromptAck{}}Calling {SelectedContact}, {CallingPhoneType}.           </Gui></Value>  
+        <Value weight="0.5"><Gui>     {g:Prompt{}}Calling {SelectedContact}, {CallingPhoneType}.              </Gui></Value>  
+      </String>
+      
+      <String Name="Calling_Title">
+         <Gui> CALLING                      </Gui>
+      </String>     
+        
+      <String Name="Calling_ButtonCancel">
+          <Gui> Cancel                      </Gui>
+      </String>
+        
+      
+     <String Name="CallingSoleNumber">
+        <Value><Gui>     {g:PromptAck{}}Calling {SelectedContact}.                                  </Gui></Value>
+      </String>
+
+      <String Name="CallingSoleNumber_Title">
+         <Gui> CALLING                      </Gui>
+      </String>
+        
+      <String Name="CallingSoleNumber_ButtonCancel">
+          <Gui> Cancel                      </Gui>
+      </String>
+        
+      
+      <String Name="CallingUsingSpeakerPhone">
+        <Value weight="1.0"><Gui>     {g:PromptAck{}}Calling {SelectedContact}, {CallingPhoneType} on speakerphone.          </Gui></Value>  
+        <Value weight="0.5"><Gui>     {g:Prompt{}}Calling {SelectedContact}, {CallingPhoneType} on speakerphone.             </Gui></Value>  
+      </String>
+
+      <String Name="CallingUsingSpeakerPhone_Title">
+          <Gui> CALLING                             </Gui>
+      </String>
+
+      <String Name="CallingUsingSpeakerPhone_ButtonCancel">
+          <Gui> Cancel        </Gui>
+      </String>
+        
+      <String Name="NoPhoneNumber">             <Gui>    {g:PromptSorry{}}There's no phone number for {SelectedContact}.                                            </Gui></String>
+      <String Name="NoMatchingPhoneType">       <Gui>    {g:PromptSorry{}}There's no {PhoneType} {PhoneNumber{}} for {SelectedContact}.                             </Gui></String>
+      <String Name="NoPhoneNumbersAny">         <Gui>    {g:Prompt{}}I found {SelectedCount} matches for {MatchName}, but none with phone numbers.                  </Gui></String>         
+      <String Name="NoMatchingPhoneTypeAny">    <Gui>    {g:Prompt{}}I found {SelectedCount} matches for {MatchName}, but none with a {PhoneType} {PhoneNumber{}}.  </Gui></String>         
+      <String Name="NoMatchingPhoneTypesAny">   <Gui>    {g:PromptSorry{}}There's no phone number for {MatchName}.                                                  </Gui></String>         
+        
+      <String Name="Cancelled">
+        <Value> <Gui>    {g:PromptCancelled{}}I've cancelled that.      </Gui> </Value>
+        <Value> <Gui>    {g:PromptCancelled{}}Call cancelled.           </Gui> </Value>
+      </String>
+        
+      <String Name="VoiceMailContactName">      <Gui>    voicemail                      </Gui></String>
+      <String Name="VoiceMailIcon">             <Gui>                                   </Gui></String>     
+
+      <!-- contact picker strings -->
+      <String Name="PickContact">       <Gui>    Pick Contact    </Gui></String>   
+    </Intent>
+    <!--
+        **********************************************************************
+        *
+        * Call with no list specificied
+        *
+        **********************************************************************  
+    -->
+    <Intent Name="Call" Scope="AskForNameCall">
+      <ListenFor> [{CallPrefixes}] {AllContactNames}  [[{PhoneNumberPrefixes}] {PhoneNumberType}]  [{SpeakerPhone}]     </ListenFor>
+      <ListenFor> [{CallPrefixes}] {PhoneNumber} [{SpeakerPhone}]</ListenFor>
+        
+      <String Name="AskForNameCall">
+        <Value>
+          <Tts>       {g:PromptAck{}}Who do you wanna call?                </Tts>
+          <Gui>       {g:PromptAck{}}Who do you want to call?              </Gui>
+        </Value>
+        <Value><Gui>  {g:PromptAck{}}Who would you like to call?           </Gui></Value>
+      </String> 
+        
+      <String Name="AskForNameCall_ButtonCancel">  
+          <Gui> Cancel        </Gui>
+      </String>
+        
+      <String Name="AskForNameCall_ButtonSubmit">  
+          <Gui> Call          </Gui>
+      </String>
+        
+      <String Name="AskForNameCall_RetryX">
+          <Value><Gui>      {g:PromptSorry{}}{AskForNameCall_{PromptNoReco}}Who did you want to call?             </Gui></Value>
+      </String> 
+        
+      <String Name="AskForNameCall_RetryX_ButtonCancel">  
+          <Gui> Cancel        </Gui>
+      </String>
+        
+      <String Name="AskForNameCall_RetryX_ButtonSubmit">  
+          <Gui> Call          </Gui>
+      </String>
+        
+      <String Name="AskForNameCall_IsNotNoReco">     
+          <Gui> </Gui> 
+      </String> 
+        
+      <String Name="AskForNameCall_IsNotNoReco_ButtonCancel">  
+          <Gui> Cancel        </Gui>
+      </String>
+        
+      <String Name="AskForNameCall_IsNotNoReco_ButtonSubmit">  
+          <Gui> Call          </Gui>
+      </String>
+        
+      <String Name="AskForNameCall_IsNoReco">
+          <Value><Tts>                  {EmoteSensitive}I couldn't find that contact.{ }                    </Tts> <Gui> </Gui> </Value>
+          <Value Weight="0.0"><Tts>     {EmoteSensitive}I can't find that contact.{ }                       </Tts> <Gui> </Gui> </Value>
+      </String> 
+        
+      <String Name="AskForNameCall_IsNoReco_ButtonCancel">  
+          <Gui> Cancel        </Gui>
+      </String>
+        
+      <String Name="AskForNameCall_IsNoReco_ButtonSubmit">  
+          <Gui> Call          </Gui>
+      </String>
+                
+      <String Name="AskForNameCall_Tip">
+          <Value Weight="0.9"><Gui>      try Call {RandomContact}                                           </Gui></Value>
+      </String>  
+      
+    </Intent>
+
+      
+    <!--
+        **********************************************************************
+        *
+        * Call with some wellknown nickname specified
+        *
+        **********************************************************************  
+    -->
+      <Intent Name="Call" Scope="AssignNickname">
+          <ListenFor> [{CallPrefixes}] {AllContactNames}  [[{PhoneNumberPrefixes}] {PhoneNumberType}]  [{SpeakerPhone}]                 </ListenFor>
+          <ListenFor> [{CallPrefixes}] {PhoneNumber} [{SpeakerPhone}]                                                                   </ListenFor>
+          <ListenFor> {NicknameConfirm}                                                                                                 </ListenFor>
+
+          <String Name="AssignNickname" CortanaOnly="true">
+            <Value><Gui>    Would you like to assign the nickname '{Nickname}'?                                        </Gui>
+                   <Tts>    The nickname '{Nickname}' is not assigned to anyone?  Would you like to assign it?         </Tts></Value>
+          </String>
+          
+          <String Name="AssignNickname_Title">
+            <Value><Gui>    CALLING                                         </Gui></Value>
+          </String>       
+        
+          <String Name="AssignNickname_Header">
+            <Value><Gui>    Assign '{Nickname}'?                            </Gui></Value>
+          </String>
+        
+          <!-- todo -->
+          <String Name="AssignNicknamer_Tip">
+            <Value><Gui>    try Yes or No                                   </Gui></Value>
+            <Value><Gui>    try Call {RandomContact}                        </Gui></Value>
+            <Value><Gui>    try Cortana, call {RandomContact}               </Gui></Value>
+          </String>
+
+          <String Name="AssignNickname_ButtonCancel">   <Gui>   Cancel      </Gui></String>
+          <String Name="AssignNickname_ButtonSubmit">   <Gui>   Assign      </Gui></String>
+
+      </Intent>
+
+      <PhraseList Label="NicknameConfirm" SlotName="NicknameConfirm">
+          <Item value="true">     {g:Affirmative} [assign it]               </Item>
+          <Item value="false">    {g:Negative}  [ {g:DoNot} assign it ]     </Item>
+      </PhraseList>
+
+
+      <!--
+        **********************************************************************
+        *
+        * Select from the list of contacts/businesses to call
+        *
+        **********************************************************************  
+    -->
+    <Intent Name="Call" Scope="SelectContact, SelectPhone">
+      <ListenFor> [{CallPrefixes}] [the] {SelectedContacts}  [[{PhoneNumberPrefixes}] {PhoneNumberType}]  [{SpeakerPhone}]      </ListenFor>
+      <ListenFor> {CallNoneOfThose}                                                                                             </ListenFor>
+        
+      <!-- {Contacts} is the list of names -->
+      <String Name="SelectWho">
+          <Value><Gui>      {g:PromptAck{}}Which one?                                                       </Gui>
+                 <Tts>      {g:PromptAck{}}Which one? {Contacts}                                            </Tts></Value>
+      </String>
+      
+      <String Name="SelectWho_Tip">
+          <Value Weight="1">    <Gui>    try {Contacts:@}                      </Gui> </Value>
+          <Value Weight="1">    <Gui>    you can say Cancel                    </Gui> </Value>
+          <Value Weight="0.5">  <Gui>    try None of those                     </Gui> </Value>
+      </String>
+
+        
+      <!-- {CommonContactName} is the common name.  {ContactDisambig} is the list of names.   E.g., "call which {pizza hut} the one {in redmond, or in bellevue}" -->
+      <String Name="SelectWhich">
+          <Value><Gui>      {g:PromptAck{}}Which one?                                                       </Gui>
+                 <Tts>      {g:PromptAck{}}call {CommonContactName}, which one? The one {ContactDisambig}?  </Tts></Value>
+      </String>
+
+      <String Name="SelectWhich_Tip">
+            <Value><Gui>    try {ContactDisambig:@}                             </Gui></Value>
+            <Value><Gui>    you can say Cancel                                  </Gui></Value>
+      </String>
+
+
+      <!-- {MatchName} is the name the user spoke -->
+      <String Name="TooManyMatches">        
+          <Value><Gui>      {g:Prompt{}}Which one?                                                          </Gui>
+                 <Tts>      {g:PromptAck{}}Which {MatchName}?                                               </Tts></Value>
+      </String>
+        
+      <String Name="TooManyMatches_Tip">
+          <Value><Gui>      {SelectWho_Tip{}}                                                               </Gui></Value>
+      </String>       
+      
+    </Intent>
+
+    <PhraseList Label="CallNoneOfThose" SlotName="CallNoneOfThose">
+      <Item Value="true"> {g:NoneOfThosePeople}                                                         </Item>
+      <Item Value="true"> [no] {g:DoNot} {call|dial} [{any|either} of] {g:ThemThosePeople}              </Item>
+      <Item Value="true"> [no] I {g:DoNot} want to {call|dial} {any|either} of {g:ThemThosePeople}      </Item>          
+    </PhraseList>
+
+      <!--
+        **********************************************************************
+        *
+        * Select which phone to use (home, mobile, ...)
+        *
+        **********************************************************************  
+    -->
+    <Intent Name="Call" Scope="SelectPhone">
+      <ListenFor> [call [{PhoneNumberPrefixes}]] {PhoneNumberType} [{SpeakerPhone}]                         </ListenFor>
+      
+      <String Name="AskForPhoneNumber">
+          <Value><Gui>      {g:PromptAck{}}Which number?                                                    </Gui>
+                 <Tts>      {g:PromptAck{}}{SelectedContact}, which number? {PhoneTypes}                    </Tts></Value>
+          
+          <Value Weight="0"><Gui>      {g:PromptTapered{}}Which number?                                     </Gui>
+                            <Tts>      {g:PromptTapered{}}{SelectedContact}, which number?                  </Tts>
+          </Value>
+        </String>
+        
+      <String Name="AskForPhoneNumber_Tip">
+            <Value><Gui>    try {PhoneTypes:@}                                      </Gui></Value>
+            <Value><Gui>    try {PhoneTypes:@} phone                                </Gui></Value>
+            <Value><Gui>    you can say Cancel                                      </Gui></Value>
+      </String>
+        
+      <String Name="NoPhoneTypeIntro">
+            <Gui>      {g:PromptSorry{}}There's no {SelectedPhoneType} {PhoneNumber{}} for {SelectedContact}.   </Gui>
+      </String>
+
+      <String Name="NoPhoneTypeWhichNumber">
+          <Value><Gui>      {NoPhoneTypeIntro{}}                                                                </Gui>
+                 <Tts>      {NoPhoneTypeIntro{}} Which one do you wanna call? {PhoneTypes}                      </Tts></Value>
+      </String>
+        
+      <String Name="NoPhoneType_Tip">
+          <Gui>     {WhichNumber_Tip{}}     </Gui>
+      </String>
+        
+      <!-- sub string used by WhichNumber -->
+      <String Name="PhoneNumber" AssignResourceId="false">
+          <Value><Gui> phone number                             </Gui></Value>
+          <Value><Gui> number                                   </Gui></Value>
+          <Value><Gui> line                                     </Gui></Value>
+      </String>
+      
+      <!-- -->
+      <String Name="PhoneTypeDefault">
+         <Value><Gui> {PhoneType}                   </Gui></Value>
+      </String>
+        
+      <String Name="PhoneTypeWithStoreName">
+         <Value><Gui> {PhoneType} ({StoreName})     </Gui>
+                <Tts> {PhoneType} {StoreName}       </Tts></Value>
+      </String>
+        
+      <String Name="PhoneTypeVoip" CortanaOnly="true">
+         <Value><Gui> {StoreName}                   </Gui></Value>
+      </String>
+        
+    </Intent>
+
+
+    <!--
+        **********************************************************************
+        *
+        * Stop & confirm it it's time to call
+        *
+        **********************************************************************  
+    -->
+
+    <Intent Name="Call" Scope="CallConfirmation">
+      <ListenFor> [{CallPrefixes}] [the] [{SelectedContacts}]  [[{PhoneNumberPrefixes}] {PhoneNumberType}]  [{SpeakerPhone}]   </ListenFor>
+      <ListenFor> {Confirm} </ListenFor>
+        
+      <String Name="ConfirmCall">
+        <Value><Gui>      {g:PromptAck{}}Call {SelectedContact} {CallingPhoneType}, is that right?      </Gui></Value>
+      </String>
+        
+      <String Name="ConfirmCall_Title">  
+          <Gui> CALLING                                             </Gui>
+      </String>   
+        
+      <String Name="ConfirmCall_ButtonCancel">  
+          <Gui> Cancel        </Gui>
+      </String>
+        
+      <String Name="ConfirmCall_ButtonSubmit">  
+          <Gui> Call          </Gui>
+      </String>
+        
+      <String Name="ConfirmCall_Tip">
+          <Value><Gui> try Yes, No or Cancel        </Gui></Value>
+      </String>
+
+
+    <!--
+        **********************************************************************
+        *
+        * 
+        *
+        **********************************************************************  
+     -->
+
+     <String Name="NoPhoneTypeConfirm">
+        <Value><Gui>      {NoPhoneTypeIntro{}} Call {CallingPhoneType} instead?                     </Gui></Value>
+      </String>
+        
+      <String Name="NoPhoneTypeConfirm_Title">
+          <Gui> CALLING                                             </Gui>
+      </String>      
+
+      <String Name="NoPhoneTypeConfirm_HeaderImage">
+          <Gui> {SelectedContactImage}                              </Gui>
+      </String>
+
+      <String Name="NoPhoneTypeConfirm_Header">
+          <Gui> {SelectedContact}                                   </Gui>
+      </String>
+
+      <String Name="NoPhoneTypeConfirm_Header2">
+          <Gui> {CallingPhoneType}                                  </Gui>
+      </String>
+        
+      <String Name="NoPhoneTypeConfirm_ButtonCancel">  
+          <Gui> Cancel    </Gui>
+      </String>
+        
+      <String Name="NoPhoneTypeConfirm_ButtonSubmit">  
+          <Gui> Call      </Gui>
+      </String>
+        
+      <String Name="NoPhoneTypeConfirm_Tip">  
+          <Value><Gui> try Yes, call it         </Gui></Value>
+          <Value><Gui> try Yes, No or Cancel    </Gui></Value>
+      </String>  
+    </Intent>
+
+    <PhraseList Label="Confirm" SlotName="Confirmed">
+        <Item value="true">     {call|dial} [{SelectedContacts}]                                    </Item>
+        <Item value="true">     {g:Affirmative} [ {call|dial} [{SelectedContacts}] ]                </Item>
+        <Item value="false">    {g:Negative}  [ {g:DoNot} {call|dial} [{SelectedContacts}] ]        </Item>  
+    </PhraseList>
+
+      
+    <!--
+        **********************************************************************
+        *
+        * Support grammars
+        *
+        **********************************************************************  
+    -->
+    <PhraseList Label="PhoneNumber" SlotName="PhoneNumber">
+      <Item out="rules.latest()">   {g:PhoneNumber}                     </Item>
+    </PhraseList>
+      
+    <PhraseList Label="StoreName" SlotName="StoreName">
+        <Item out="rules.latest()">   {s:PimStoreNames}                 </Item>
+    </PhraseList>
+      
+    <PhraseList Label="VoipName" SlotName="VoipName">
+        <Item Value="voip">           voip                              </Item>
+        <Item out="rules.latest()">   {s:PimVoipStoreNames}             </Item>
+    </PhraseList>
+      
+    <PhraseList Label="AllContactNames" SlotName="Name">
+      <Item Weight="1.00">        {AllContactNames2}                    </Item>
+      <Item Weight="1.00">        {BuiltInContactNames}                 </Item>
+      <Item Weight="1.00">        {PointsOfInterest}                    </Item>
+      <Item Weight="0.50">   [my] {WellKnownContactNicknames}           </Item>
+      <Item Weight="0.10">        {NoReco}                              </Item>   
+    </PhraseList>    
+      
+    <PhraseList Label="AllContactNames2">
+      <Item Weight="1.00">      {AllContactNames3}                      </Item>
+    </PhraseList>
+      
+    <PhraseList Label="AllContactNames3">
+      <Item out="rules.latest()">   {s:Contacts}                        </Item>
+    </PhraseList>
+      
+    <PhraseList Label="PointsOfInterest" SlotName="PointsOfInterest">
+      <Item out="rules.latest()">   {s:PointsOfInterest2}               </Item>
+    </PhraseList>
+
+    <!-- This grammar is used to detect Nicknames that aren't yet defined by the user -->
+    <PhraseList Label="WellKnownContactNicknames" SlotName="ContactNickname">
+      <Item out="rules.latest()">   {g:WellKnownNicknames}              </Item>  
+    </PhraseList>
+      
+    <PhraseList Label="BuiltInContactNames" SlotName="BuiltInContact">
+      <Item Value="voicemail">      [my] voicemail                      </Item>
+    </PhraseList>
+
+    <PhraseList Label="NoReco">
+      <Item Value="true">           {*}                                 </Item>
+    </PhraseList>
+      
+    <!-- Wraps the "by name" and "by number" selection grammar list. Used by modal for contact picking -->
+    <PhraseList Label="SelectedContacts">
+       <Item>       {SelectedContactByName}                             </Item>
+    </PhraseList>
+
+    <!-- The dynamic grammars used by the code -->
+    <DynamicPhraseList Label="SelectedContactByName"   SlotName="ContactsByName"    HackId="1" />
+
+  </Domain>
+
+    
+</VoiceCommands>
+
+
+
+  

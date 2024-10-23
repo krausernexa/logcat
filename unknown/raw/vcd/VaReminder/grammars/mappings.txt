@@ -1,0 +1,98 @@
+# See generate_vad.bat for usage.
+
+# -- MAPPINGS FILE --
+# The master scripts reference common or shared output strings (eg. confirmation)
+# but there's currently no way for MasterScriptParser to load those replacements.
+# If MasterScriptParser encounters a [foo] or <bar> placeholder that it doesn't
+# have a replacement for, it will auto-generate a dummy replacement string.  This
+# file provides a way to provide a proper replacement, and avoid the dummy string
+# generation. This file can also be used to map string names from the XLS to names
+# that make sense in code.
+#   * Mappings are tab-delimited
+#   * Empty iines and lines starting with # are ignored.
+
+# Template mappings
+[Acknowledgement-phrase]	{g:PromptAck{}}
+[Success-acknowledgement-phrase]	{g:PromptSuccess{}}
+[Confirm-phrase]	{g:RequestConfirmation{}}
+[Change-intro-phrase]	{g:PromptChange{}}
+[Reminder-Day-Time]	at {ReminderTime} {ReminderDate} 
+[Person-disambig-template]	{0}
+[Location-disambig-template]	{0}
+[Recurrence-Template]	{ReminderRecurrence{}} at {ReminderTime}
+[Recurrence-Day-Readback-Template]	{ReminderRecurrence{}} at {ReminderTime}
+[At-Time-Template]	at {ReminderTime}
+[Place-Confirmed-Prefix]	{ReminderLocationDirection}
+[Reminder-Location-Tips-Template]	{ReminderLocationTipsTemplate{}}
+[Reminder-Location-Descriptor]	{ReminderLocation}
+[Location-Tip-Template]	{LocationTip{}}
+[Meeting-Places-Template]	{MeetingPlacesTemplate{}}
+[Cancel-empty-phrase]	{g:PromptCancelled{}}
+[X-SlotType-Time]	Time
+[X-SubType-SlotName]	Condition
+
+# Slot mappings
+<ReminderDateTime>	{ReminderTime}
+#<ReminderBody>	{ReminderBodyText}
+<ContactName>	{ReminderPerson}
+<Location>	{ReminderLocation}
+<NameRequested>	{ReminderLocationClass}
+<NameOfFirstResult>	{ReminderShortcutLocationName}
+<StreetName>	{ReminderShortcutLocationStreet}
+<City>	{ReminderShortcutLocationCity}
+<StartDate-Day-of-Week>	{ReminderRecurrencePeriod}
+<Inner-Circle-Contact-First-Name>	Jack
+<Contact-From-Disambig>	{ReminderContactDisambigTips:@}
+
+# Earcon mappings
+[success earcon]	{EarConSuccess}
+[success-earcon]	{EarConSuccess}
+[cancel earcon]	{EarConCancel}
+
+# Alert name mappings
+CancelReminder	AlertReminderCancelled
+CreateReminderSuccess	AlertReminderCreationSucceeded
+CreateReminderSuccessFirstUse	AlertReminderCreationSucceededFirstTime
+CreateReminderError	AlertReminderCreationFailed
+TooManyRemindersError	AlertTooManyRemindersError
+TimeoutReminderError	AlertTimeoutReminderError
+NoGeoFenceError	AlertNoGeoFenceError
+ReminderInThePastError	AlertReminderIsInThePast
+ReminderPersonDisambig	AlertContactDisambiguationIntro
+ErrorNoPerson	AlertPersonRecoFailed
+BatterySaverOnError	AlertBatterySaverOnError
+RemindMeCalendarIsOff	AlertRemindMeCalendarIsOffError
+
+# Ask-For name mappings
+ConfirmReminder	AskForTimeBasedRecurringReminderConfirmation
+ConfirmReminderNone	AskForTimeBasedRecurringReminderConfirmation
+ConfirmReminderTime	AskForTimeBasedRecurringReminderConfirmation
+ConfirmReminderArrivingLocation	AskForLocationBasedReminderConfirmation
+ConfirmReminderPerson	AskForPersonBasedReminderConfirmation
+ChangeReminderTimeBased	AskForTimeBasedReminderChange
+ChangeReminderPersonBased	AskForPersonBasedReminderChange
+ChangeReminderLocationBased	AskForLocationBasedReminderChange
+GetReminderTitle	AskForReminderBody
+ChangeReminderBody	AskForNewReminderBody
+GetReminderTrigger	AskForReminderTrigger
+GetTimeFinishTrigger	AskForReminderTimeFinishTrigger
+GetReminderTime	AskForReminderTime
+GetReminderPerson	AskForReminderPerson
+GetReminderLocation	AskForReminderLocation
+AskForTimeNone	AskForReminderTime
+AskForTimeReminder	AskForReminderTime
+AskForTimeReminderTime	AskForReminderTime
+ClarifyReminderContactName	AskForContactDisambiguation
+ClarifyReminderPersonFew	AskForContactDisambiguation
+ClarifyReminderPersonMany	AskForContactDisambiguationTooMany
+ClarifyReminderLocationFew	OfferFirstLocation
+ClarifyReminderLocationMany	OfferFirstLocation
+ClarifyReminderContactNamePhraseList	s:Contacts
+ClarifyReminderContactNameSlot	Name
+ReminderSuccess	AlertReminderCreationSucceeded
+ReminderError	AlertReminderCreationFailed
+
+# Task globals mappings
+TaskName	FormTitle
+SaveButton	FormConfirmButton
+CancelButton	FormCancelButton

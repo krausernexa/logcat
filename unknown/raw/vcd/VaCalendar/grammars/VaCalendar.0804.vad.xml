@@ -1,0 +1,1268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.0" xmlns:x="http://schemas.thinkman.com/voicecommands/extensions/1.0">
+
+  <Domain Name="Calendar"  ClassName="CalendarRes" CortanaOnly="true">
+
+    <!-- This intent is purely for string sharing -->
+    <Intent Name="CalendarCommon" Scope="g:Nop">
+      
+      <!-- If a calendar query and update title has it at the end of the title, it will be removed.                -->
+      <!-- This is primarily to workaround the issue that the service always returns "dentist appointment"         -->
+      <!-- instead of "dentist" if the user says "when is my dentist appointment".                                 -->
+      <!-- Note: The implementation currently only removes last word. It can't be direclty used in Chinese as      -->
+      <!--       in 0409, the last word checking needs a space before the word. If Chinese locale also needs it,   -->
+      <!--       the trimming function TrimStringEndsWithPhrases needs to be updated to find the such word         -->
+      <!--       without a space before it.-->
+      <String Name="CalendarCarrierPhrases">
+          <Value><Gui>      Appointment    </Gui></Value>
+          <Value><Gui>      Appointments   </Gui></Value>
+          <Value><Gui>      Meeting        </Gui></Value>
+          <Value><Gui>      Meetings       </Gui></Value>
+          <Value><Gui>      Appt           </Gui></Value>
+          <Value><Gui>      Appts          </Gui></Value>
+      </String>
+      
+      <!-- {0} is the Calendar Name, {1} is the Calendar App Name (e.g. Outlook, Gmail, Facebook, etc) -->
+      <String Name="CalendarNameFormat">
+        <Value><Gui> {0} - {1} </Gui></Value>
+      </String>
+
+      <!-- Generic Strings  -->
+      <String Name="TheAppointment"> <!-- Subsitute TTS title when there is none. -->
+        <Value><Tts> the appointment </Tts></Value>
+      </String>
+
+      <String Name="Untitled"> <!-- Subsitute GUI appointment title -->
+        <Value><Gui> (no subject) </Gui></Value>
+      </String>
+
+      <String Name="SubjectPlaceholder">
+        <Value><Gui> Subject </Gui></Value>
+      </String>
+
+      <String Name="LocationPlaceholder">
+        <Value><Gui> Location </Gui></Value>
+      </String>
+      
+      <String Name="TimePlaceholder">
+        <Value><Gui> Time </Gui></Value>
+      </String>
+      
+      <String Name="DatePlaceholder">
+        <Value><Gui> Date </Gui></Value>
+      </String>
+      
+      <String Name="AnUntitledAppointment"> <!-- Subsitute TTS title, for conflict readback, when there is none. -->
+        <Value><Gui> an untitled appointment </Gui></Value>
+      </String>
+
+      <String Name="AppointmentDetailsAllDayLabel">
+        <Value><Gui> All day </Gui></Value>
+      </String>
+
+      <!-- 12pm - 1pm -->
+      <String Name="AppointmentDetailsStartAndEndTimeLabel">
+        <Value><Gui> {0} - {1} </Gui></Value>
+      </String>
+
+      <!-- 12pm to -->
+      <String Name="AppointmentDetailsMultiDayTimeLabel">
+        <Value><Gui> {0} to </Gui></Value>
+      </String>
+
+      <!-- to Thursday, October 17, 2013 -->
+      <String Name="AppointmentDetailsAllDayToDateLabel">
+        <Value><Gui> to {0} </Gui></Value>
+      </String>
+
+      <String Name="ConflictsHeader">
+        <Value><Gui> Conflicts </Gui></Value>
+      </String>
+      
+      <String Name="ConflictsOneHeader">
+        <Value><Gui> 1 Conflict </Gui></Value>
+      </String>
+
+      <String Name="ConflictsMultipleHeaderFormat">
+        <Value><Gui> {0} Conflicts </Gui></Value>
+      </String>
+
+      <!-- 10:00am - 1:00pm dentist appointment -->
+      <String Name="ConflictsAppointmentFromToFormat">
+        <Value><Gui> {0} - {1} {2} </Gui></Value>
+      </String>
+
+      <!-- All day dentist appointment -->
+      <String Name="ConflictsAppointmentAllDayFormat">
+        <Value><Gui> All day {0} </Gui></Value>
+      </String>
+      
+      <String Name="ConflictsFooterOne">
+        <Value><Gui> 1 more conflict </Gui></Value>
+      </String>
+
+      <String Name="ConflictsFooterMultiple">
+        <Value><Gui> {0} more conflicts </Gui></Value>
+      </String>
+      
+      <String Name="AllDayHeader">
+        <Value><Gui> All day </Gui></Value>
+      </String>
+
+      <String Name="AllDayHeaderWithNumber">
+        <Value><Gui> {0} All day </Gui></Value>
+      </String>
+
+      <String Name="AppointmentSuccess_RollupTitle">
+        <Value><Gui> CALENDAR    </Gui></Value>
+      </String>
+    </Intent>
+
+    <Intent Name="QueryAppointment" Scope="g:Nop" EmitGrxml="false">
+      <!-- no specific time was given: what is my next appointment / when is my next doctor appointment-->
+      <ListenFor> {QueryAppointment_NotTimeBased}                                                                                   </ListenFor>
+      
+      <!-- review my schedule / what do i have on Tuesday -->
+      <ListenFor> {QueryAppointmentPrefixes} [{on | at}] [{QueryStartDate}] [{QueryStartTime}]                                      </ListenFor>
+      
+      <!-- what do i have at 2 pm  / what do i have on July 1st 4 pm-->
+      <ListenFor> {QueryAppointmentPrefixes} [[on] {QueryStartDate}] [at] {QueryStartTime}                                          </ListenFor>
+
+      <!-- what do i have at 2 pm on July 1st -->
+      <ListenFor> {QueryAppointmentPrefixes} [at] {QueryStartTime} [on] {QueryStartDate}                                            </ListenFor>
+
+      <!-- what do i have this weekend / what do i have in the week of July 1st / what do i have next weekend-->          
+      <ListenFor> {QueryAppointmentPrefixes} [{on | at | in}] [{ThisOrNext}] {WeekKeywords} [of] [{QueryStartDate}]                 </ListenFor>
+      
+      <!-- what do i have from July 1st to July 4th-->
+      <ListenFor> {QueryAppointmentPrefixes} [{between | from}] {QueryStartDate} [{and | to | through}]  {EndDate}                  </ListenFor>
+
+      <!-- what do i have from Monday 1 pm to Tuesday 2 pm-->
+      <ListenFor> {QueryAppointmentPrefixes} {between | from} [{QueryStartDate}] {QueryStartTime} {and | to}  [{EndDate}] {EndTime} </ListenFor>
+
+      <!-- what do i have on July 1st from 1 pm to 2 pm-->
+      <ListenFor> {QueryAppointmentPrefixes} [[on] {QueryStartDate}] {between | from} {QueryStartTime} {and | to}  {EndTime}        </ListenFor>
+
+      <!-- what do i have from 1 pm to 2 pm on July 1st-->
+      <ListenFor> {QueryAppointmentPrefixes} {between | from} {QueryStartTime} {and | to}  {EndTime} [[on] {QueryStartDate}]        </ListenFor>
+
+      <!-- what do i have from now to July 1st / what do i have from now to 6pm -->
+      <ListenFor> {QueryAppointmentPrefixes} {between | from} {now | current} {and | to}  [{EndDate{} | EndTime{}}]       </ListenFor>
+
+      <!-- what do i have for the morning / afternoon / evening -->
+      <ListenFor> {QueryAppointmentPrefixes} [{in | for}] [{the | this}] [{QueryStartDate}] {BlockOfTime}                      </ListenFor>
+
+      <!-- what do i have for the morning of Jan 1st -->
+      <ListenFor> {QueryAppointmentPrefixes} [{in | for}] the {BlockOfTime} of {QueryStartDate}                                </ListenFor>
+
+      <!-- Text shown when there is no appointments.                                     -->
+      <String Name="CalendarGuiNoAppointment">
+          <Value><Gui>      No appointments.                                     </Gui></Value>
+      </String>
+
+      <!-- GENERATED STRINGS - START -->
+      <!-- !# shared/date-time-templates/Week-Template -->
+      <String Name="WeekTemplate">
+          <Value><Tts> {WeekTemplate_{WeekTemplate_Condition}} </Tts></Value>
+      </String>
+
+      <String Name="WeekTemplate_ThisWeek">
+          <!-- StartDate==this week -->
+          <Value><Tts> for this week </Tts></Value>
+      </String>
+
+      <String Name="WeekTemplate_NextWeek">
+          <!-- StartDate==next week -->
+          <Value><Tts> for next week </Tts></Value>
+      </String>
+
+      <String Name="WeekTemplate_ThisMonth">
+          <!-- StartDate==beyond next week, within the month -->
+          <Value><Tts> for the week of the {data_StartDateWithoutDayOfWeek} </Tts></Value>
+      </String>
+
+      <String Name="WeekTemplate_OtherMonth">
+          <!-- StartDate==any day beyond this week -->
+          <Value><Tts> for the week of {data_StartDateWithoutDayOfWeek} </Tts></Value>
+      </String>
+
+      <String Name="WeekTemplate_OtherYear">
+          <!-- StartDate==any day beyond today + 364 -->
+          <Value><Tts> for the week of {data_StartDateWithoutDayOfWeek} </Tts></Value>
+      </String>
+
+      <!-- !# shared/date-time-templates/Appointment-Readback-Template -->
+      <String Name="AppointmentReadbackTemplate">
+          <Value><Tts> {AppointmentReadbackTemplate_{AppointmentReadbackTemplate_Condition}} </Tts></Value>
+      </String>
+
+      <String Name="AppointmentReadbackTemplate_All">
+          <!-- all -->
+          <Value><Tts> {data_StartTime}, {AppointmentTitleLocationReadbackTemplate{}} </Tts></Value>
+      </String>
+
+      <!-- !# shared/date-time-templates/appointment-count-readback -->
+      <String Name="AppointmentCountReadback">
+          <Value><Tts> {AppointmentCountReadback_{AppointmentCountReadback_Condition}} </Tts></Value>
+      </String>
+
+      <String Name="AppointmentCountReadback_One">
+          <!-- Number-of-Results == 1 -->
+          <Value><Tts> 1 event </Tts></Value>
+      </String>
+
+      <String Name="AppointmentCountReadback_MoreThanOne">
+          <!-- Else -->
+          <Value><Tts> {data_NumberOfResults} events </Tts></Value>
+      </String>
+
+      <!-- !# shared/date-time-templates/Appointment-Title-Readback-Template -->
+      <String Name="AppointmentTitleReadbackTemplate">
+          <Value><Tts> {AppointmentTitleReadbackTemplate_{AppointmentTitleReadbackTemplate_Condition}} </Tts></Value>
+      </String>
+
+      <String Name="AppointmentTitleReadbackTemplate_WithoutTitle">
+          <!-- title == null -->
+          <Value><Tts> an untitled event </Tts></Value>
+      </String>
+
+      <String Name="AppointmentTitleReadbackTemplate_WithTitle">
+          <!-- title != null -->
+          <Value><Tts> {data_Title} </Tts></Value>
+      </String>
+
+      <!-- !# shared/date-time-templates/Appointment-Title-Location-Readback-Template -->
+      <String Name="AppointmentTitleLocationReadbackTemplate">
+          <Value><Tts> {AppointmentTitleLocationReadbackTemplate_{AppointmentTitleLocationReadbackTemplate_Condition}} </Tts></Value>
+      </String>
+
+      <String Name="AppointmentTitleLocationReadbackTemplate_WithLocation">
+          <!-- location != null -->
+          <Value><Tts> {AppointmentTitleReadbackTemplate{}} at {data_Location} </Tts></Value>
+      </String>
+
+      <String Name="AppointmentTitleLocationReadbackTemplate_WithoutLocation">
+          <!-- else -->
+          <Value><Tts> {AppointmentTitleReadbackTemplate{}} </Tts></Value>
+      </String>
+
+      <!-- !# shared/date-time-templates/Around-Time-Readback-Template -->
+      <String Name="AroundTimeReadbackTemplate">
+          <Value><Tts> {AroundTimeReadbackTemplate_{AroundTimeReadbackTemplate_Condition}} </Tts></Value>
+      </String>
+
+      <String Name="AroundTimeReadbackTemplate_One">
+          <!-- Number-of-Results == 1 -->
+          <Value><Tts> 1 event {AroundTimeTemplate{}} </Tts></Value>
+      </String>
+
+      <String Name="AroundTimeReadbackTemplate_MoreThanOne">
+          <!-- Else -->
+          <Value><Tts> {data_NumberOfResults} events {AroundTimeTemplate{}} </Tts></Value>
+      </String>
+
+      <!-- !# shared/date-time-templates/Day-Cal-Readback-Template -->
+      <String Name="DayCalReadbackTemplate">
+          <Value><Tts> {DayCalReadbackTemplate_{DayCalReadbackTemplate_Condition}} </Tts></Value>
+      </String>
+
+      <String Name="DayCalReadbackTemplate_One">
+          <!-- Number-of-Results == 1 -->
+          <Value><Tts> 1 event {data_StartDayOrDate} </Tts></Value>
+      </String>
+
+      <String Name="DayCalReadbackTemplate_MoreThanOne">
+          <!-- Else -->
+          <Value><Tts> {data_NumberOfResults} events {data_StartDayOrDate} </Tts></Value>
+      </String>
+
+      <!-- !# shared/date-time-templates/Single-Appointment-Readback-Template -->
+      <String Name="SingleAppointmentReadbackTemplate">
+          <Value><Tts> {SingleAppointmentReadbackTemplate_{SingleAppointmentReadbackTemplate_Condition}} </Tts></Value>
+      </String>
+
+      <String Name="SingleAppointmentReadbackTemplate_Today">
+          <!-- StartDate==today -->
+          <Value><Tts> at {data_StartTime} you have {AppointmentTitleLocationReadbackTemplate{}}. </Tts></Value>
+      </String>
+
+      <String Name="SingleAppointmentReadbackTemplate_Tomorrow">
+          <!-- StateDate==tomorrow -->
+          <Value><Tts> at {data_StartTime} tomorrow you have {AppointmentTitleLocationReadbackTemplate{}}. </Tts></Value>
+      </String>
+
+      <String Name="SingleAppointmentReadbackTemplate_Else">
+          <!-- else -->
+          <Value><Tts> at {data_StartTime} on {data_StartDayOrDate} you have {AppointmentTitleLocationReadbackTemplate{}}. </Tts></Value>
+      </String>
+
+      <!-- !# shared/date-time-templates/Single-Appointment-Readback-Duration-Template -->
+      <String Name="SingleAppointmentReadbackDurationTemplate">
+          <Value><Tts> {SingleAppointmentReadbackDurationTemplate_{SingleAppointmentReadbackDurationTemplate_Condition}} </Tts></Value>
+      </String>
+
+      <String Name="SingleAppointmentReadbackDurationTemplate_Today">
+          <!-- StartDate==today -->
+          <Value><Tts> from {data_FromToTime} you have {AppointmentTitleLocationReadbackTemplate{}}. </Tts></Value>
+      </String>
+
+      <String Name="SingleAppointmentReadbackDurationTemplate_Tomorrow">
+          <!-- StartDate==tomorrow -->
+          <Value><Tts> from {data_FromToTime} tomorrow you have {AppointmentTitleLocationReadbackTemplate{}}. </Tts></Value>
+      </String>
+
+      <String Name="SingleAppointmentReadbackDurationTemplate_Else">
+          <!-- else -->
+          <Value><Tts> from {data_FromToTime} on {data_StartDayOrDate} you have {AppointmentTitleLocationReadbackTemplate{}}. </Tts></Value>
+      </String>
+
+      <!-- !# shared/date-time-templates/Single-Appointment-Readback-Title-With-Duration-Template -->
+      <String Name="SingleAppointmentReadbackTitleWithDurationTemplate">
+          <Value><Tts> {SingleAppointmentReadbackTitleWithDurationTemplate_{SingleAppointmentReadbackTitleWithDurationTemplate_Condition}} </Tts></Value>
+      </String>
+
+      <String Name="SingleAppointmentReadbackTitleWithDurationTemplate_Today">
+          <!-- StartDate==today -->
+          <Value><Tts> {AppointmentTitleLocationReadbackTemplate{}} {FromDurationEndphraseTemplate{}} </Tts></Value>
+      </String>
+
+      <String Name="SingleAppointmentReadbackTitleWithDurationTemplate_Tomorrow">
+          <!-- StartDate==tomorrow -->
+          <Value><Tts> {AppointmentTitleLocationReadbackTemplate{}} tomorrow {FromDurationEndphraseTemplate{}} </Tts></Value>
+      </String>
+
+      <String Name="SingleAppointmentReadbackTitleWithDurationTemplate_Else">
+          <!-- else -->
+          <Value><Tts> {AppointmentTitleLocationReadbackTemplate{}} on {data_StartDayOrDate} {FromDurationEndphraseTemplate{}} </Tts></Value>
+      </String>
+
+      <!-- !# shared/date-time-templates/TOD-Period-Template -->
+      <String Name="TODPeriodTemplate">
+          <Value><Tts> {TODPeriodTemplate_{TODPeriodTemplate_Condition}} </Tts></Value>
+      </String>
+
+      <String Name="TODPeriodTemplate_Morning">
+          <!-- TOD==morning -->
+          <Value><Tts> {RelativeDayReadbackTemplate{}} morning before noon </Tts></Value>
+      </String>
+
+      <String Name="TODPeriodTemplate_Afternoon_Current_In_Morning">
+          <!-- TOD==afternooon && currenttime < 12pm -->
+          <Value><Tts> {RelativeDayReadbackTemplate{}} afternoon between 12 and 6pm </Tts></Value>
+      </String>
+
+      <String Name="TODPeriodTemplate_Afternoon_Current_In_Afternoon">
+          <!-- TOD==afternoon && (currenttime > 12pm && <6pm) && currentdate == StartDate -->
+          <Value><Tts> {RelativeDayReadbackTemplate{}} afternoon before 6pm </Tts></Value>
+      </String>
+
+      <String Name="TODPeriodTemplate_Evening">
+          <!-- TOD==evening -->
+          <Value><Tts> {RelativeDayReadbackTemplate{}} evening after 6pm </Tts></Value>
+      </String>
+
+      <!-- !# shared/date-time-templates/TOD-Readback-Template -->
+      <String Name="TODReadbackTemplate">
+          <Value><Tts> {TODReadbackTemplate_{TODReadbackTemplate_Condition}} </Tts></Value>
+      </String>
+
+      <String Name="TODReadbackTemplate_One">
+          <!-- Number-of-Results == 1 -->
+          <Value><Tts> 1 event {TODPeriodTemplate{}} </Tts></Value>
+      </String>
+
+      <String Name="TODReadbackTemplate_MoreThanOne">
+          <!-- Else -->
+          <Value><Tts> {data_NumberOfResults} events {TODPeriodTemplate{}} </Tts></Value>
+      </String>
+
+      <!-- !# shared/date-time-templates/Specific-Time-Readback-Template -->
+      <String Name="SpecificTimeCalReadbackTemplate">
+          <Value><Tts> {SpecificTimeCalReadbackTemplate_{SpecificTimeCalReadbackTemplate_Condition}} </Tts></Value>
+      </String>
+
+      <String Name="SpecificTimeCalReadbackTemplate_One">
+          <!-- Number-of-Results == 1 -->
+          <Value><Tts> 1 event {data_StartDayOrDate} at {data_StartTime} </Tts></Value>
+      </String>
+
+      <String Name="SpecificTimeCalReadbackTemplate_MoreThanOne">
+          <!-- Else -->
+          <Value><Tts> {data_NumberOfResults} events {data_StartDayOrDate} at {data_StartTime} </Tts></Value>
+      </String>
+
+      <!-- !# shared/date-time-templates/Multiday-Template -->
+      <String Name="MultidayTemplate">
+          <Value><Tts> {MultidayTemplate_{MultidayTemplate_Condition}} </Tts></Value>
+      </String>
+
+      <String Name="MultidayTemplate_All">
+          <!-- all -->
+          <Value><Tts> {data_StartDayOrDate} to {data_EndDayOrDate} </Tts></Value>
+      </String>
+
+      <!-- !# shared/date-time-templates/Around-Time-Template -->
+      <String Name="AroundTimeTemplate">
+          <Value><Tts> {AroundTimeTemplate_{AroundTimeTemplate_Condition}} </Tts></Value>
+      </String>
+
+      <String Name="AroundTimeTemplate_All">
+          <!-- all -->
+          <Value><Tts> {data_StartDayOrDate} around {data_StartTime} </Tts></Value>
+      </String>
+
+      <!-- !# shared/date-time-templates/Specific-Time-Template -->
+      <String Name="SpecificTimeTemplate">
+          <Value><Tts> {SpecificTimeTemplate_{SpecificTimeTemplate_Condition}} </Tts></Value>
+      </String>
+
+      <String Name="SpecificTimeTemplate_All">
+          <!-- all -->
+          <Value><Tts> {data_StartDayOrDate} at {data_StartTime} </Tts></Value>
+      </String>
+
+      <!-- !# shared/date-time-templates/From-Duration-Endphrase-Template -->
+      <String Name="FromDurationEndphraseTemplate">
+          <Value><Tts> {FromDurationEndphraseTemplate_{FromDurationEndphraseTemplate_Condition}} </Tts></Value>
+      </String>
+
+      <String Name="FromDurationEndphraseTemplate_All">
+          <!-- all -->
+          <Value><Tts> from {data_FromToTime} </Tts></Value>
+      </String>
+
+      <!-- !# shared/date-time-templates/Relative-Day-Readback-Template -->
+      <String Name="RelativeDayReadbackTemplate">
+          <Value><Tts> {RelativeDayReadbackTemplate_{RelativeDayReadbackTemplate_Condition}} </Tts></Value>
+      </String>
+
+      <String Name="RelativeDayReadbackTemplate_Today">
+          <!-- StartDate==today -->
+          <Value><Tts> this </Tts></Value>
+      </String>
+
+      <String Name="RelativeDayReadbackTemplate_WithinNextWeek">
+          <!-- else StartDate is within the next week -->
+          <Value><Tts> {data_StartDayOrDate} </Tts></Value>
+      </String>
+
+      <String Name="RelativeDayReadbackTemplate_Else">
+          <!-- else -->
+          <Value><Tts> on {data_StartDayOrDate} in the </Tts></Value>
+      </String>
+
+      <!-- !# shared/date-time-templates/List-Appointment-Readback-Template-Wrapper -->
+      <String Name="ListAppointmentReadbackTemplateWrapper">
+          <Value><Tts> {ListAppointmentReadbackTemplateWrapper_{ListAppointmentReadbackTemplateWrapper_Condition}} </Tts></Value>
+      </String>
+
+      <String Name="ListAppointmentReadbackTemplateWrapper_ReadbackCountEqualTo1">
+          <!-- readback count == 1 -->
+          <Value><Tts> {ListAppointmentReadbackTemplate{}} </Tts></Value>
+      </String>
+
+      <String Name="ListAppointmentReadbackTemplateWrapper_ListReadbackLastWithPrefix">
+          <!-- if >1 appointment && last item in list && no all day appts -->
+          <Value><Tts> And, {ListAppointmentReadbackTemplate{}} </Tts></Value>
+      </String>
+
+      <String Name="ListAppointmentReadbackTemplateWrapper_Else">
+          <!-- else  -->
+          <Value><Tts> {ListAppointmentReadbackTemplate{}} {EarConNext} </Tts></Value>
+      </String>
+
+      <!-- !# shared/date-time-templates/List-Appointment-Readback-Template -->
+      <String Name="ListAppointmentReadbackTemplate">
+          <Value><Tts> {ListAppointmentReadbackTemplate_{ListAppointmentReadbackTemplate_Condition}} </Tts></Value>
+      </String>
+
+      <String Name="ListAppointmentReadbackTemplate_DayCalOrWeekendAllDayOnly">
+          <!-- QueryType== (DayCalQuery || WeekendQuery) && (AllDay Appointment List Item) -->
+          <Value><Tts> {AppointmentTitleReadbackTemplate{}}, all day </Tts></Value>
+      </String>
+
+      <String Name="ListAppointmentReadbackTemplate_AllDay_MoreThanOne">
+          <!-- AllDay Appointment List Item && > 1 all day appointment -->
+          <Value><Tts> {data_NumberOfResults_AllDay} all day events </Tts></Value>
+      </String>
+
+      <String Name="ListAppointmentReadbackTemplate_AllDay_One">
+          <!-- AllDay Appointment List Item && 1 all day appointment -->
+          <Value><Tts> 1 all day event </Tts></Value>
+      </String>
+
+      <String Name="ListAppointmentReadbackTemplate_NotAllDay_MultipleDays">
+          <!-- Appointment StartTime before query StartTime AND (Appointment StartDate before query StartDate OR Appintment EndDate after query EndDate) -->
+          <Value><Tts> From {data_StartDayOrDate} at {data_StartTime} to {data_EndDayOrDate} at {data_EndTime}, {AppointmentTitleLocationReadbackTemplate{}} </Tts></Value>
+      </String>
+
+      <String Name="ListAppointmentReadbackTemplate_NotAllDay_BeforeQueryStartTime">
+          <!-- Appointment StartTime before query StartTime -->
+          <Value><Tts> from {data_FromToTime}, {AppointmentTitleLocationReadbackTemplate{}} </Tts></Value>
+      </String>
+
+      <String Name="ListAppointmentReadbackTemplate_SpecificTimeQuery">
+          <!-- QueryType==Specific Time Query && for all appointments matched (excluding simple AllDay appointments), Appt_StartTime = Query_StartTime -->
+          <Value><Tts> {AppointmentTitleLocationReadbackTemplate{}} </Tts></Value>
+      </String>
+
+      <String Name="ListAppointmentReadbackTemplate_NextQuery">
+          <!-- QueryType==Next Query -->
+          <Value><Tts> {AppointmentTitleLocationReadbackTemplate{}} </Tts></Value>
+      </String>
+
+      <String Name="ListAppointmentReadbackTemplate_Else">
+          <!-- else -->
+          <Value><Tts> At {AppointmentReadbackTemplate{}} </Tts></Value>
+      </String>
+
+      <!-- !# calendarreview/getcalendaryquery/calqueryintro -->
+      <String Name="GetCalendarQueryCalQueryIntro">
+          <Value>
+              <Tts> {g:PromptAck{}} I can look for something on your calendar. Here's what you have today. </Tts>
+              <Gui> Here's what you have today. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} I can help you find something on the calendar. Here's your schedule for today. </Tts>
+              <Gui> Here's your schedule for today. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} I can check your calendar. Here's what you have today. </Tts>
+              <Gui> Here's what you have today. </Gui>
+          </Value>
+      </String>
+
+      <String Name="GetCalendarQueryCalQueryIntro_Tip">
+          <Value><Gui> try What do I have on Friday? </Gui></Value>
+          <Value><Gui> try What do I have next? </Gui></Value>
+          <Value><Gui> try What's my weekend schedule? </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/daycalquery/introdayresults -->
+      <String Name="DayCalQueryIntroDayResults">
+          <Value>
+              <Tts> {g:Prompt{}} You have {DayCalReadbackTemplate{}}. </Tts>
+              <Gui> You have {DayCalReadbackTemplate{}}. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} I found {DayCalReadbackTemplate{}}. </Tts>
+              <Gui> I found {DayCalReadbackTemplate{}}. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} You've got {DayCalReadbackTemplate{}}. </Tts>
+              <Gui> You've got {DayCalReadbackTemplate{}}. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} I'm finding {DayCalReadbackTemplate{}}. </Tts>
+              <Gui> I'm finding {DayCalReadbackTemplate{}}. </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} You have {DayCalReadbackTemplate{}}. </Tts>
+              <Gui> You have {DayCalReadbackTemplate{}}. </Gui>
+          </Value>
+      </String>
+
+      <String Name="DayCalQueryIntroDayResults_Tip">
+          <Value><Gui> try What do I have next week? </Gui></Value>
+          <Value><Gui> try What do I have next? </Gui></Value>
+          <Value><Gui> try Show me my weekend </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/noresultsonday/dayquery0Results -->
+      <String Name="NoResultsOnDayDayQuery0Results">
+          <Value>
+              <Tts> {g:Prompt{}} You don't have anything scheduled {data_StartDayOrDate}. </Tts>
+              <Gui> You don't have anything scheduled {data_StartDayOrDate}. </Gui>
+          </Value>
+      </String>
+
+      <String Name="NoResultsOnDayDayQuery0Results_Tip">
+          <Value><Gui> try What do I have next week? </Gui></Value>
+          <Value><Gui> try Add dentist for Friday </Gui></Value>
+          <Value><Gui> try Am I busy this weekend? </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/introvisualdisplaypositive/heretheyare -->
+      <String Name="IntroVisualDisplayPositiveHereTheyAre">
+          <Value><Tts> {g:Prompt{}} Here's what you do have... </Tts></Value>
+      </String>
+
+      <!-- !# calendarreview/introvisualdisplay/hereitis -->
+      <String Name="IntroVisualDisplayHereItIs">
+          <Value><Tts> {g:Prompt{}} Here it is. </Tts></Value>
+      </String>
+
+      <!-- !# calendarreview/introvisualdisplay/heretheyare -->
+      <String Name="IntroVisualDisplayHereTheyAre">
+          <Value><Tts> {g:Prompt{}} Here they are. </Tts></Value>
+      </String>
+
+      <!-- !# calendarreview/appointmentreadback/listappointmentreadback -->
+      <String Name="AppointmentReadbackListAppointmentReadback">
+          <Value><Tts> {g:Prompt{}} {ListAppointmentReadbackTemplateWrapper{}}. </Tts></Value>
+      </String>
+
+      <!-- !# calendarreview/appointmentreadback/thatsit -->
+      <String Name="AppointmentReadbackThatSIt">
+          <Value><Tts>  </Tts></Value>
+      </String>
+
+      <!-- !# calendarreview/TODcalquery/introTODresults -->
+      <String Name="TODCalQueryIntroTODResults">
+          <Value><Tts> {g:Prompt{}} You have {TODReadbackTemplate{}}. </Tts></Value>
+          <Value><Tts> {g:Prompt{}} I found {TODReadbackTemplate{}}. </Tts></Value>
+          <Value><Tts> {g:Prompt{}} I see {TODReadbackTemplate{}}. </Tts></Value>
+      </String>
+
+      <!-- !# calendarreview/TODcalquery/restofday -->
+      <String Name="TODCalQueryRestOfDay">
+          <Value>
+              <Tts> {g:Prompt{}} Here's what you have the rest of the day. </Tts>
+              <Gui> Here's what you have the rest of the day. </Gui>
+          </Value>
+      </String>
+
+      <!-- !# calendarreview/TODcalquery/TODquery-0Results -->
+      <String Name="TODCalQueryTODQuery0Results">
+          <Value>
+              <Tts> {g:Prompt{}} You don't have anything {TODPeriodTemplate{}}. </Tts>
+              <Gui> You don't have anything {TODPeriodTemplate{}}. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} Looks like there's nothing on the calendar {TODPeriodTemplate{}}. </Tts>
+              <Gui> Looks like there's nothing on the calendar {TODPeriodTemplate{}}. </Gui>
+          </Value>
+      </String>
+
+      <String Name="TODCalQueryTODQuery0Results_Tip">
+          <Value><Gui> try What's scheduled next week? </Gui></Value>
+          <Value><Gui> try Add party on Friday </Gui></Value>
+          <Value><Gui> try What am I doing on Monday? </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/TODcalquery/firstappointment -->
+      <String Name="TODCalQueryFirstAppointment">
+          <Value>
+              <Tts> {g:Prompt{}} You don't have anything {TODPeriodTemplate{}}. Your first event's at {AppointmentReadbackTemplate{}}. </Tts>
+              <Gui> You don't have anything {TODPeriodTemplate{}}. Your first event's at {data_StartTime}. </Gui>
+          </Value>
+      </String>
+
+      <String Name="TODCalQueryFirstAppointment_Tip">
+          <Value><Gui> try Add to my calendar </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/TODcalquery/nextappointment -->
+      <String Name="TODCalQueryNextAppointment">
+          <Value>
+              <Tts> {g:Prompt{}} You don't have anything {TODPeriodTemplate{}}. Your next event's at {AppointmentReadbackTemplate{}}. </Tts>
+              <Gui> You don't have anything {TODPeriodTemplate{}}. Your next event's at {data_StartTime}. </Gui>
+          </Value>
+      </String>
+
+      <String Name="TODCalQueryNextAppointment_Tip">
+          <Value><Gui> try Add to my calendar </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/TODcalquery/lastappointment -->
+      <String Name="TODCalQueryLastAppointment">
+          <Value>
+              <Tts> {g:Prompt{}} You don't have anything {TODPeriodTemplate{}}. Your last event's at {AppointmentReadbackTemplate{}}. </Tts>
+              <Gui> You don't have anything {TODPeriodTemplate{}}. Your last event's at {data_StartTime}. </Gui>
+          </Value>
+      </String>
+
+      <String Name="TODCalQueryLastAppointment_Tip">
+          <Value><Gui> try Add to my calendar </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/weekendcalquery/weekendquery0results -->
+      <String Name="WeekendCalQueryWeekendQuery0Results">
+          <Value>
+              <Tts> {g:Prompt{}} You don't have anything scheduled this weekend. </Tts>
+              <Gui> You don't have anything scheduled this weekend. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} You're free all weekend. </Tts>
+              <Gui> You're free all weekend. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} You don't have anything this weekend. </Tts>
+              <Gui> You don't have anything this weekend. </Gui>
+          </Value>
+      </String>
+
+      <String Name="WeekendCalQueryWeekendQuery0Results_Tip">
+          <Value><Gui> try What's my Monday look like? </Gui></Value>
+          <Value><Gui> try Add 'go hiking' on Sunday </Gui></Value>
+          <Value><Gui> try What's next weekend like? </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/weekendcalquery/introweekendresults -->
+      <String Name="WeekendCalQueryIntroWeekendResults">
+          <Value>
+              <Tts> {g:Prompt{}} I'm pulling up your weekend schedule. </Tts>
+              <Gui> I'm pulling up your weekend schedule. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} Let me check on your weekend. </Tts>
+              <Gui> Let me check on your weekend. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} I'll see what you have this weekend. </Tts>
+              <Gui> I'll see what you have this weekend. </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} Let me check your weekend. </Tts>
+              <Gui> Let me check your weekend. </Gui>
+          </Value>
+      </String>
+
+      <!-- !# calendarreview/weekendcalquery/introsaturdayresults -->
+      <String Name="WeekendCalQueryIntroSaturdayResults">
+          <Value><Tts> {g:Prompt{}} On Saturday, </Tts></Value>
+      </String>
+
+      <!-- !# calendarreview/weekendcalquery/introsundayresults -->
+      <String Name="WeekendCalQueryIntroSundayResults">
+          <Value><Tts> {g:Prompt{}} On Sunday, </Tts></Value>
+      </String>
+
+      <!-- !# calendarreview/weekendcalquery/busyweekend -->
+      <String Name="WeekendCalQueryBusyWeekend">
+          <Value>
+              <Tts> {g:Prompt{}} You have a busy weekend. Take a look. </Tts>
+              <Gui> You have a busy weekend. Take a look. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} You've got a lot going on this weekend. Let me show you. </Tts>
+              <Gui> You've got a lot going on this weekend. Let me show you. </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} You've got a lot going on this weekend. </Tts>
+              <Gui> You've got a lot going on this weekend. </Gui>
+          </Value>
+      </String>
+
+      <String Name="WeekendCalQueryBusyWeekend_Tip">
+          <Value><Gui> try What do I have at noon? </Gui></Value>
+          <Value><Gui> try What's happening on Sunday? </Gui></Value>
+          <Value><Gui> try What am I doing on Monday? </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/weekcalquery/weekquery0results -->
+      <String Name="WeekCalQueryWeekQuery0Results">
+          <Value>
+              <Tts> {g:Prompt{}} You don't have anything scheduled {WeekTemplate{}}. </Tts>
+              <Gui> You don't have anything scheduled {WeekTemplate{}}. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} I don't see anything on the calendar {WeekTemplate{}}. </Tts>
+              <Gui> I don't see anything on the calendar {WeekTemplate{}}. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} I don't see any events {WeekTemplate{}}. </Tts>
+              <Gui> I don't see any events {WeekTemplate{}}. </Gui>
+          </Value>
+      </String>
+
+      <String Name="WeekCalQueryWeekQuery0Results_Tip">
+          <Value><Gui> try Add an event for Friday </Gui></Value>
+          <Value><Gui> try What do I have next? </Gui></Value>
+          <Value><Gui> try Add lunch date at noon </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/weekcalquery/introweekresults -->
+      <String Name="WeekCalQueryIntroWeekResults">
+          <Value>
+              <Tts> {g:PromptAck{}} here's your calendar {WeekTemplate{}}. </Tts>
+              <Gui> Here's your calendar {WeekTemplate{}}. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} Here's your schedule {WeekTemplate{}}. </Tts>
+              <Gui> Here's your schedule {WeekTemplate{}}. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} I'll pull up your calendar {WeekTemplate{}}. </Tts>
+              <Gui> I'll pull up your calendar {WeekTemplate{}}. </Gui>
+          </Value>
+      </String>
+
+      <String Name="WeekCalQueryIntroWeekResults_Tip">
+          <Value><Gui> try Add book club on Monday </Gui></Value>
+          <Value><Gui> try Tell me Friday's schedule </Gui></Value>
+          <Value><Gui> try Do I have anything Sunday? </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/specifictimecalquery/specifictimequery0results -->
+      <String Name="SpecificTimeCalQuerySpecificTimeQuery0Results">
+          <Value>
+              <Tts> {g:Prompt{}} You don't have anything scheduled for {data_StartDayOrDate} at {data_StartTime}. </Tts>
+              <Gui> You don't have anything scheduled for {data_StartDayOrDate} at {data_StartTime}. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} I found nothing on the books for {data_StartDayOrDate} at {data_StartTime}. </Tts>
+              <Gui> I found nothing on the books for {data_StartDayOrDate} at {data_StartTime}. </Gui>
+          </Value>
+      </String>
+
+      <String Name="SpecificTimeCalQuerySpecificTimeQuery0Results_Tip">
+          <Value><Gui> try Add to Friday's calendar </Gui></Value>
+          <Value><Gui> try What do I have next? </Gui></Value>
+          <Value><Gui> try What's my weekend like? </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/specifictimecalquery/introfuzzyresults -->
+      <String Name="SpecificTimeCalQueryIntroFuzzyResults">
+          <Value>
+              <Tts> {g:Prompt{}} You've got {AroundTimeReadbackTemplate{}}. </Tts>
+              <Gui> You've got {AroundTimeReadbackTemplate{}}. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} I found {AroundTimeReadbackTemplate{}}. </Tts>
+              <Gui> I found {AroundTimeReadbackTemplate{}}. </Gui>
+          </Value>
+      </String>
+
+      <String Name="SpecificTimeCalQueryIntroFuzzyResults_Tip">
+          <Value><Gui> try Schedule surfing lesson </Gui></Value>
+          <Value><Gui> try What do I have next? </Gui></Value>
+          <Value><Gui> try What's my weekend like? </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/specifictimecalquery/introexactresults -->
+      <String Name="SpecificTimeCalQueryIntroExactResults">
+          <Value>
+              <Tts> {g:Prompt{}} You have {SpecificTimeCalReadbackTemplate{}}. </Tts>
+              <Gui> You have {SpecificTimeCalReadbackTemplate{}}. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} I found {SpecificTimeCalReadbackTemplate{}}. </Tts>
+              <Gui> I found {SpecificTimeCalReadbackTemplate{}}. </Gui>
+          </Value>
+      </String>
+
+      <String Name="SpecificTimeCalQueryIntroExactResults_Tip">
+          <Value><Gui> try Add an event for Thursday </Gui></Value>
+          <Value><Gui> try What's my weekend like? </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/specifictimecalquery/singleappointmentreadback -->
+      <String Name="SpecificTimeCalQuerySingleAppointmentReadback">
+          <Value>
+              <Tts> {g:Prompt{}} {SingleAppointmentReadbackTemplate{}} </Tts>
+              <Gui> Here's your event. </Gui>
+          </Value>
+      </String>
+
+      <String Name="SpecificTimeCalQuerySingleAppointmentReadback_Tip">
+          <Value><Gui> try Reschedule this </Gui></Value>
+          <Value><Gui> try Move this out by 30 minutes </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/specifictimecalquery/timerangequery0results -->
+      <String Name="TimeRangeOnDayCalQueryTimeRangeQuery0Results">
+          <Value>
+              <Tts> {g:Prompt{}} You don't have anything scheduled between {data_FromToTime}. </Tts>
+              <Gui> You don't have anything scheduled between {data_FromToTime}. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} There's nothing on the calendar between {data_FromToTime}. </Tts>
+              <Gui> There's nothing on the calendar between {data_FromToTime}. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} I'm not seeing any events between {data_FromToTime}. </Tts>
+              <Gui> I'm not seeing any events between {data_FromToTime}. </Gui>
+          </Value>
+      </String>
+
+      <String Name="TimeRangeOnDayCalQueryTimeRangeQuery0Results_Tip">
+          <Value><Gui> try Schedule something at 5 PM </Gui></Value>
+          <Value><Gui> try What's my weekend like? </Gui></Value>
+          <Value><Gui> try What do I have next? </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/timerangeondaycalquery/introfuzzyresults -->
+      <String Name="TimeRangeOnDayCalQueryIntroFuzzyResults">
+          <Value>
+              <Tts> {g:Prompt{}} Here's your schedule for {data_StartDayOrDate} around {data_StartTime}. </Tts>
+              <Gui> Here's your schedule for {data_StartDayOrDate} around {data_StartTime}. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} I found these events for {data_StartDayOrDate} around {data_StartTime}. </Tts>
+              <Gui> I found these events for {data_StartDayOrDate} around {data_StartTime}. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} I'll pull up your calendar for {data_StartDayOrDate} around {data_StartTime}. </Tts>
+              <Gui> I'll pull up your calendar for {data_StartDayOrDate} around {data_StartTime}. </Gui>
+          </Value>
+      </String>
+
+      <String Name="TimeRangeOnDayCalQueryIntroFuzzyResults_Tip">
+          <Value><Gui> try What do I have next? </Gui></Value>
+          <Value><Gui> try Do I have anything Sunday? </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/timerangeondaycalquery/introexactresults -->
+      <String Name="TimeRangeOnDayCalQueryIntroExactResults">
+          <Value><Tts> {g:Prompt{}} Between {data_FromToTime}, you have {AppointmentCountReadback{}}. </Tts></Value>
+          <Value><Tts> {g:Prompt{}} I'm seeing {AppointmentCountReadback{}} between {data_FromToTime}. </Tts></Value>
+          <Value><Tts> {g:Prompt{}} You scheduled {AppointmentCountReadback{}} between {data_FromToTime}. </Tts></Value>
+      </String>
+
+      <String Name="TimeRangeOnDayCalQueryIntroExactResults_Tip">
+          <Value><Gui> try Schedule take nap at 3 PM </Gui></Value>
+          <Value><Gui> try What's my weekend like? </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/timerangeondaycalquery/singleappointmentreadbackwithduration -->
+      <String Name="TimeRangeOnDayCalQuerySingleAppointmentReadbackWithDuration">
+          <Value>
+              <Tts> {g:Prompt{}} {SingleAppointmentReadbackDurationTemplate{}} </Tts>
+              <Gui> Here's your event. </Gui>
+          </Value>
+      </String>
+
+      <String Name="TimeRangeOnDayCalQuerySingleAppointmentReadbackWithDuration_Tip">
+          <Value><Gui> try What do I have next? </Gui></Value>
+          <Value><Gui> try Add joy ride for Friday </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/weekcalquery/intromultidayresults -->
+      <String Name="MultiDayCalQueryIntroMultiDayResults">
+          <Value>
+              <Tts> {g:Prompt{}} Here's your calendar for {data_StartDayOrDate} to {data_EndDayOrDate}. </Tts>
+              <Gui> Here's your calendar for {data_StartDayOrDate} to {data_EndDayOrDate}. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} I'll pull up your schedule for {data_StartDayOrDate} to {data_EndDayOrDate}. </Tts>
+              <Gui> I'll pull up your schedule for {data_StartDayOrDate} to {data_EndDayOrDate}. </Gui>
+          </Value>
+      </String>
+
+      <String Name="MultiDayCalQueryIntroMultiDayResults_Tip">
+          <Value><Gui> try Am I free on Saturday? </Gui></Value>
+          <Value><Gui> try When's my dentist visit? </Gui></Value>
+          <Value><Gui> try What do I have tomorrow? </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/weekcalquery/multiday0results -->
+      <String Name="MultiDayCalQueryMultiDay0Results">
+          <Value>
+              <Tts> {g:Prompt{}} You don't have anything {data_StartDayOrDate} to {data_EndDayOrDate}. </Tts>
+              <Gui> You don't have anything {data_StartDayOrDate} to {data_EndDayOrDate}. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} You don't have anything {data_StartDayOrDate} to {data_EndDayOrDate}. </Tts>
+              <Gui> You don't have anything {data_StartDayOrDate} to {data_EndDayOrDate}. </Gui>
+          </Value>
+      </String>
+
+      <String Name="MultiDayCalQueryMultiDay0Results_Tip">
+          <Value><Gui> try Add to my calendar </Gui></Value>
+          <Value><Gui> try Add an event </Gui></Value>
+          <Value><Gui> try Put something on my calendar </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/nextapptcalquery/nextquery0Results -->
+      <String Name="NextApptCalQueryNextQuery0Results">
+          <Value>
+              <Tts> {g:Prompt{}} You don't have anything scheduled for the rest of the day. </Tts>
+              <Gui> You don't have anything scheduled for the rest of the day. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} Looks like your calendar is clear for the rest of today. </Tts>
+              <Gui> Looks like your calendar is clear for the rest of today. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} You're all done for the day. </Tts>
+              <Gui> You're all done for the day. </Gui>
+          </Value>
+      </String>
+
+      <String Name="NextApptCalQueryNextQuery0Results_Tip">
+          <Value><Gui> try What do I have tomorrow? </Gui></Value>
+          <Value><Gui> try What's my weekend like? </Gui></Value>
+          <Value><Gui> try Add see baby pandas today </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/nextapptcalquery/nextappointmentreadback -->
+      <String Name="NextApptCalQueryNextAppointmentReadback">
+          <Value>
+              <Tts> {g:Prompt{}} Coming up next, you have {AppointmentTitleLocationReadbackTemplate{}} from {data_FromToTime}. </Tts>
+              <Gui> Here's your next event. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} Next, from {data_FromToTime}, you have {AppointmentTitleLocationReadbackTemplate{}}. </Tts>
+              <Gui> Here's your next event. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} I see {AppointmentTitleLocationReadbackTemplate{}} coming up next from {data_FromToTime}. </Tts>
+              <Gui> Here's your next event. </Gui>
+          </Value>
+      </String>
+
+      <String Name="NextApptCalQueryNextAppointmentReadback_Tip">
+          <Value><Gui> try What about next weekend? </Gui></Value>
+          <Value><Gui> try Show next week's schedule </Gui></Value>
+          <Value><Gui> try When is Groundhog Day? </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/nextapptcalquery/intromultiplenextappointments -->
+      <String Name="NextApptCalQueryIntroMultipleNextAppointments">
+          <Value>
+              <Tts> {g:Prompt{}} I found {data_NumberOfResults} events coming up next at {data_StartTime}. </Tts>
+              <Gui> I found {data_NumberOfResults} events coming up next at {data_StartTime}. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} You have {data_NumberOfResults} events scheduled next at {data_StartTime}. </Tts>
+              <Gui> You have {data_NumberOfResults} events scheduled next at {data_StartTime}. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} Next up there are {data_NumberOfResults} events at {data_StartTime}. </Tts>
+              <Gui> Next up there are {data_NumberOfResults} events at {data_StartTime}. </Gui>
+          </Value>
+      </String>
+
+      <String Name="NextApptCalQueryIntroMultipleNextAppointments_Tip">
+          <Value><Gui> try What about next weekend? </Gui></Value>
+          <Value><Gui> try Show me next week </Gui></Value>
+          <Value><Gui> try Add swap meet for Friday </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/titlecalquery/titlecalquery0results -->
+      <String Name="TitleCalQueryTitleCalQuery0Results">
+          <Value>
+              <Tts> {g:Prompt{}}{EmoteSensitive} Sorry, I couldn't find {data_Title} in your calendar. </Tts>
+              <Gui> Sorry, I couldn't find {data_Title} in your calendar. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}}{EmoteSensitive} I'm afraid I couldn't find any events called {data_Title}. </Tts>
+              <Gui> I'm afraid I couldn't find any events called {data_Title}. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}}{EmoteSensitive} I'm not finding anything called {data_Title}. </Tts>
+              <Gui> I'm not finding anything called {data_Title}. </Gui>
+          </Value>
+      </String>
+
+      <String Name="TitleCalQueryTitleCalQuery0Results_Tip">
+          <Value><Gui> try Add {data_Title} to my calendar </Gui></Value>
+          <Value><Gui> try What do I have tomorrow? </Gui></Value>
+          <Value><Gui> try Add something on Sunday </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/titlecalquery/singleappointmentreadbacktitlewithduration -->
+      <String Name="TitleCalQuerySingleAppointmentReadbackTitleWithDuration">
+          <Value>
+              <Tts> {g:Prompt{}} You have {SingleAppointmentReadbackTitleWithDurationTemplate{}}. </Tts>
+              <Gui> Here's your event. </Gui>
+          </Value>
+      </String>
+
+      <String Name="TitleCalQuerySingleAppointmentReadbackTitleWithDuration_Tip">
+          <Value><Gui> try What do I have tomorrow? </Gui></Value>
+          <Value><Gui> try What's on tap this weekend? </Gui></Value>
+          <Value><Gui> try Add an event for Friday </Gui></Value>
+      </String>
+
+      <!-- !# calendarreview/titlecalquery/intromultipletitlematches -->
+      <String Name="TitleCalQueryIntroMultipleTitleMatches">
+          <Value>
+              <Tts> {g:Prompt{}} I found {data_NumberOfResults} events with {data_Title} in the title. </Tts>
+              <Gui> I found {data_NumberOfResults} events with {data_Title} in the title. </Gui>
+          </Value>
+      </String>
+
+      <String Name="TitleCalQueryIntroMultipleTitleMatches_Tip">
+          <Value><Gui>  </Gui></Value>
+          <Value><Gui>  </Gui></Value>
+      </String>
+
+      <!-- GENERATED STRINGS - END -->
+    
+      <!-- Dialog Titles - these strings will be moved into the generated strings soon -->
+      <String Name="GetCalendarQueryCalQueryIntro_HeaderTitle">
+          <Value><Gui>  {HeaderImageCalendar} CALENDAR </Gui></Value>
+      </String>
+    
+      <String Name="DayCalQueryIntroDayResults_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+      </String>
+    
+      <String Name="WeekendCalQueryBusyWeekend_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+      </String>
+    
+      <String Name="WeekCalQueryIntroWeekResults_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+       </String>
+    
+       <String Name="SpecificTimeCalQuerySingleAppointmentReadback_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+       </String>
+    
+       <String Name="TimeRangeOnDayCalQueryIntroFuzzyResults_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+       </String>
+
+       <String Name="TimeRangeOnDayCalQueryIntroExactResults_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+       </String>
+    
+       <String Name="MultiDayCalQueryMultiDay0Results_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+       </String>
+
+       <String Name="NextApptCalQueryNextAppointmentReadback_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+       </String>
+    
+       <String Name="NextApptCalQueryIntroMultipleNextAppointments_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+       </String>
+    
+       <String Name="TitleCalQuerySingleAppointmentReadbackTitleWithDuration_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+       </String>
+    
+       <String Name="TimeRangeOnDayCalQuerySingleAppointmentReadbackWithDuration_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+       </String>
+    
+       <String Name="MultiDayCalQueryIntroMultiDayResults_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+       </String>
+    
+       <String Name="TODCalQueryIntroTODResults_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+       </String>
+    
+       <String Name="NextApptCalQueryNextQuery0Results_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+       </String>
+    
+       <String Name="SpecificTimeCalQueryIntroExactResults_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+       </String>
+    
+       <String Name="SpecificTimeCalQueryIntroFuzzyResults_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+       </String>
+    
+       <String Name="WeekCalQueryWeekQuery0Results_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+       </String>
+    
+       <String Name="WeekendCalQueryWeekendQuery0Results_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+       </String>
+    
+       <String Name="WeekendCalQueryIntroWeekendResults_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+       </String>
+    
+       <String Name="TODCalQueryRestOfDay_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+       </String>
+    
+       <String Name="TODCalQueryTODQuery0Results_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+       </String>
+    
+       <String Name="NoResultsOnDayDayQuery0Results_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+       </String>   
+    
+       <String Name="IntroVisualDisplayPositiveHereTheyAre_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+       </String>   
+    
+       <String Name="TODCalQueryNextAppointment_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+       </String>   
+    
+       <String Name="TODCalQueryLastAppointment_HeaderTitle">
+          <Value><Gui> {HeaderImageCalendar} CALENDAR </Gui></Value>
+       </String>   
+    </Intent>
+
+    <PhraseList Label="QueryStartDate" SlotName="Date">
+      <Item out="rules.latest()"> {g:CalendarDate}        </Item>
+      <Item out="rules.latest()"> {g:DayOfTheWeek}        </Item>
+    </PhraseList>
+
+    <PhraseList Label="QueryStartTime" SlotName="StartTime">
+      <Item out="rules.latest()"> {g:Time}                </Item>
+    </PhraseList>
+
+    <PhraseList Label="EndDate" SlotName="EndDate">
+      <Item out="rules.latest()"> {g:CalendarDate}        </Item>
+      <Item out="rules.latest()"> {g:DayOfTheWeek}        </Item>
+    </PhraseList>
+
+    <PhraseList Label="EndTime" SlotName="EndTime">
+      <Item out="rules.latest()"> {g:Time}                </Item>
+    </PhraseList>
+
+    <PhraseList Label="WeekKeywords" SlotName="WeekKeywords">
+      <Item value="Fullweek">   week                      </Item>
+      <Item value="Weekend">    weekend                   </Item>
+    </PhraseList>
+
+    <PhraseList Label="ThisOrNext" SlotName="ThisOrNext">
+      <Item value="This">    the                          </Item>
+      <Item value="This">    this                         </Item>
+      <Item value="Next">    next                         </Item>
+    </PhraseList>
+
+    <PhraseList Label="BlockOfTime" SlotName="BlockOfTime">
+      <Item value="Morning">    morning                   </Item>
+      <Item value="Afternoon">  afternoon                 </Item>
+      <Item value="Evening">    evening                   </Item>
+      <Item value="Evening">    tonight                   </Item>
+    </PhraseList>
+
+    <PhraseList Label="QueryAppointmentPrefixes">
+      <Item>      what [{MeetingDefinitions}] do i have                         </Item>
+      <Item>      {QueryCalendarQuestions} is [my] {MeetingDefinitions} [for]   </Item>
+      <Item>      {QueryCalendarCommands} [my] {MeetingDefinitions} [for]       </Item>
+      <Item>      am i free                                                     </Item>
+      <Item>      {what's|what does} my {calendar|schedule} look like           </Item>
+    </PhraseList>
+
+    <PhraseList Label="QueryAppointment_NotTimeBased">
+      <Item value="ByNextAppt">    what's coming up [next]                                                               </Item>
+      <Item value="ByNextAppt">    what do i have next                                                                   </Item>
+      <Item value="ByNextAppt">    {QueryCalendarQuestions} is [my] next {QueryDictationTitle}                           </Item>
+      <Item value="ByNextAppt">    {QueryCalendarCommands} [my] next {MeetingDefinitions}                                </Item>
+      <Item value="ByTitle">       {QueryCalendarQuestions} is [my next] {QueryDictationTitle}                           </Item>
+      <Item value="ByTitle">       {QueryCalendarCommands} [my] {QueryDictationTitle}                                    </Item>
+    </PhraseList>
+
+    <PhraseList Label="MeetingDefinitions">
+      <Item>      appointment    </Item>
+      <Item>      meeting        </Item>
+      <Item>      schedule       </Item>
+      <Item>      event          </Item>
+    </PhraseList>
+
+    <PhraseList Label="QueryCalendarQuestions">
+      <Item>      what                           </Item>
+      <Item>      when                           </Item>
+      <Item>      where                          </Item>
+      <Item>      how long                       </Item>
+    </PhraseList>
+
+    <PhraseList Label="QueryCalendarCommands">
+      <Item>      review                         </Item>
+      <Item>      show                           </Item>
+    </PhraseList>
+
+    <Dictation Label="QueryDictationTitle"  SlotName="Title" />
+
+  </Domain>
+
+</VoiceCommands>
+
+

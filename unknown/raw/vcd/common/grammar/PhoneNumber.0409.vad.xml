@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.0" xmlns:x="http://schemas.thinkman.com/voicecommands/extensions/1.0">
+
+  <Domain Name="Common">
+
+    <PhraseList Label="g:PhoneNumber">
+        
+        <Item out="rules.latest()">     {ThreeDigitService}         </Item>
+        <Item out="rules.latest()">     {SevenDigitNumber}          </Item>
+        <Item out="rules.latest()">     {TenDigitNumber}            </Item>
+        <Item out="rules.latest()">     {InternationalNumber}       </Item>
+        
+        <!-- TODO: add weighting here -->
+        <Item out="rules.latest()">     {ThreeToFiveDigitNumber}    </Item>
+
+    </PhraseList>
+      
+    <PhraseList Label="ThreeDigitService" initout="''">
+        <Item foreach="out+rules.latest()">     {Digit2to9}{Digit1}{Digit1}                             </Item>
+    </PhraseList>
+
+    <PhraseList Label="SevenDigitNumber" initout="''">
+        <Item foreach="out+rules.latest()">     {Digit2to9}{Digit0to9}{Digit0to9} {DigitXXXX}           </Item>
+    </PhraseList>
+
+    <PhraseList Label="TenDigitNumber" initout="''">
+        <Item foreach="out+rules.latest()">     [{Digit1}] {DigitAreaCode}  {SevenDigitNumber}          </Item>
+    </PhraseList>
+
+    <PhraseList Label="InternationalNumber" initout="''">
+        <Item foreach="out+rules.latest()">     {Digit0}{Digit1}{Digit1} {InternationalNumberDigits}    </Item>
+    </PhraseList>
+
+    <PhraseList Label="InternationalNumberDigits" initout="''">
+        <Item foreach="out+rules.latest()"  repeat="8-15">     {Digit0to9}     </Item>
+    </PhraseList>
+      
+    <PhraseList Label="ThreeToFiveDigitNumber" initout="''">
+        <Item foreach="out+rules.latest()">     {Digit0to9}{DigitXX}                            </Item>
+        <Item foreach="out+rules.latest()">     [{Digit0to9}]{DigitXXXX}                        </Item>
+    </PhraseList>
+      
+    <PhraseList Label="DigitAreaCode" initout="''">
+        <Item foreach="out+rules.latest()">         {Digit2to9}{Digit0to9}{Digit0to9}           </Item>
+        <Item value="800">                          8 hundred                                   </Item>
+        <Item value="900">                          9 hundred                                   </Item>
+    </PhraseList>
+      
+    <PhraseList Label="DigitXX" initout="''">
+        <Item foreach="out+rules.latest()">         {Digit0to9} {Digit0to9}                     </Item>
+        <Item foreach="out+rules.latest()">         {Digit10to99}                               </Item>
+    </PhraseList>
+      
+    <PhraseList Label="DigitXXXX" initout="''">
+        <Item foreach="out+rules.latest()">         {DigitXX}{DigitXX}                          </Item>
+        <Item foreach="out+rules.latest()">         {IDigitXXXX}                                </Item>
+    </PhraseList>
+      
+    <!-- private to DigitXXXX.  postout is telling the code to format this numeric result into 4 positions -->
+    <PhraseList Label="IDigitXXXX" initout="0" postout="'[4,'+out+']'"> 
+        <!-- we dont include {g:Number1to99} because people don't say phone #'s that way.  e.g., "555 4" please say "555 0004"    -->
+        <Item foreach="out+rules.latest()">         {g:NumberHundreds} [and] [{g:Number1to99}]                          </Item>
+        <Item foreach="out+rules.latest()">         {g:NumberThousands} [{g:NumberHundreds}] [and] [{g:Number1to99}]    </Item>
+    </PhraseList>
+
+      
+    <PhraseList Label="Digit10to99" initout="0" postout="'[2,'+out+']'"> 
+        <Item foreach="out+rules.latest()">         {g:NumberTeen}                              </Item>
+        <Item foreach="out+rules.latest()">         {g:NumberTens} [{g:Number1to9}]             </Item>
+    </PhraseList>
+      
+        
+    <PhraseList Label="Digit0">
+        <Item value="0">                { 0 | oh }     </Item>
+    </PhraseList>
+      
+    <PhraseList Label="Digit1">
+        <Item value="1">                1              </Item>
+    </PhraseList>
+      
+    <PhraseList Label="Digit0to9">
+        <Item value="0">                { 0 | oh }      </Item>
+        <Item value="1">                1               </Item>
+        <Item out="rules.latest()">     {Digit2to9}     </Item>
+    </PhraseList>
+            
+    <PhraseList Label="Digit2to9">
+        <Item value="2">               2               </Item>
+        <Item value="3">               3               </Item>
+        <Item value="4">               4               </Item>
+        <Item value="5">               5               </Item>
+        <Item value="6">               6               </Item>
+        <Item value="7">               7               </Item>
+        <Item value="8">               8               </Item>
+        <Item value="9">               9               </Item>
+    </PhraseList>
+
+  </Domain>
+    
+    
+</VoiceCommands>
+
+            

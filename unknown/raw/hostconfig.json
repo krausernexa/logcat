@@ -1,0 +1,24 @@
+{
+    "DefaultProfile": "Cortana",
+    "Cortana": {
+        "HomePage": "/proactive?form=WNSBOX&uncrunched=1",
+        "BackgroundColor": "0",
+        "ForegroundColor": "1810914"
+    },
+    "Threshold": {
+        "HomePage": "/zinc?cc=US&form=WNSBOX",
+        "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Trident/7.0; rv:11.0; Cortana 1.4.1.512; 10.0.0.0.10012.21) like Gecko",
+        "BackgroundColor": "16777215",
+        "ForegroundColor": "0"
+    },
+    "Locales": {
+        "0409": {
+            "BaseUrl": "https://www.bing.com",
+            "BaseUrlAudio": "https://www.bing.com/speech_render"
+        },
+        "0804": {
+            "BaseUrl": "https://cn.bing.com",
+            "BaseUrlAudio": "https://cn.bing.com/speech_render"
+        }
+    }
+}

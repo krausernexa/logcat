@@ -1,0 +1,38 @@
+# -- MAPPINGS FILE --
+# Used by "vad-generate.cmd"
+
+# Template Mappings
+[Acknowledgement-phrase]	{g:PromptAck{}}
+[Acknowledgement phrase]	{g:PromptAck{}}
+[Acknowledgment-phrase]	{g:PromptAck{}}
+[Acknowledgement]	{g:PromptAck{}}
+[Alarm-None-Found-Template]	{d_AlarmQuery}
+[Cancel-empty-phrase]	{g:PromptCancelled{}}
+#[X-RequiredSlots-Create]	TimeToTurnOn
+#[X-RequiredSlots-Off]	TimeToTurnOff
+[X-SlotType-StartTime]	Time
+
+# Earcon Mappings
+[success earcon]	{EarConSuccess}
+[success-earcon]	{EarConSuccess}
+
+# Slot Mappings
+<alarm-time>	{d_AlarmTime}
+<existing-alarm-time-thats-on>	{d_ExistingAlarmTimeForTips:@}
+<existing-alarm-time-that's-on>	{d_ExistingAlarmTimeForTips:@}
+<alarm-time-choice-from-screen>	{d_DisambigTimeForTips:@}
+
+#[Alarm-Disambig-Template]	{AlarmDisambigTemplate{}}
+#<Result1.AlarmTime>	{d_DisambigTime1}
+#<Result2.AlarmTime>	{d_DisambigTime2}
+#<Result3.AlarmTime>	{d_DisambigTime3}
+
+# String Name Mappings
+AskForStartTimeAlarm	AskForTimeToTurnOn
+GetTimeToTurnOn	AskForTimeToTurnOn
+GetTimeToTurnOff	AskForTimeToTurnOff
+NoAlarms	NoAlarmsToTurnOff
+CreateAlarmSuccess	ConfirmAlarm
+CreateAlarmError	TooManyAlarms
+OffAlarmError	NoAlarmsToTurnOff
+CompleteAlarmCreate	ConfirmAlarm

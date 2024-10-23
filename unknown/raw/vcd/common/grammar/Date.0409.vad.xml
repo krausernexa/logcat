@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.0" xmlns:x="http://schemas.thinkman.com/voicecommands/extensions/1.0">
+    
+    <Domain Name="Common">
+        <PhraseList Label="g:CalendarDate">
+            <Item out="rules.latest()">   {MonthDayYear}        </Item>
+            <Item out="rules.latest()">   {DayMonthYear}        </Item>
+            <Item out="rules.latest()">   {NotAbsoluteDay}      </Item>
+        </PhraseList>
+
+        <PhraseList Label="MonthDayYear" initout="''">
+            <!--
+                month day|dd [year]
+            -->
+            <Item foreach="out+rules.latest()+'/'"> {MonthWords} [the] {DayWords} [[of] {Year}]                     </Item>
+
+            <!--
+              mm dd year
+            -->
+            <Item foreach="out+rules.latest()+'/'"> {MonthNumbers} {DayNumbers} {Year}                              </Item>
+        </PhraseList>
+
+        <PhraseList Label="DayMonthYear" initout="''">
+            <!--
+                day [month|mm] [year]
+            -->
+            <Item foreach="out+rules.latest()+'/'"> [the] {DayWords} [of {MonthWords} [[of] {Year}]]                </Item>
+        </PhraseList>
+
+        <PhraseList Label="NotAbsoluteDay" initout="''">
+            <!--  
+                next week
+                this Thursday
+                the day after next
+            -->
+            <Item out="rules.latest()">             {RelativeDay}                               </Item>
+            <Item out="rules.latest()">             in {RelativeDate} [time]                    </Item>
+            <Item out="rules.latest()">             [in] {RelativeDate} from {now|today}        </Item>
+            <Item out="rules.latest()">             [on] {ThisOrNextDayOfTheWeek}               </Item>
+        </PhraseList>
+
+        <PhraseList Label="RelativeDate">
+            <Item out="rules.latest()">             {RelativeYears}                             </Item>
+            <Item out="rules.latest()">             {RelativeMonths}                            </Item>
+            <Item out="rules.latest()">             {RelativeWeeks}                             </Item>
+            <Item out="rules.latest()">             {RelativeDays}                              </Item>
+        </PhraseList>
+
+        <PhraseList Label="RelativeYears" initout="''" postout="'relative_years:'+out">
+            <Item out="1">                          {1|a} year                                  </Item>
+            <Item out="rules.latest()">             {g:Number2to99} years                       </Item>
+        </PhraseList>
+
+        <PhraseList Label="RelativeMonths" initout="''" postout="'relative_months:'+out">
+            <Item out="1">                          {1|a} month                                 </Item>
+            <Item out="rules.latest()">             {g:Number2to99} months                      </Item>
+        </PhraseList>
+
+        <PhraseList Label="RelativeWeeks" initout="''" postout="'relative_weeks:'+out">
+            <Item out="1">                          {1|a} week                                  </Item>
+            <Item out="rules.latest()">             {g:Number2to99} weeks                       </Item>
+        </PhraseList>
+
+        <PhraseList Label="RelativeDays" initout="''" postout="'relative_days:'+out">
+            <Item out="1">                          {1|a} day                                   </Item>
+            <Item out="rules.latest()">             {g:Number2to99} days                        </Item>
+        </PhraseList>
+
+        <PhraseList Label="RelativeDay" initout="0" postout="'date_period:'+out">     
+            <Item value="today">                    today                                       </Item>
+            <Item value="tomorrow">                 tomorrow                                    </Item>
+            <Item value="day_after_tomorrow">       [the] day after {next|tomorrow}             </Item>
+        </PhraseList>
+
+        <PhraseList Label="ThisOrNextDayOfTheWeek" initout="''">
+            <Item foreach="out+rules.latest()+'/'"> [{ThisOrNext} [week [on]]] {DayOfTheWeek}   </Item>
+            <Item foreach="out+rules.latest()+'/'"> [{{ThisOrNext}|the}] {Weekend}              </Item>
+            <Item foreach="out+rules.latest()+'/'"> {WeekFrom} {DayOfTheWeek}                   </Item>
+        </PhraseList>
+
+        <PhraseList Label="WeekFrom" initout="''" postout="'adjust_week:'+out">
+            <Item value="add">                      [a] week [{from|on}]                        </Item>
+        </PhraseList>
+
+        <PhraseList Label="ThisOrNext" initout="''" postout="'adjust_week:'+out">
+            <Item value="this">                     this                                        </Item>
+            <Item value="next">                     {next|the following}                        </Item>
+        </PhraseList>
+
+        <PhraseList Label="g:TomorrowOrDayOfWeek" initout="''">
+            <Item foreach="out+rules.latest()+'/'"> {Tomorrow}                                  </Item>
+            <Item foreach="out+rules.latest()+'/'"> [on] [{ThisOrNext}] {DayOfTheWeek}          </Item>
+        </PhraseList>
+
+        <PhraseList Label="DayOfTheWeek" initout="0" postout="'day_of_week:'+out">
+            <Item out="rules.latest()">             {g:DayOfTheWeek}                            </Item>
+        </PhraseList>
+
+        <PhraseList Label="Tomorrow" initout="''" postout="'date_period:'+out">
+            <Item value="tomorrow">                 tomorrow                                    </Item>
+        </PhraseList>
+
+        <PhraseList Label="Weekend" initout="''" postout="'date_period:'+out">
+            <Item value="weekend">                  weekend                                     </Item>
+        </PhraseList>
+        
+        <!-- Day-of-week numbering matches ISO8601 for ease of parsing -->
+        <PhraseList Label="g:DayOfTheWeek" initout="0">
+            <Item value="1">    Monday          </Item>
+            <Item value="2">    Tuesday         </Item>
+            <Item value="3">    Wednesday       </Item>
+            <Item value="4">    Thursday        </Item>
+            <Item value="5">    Friday          </Item>
+            <Item value="6">    Saturday        </Item>
+            <Item value="7">    Sunday          </Item>
+        </PhraseList>
+
+        <PhraseList Label="MonthWords" initout="0" postout="'month:'+out">
+            <Item value="1">    January         </Item>
+            <Item value="2">    February        </Item>
+            <Item value="3">    March           </Item>
+            <Item value="4">    April           </Item>
+            <Item value="5">    May             </Item>
+            <Item value="6">    June            </Item>
+            <Item value="7">    July            </Item>
+            <Item value="8">    August          </Item>
+            <Item value="9">    September       </Item>
+            <Item value="10">   October         </Item>
+            <Item value="11">   November        </Item>
+            <Item value="12">   December        </Item>
+        </PhraseList>
+
+        <PhraseList Label="MonthNumbers" initout="0" postout="'month:'+out">
+            <Item out="rules.latest()"> {g:Number1to9}      </Item>
+            <Item value="10">           10                  </Item>
+            <Item value="11">           11                  </Item>
+            <Item value="12">           12                  </Item>
+        </PhraseList>
+
+        <PhraseList Label="DayWords" initout="0" postout="'day:'+out">
+            <Item value="1">    first           </Item>
+            <Item value="2">    second          </Item>
+            <Item value="3">    third           </Item>
+            <Item value="4">    fourth          </Item>
+            <Item value="5">    fifth           </Item>
+            <Item value="6">    sixth           </Item>
+            <Item value="7">    seventh         </Item>
+            <Item value="8">    eighth          </Item>
+            <Item value="9">    ninth           </Item>
+            <Item value="10">   tenth           </Item>
+            <Item value="11">   eleventh        </Item>
+            <Item value="12">   twelfth         </Item>
+            <Item value="13">   thirteenth      </Item>
+            <Item value="14">   fourteenth      </Item>
+            <Item value="15">   fifteenth       </Item>
+            <Item value="16">   sixteenth       </Item>
+            <Item value="17">   seventeenth     </Item>
+            <Item value="18">   eighteenth      </Item>
+            <Item value="19">   nineteenth      </Item>
+            <Item value="20">   twentieth       </Item>
+            <Item value="21">   twenty first    </Item>
+            <Item value="22">   twenty second   </Item>
+            <Item value="23">   twenty third    </Item>
+            <Item value="24">   twenty fourth   </Item>
+            <Item value="25">   twenty fifth    </Item>
+            <Item value="26">   twenty sixth    </Item>
+            <Item value="27">   twenty seventh  </Item>
+            <Item value="28">   twenty eighth   </Item>
+            <Item value="29">   twenty ninth    </Item>
+            <Item value="30">   thirtieth       </Item>
+            <Item value="31">   thirty first    </Item>
+        </PhraseList>
+
+        <PhraseList Label="DayNumbers" initout="0" postout="'day:'+out">
+            <Item out="rules.latest()">             {g:Number1to9}                          </Item>
+            <Item out="rules.latest()">             {g:NumberTeen}                          </Item>
+            <Item foreach="out+rules.latest()">     {NumberTwenty} [{g:Number1to9}]         </Item>
+            <Item out="30">                         30                                      </Item>
+            <Item out="31">                         31                                      </Item>
+        </PhraseList>
+
+        <PhraseList Label="NumberTwenty">
+            <Item out="20">                         20                                      </Item>
+        </PhraseList>
+
+        <PhraseList Label="Year" initout="0" postout="'year:'+out">
+            <Item out="0">                          this year                               </Item>
+            <Item out="1">                          next year                               </Item>
+            <Item out="rules.latest()">             {TwoThousandYearNumber}                 </Item>
+        </PhraseList>
+
+        <PhraseList Label="TwoThousandYearNumber" initout="0">
+            <Item out="2000+rules.latest()">     2000 [and] {g:Number1to99}                 </Item>
+            <Item out="2000+rules.latest()">     20 {g:Number10to99}                        </Item>
+        </PhraseList>
+
+    </Domain>    
+    
+</VoiceCommands>
+
+            
+

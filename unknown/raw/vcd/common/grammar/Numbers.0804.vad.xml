@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.0" xmlns:x="http://schemas.thinkman.com/voicecommands/extensions/1.0">
+
+  <Domain Name="Common">
+
+      <PhraseList Label="g:Number1to99" initout="0">
+          <Item out="1">                              1                                           </Item>
+          <Item out="rules.latest()">                 {g:Number2to99}                             </Item>
+      </PhraseList>
+
+      <PhraseList Label="g:Number2to99" initout="0">
+          <Item out="rules.latest()">                 {g:Number2to9}                              </Item>
+          <Item out="rules.latest()">                 {g:Number10to99}                              </Item>
+      </PhraseList>
+
+      <PhraseList Label="g:Number10to99" initout="0">
+          <Item out="rules.latest()">                 {g:NumberTeen}                              </Item>
+          <Item foreach="out+rules.latest()">         {g:NumberTens} [{g:Number1to9}]             </Item>
+      </PhraseList>
+
+      <PhraseList Label="g:Number1to9">
+          <Item out="1">                            1                                             </Item>
+          <Item out="rules.latest()">               {g:Number2to9}                                </Item>
+      </PhraseList>
+        
+      <PhraseList Label="g:Number2to9">
+          <Item out="2">               2               </Item>
+          <Item out="3">               3               </Item>
+          <Item out="4">               4               </Item>
+          <Item out="5">               5               </Item>
+          <Item out="6">               6               </Item>
+          <Item out="7">               7               </Item>
+          <Item out="8">               8               </Item>
+          <Item out="9">               9               </Item>
+      </PhraseList>
+    
+      <PhraseList Label="g:NumberTeen">
+          <Item out="10">              ten             </Item>
+          <Item out="11">              eleven          </Item>
+          <Item out="12">              twelve          </Item>
+          <Item out="13">              thirteen        </Item>
+          <Item out="14">              fourteen        </Item>
+          <Item out="15">              fifteen         </Item>
+          <Item out="16">              sixteen         </Item>
+          <Item out="17">              seventeen       </Item>
+          <Item out="18">              eighteen        </Item>
+          <Item out="19">              nineteen        </Item>
+      </PhraseList>
+        
+      <PhraseList Label="g:Number20to50inTens">
+          <Item out="20">              twenty          </Item>
+          <Item out="30">              thirty          </Item>
+          <Item out="40">              forty           </Item>
+          <Item out="50">              fifty           </Item>
+      </PhraseList>
+
+      <PhraseList Label="g:NumberTens">
+          <Item out="rules.latest()">  {g:Number20to50inTens} </Item>
+          <Item out="60">              sixty                  </Item>
+          <Item out="70">              seventy                </Item>
+          <Item out="80">              eighty                 </Item>
+          <Item out="90">              ninety                 </Item>
+      </PhraseList>  
+        
+        
+      <PhraseList Label="g:NumberHundreds">
+          <Item out="rules.latest()*100">         {g:Number1to9} hundred            </Item>
+          <Item out="rules.latest()*100">         {g:NumberTeen} hundred            </Item>
+      </PhraseList>
+      
+        
+      <PhraseList Label="g:NumberThousands">
+          <Item out="rules.latest()*1000">        {g:Number1to9} thousand           </Item>
+          <Item out="rules.latest()*1000">        {g:NumberTeen} thousand           </Item>
+      </PhraseList>  
+
+
+  </Domain>
+    
+    
+</VoiceCommands>
+
+            
+

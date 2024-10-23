@@ -1,0 +1,56 @@
+# -- MAPPINGS FILE --
+
+# Common strings mappings
+[Acknowledgement-phrase]	{g:PromptAck{}}
+[Acknowledgement phrase]	{g:PromptAck{}}
+[Acknowledgement]	{g:PromptAck{}}
+[Confirmation-phrase]	{g:RequestConfirmation{}}
+[Change-intro-phrase]	{g:PromptChange{}}
+[Success-acknowledgement-phrase]	{g:PromptSuccess{}}
+[Inform-intro-phrase]	{g:InformIntro{}}
+[Confirm-phrase]	{g:RequestConfirmation{}}
+[Cancel-empty-phrase]	{g:PromptCancelled{}}
+[X-RequiredSlots-CreateAppointment]	Title,StartTime
+[X-SlotType-StartTime]	TimeSpan
+[X-SlotDefault-StartTime]	2013-06-05
+
+# String Name Mappings
+GetTimeToTurnOn	AskForTimeToTurnOn
+GetTimeToTurnOff	AskForTimeToTurnOff
+
+# Earcon mappings
+[success earcon]	{EarConSuccess}
+
+# Slot mappings
+<Title>	{data_Title}
+<Implicit-Location>	{data_Location}
+<Number-of-Conflicts>	{data_NumConflicts}
+<Recent-Contact-First-Name>	(recent-contact-first-name)
+[Specific-Time-Template]	{data_StartDayOrDate} at {data_StartTime}
+[Day-Readback-Template]	{data_StartDayOrDate}
+[Day-Readback-Template(StartDate)]	{data_StartDayOrDate}
+[Day-Readback-Temaplte(StartDate)]	{data_StartDayOrDate}
+[Day-Readback-Template(EndDate)]	{data_EndDayOrDate}
+[Day-Readback-Template(EndDay)]	{data_EndDayOrDate}
+[From-Duration-Template]	from {data_FromToTime}
+[From-Duration-Endphrase-Template]	from {data_FromToTime}
+[Time-Template(EndTime)]	{data_EndTime}
+[Time-Template(StartTime)]	{data_StartTime}
+[Appointment-Title-Readback(Conflict.Title)]	{data_ConflictTitle}
+[Meeting-Places-Template]	{MeetingPlacesTemplate{}}
+
+# Name Mappings
+GetAppointmentTitle	AskForTitle
+GetStart	AskForStartDateTime
+GetStartTime	AskForStartTime
+GetEndTime	AskForEndTime
+GetAppointmentLocation	AskForLocation
+1Conflict	OneConflict
+ChangeWithoutLocationOption	ChangeWhat
+ChangeWithLocationOption	ChangeWhatWithLocation
+ConfirmAllDayAndLocation	ConfirmAllDayWithLocation
+ConfirmMultiDayWithStartAndEndTimesAtLocation	ConfirmMultidayWithTimeAndLocation
+ConfirmMultiDayWithStartAndEndTimes	ConfirmMultidayWithTime
+ConfirmMultiDayAtLocation	ConfirmMultidayWithLocation
+ConfirmMultiDay	ConfirmMultiday
+ConfirmCalendarCreateAppointment	ConfirmAppointmentStartTime

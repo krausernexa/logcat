@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.0" xmlns:x="http://schemas.thinkman.com/voicecommands/extensions/1.0">
+
+  <Domain Name="WpDialer" ClassName="InCallPressRes">
+
+    <Intent Name="InCallPress" Scope="g:InCall">
+      <ListenFor> press [the] {DialPad} [key]   </ListenFor>
+    </Intent>
+
+    <PhraseList Label="DialPad" SlotName="Digits" initout="''">
+        <Item foreach="out+rules.latest()"  repeat="1-18">     {DialPadKey}     </Item>
+    </PhraseList>
+      
+    <PhraseList Label="DialPadKey">
+      <Item value="0">     { 0 | oh }       </Item>
+      <Item value="1">      1               </Item>
+      <Item value="2">      2               </Item>
+      <Item value="3">      3               </Item>
+      <Item value="4">      4               </Item>
+      <Item value="5">      5               </Item>
+      <Item value="6">      6               </Item>
+      <Item value="7">      7               </Item>
+      <Item value="8">      8               </Item>
+      <Item value="9">      9               </Item>
+      <Item value="*">      star            </Item>
+      <Item value="#">   { pound | hash }   </Item>
+    </PhraseList>
+
+  </Domain>
+    
+</VoiceCommands>
+
+
+
+  

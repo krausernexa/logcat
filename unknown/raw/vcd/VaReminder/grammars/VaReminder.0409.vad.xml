@@ -1,0 +1,1059 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands 
+  xmlns="http://schemas.microsoft.com/voicecommands/1.0" 
+  xmlns:x="http://schemas.thinkman.com/voicecommands/extensions/1.0">
+
+  <Domain Name="Reminder" ClassName="ReminderRes" CortanaOnly="true">
+
+    <!-- INTENTS -->
+
+    <Intent Name="Create" Scope="g:Nop" EmitGrxml="false">
+        <!-- g:Prefix and g:Suffix is implicit -->
+        <ListenFor> [{make|create|add|need|want|set} [a]] reminder {ReminderBodyAndTrigger} </ListenFor>
+        <ListenFor> remind me {ReminderBodyAndTrigger} </ListenFor>
+    </Intent>
+
+    <Intent Name="Create" Scope="ReminderBody">
+        <ListenFor> {ReminderBody} </ListenFor>
+    </Intent>
+
+    <Intent Name="Create" Scope="ReminderTrigger">
+        <ListenFor> {ReminderTrigger} </ListenFor>
+    </Intent>
+
+    <Intent Name="Create" Scope="ReminderDateTime">
+        <ListenFor> {ReminderDateTime} </ListenFor>
+    </Intent>
+
+    <Intent Name="Create" Scope="ReminderPerson">
+        <ListenFor> {AllContactNamesAndNicknames} </ListenFor>
+    </Intent>
+
+    <Intent Name="Create" Scope="ReminderLocation">
+        <ListenFor> {ReminderLocation} </ListenFor>
+    </Intent>
+
+    <Intent Name="Create" Scope="ReminderLocationWithOptionalDirection">
+        <ListenFor> {ReminderLocationWithOptionalDirection} </ListenFor>
+    </Intent>
+
+    <Intent Name="Create" Scope="ConfirmForemostLocation">
+      <ListenFor> {ConfirmForemostLocation} </ListenFor>
+    </Intent>
+
+    <Intent Name="Create" Scope="ConfirmReminder">
+        <ListenFor> {ConfirmReminder} </ListenFor>
+    </Intent>
+
+    <Intent Name="Create" Scope="ChangeTimeBasedReminderSlot">
+        <ListenFor> {ChangeTimeBasedReminderSlot} </ListenFor>
+    </Intent>
+
+    <Intent Name="Create" Scope="ChangePersonBasedReminderSlot">
+        <ListenFor> {ChangePersonBasedReminderSlot} </ListenFor>
+    </Intent>
+
+    <Intent Name="Create" Scope="ChangeLocationBasedReminderSlot">
+        <ListenFor> {ChangeLocationBasedReminderSlot} </ListenFor>
+    </Intent>
+
+    <Intent Name="Create" Scope="SelectContactFromList">
+        <ListenFor> {SelectedContacts} </ListenFor>
+    </Intent>
+
+    <Intent Name="Create" Scope="SelectLocationFromList">
+        <ListenFor> {SelectedLocations} </ListenFor>
+    </Intent>
+
+    <!-- PHRASELISTS -->
+
+    <PhraseList Label="ReminderBodyAndTrigger">
+        <Item> [[{to|of}] {ReminderBody}] [{ReminderTrigger}] </Item>
+        <Item> [{ReminderTrigger}] [[{to|of}] {ReminderBody}] </Item>
+    </PhraseList>
+
+    <!-- not used directly in VCD, but pulled from the service -->
+      
+    <Dictation Label="ReminderBody" SlotName="Title" />
+
+    <PhraseList Label="ReminderTrigger">
+        <Item value="time">      {ReminderDateTime} </Item>
+        <Item value="person">    {ReminderPerson} </Item>
+        <Item value="location">  {ReminderLocation} [{ReminderDateTime}] </Item>
+    </PhraseList>
+
+    <PhraseList Label="ReminderDateTime">
+        <Item> {TimeFromNow}                                                                                    </Item> <!-- in 3 hours -->
+
+        <Item> {TimeOfDay}                                                                                      </Item> <!-- in the morning -->
+        <Item> {TimeOfDay} [on] {Date}                                                                          </Item> <!-- in the morning on Monday November 4th -->
+        <Item> [on] {Date} {TimeOfDay}                                                                          </Item> <!-- on November 4th in the morning -->
+
+        <Item> [{RecurrenceFrequency} {RecurrencePeriod}] [at] {Time}                                                                                      </Item> <!-- at 3pm -->
+        <Item> [on] {Date}                                                                                      </Item> <!-- on Monday -->
+        <Item> [at] {Time} [[on] {Date}]                                                                        </Item> <!-- at 3pm on Monday -->
+        <Item> [on] {Date} [at] {Time}                                                                          </Item> <!-- on Monday at 3pm -->
+
+        <Item> {RecurrenceFrequency} {RecurrencePeriod}                                                         </Item> <!-- Every day -->
+        <Item> {RecurrenceFrequency} {TimeOfDayMornAftEveNight}                                                 </Item> <!-- Every morning -->
+
+        <Item> [at] {Time} {RecurrenceFrequency}  {RecurrencePeriod}                                            </Item> <!-- at 3pm every day -->
+        <Item> [at] {Time} {RecurrenceFrequency} [{RecurrencePeriod} [on]] {Date}                               </Item> <!-- at 3pm every week on Monday -->
+
+        <Item> {RecurrenceFrequency}  {RecurrencePeriod} [at]  {Time}                                           </Item> <!-- Every day at 3pm -->
+        <Item> {RecurrenceFrequency}  {RecurrencePeriod} [at]  {Time} [on] {Date}                               </Item> <!-- Every week at 3pm on Monday -->
+        <Item> {RecurrenceFrequency} [{RecurrencePeriod} [on]] {Date}                                           </Item> <!-- Every week on Friday -->
+        <Item> {RecurrenceFrequency} [{RecurrencePeriod} [on]] {Date} [at] {Time}                               </Item> <!-- Every week on Friday at 3pm -->
+        <Item> {RecurrenceFrequency} [{RecurrencePeriod} [on]] {Date} [{at|in the}] {TimeOfDayMornAftEveNight}  </Item> <!-- Every week on Friday morning -->
+    </PhraseList>
+
+    <PhraseList Label="ReminderPerson">
+        <Item> {when|[the] next time} I {see|call|phone|email|mail|text|message|speak to|talk to} {AllContactNamesAndNicknames} </Item>  
+        <Item> {when|[the] next time} I get {a|an} {call|phone call|email|mail|text|message} from {AllContactNamesAndNicknames} </Item>  
+        <Item> {when|[the] next time} {AllContactNamesAndNicknames} {calls|phones|texts|message|emails|mails} [me] </Item>  
+    </PhraseList>
+
+    <PhraseList Label="ReminderLocation"  >
+        <Item> {LocationDirection} {LocationName} </Item>
+        <Item> {LocationDirection} {LocationPOIs} </Item>
+    </PhraseList>
+
+    <PhraseList Label="ReminderLocationWithOptionalDirection">
+        <Item> [{LocationDirection}] {LocationName} </Item>
+        <Item> [{LocationDirection}] {LocationPOIs} </Item>
+    </PhraseList>
+
+    <PhraseList Label="AllContactNamesAndNicknames" SlotName="ContactName">
+      <Item> {AllContactNames} </Item>
+      <Item> [my] {WellKnownNicknames} </Item>
+    </PhraseList>
+
+    <!-- Wraps the sharing:contact list into our local slotname. -->
+    <!-- ContactIds is a comma seperated OLITEMID list in the sharing:contact list grammar -->
+    <PhraseList Label="AllContactNames" SlotName="Name">
+        <Item out="rules.latest()"> {s:Contacts}    </Item>
+    </PhraseList>
+
+    <!-- Used to detect nicknames that aren't yet defined by the user, e.g. "mom" -->
+    <PhraseList Label="WellKnownNicknames" SlotName="WellKnownNickname">
+      <Item out="rules.latest()">   {g:WellKnownNicknames}         </Item>
+    </PhraseList>
+
+    <PhraseList Label="Date" SlotName="Date">
+      <Item out="rules.latest()"> {g:CalendarDate} </Item>
+    </PhraseList>
+
+    <PhraseList Label="Time" SlotName="Time">
+      <Item out="rules.latest()"> {g:TimeHoursMinutes} </Item>
+    </PhraseList>
+
+    <PhraseList Label="TimeFromNow" SlotName="Time">
+      <Item out="rules.latest()"> {g:TimeFromNow} </Item>
+    </PhraseList>
+
+    <PhraseList Label="TimeOfDay" SlotName="Time">
+      <Item out="rules.latest()"> {g:TimeOfDay} </Item>
+    </PhraseList>
+
+    <PhraseList Label="TimeOfDayMornAftEveNight" SlotName="TimeOfDayMornAftEveNight">
+      <Item out="rules.latest()"> {g:TimeOfDayMornAftEveNight} </Item>
+    </PhraseList>
+
+    <PhraseList Label="RecurrenceFrequency" SlotName="RecurrenceFrequency">
+        <Item value="every"> {every | each} </Item>
+    </PhraseList>
+
+    <PhraseList Label="RecurrencePeriod" SlotName="RecurrencePeriod">
+        <Item value="day"> day </Item>
+        <Item value="week"> week </Item>
+        <Item value="dow"> {g:DayOfTheWeek} </Item>"
+    </PhraseList>
+
+    <PhraseList Label="SelectedContacts" SlotName="ContactDisambiguationResponse">
+       <Item value="select"> {SelectedContactByName} </Item>
+       <Item value="none"> {g:NoneOfThosePeople} </Item>
+    </PhraseList>
+
+    <DynamicPhraseList Label="SelectedContactByName" SlotName="ContactId" HackId="1"/>
+
+    <PhraseList Label="SelectedLocations" SlotName="LocationDisambiguationResponse">
+      <Item value="select"> {SelectedLocationByName} </Item>
+      <Item value="none"> {g:NoneOfThose} [{locations|places}] </Item>
+      <Item value="any"> {SelectedLocationClassByName} </Item>
+      <Item value="any"> {g:AnyOrAllOfThose} [{location|locations|place|places}] </Item>
+      <Item value="any"> [I] {do not|don't} {care|mind} </Item>
+      <Item value="any"> [it] {does not|doesn't} matter [which [one]] </Item>
+    </PhraseList>
+
+    <DynamicPhraseList Label="SelectedLocationByName" SlotName="LocationDisambiguationIds" HackId="1"/>
+    <DynamicPhraseList Label="SelectedLocationClassByName" SlotName="LocationDisambiguationIds" HackId="2"/>
+
+    <PhraseList Label="LocationDirection">
+      <!-- arriving -->
+      <Item value="arriving"> {[the] next time|when} I go [{in|into|to|near|back|back to} [the]] </Item>
+      <Item value="arriving"> {[the] next time|when} I get [{in|into|to|near|back|back to} [the]] </Item>
+      <Item value="arriving"> {[the] next time|when} I arrive [{in|into|at|near|back|back at} [the]] </Item>
+      <Item value="arriving"> {[the] next time|when} [{I am|I'm}] [{in|into|at|near|back|back at} [the]] </Item>
+      <Item value="arriving"> {in|at|near} </Item>
+
+      <!-- leaving -->
+      <Item value="leaving"> {[the] next time|when} I leave [the] </Item>
+      <Item value="leaving"> {[the] next time|when} [{I am|I'm}] leaving [the] </Item>
+      <Item value="leaving"> {[the] next time|when} I depart [the] </Item>
+      <Item value="leaving"> {[the] next time|when} [{I am|I'm}] departing [the] </Item>
+    </PhraseList>
+
+    <Dictation Label="LocationName" SlotName="Location" />
+
+    <PhraseList Label="LocationPOIs" SlotName="Location" >
+      <Item out="rules.latest()"> {s:PointsOfInterest} </Item>
+    </PhraseList>
+    
+    <PhraseList Label="ConfirmReminder" SlotName="ConfirmReminder">
+      <Item value="change"> change </Item>
+      <Item value="change"> {g:Negative} </Item>
+      <Item value="confirm"> {g:Affirmative} </Item>
+      <Item value="confirm"> [{g:Affirmative}] add [{it | this | that}] </Item>
+      <Item value="confirm"> [{g:Affirmative}] remind [me] </Item>
+      <Item value="cancel"> cancel </Item>
+    </PhraseList>
+
+    <PhraseList Label="ConfirmForemostLocation" SlotName="ConfirmForemostLocation">
+      <Item value="confirm"> {g:Affirmative} </Item>
+      <Item value="change">  {g:Negative}    </Item>
+      <Item value="change">  [I] {do not|don't} know    </Item>
+    </PhraseList>
+
+    <PhraseList Label="ChangeTimeBasedReminderSlot" SlotName="ChangeTimeBasedReminderSlot">
+        <Item value="body"> [change] [the] reminder </Item>
+        <Item value="time"> [change] [the] {date|time|date and time} </Item>
+        <Item value="none"> {g:NoneOfThose} [options] </Item>
+    </PhraseList>
+
+    <PhraseList Label="ChangePersonBasedReminderSlot" SlotName="ChangePersonBasedReminderSlot">
+        <Item value="body"> [change] [the] {reminder|text|body|title} </Item>
+        <Item value="person"> [change] [the] {person|contact} </Item>
+        <Item value="none"> {g:NoneOfThose} [options] </Item>
+    </PhraseList>
+
+    <PhraseList Label="ChangeLocationBasedReminderSlot" SlotName="ChangeLocationBasedReminderSlot">
+        <Item value="body"> [change] [the] reminder </Item>
+        <Item value="location"> [change] [the] location </Item>
+        <Item value="none"> {g:NoneOfThose} [options] </Item>
+    </PhraseList>
+
+    <!-- OUTPUT STRINGS -->
+
+    <Intent Name="Create" Scope="g:Nop">
+        <!-- Required, not used -->
+        <ListenFor> {g:Prefix} {g:Suffix} </ListenFor>
+
+        <!-- GENERATED STRINGS - START -->
+        <!-- !# createreminder/getreminderbody/getbody -->
+        <String Name="AskForTitle">
+            <Value>
+                <Tts> {g:PromptAck{}} what do you wanna be reminded about? </Tts>
+                <Gui> What do you want to be reminded about? </Gui>
+            </Value>
+            <Value>
+                <Tts> {g:PromptAck{}} what do you wanna remember? </Tts>
+                <Gui> What do you want to remember? </Gui>
+            </Value>
+            <Value>
+                <Tts> {g:PromptAck{}} what should I remind you about? </Tts>
+                <Gui> What should I remind you about? </Gui>
+            </Value>
+            <Value>
+                <Tts> {g:PromptAck{}} tell me your reminder. </Tts>
+                <Gui> Tell me your reminder. </Gui>
+            </Value>
+            <Value>
+                <Tts> {g:Prompt{}} I'll create a reminder. What's on your mind? </Tts>
+                <Gui> I'll create a reminder. What's on your mind? </Gui>
+            </Value>
+            <Value Weight="0.0">
+                <Tts> {g:PromptTapered{}} What's your reminder? </Tts>
+                <Gui> What's your reminder? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForTitle_RetryX">
+            <Value>
+                <Tts> {g:Reprompt{}} What was your reminder? </Tts>
+                <Gui> What was your reminder? </Gui>
+            </Value>
+        </String>
+
+        <!-- !# createreminder/confirmreminder/changereminder/changereminderbody -->
+        <String Name="AskForNewTitle">
+            <Value>
+                <Tts> {g:PromptAck{}} what's your reminder? </Tts>
+                <Gui> What's your reminder? </Gui>
+            </Value>
+            <Value Weight="0.0">
+                <Tts> {g:PromptTapered{}} What's your reminder? </Tts>
+                <Gui> What's your reminder? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForNewTitle_RetryX">
+            <Value>
+                <Tts> {g:Reprompt{}} What was your reminder? </Tts>
+                <Gui> What was your reminder? </Gui>
+            </Value>
+        </String>
+
+        <!-- !# createreminder/getremindertrigger/gettrigger -->
+        <String Name="AskForReminderTrigger">
+            <Value>
+                <Tts> {g:Prompt{}} When should I remind you? </Tts>
+                <Gui> When should I remind you? </Gui>
+            </Value>
+            <Value>
+                <Tts> {g:Prompt{}} When would you like to be reminded? </Tts>
+                <Gui> When would you like to be reminded? </Gui>
+            </Value>
+            <Value>
+                <Tts> {g:Prompt{}} When do you wanna be reminded? </Tts>
+                <Gui> When do you want to be reminded? </Gui>
+            </Value>
+            <Value Weight="0.0">
+                <Tts> {g:PromptTapered{}} Remind you when? </Tts>
+                <Gui> Remind you when? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForReminderTrigger_RetryX">
+            <Value>
+                <Tts> {g:Reprompt{}} When did you want to be reminded? </Tts>
+                <Gui> When did you want to be reminded? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForReminderTrigger_Tip">
+            <Value><Gui> try Tomorrow at 10 AM </Gui></Value>
+            <Value><Gui> try When I talk to Jack </Gui></Value>
+            <Value><Gui> try When I get home </Gui></Value>
+            <Value><Gui> try When I get to {ReminderLocationTipsTemplate{}} </Gui></Value>
+            <Value><Gui> try When I leave work </Gui></Value>
+        </String>
+
+        <!-- !# createreminder/getremindertrigger/getremindertrigger-disambigfallback -->
+        <String Name="GetReminderTriggerDisambigFallback">
+            <Value><Tts> {g:Prompt{}} Sorry about that. Help me complete this by tapping below. </Tts></Value>
+        </String>
+
+        <!-- !# createreminder/getremindertrigger/gettime-finishtrigger 
+        <String Name="AskForReminderTimeFinishTrigger">
+            <Value>
+                <Tts> {g:PromptAck{}} at what time? </Tts>
+                <Gui> At what time? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForReminderTimeFinishTrigger_RetryX">
+            <Value>
+                <Tts> {g:Reprompt{}} What time did you wanna be reminded? </Tts>
+                <Gui> What time did you want to be reminded? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForReminderTimeFinishTrigger_Tip">
+            <Value><Gui> try At 10 AM </Gui></Value>
+            <Value><Gui> try At noon tomorrow </Gui></Value>
+        </String>
+ JASONVO -->
+        <!-- !# createreminder/getremindertrigger/dateerror -->
+        <String Name="AlertReminderIsInThePast">
+            <Value><Tts> {g:Prompt{}}{EmoteSensitive} Sorry, I can't create reminders in the past. </Tts></Value>
+            <Value Weight="0.0"><Tts> {g:PromptTapered{}}{EmoteSensitive} I can't create reminders in the past. </Tts></Value>
+        </String>
+
+        <!-- !# createreminder/getremindertrigger/batterysaveronerror -->
+        <String Name="AlertBatterySaverOnError">
+            <Value><Tts> {g:Prompt{}}{EmoteSensitive} Sorry, I can't add that reminder while Battery Saver is on. </Tts></Value>
+        </String>
+
+        <!-- !# createreminder/getremindertrigger/remindmecalendaroff -->
+        <String Name="AlertRemindMeCalendarIsOffError">
+            <Value><Tts> {g:Prompt{}}{EmoteSensitive} Sorry, your Remind Me calendar is off. You can turn it on in Calendar settings. </Tts></Value>
+        </String>
+
+        <!-- !# createreminder/confirmreminder/confirmtime-basedreminder/confirmtime-based -->
+        <String Name="AskForTimeBasedReminderConfirmation">
+            <Value>
+                <Tts> {g:PromptAck{}} I'll remind you to {Title} at {Time} {ReminderDate}. {g:RequestConfirmation{}} </Tts>
+                <Gui> Remind you about this? </Gui>
+            </Value>
+            <Value>
+                <Tts> {g:PromptAck{}} I can remind you to {Title} at {Time} {ReminderDate}. {g:RequestConfirmation{}} </Tts>
+                <Gui> Remind you about this? </Gui>
+            </Value>
+            <Value>
+                <Tts> {g:PromptAck{}} remind you to {Title} at {Time} {ReminderDate}. {g:RequestConfirmation{}} </Tts>
+                <Gui> Remind you about this? </Gui>
+            </Value>
+            <Value Weight="0.0">
+                <Tts> {g:PromptTapered{}} Remind you to {Title} at {Time} {ReminderDate}. {g:RequestConfirmation{}} </Tts>
+                <Gui> Remind you about this? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForTimeBasedReminderConfirmation_RetryX">
+            <Value>
+                <Tts> {g:Reprompt{}} Should I remind you? </Tts>
+                <Gui> Should I remind you? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForTimeBasedReminderConfirmation_Tip">
+            <Value><Gui> you can say Yes, No, or Cancel </Gui></Value>
+        </String>
+
+        <!-- !# createreminder/confirmreminder/confirmtime-basedreminder/confirmreoccurringtime-based -->
+        <String Name="AskForTimeBasedRecurringReminderConfirmation">
+            <Value>
+                <Tts> {g:PromptAck{}} I'll remind you to {Title} {ReminderRecurrence{}} at {Time}. {g:RequestConfirmation{}} </Tts>
+                <Gui> Remind you about this? </Gui>
+            </Value>
+            <Value>
+                <Tts> {g:PromptAck{}} remind you to {Title} {ReminderRecurrence{}} at {Time}. {g:RequestConfirmation{}} </Tts>
+                <Gui> Remind you about this? </Gui>
+            </Value>
+            <Value>
+                <Tts> {g:PromptAck{}} I can remind you to {Title} {ReminderRecurrence{}} at {Time}. {g:RequestConfirmation{}} </Tts>
+                <Gui> Remind you about this? </Gui>
+            </Value>
+            <Value Weight="0.0">
+                <Tts> {g:PromptTapered{}} I'll remind you to {Title} {ReminderRecurrence{}} at {Time}. {g:RequestConfirmation{}} </Tts>
+                <Gui> Remind you about this? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForTimeBasedRecurringReminderConfirmation_RetryX">
+            <Value>
+                <Tts> {g:Reprompt{}} Should I remind you? </Tts>
+                <Gui> Should I remind you? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForTimeBasedRecurringReminderConfirmation_Tip">
+            <Value><Gui> you can say Yes, No, or Cancel </Gui></Value>
+        </String>
+
+        <!-- !# createreminder/confirmreminder/confirmperson-basedreminder/confirmperson-based -->
+        <String Name="AskForPersonBasedReminderConfirmation">
+            <Value>
+                <Tts> {g:PromptAck{}} next time you talk to {ContactName}, I'll remind you to {Title}. {g:RequestConfirmation{}} </Tts>
+                <Gui> Remind you about this? </Gui>
+            </Value>
+            <Value>
+                <Tts> {g:PromptAck{}} next time you talk to {ContactName}, I can remind you to {Title}. {g:RequestConfirmation{}} </Tts>
+                <Gui> Remind you about this? </Gui>
+            </Value>
+            <Value Weight="0.0">
+                <Tts> {g:PromptTapered{}} When you talk to {ContactName}, I'll remind you to {Title}. {g:RequestConfirmation{}} </Tts>
+                <Gui> Remind you about this? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForPersonBasedReminderConfirmation_RetryX">
+            <Value>
+                <Tts> {g:Reprompt{}} Should I remind you? </Tts>
+                <Gui> Should I remind you? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForPersonBasedReminderConfirmation_Tip">
+            <Value><Gui> you can say Yes, No, or Cancel </Gui></Value>
+        </String>
+
+        <!-- !# createreminder/confirmreminder/confirmlocation-basedreminder/confirmlocation-based -->
+        <String Name="AskForLocationBasedReminderConfirmation">
+            <Value>
+                <Tts> {g:PromptAck{}} I'll remind you to {Title} when {ReminderLocationDirection} {Location}. {g:RequestConfirmation{}} </Tts>
+                <Gui> Remind you about this? </Gui>
+            </Value>
+            <Value>
+                <Tts> {g:PromptAck{}} I can remind you to {Title} when {ReminderLocationDirection} {Location}. {g:RequestConfirmation{}} </Tts>
+                <Gui> Remind you about this? </Gui>
+            </Value>
+            <Value>
+                <Tts> {g:PromptAck{}} remind you to {Title} when {ReminderLocationDirection} {Location}. {g:RequestConfirmation{}} </Tts>
+                <Gui> Remind you about this? </Gui>
+            </Value>
+            <Value Weight="0.0">
+                <Tts> {g:PromptAck{}} I'll remind you to {Title} when {ReminderLocationDirection} {Location}. {g:RequestConfirmation{}} </Tts>
+                <Gui> Remind you about this? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForLocationBasedReminderConfirmation_RetryX">
+            <Value>
+                <Tts> {g:Reprompt{}} Should I remind you? </Tts>
+                <Gui> Should I remind you? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForLocationBasedReminderConfirmation_Tip">
+            <Value><Gui> you can say Yes, No, or Cancel </Gui></Value>
+        </String>
+
+        <!-- !# createreminder/confirmreminder/success -->
+        <String Name="AlertReminderCreationSucceeded">
+            <Value>
+                <Tts> {g:Prompt{}}{EmoteSatisfied} Got it. {EarConSuccess} </Tts>
+                <Gui> I'll remind you. </Gui>
+            </Value>
+            <Value>
+                <Tts> {g:Prompt{}}{EmoteSatisfied} Great. {EarConSuccess} </Tts>
+                <Gui> I'll remind you. </Gui>
+            </Value>
+            <Value>
+                <Tts> {g:Prompt{}}{EmoteSatisfied} Sure thing. {EarConSuccess} </Tts>
+                <Gui> I'll remind you. </Gui>
+            </Value>
+            <Value Weight="0.0">
+                <Tts> {g:PromptTapered{}}{EmoteSatisfied} {EarConSuccess} </Tts>
+                <Gui> I'll remind you. </Gui>
+            </Value>
+        </String>
+
+        <!-- !# createreminder/confirmreminder/success-first -->
+        <String Name="AlertReminderCreationSucceededFirstTime">
+            <Value>
+                <Tts> {g:PromptSuccess{}} I'll remind you. You can see it in the Notebook any time. {EarConSuccess} </Tts>
+                <Gui> I'll remind you. You can see it in the Notebook any time. </Gui>
+            </Value>
+        </String>
+
+        <!-- !# createreminder/confirmreminder/remindercancelled -->
+        <String Name="AlertReminderCancelled">
+            <Value>
+                <Tts> {g:PromptCancelled{}}{EmoteSensitive} Reminder cancelled. </Tts>
+                <Gui> Reminder cancelled. </Gui>
+            </Value>
+            <Value>
+                <Tts> {g:PromptCancelled{}}{EmoteSensitive} OK, I cancelled that reminder. </Tts>
+                <Gui> I cancelled that reminder. </Gui>
+            </Value>
+            <Value Weight="0.0">
+                <Tts> {g:PromptCancelled{}}{EmoteSensitive} </Tts>
+                <Gui> Reminder cancelled. </Gui>
+            </Value>
+        </String>
+
+        <!-- !# createreminder/confirmreminder/changereminder/changetime-based -->
+        <String Name="AskForTimeBasedReminderChange">
+            <Value>
+                <Tts> {g:PromptChange{}}{EmoteSensitive} do you wanna change the reminder, date, or time? </Tts>
+                <Gui> Do you want to change the reminder, date, or time? </Gui>
+            </Value>
+            <Value>
+                <Tts> {g:PromptChange{}}{EmoteSensitive} should I change the reminder, date, or time? </Tts>
+                <Gui> Should I change the reminder, date, or time? </Gui>
+            </Value>
+            <Value Weight="0.0">
+                <Tts> {g:PromptTapered{}}{EmoteSensitive} What do you wanna change? </Tts>
+                <Gui> What do you want to change? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForTimeBasedReminderChange_RetryX">
+            <Value>
+                <Tts> {g:Reprompt{}} Did you wanna change the reminder, date, or time? </Tts>
+                <Gui> Did you want to change the reminder, date, or time? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForTimeBasedReminderChange_Tip">
+            <Value><Gui> you can say The reminder, The date, The time, or Cancel </Gui></Value>
+        </String>
+
+        <!-- !# createreminder/confirmreminder/changereminder/changeperson-based -->
+        <String Name="AskForPersonBasedReminderChange">
+            <Value>
+                <Tts> {g:PromptChange{}}{EmoteSensitive} do you wanna change the reminder or the contact? </Tts>
+                <Gui> Do you want to change the reminder or the contact? </Gui>
+            </Value>
+            <Value>
+                <Tts> {g:PromptChange{}}{EmoteSensitive} should I change the reminder or the contact? </Tts>
+                <Gui> Should I change the reminder or the contact? </Gui>
+            </Value>
+            <Value Weight="0.0">
+                <Tts> {g:PromptTapered{}}{EmoteSensitive} What do you wanna change? </Tts>
+                <Gui> What do you want to change? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForPersonBasedReminderChange_RetryX">
+            <Value>
+                <Tts> {g:Reprompt{}} Did you wanna change the reminder or the contact? </Tts>
+                <Gui> Did you want to change the reminder or the contact? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForPersonBasedReminderChange_Tip">
+            <Value><Gui> you can say The reminder, The contact, or Cancel </Gui></Value>
+        </String>
+
+        <!-- !# createreminder/confirmreminder/changereminder/changelocation-based -->
+        <String Name="AskForLocationBasedReminderChange">
+            <Value>
+                <Tts> {g:PromptChange{}}{EmoteSensitive} do you wanna change the reminder or the location? </Tts>
+                <Gui> Do you want to change the reminder or the location? </Gui>
+            </Value>
+            <Value>
+                <Tts> {g:PromptChange{}}{EmoteSensitive} should I change the reminder or the location? </Tts>
+                <Gui> Should I change the reminder or the location? </Gui>
+            </Value>
+            <Value Weight="0.0">
+                <Tts> {g:PromptTapered{}}{EmoteSensitive} What do you wanna change? </Tts>
+                <Gui> What do you want to change? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForLocationBasedReminderChange_RetryX">
+            <Value>
+                <Tts> {g:Reprompt{}} Did you wanna change the reminder or the location? </Tts>
+                <Gui> Did you want to change the reminder or the location? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForLocationBasedReminderChange_Tip">
+            <Value><Gui> you can say The reminder, The location, or Cancel </Gui></Value>
+        </String>
+
+        <!-- !# createreminder/confirmreminder/changereminder/getremindertime/gettime -->
+        <String Name="AskForReminderTime">
+            <Value>
+                <Tts> {g:PromptAck{}} when do you wanna be reminded? </Tts>
+                <Gui> When do you want to be reminded? </Gui>
+            </Value>
+            <Value>
+                <Tts> {g:PromptAck{}} when should I remind you? </Tts>
+                <Gui> When should I remind you? </Gui>
+            </Value>
+            <Value>
+                <Tts> {g:PromptAck{}} when would you like to be reminded? </Tts>
+                <Gui> When would you like to be reminded? </Gui>
+            </Value>
+            <Value Weight="0.0">
+                <Tts> {g:PromptTapered{}} When's the reminder? </Tts>
+                <Gui> When's the reminder? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForReminderTime_RetryX">
+            <Value>
+                <Tts> {g:Reprompt{}} When did you wanna be reminded? </Tts>
+                <Gui> When did you want to be reminded? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForReminderTime_Tip">
+            <Value><Gui> try At 10 AM </Gui></Value>
+            <Value><Gui> try At noon tomorrow </Gui></Value>
+        </String>
+
+        <!-- !# createreminder/confirmreminder/changereminder/getreminderperson/getperson -->
+        <String Name="AskForPerson">
+            <Value>
+                <Tts> {g:PromptAck{}} which contact? </Tts>
+                <Gui> Which contact? </Gui>
+            </Value>
+            <Value Weight="0.0">
+                <Tts> {g:PromptTapered{}} Which contact? </Tts>
+                <Gui> Which contact? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForPerson_RetryX">
+            <Value>
+                <Tts> {g:Reprompt{}} What was the contact name? </Tts>
+                <Gui> What was the contact name? </Gui>
+            </Value>
+        </String>
+
+        <!-- !# createreminder/confirmreminder/changereminder/getreminderlocation/getlocation -->
+        <String Name="AskForLocation">
+            <Value>
+                <Tts> {g:PromptAck{}} what's the location? </Tts>
+                <Gui> What's the location? </Gui>
+            </Value>
+            <Value>
+                <Tts> {g:PromptAck{}} where do you want to be reminded? </Tts>
+                <Gui> Where do you want to be reminded? </Gui>
+            </Value>
+            <Value>
+                <Tts> {g:PromptAck{}} where should I remind you? </Tts>
+                <Gui> Where should I remind you? </Gui>
+            </Value>
+            <Value Weight="0.0">
+                <Tts> {g:PromptTapered{}} What's the location? </Tts>
+                <Gui> What's the location? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForLocation_RetryX">
+            <Value>
+                <Tts> {g:Reprompt{}} Where should I remind you? </Tts>
+                <Gui> Where should I remind you? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForLocation_Tip">
+            <Value><Gui> try Home </Gui></Value>
+            <Value><Gui> try Work </Gui></Value>
+            <Value><Gui> try {MeetingPlacesTemplate{}} </Gui></Value>
+        </String>
+
+        <!-- !# createreminder/resolveperson/remninderpersondisambig -->
+        <String Name="AlertContactDisambiguationIntro">
+            <Value><Tts> {g:PromptAck{}} you want to be reminded when you talk to {ReminderPerson}. </Tts></Value>
+            <Value Weight="0.0"><Tts> {g:PromptAck{}} you want to be reminded when you talk to {ReminderPerson}. </Tts></Value>
+        </String>
+
+        <!-- !# shared/disambigperson/clarifypersonfew -->
+        <String Name="AskForContactDisambiguation">
+            <Value>
+                <Tts> {g:Prompt{}} Which one? {0} </Tts>
+                <Gui> Which one? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForContactDisambiguation_RetryX">
+            <Value>
+                <Tts> {g:Reprompt{}} Which person did you want? </Tts>
+                <Gui> Which person did you want? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForContactDisambiguation_Tip">
+            <Value><Gui> try {ReminderContactDisambigTips:@} </Gui></Value>
+            <Value><Gui> you can say Cancel </Gui></Value>
+        </String>
+
+        <!-- !# shared/disambigperson/clarifypersonmany -->
+        <String Name="AskForContactDisambiguationTooMany">
+            <Value>
+                <Tts> {g:Prompt{}} Which one? </Tts>
+                <Gui> Which one? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForContactDisambiguationTooMany_RetryX">
+            <Value>
+                <Tts> {g:Reprompt{}} Which person did you want? </Tts>
+                <Gui> Which person did you want? </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForContactDisambiguationTooMany_Tip">
+            <Value><Gui> try {ReminderContactDisambigTips:@} </Gui></Value>
+            <Value><Gui> you can say Cancel </Gui></Value>
+        </String>
+
+        <!-- !# createreminder/remindlocdisambig -->
+        <String Name="ReminderLocationDisambig">
+            <Value><Tts> {g:PromptAck{}} you want to be reminded when {ReminderLocationDirection} {Location}. </Tts></Value>
+            <Value Weight="0.0"><Tts> {g:PromptAck{}} you want to be reminded when {ReminderLocationDirection} {Location}. </Tts></Value>
+        </String>
+
+        <!-- !# createreminder/remindlocdisambig/offerfirstlocation -->
+        <String Name="OfferFirstLocation">
+            <Value>
+                <Tts> {g:PromptAck{}} remind you when {ReminderLocationDirection} {ReminderLocationClass}. There's one on {ReminderShortcutLocationStreet} in {ReminderShortcutLocationCity}. Is this the one you want? </Tts>
+                <Gui> Remind you when {ReminderLocationDirection} {ReminderLocationClass}. Is this the one you want? </Gui>
+            </Value>
+        </String>
+
+        <String Name="OfferFirstLocation_Tip">
+            <Value><Gui> you can say Yes, No, or Cancel </Gui></Value>
+        </String>
+
+        <!-- !# createreminder/remindlocdisambig/offerfirstlocation-differentname -->
+        <String Name="OfferFirstLocationDifferentName">
+            <Value>
+                <Tts> {g:PromptAck{}} remind you when {ReminderLocationDirection} {ReminderLocationClass}. There's a {ReminderShortcutLocationName} on {ReminderShortcutLocationStreet} in {ReminderShortcutLocationCity}. Is this the one you want? </Tts>
+                <Gui> Remind you when {ReminderLocationDirection} {ReminderLocationClass}. Is this the one you want? </Gui>
+            </Value>
+        </String>
+
+        <String Name="OfferFirstLocationDifferentName_Tip">
+            <Value><Gui> you can say Yes, No, or Cancel </Gui></Value>
+        </String>
+
+        <!-- !# createreminder/remindlocdisambig/offernearestlocation -->
+        <String Name="OfferNearestLocation">
+            <Value>
+                <Tts> {g:PromptAck{}} remind you when {ReminderLocationDirection} {ReminderLocationClass}. The closest one's on {ReminderShortcutLocationStreet} in {ReminderShortcutLocationCity}. Is this the one you want? </Tts>
+                <Gui> Remind you when {ReminderLocationDirection} {ReminderLocationClass}. Is this the one you want? </Gui>
+            </Value>
+        </String>
+
+        <String Name="OfferNearestLocation_Tip">
+            <Value><Gui> you can say Yes, No, or Cancel </Gui></Value>
+        </String>
+
+        <!-- !# createreminder/remindlocdisambig/offernearestlocation-differentname -->
+        <String Name="OfferNearestLocationDifferentName">
+            <Value>
+                <Tts> {g:PromptAck{}} remind you when {ReminderLocationDirection} {ReminderLocationClass}. The closest one is {ReminderShortcutLocationName} on {ReminderShortcutLocationStreet} in {ReminderShortcutLocationCity}. Is this the one you want? </Tts>
+                <Gui> Remind you when {ReminderLocationDirection} {ReminderLocationClass}. Is this the one you want? </Gui>
+            </Value>
+        </String>
+
+        <String Name="OfferNearestLocationDifferentName_Tip">
+            <Value><Gui> you can say Yes, No, or Cancel </Gui></Value>
+        </String>
+
+        <!-- !# createreminder/confirmreminder/createremindererror -->
+        <String Name="AlertReminderCreationFailed">
+            <Value Weight="1.0">
+                <Tts> {g:Prompt{}}{EmoteAbashed} I'm sorry, I couldn't save that reminder. Please try again later. </Tts>
+                <Gui> I couldn't save that reminder. Please try again later. </Gui>
+            </Value>
+            <Value Weight="1.0">
+                <Tts> {g:Prompt{}}{EmoteAbashed} Very sorry, I wasn't able to save that reminder. Try again in a little while. </Tts>
+                <Gui> I wasn't able to save that reminder. Try again in a little while. </Gui>
+            </Value>
+            <Value Weight="0.1">
+                <Tts> {g:Prompt{}}{EmoteAbashed} How embarrassing, I couldn't save the reminder. Try again later. </Tts>
+                <Gui> I couldn't save the reminder. Try again later. </Gui>
+            </Value>
+            <Value Weight="0.0">
+                <Tts> {g:PromptTapered{}}{EmoteAbashed} Sorry, I couldn't create that. Please try again later. </Tts>
+                <Gui> I couldn't create that. Please try again later. </Gui>
+            </Value>
+        </String>
+
+        <!-- !# createreminder/confirmreminder/toomanyreminderserror -->
+        <String Name="AlertTooManyRemindersError">
+            <Value>
+                <Tts> {g:Prompt{}}{EmoteAbashed} Very sorry, there are too many reminders. Please remove one and try again. </Tts>
+                <Gui> Very sorry, there are too many reminders. Please remove one and try again. </Gui>
+            </Value>
+        </String>
+
+        <!-- !# createreminder/confirmreminder/timeouterror -->
+        <String Name="AlertTimeoutReminderError">
+            <Value>
+                <Tts> {g:Prompt{}}{EmoteAbashed} I'm sorry, I wasn't able to save that. Please try again shortly. </Tts>
+                <Gui> I'm sorry, I wasn't able to save that. Please try again shortly. </Gui>
+            </Value>
+        </String>
+
+        <!-- !# createreminder/confirmreminder/nogeofenceerror -->
+        <String Name="AlertNoGeoFenceError">
+            <Value>
+                <Tts> {g:Prompt{}}{EmoteAbashed} Sorry, I couldn't locate that on the map. You can choose another place. </Tts>
+                <Gui> Sorry, I couldn't locate that on the map. You can choose another place. </Gui>
+            </Value>
+        </String>
+
+        <!-- !# createreminder/taskglobals -->
+        <String Name="FormTitle">
+            <Value><Gui> REMINDER </Gui></Value>
+        </String>
+
+        <String Name="FormConfirmButton">
+            <Value><Gui> remind </Gui></Value>
+        </String>
+
+        <String Name="FormCancelButton">
+            <Value><Gui> cancel </Gui></Value>
+        </String>
+
+        <!-- !# shared/locationtemplates/Reminder-Location-Tips-Template -->
+        <String Name="ReminderLocationTipsTemplate">
+            <Value><Tts> Costco </Tts></Value>
+            <Value><Tts> Home Depot </Tts></Value>
+            <Value><Tts> Walmart </Tts></Value>
+            <Value><Tts> Kroger </Tts></Value>
+            <Value><Tts> the gas station </Tts></Value>
+            <Value><Tts> the bank </Tts></Value>
+            <Value><Tts> Best Buy </Tts></Value>
+            <Value><Tts> Rite Aid </Tts></Value>
+            <Value><Tts> Staples </Tts></Value>
+            <Value><Tts> Kinkos </Tts></Value>
+            <Value><Tts> the pharmacy </Tts></Value>
+            <Value><Tts> Starbucks </Tts></Value>
+            <Value><Tts> the grocery store </Tts></Value>
+            <Value><Tts> Target </Tts></Value>
+        </String>
+
+        <!-- !# shared/locationtemplates/Meeting-Places-Template -->
+        <String Name="MeetingPlacesTemplate">
+            <Value><Tts> Los Pollos Hermanos </Tts></Value>
+            <Value><Tts> the movie theatre </Tts></Value>
+            <Value><Tts> the gym </Tts></Value>
+            <Value><Tts> the diner </Tts></Value>
+            <Value><Tts> the doctor's office </Tts></Value>
+            <Value><Tts> the school </Tts></Value>
+            <Value><Tts> mom's house </Tts></Value>
+            <Value><Tts> the library </Tts></Value>
+            <Value><Tts> the park </Tts></Value>
+            <Value><Tts> the coffee shop </Tts></Value>
+        </String>
+
+        <!-- GENERATED STRINGS - END -->
+
+        <!-- TODO: These disambiguation strings are no longer in the masterscript, but a
+             decision has not yet been made on whether to use readback or touch for location
+             disambiguation.  Once a decision has been made, these either need to be removed
+             or added back to the generated section. -->
+        
+        <!-- !# shared/disambiglocation/clarifylocationmany -->
+        <String Name="AskForLocationDisambiguationTooMany">
+            <Value>
+              <Tts> {g:Prompt{}}{EmoteConsiderate} tap on the one you want. </Tts>
+              <Gui> Tap on the one you want. </Gui>
+            </Value>
+        </String>
+
+        <String Name="AskForLocationDisambiguationTooMany_RetryX">
+            <Value><Tts> Which location did you want? </Tts></Value>
+        </String>
+      
+        <String Name="ReminderRecurrence"><Gui> {ReminderRecurrenceFrequency} {ReminderRecurrencePeriod} </Gui></String>
+
+        <String Name="RecurrenceFrequencyEvery"><Gui> Every </Gui></String>
+
+        <String Name="RecurrencePeriodDay"><Gui> Day </Gui></String>
+      <String Name="RecurrencePeriodWeek"><Gui> {ReminderDayOfWeek} </Gui></String>
+        
+        <String Name="ReminderDateTime"><Gui> {ReminderDate} - {Time} </Gui></String>
+        <String Name="ReminderRecurrenceTime"><Gui> {ReminderRecurrence{}} - {Time} </Gui></String>
+
+        <String Name="ReminderBucketLocationAndDirection"><Gui> {ReminderBucketLocationDirection} {Location} </Gui></String>
+
+        <String Name="LocationClass"><Gui> any {ReminderLocationClass} </Gui></String>
+      
+        <String Name="LocationClassDisambiguation"><Gui> Any {ReminderLocationClass} </Gui></String>
+      
+        <String Name="LocationShortcutSeperatorLabel"><Gui> OTHER RESULTS </Gui></String>      
+      
+        <String Name="DisambiguationItemNone"><Gui> None of these </Gui></String>
+
+        <!-- added for droid -->
+        <String Name="ReminderLocationDirection">
+          <Tts>{LocationDirection_in}</Tts>
+        </String>
+        <!-- added for droid -->
+        <String Name="ReminderLocationClass">
+          <Tts>{Location.Value}</Tts>
+        </String>
+        <!-- added for droid -->
+        <String Name="ReminderShortcutLocationStreet">
+          <Tts>[select-first {Location} {Address.StreetAddress}]</Tts>
+        </String>
+        <!-- added for droid -->
+        <String Name="ReminderShortcutLocationCity">
+          <Tts>[select-first {Location} {Address.AddressLocality}]</Tts>
+        </String>
+
+        <String Name="LocationDirection_in">
+          <Tts> you get to  </Tts>
+        </String>
+
+        <String Name="LocationDirection_inForHome">
+          <Tts> you get     </Tts>
+        </String>
+
+        <String Name="LocationDirection_out">
+          <Tts> you leave   </Tts>
+        </String>
+        
+        <String Name="BucketLocationDirection_in">
+          <Gui> When you get to </Gui>
+        </String>
+
+        <String Name="BucketLocationDirection_inForHome">
+          <Gui> When you get    </Gui>
+        </String>
+
+        <String Name="BucketLocationDirection_out">
+          <Gui> When you leave  </Gui>
+        </String>
+        
+        <String Name="LocationTip">
+          <Value><Gui> the first one </Gui></Value>
+        </String>
+      
+        <String Name="BodyFieldPlaceholder">
+          <Value><Gui> Remember to... </Gui></Value>
+        </String>
+
+        <String Name="DateFieldPlaceholder">
+          <Value><Gui> Date </Gui></Value>
+        </String>
+
+        <!-- The next four strings are used in turn 0 text input for "Person, Place or Time" -->
+        <String Name="ContactFieldPlaceholder">
+          <Value><Gui> Person, </Gui></Value>
+        </String>
+
+        <String Name="LocationFieldPlaceholder">
+          <Value><Gui> Place </Gui></Value>
+        </String>
+
+        <String Name="ListSeparatorLabel">
+          <Value><Gui> or </Gui></Value>
+        </String>
+      
+        <String Name="TimeFieldPlaceholder">
+          <Value><Gui> Time </Gui></Value>
+        </String>    
+
+        <!-- Title Text for recurrence reminder picker-->
+        <String Name="RecurrencePickerTitle">
+            <Value><Gui> REMINDER WILL OCCUR </Gui></Value> 
+        </String>
+
+        <!-- Title Text for Rollup-->
+        <String Name="RollupFormTitle">
+            <Value><Gui> REMIND ME </Gui></Value> 
+        </String>
+
+        <!-- Day of the week -->
+        <String Name="DayOfWeek_Sundays">
+            <Value><Gui> every Sunday </Gui></Value>
+        </String>
+        
+        <String Name="DayOfWeek_Mondays">
+            <Value><Gui> every Monday </Gui></Value>
+        </String>
+        
+        <String Name="DayOfWeek_Tuesdays">
+            <Value><Gui> every Tuesday </Gui></Value>
+        </String>
+        
+        <String Name="DayOfWeek_Wednesdays">
+            <Value><Gui> every Wednesday </Gui></Value>
+        </String>
+        
+        <String Name="DayOfWeek_Thursdays">
+            <Value><Gui> every Thursday </Gui></Value>
+        </String>
+        
+        <String Name="DayOfWeek_Fridays">
+            <Value><Gui> every Friday </Gui></Value>
+        </String>
+        
+        <String Name="DayOfWeek_Saturdays">
+            <Value><Gui> every Saturday </Gui></Value>
+        </String>
+
+        <String Name="OnlyOnce">
+            <Value><Gui> only once </Gui></Value>
+        </String>
+
+        <String Name="Everyday">
+            <Value><Gui> every day </Gui></Value>
+        </String>
+    </Intent>
+
+  </Domain>
+
+</VoiceCommands>

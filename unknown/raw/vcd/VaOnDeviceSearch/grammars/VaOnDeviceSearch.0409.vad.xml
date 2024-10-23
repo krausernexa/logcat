@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.0" xmlns:x="http://schemas.thinkman.com/voicecommands/extensions/1.0">
+  <!-- JASONVO: Communication/FindMessage is kldged because this is what the service returns -->
+  <Domain Name="Communication" ClassName="DeviceSearchRes" CortanaOnly="true">
+    <Intent Name="FindMessage" Scope="g:Nop">
+      <ListenFor>   {DeviceSearchCommon}    </ListenFor>
+
+      <String Name="SettingTitle">
+        <Value>
+          <Gui>      {SettingName}  </Gui>
+        </Value>
+      </String>
+
+      <String Name="SearchingForGeneric">
+        <Value>
+          <Tts>   {g:PromptAck{}}let me search for that.       </Tts> <!-- added periods; changed capitalization -->
+          <Gui>   Let me search for that.                      </Gui>
+        </Value>
+        <Value>
+          <Tts>   {g:PromptAck{}}I'll look for that.           </Tts> <!-- added periods; changed capitalization -->
+          <Gui>   I'll look for that.                          </Gui>
+        </Value>
+        <Value>
+          <Tts>   {g:PromptAck{}}I'll look that up for you.    </Tts> <!-- added periods; changed capitalization -->
+          <Gui>   I'll look that up for you.                   </Gui>
+        </Value>
+      </String>
+
+      <String Name="SearchingForContact">
+        <Value>
+          <Tts>   {g:PromptAck{}}I'll look for {ContactName}.   </Tts> <!-- added periods -->
+          <Gui>   {g:PromptAck{}}I'll look for {ContactName}.   </Gui>
+        </Value>
+        <Value>
+          <Tts>   {g:PromptAck{}}looking for {ContactName}.     </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think -->
+          <Gui>   {g:PromptAck{}}looking for {ContactName}.     </Gui>
+        </Value>
+        <Value>
+          <Tts>   {g:PromptAck{}}I'm looking for {ContactName}. </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think -->
+          <Gui>   {g:PromptAck{}}I'm looking for {ContactName}. </Gui>
+        </Value>
+      </String>
+
+
+      <String Name="SearchingForEmailFrom">
+        <Value>
+          <Tts>   {g:PromptAck{}}I'll look for emails from {ContactName}.    </Tts> <!-- added periods -->
+          <Gui>   {g:PromptAck{}}I'll look for emails from {ContactName}.    </Gui>
+        </Value>
+        <Value>
+          <Tts>   {g:PromptAck{}}looking for emails from {ContactName}.       </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think -->
+          <Gui>   {g:PromptAck{}}looking for emails from {ContactName}.       </Gui>
+        </Value>
+        <Value>
+          <Tts>   {g:PromptAck{}}I'm looking for emails from {ContactName}.   </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think -->
+          <Gui>   {g:PromptAck{}}I'm looking for emails from {ContactName}.   </Gui>
+        </Value>
+      </String>
+
+
+      <String Name="SearchingForMessageFrom">
+        <Value>
+          <Tts>   {g:PromptAck{}}I'll look for messages from {ContactName}.        </Tts> <!-- added periods -->
+          <Gui>   {g:PromptAck{}}I'll look for messages from {ContactName}.        </Gui>
+        </Value>
+        <Value>
+          <Tts>   {g:PromptAck{}}looking for messages from {ContactName}.          </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think -->
+          <Gui>   {g:PromptAck{}}looking for messages from {ContactName}.          </Gui>
+        </Value>
+        <Value>
+          <Tts>   {g:PromptAck{}}I'm looking for messages from {ContactName}.      </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think -->
+          <Gui>   {g:PromptAck{}}I'm looking for messages from {ContactName}.      </Gui>
+        </Value>
+      </String>
+
+      <String Name="SearchingForEmailAbout">
+        <Value>
+          <Tts>   {g:PromptAck{}}I'll look for emails with {DictationPhrase}      </Tts> <!-- added periods -->
+          <Gui>   {g:PromptAck{}}I'll look for emails with {DictationPhrase}      </Gui>
+        </Value>
+        <Value>
+          <Tts>   {g:PromptAck{}}looking for emails with {DictationPhrase}        </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think -->
+          <Gui>   {g:PromptAck{}}looking for emails with {DictationPhrase}        </Gui>
+        </Value>
+        <Value>
+          <Tts>   {g:PromptAck{}}I'm looking for emails with {DictationPhrase}    </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think -->
+          <Gui>   {g:PromptAck{}}I'm looking for emails with {DictationPhrase}    </Gui>
+        </Value>
+      </String>
+
+
+      <String Name="SearchingForMessageAbout">
+        <Value>
+          <Tts>   {g:PromptAck{}}I'll look for messages with {DictationPhrase}       </Tts> <!-- added periods -->
+          <Gui>   {g:PromptAck{}}I'll look for messages with {DictationPhrase}       </Gui>
+        </Value>
+        <Value>
+          <Tts>   {g:PromptAck{}}looking for messages with {DictationPhrase}         </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think -->
+          <Gui>   {g:PromptAck{}}looking for messages with {DictationPhrase}         </Gui>
+        </Value>
+        <Value>
+          <Tts>   {g:PromptAck{}}I'm looking for messages with {DictationPhrase}     </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think -->
+          <Gui>   {g:PromptAck{}}I'm looking for messages with {DictationPhrase}     </Gui>
+        </Value>
+      </String>
+
+      <String Name="SearchingForEmailFromAbout">  
+        <Value>  
+          <Tts>   {g:PromptAck{}}I'll look for emails from {ContactName} with {DictationPhrase}      </Tts> <!-- added periods  -->
+          <Gui>   {g:PromptAck{}}I'll look for emails from {ContactName} with {DictationPhrase}      </Gui>  
+        </Value>  
+        <Value>  
+          <Tts>   {g:PromptAck{}}looking for emails from {ContactName} with {DictationPhrase}        </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think   -->
+          <Gui>   {g:PromptAck{}}looking for emails from {ContactName} with {DictationPhrase}        </Gui>  
+        </Value>  
+        <Value>  
+          <Tts>   {g:PromptAck{}}I'm looking for emails from {ContactName} with {DictationPhrase}    </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think   -->
+          <Gui>   {g:PromptAck{}}I'm looking for emails from {ContactName} with {DictationPhrase}    </Gui>  
+        </Value>  
+      </String>  
+  
+  
+      <String Name="SearchingForMessageFromAbout">  
+        <Value>  
+          <Tts>   {g:PromptAck{}}I'll look for messages from {ContactName} with {DictationPhrase}       </Tts> <!-- added periods  --> 
+          <Gui>   {g:PromptAck{}}I'll look for messages from {ContactName} with {DictationPhrase}       </Gui>  
+        </Value>  
+        <Value>  
+          <Tts>   {g:PromptAck{}}looking for messages from {ContactName} with {DictationPhrase}         </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think  --> 
+          <Gui>   {g:PromptAck{}}looking for messages from {ContactName} with {DictationPhrase}         </Gui>  
+        </Value>  
+        <Value>  
+          <Tts>   {g:PromptAck{}}I'm looking for messages from {ContactName} with {DictationPhrase}     </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think   -->
+          <Gui>   {g:PromptAck{}}I'm looking for messages from {ContactName} with {DictationPhrase}     </Gui>  
+        </Value>  
+      </String>
+
+      <String Name="SearchingForSetting">
+        <Value>
+          <Tts>   {g:PromptAck{}}here are {Setting} settings.    </Tts>  <!-- added periods -->
+          <Gui>   {g:PromptAck{}}here are {Setting} settings.    </Gui>
+        </Value>
+      </String>
+
+      <String Name="SearchingFor">
+        <Value>
+          <Tts>   {SearchingFor{Scenario}{SearchType}}     </Tts>  <!-- added periods -->
+          <Gui>   {SearchingFor{Scenario}{SearchType}}     </Gui>
+        </Value>
+      </String>
+
+
+     <String Comment="E_VOICEAGENT_DEVICESEARCH_CONNECTIVITY_ERROR"      Name="Error_80731201">
+        <Value>
+          <Gui>   {g:PromptSorry{}}I'm feeling a bit disconnected from the internet. Try again in a bit.   </Gui>
+        </Value>
+      </String>
+
+      <String Name="AskForContactDisambiguation">
+        <Value>
+          <Tts> {g:Prompt{}} Which one? {0} </Tts>
+          <Gui> Which one? </Gui>
+        </Value>
+      </String>
+
+      <String Name="AskForContactDisambiguation_RetryX">
+        <Value>
+          <Tts> {g:Reprompt{}} Which person did you want? </Tts>
+          <Gui> Which person did you want? </Gui>
+        </Value>
+      </String>
+
+      <String Name="AskForContactDisambiguation_Tip">
+        <Value>
+          <Gui> try {ContactDisambigTips:@} </Gui>
+        </Value>
+      </String>
+
+      <String Name="AskForContactDisambiguationTooMany">
+        <Value>
+          <Tts> {g:Prompt{}} Which one? </Tts>
+          <Gui> Which one? </Gui>
+        </Value>
+      </String>
+    </Intent>
+
+    <Intent Name="FindContact" Scope="g:Nop">
+      <ListenFor>   {PeopleSearchPhrase}    </ListenFor>
+
+      <String Name="SettingTitle">
+        <Value>
+          <Gui>      {SettingName}  </Gui>
+        </Value>
+      </String>
+
+      <String Name="SearchingForGeneric">
+        <Value>
+          <Tts>   {g:PromptAck{}}let me search for that.       </Tts> <!-- added periods; changed capitalization -->
+          <Gui>   Let me search for that.                      </Gui>
+        </Value>
+        <Value>
+          <Tts>   {g:PromptAck{}}I'll look for that.           </Tts> <!-- added periods; changed capitalization -->
+          <Gui>   I'll look for that.                          </Gui>
+        </Value>
+        <Value>
+          <Tts>   {g:PromptAck{}}I'll look that up for you.    </Tts> <!-- added periods; changed capitalization -->
+          <Gui>   I'll look that up for you.                   </Gui>
+        </Value>
+      </String>
+
+      <String Name="SearchingForContact">
+        <Value>
+          <Tts>   {g:PromptAck{}}I'll look for {ContactName}.   </Tts> <!-- added periods -->
+          <Gui>   {g:PromptAck{}}I'll look for {ContactName}.   </Gui>
+        </Value>
+        <Value>
+          <Tts>   {g:PromptAck{}}looking for {ContactName}.     </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think -->
+          <Gui>   {g:PromptAck{}}looking for {ContactName}.     </Gui>
+        </Value>
+        <Value>
+          <Tts>   {g:PromptAck{}}I'm looking for {ContactName}. </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think -->
+          <Gui>   {g:PromptAck{}}I'm looking for {ContactName}. </Gui>
+        </Value>
+      </String>
+
+
+      <String Name="SearchingForEmailFrom">
+        <Value>
+          <Tts>   {g:PromptAck{}}I'll look for emails from {ContactName}.    </Tts> <!-- added periods -->
+          <Gui>   {g:PromptAck{}}I'll look for emails from {ContactName}.    </Gui>
+        </Value>
+        <Value>
+          <Tts>   {g:PromptAck{}}looking for emails from {ContactName}.       </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think -->
+          <Gui>   {g:PromptAck{}}looking for emails from {ContactName}.       </Gui>
+        </Value>
+        <Value>
+          <Tts>   {g:PromptAck{}}I'm looking for emails from {ContactName}.   </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think -->
+          <Gui>   {g:PromptAck{}}I'm looking for emails from {ContactName}.   </Gui>
+        </Value>
+      </String>
+
+
+      <String Name="SearchingForMessageFrom">
+        <Value>
+          <Tts>   {g:PromptAck{}}I'll look for messages from {ContactName}.        </Tts> <!-- added periods -->
+          <Gui>   {g:PromptAck{}}I'll look for messages from {ContactName}.        </Gui>
+        </Value>
+        <Value>
+          <Tts>   {g:PromptAck{}}looking for messages from {ContactName}.          </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think -->
+          <Gui>   {g:PromptAck{}}looking for messages from {ContactName}.          </Gui>
+        </Value>
+        <Value>
+          <Tts>   {g:PromptAck{}}I'm looking for messages from {ContactName}.      </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think -->
+          <Gui>   {g:PromptAck{}}I'm looking for messages from {ContactName}.      </Gui>
+        </Value>
+      </String>
+
+      <String Name="SearchingForEmailAbout">
+        <Value>
+          <Tts>   {g:PromptAck{}}I'll look for emails with {DictationPhrase}      </Tts> <!-- added periods -->
+          <Gui>   {g:PromptAck{}}I'll look for emails with {DictationPhrase}      </Gui>
+        </Value>
+        <Value>
+          <Tts>   {g:PromptAck{}}looking for emails with {DictationPhrase}        </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think -->
+          <Gui>   {g:PromptAck{}}looking for emails with {DictationPhrase}        </Gui>
+        </Value>
+        <Value>
+          <Tts>   {g:PromptAck{}}I'm looking for emails with {DictationPhrase}    </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think -->
+          <Gui>   {g:PromptAck{}}I'm looking for emails with {DictationPhrase}    </Gui>
+        </Value>
+      </String>
+
+
+      <String Name="SearchingForMessageAbout">
+        <Value>
+          <Tts>   {g:PromptAck{}}I'll look for messages with {DictationPhrase}       </Tts> <!-- added periods -->
+          <Gui>   {g:PromptAck{}}I'll look for messages with {DictationPhrase}       </Gui>
+        </Value>
+        <Value>
+          <Tts>   {g:PromptAck{}}looking for messages with {DictationPhrase}         </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think -->
+          <Gui>   {g:PromptAck{}}looking for messages with {DictationPhrase}         </Gui>
+        </Value>
+        <Value>
+          <Tts>   {g:PromptAck{}}I'm looking for messages with {DictationPhrase}     </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think -->
+          <Gui>   {g:PromptAck{}}I'm looking for messages with {DictationPhrase}     </Gui>
+        </Value>
+      </String>
+
+      <String Name="SearchingForEmailFromAbout">  
+        <Value>  
+          <Tts>   {g:PromptAck{}}I'll look for emails from {ContactName} with {DictationPhrase}      </Tts> <!-- added periods   -->
+          <Gui>   {g:PromptAck{}}I'll look for emails from {ContactName} with {DictationPhrase}      </Gui>  
+        </Value>  
+        <Value>  
+          <Tts>   {g:PromptAck{}}looking for emails from {ContactName} with {DictationPhrase}        </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think   -->
+          <Gui>   {g:PromptAck{}}looking for emails from {ContactName} with {DictationPhrase}        </Gui>  
+        </Value>  
+        <Value>  
+          <Tts>   {g:PromptAck{}}I'm looking for emails from {ContactName} with {DictationPhrase}    </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think   -->
+          <Gui>   {g:PromptAck{}}I'm looking for emails from {ContactName} with {DictationPhrase}    </Gui>  
+        </Value>  
+      </String>  
+  
+  
+      <String Name="SearchingForMessageFromAbout">  
+        <Value>  
+          <Tts>   {g:PromptAck{}}I'll look for messages from {ContactName} with {DictationPhrase}       </Tts> <!-- added periods   -->
+          <Gui>   {g:PromptAck{}}I'll look for messages from {ContactName} with {DictationPhrase}       </Gui>  
+        </Value>  
+        <Value>  
+          <Tts>   {g:PromptAck{}}looking for messages from {ContactName} with {DictationPhrase}         </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think   -->
+          <Gui>   {g:PromptAck{}}looking for messages from {ContactName} with {DictationPhrase}         </Gui>  
+        </Value>  
+        <Value>  
+          <Tts>   {g:PromptAck{}}I'm looking for messages from {ContactName} with {DictationPhrase}     </Tts> <!-- took out "I'm" - sounds more like like a transition into a search this way I think   -->
+          <Gui>   {g:PromptAck{}}I'm looking for messages from {ContactName} with {DictationPhrase}     </Gui>  
+        </Value>  
+      </String>
+
+      <String Name="SearchingForSetting">
+        <Value>
+          <Tts>   {g:PromptAck{}}here are {Setting} settings.    </Tts>  <!-- added periods -->
+          <Gui>   {g:PromptAck{}}here are {Setting} settings.    </Gui>
+        </Value>
+      </String>
+
+      <String Name="SearchingFor">
+        <Value>
+          <Tts>   {SearchingFor{Scenario}{SearchType}}     </Tts>  <!-- added periods -->
+          <Gui>   {SearchingFor{Scenario}{SearchType}}     </Gui>
+        </Value>
+      </String>
+
+
+     <String Comment="E_VOICEAGENT_DEVICESEARCH_CONNECTIVITY_ERROR"      Name="Error_80731201">
+        <Value>
+          <Gui>   {g:PromptSorry{}}I'm feeling a bit disconnected from the internet. Try again in a bit.   </Gui>
+        </Value>
+      </String>
+
+      <String Name="AskForContactDisambiguation">
+        <Value>
+          <Tts> {g:Prompt{}} Which one? {0} </Tts>
+          <Gui> Which one? </Gui>
+        </Value>
+      </String>
+
+      <String Name="AskForContactDisambiguation_RetryX">
+        <Value>
+          <Tts> {g:Reprompt{}} Which person did you want? </Tts>
+          <Gui> Which person did you want? </Gui>
+        </Value>
+      </String>
+
+      <String Name="AskForContactDisambiguation_Tip">
+        <Value>
+          <Gui> try {ContactDisambigTips:@} </Gui>
+        </Value>
+      </String>
+
+      <String Name="AskForContactDisambiguationTooMany">
+        <Value>
+          <Tts> {g:Prompt{}} Which one? </Tts>
+          <Gui> Which one? </Gui>
+        </Value>
+      </String>
+    </Intent>
+      
+    <Intent Name="DeviceSearchText" Scope="g:Nop">
+      <ListenFor>   {DeviceSearchCommon}    </ListenFor>
+    </Intent>
+
+    <Intent Name="DeviceSearch" Scope="SelectContact">
+      <ListenFor> {SelectedContacts} </ListenFor>
+    </Intent>
+
+    <PhraseList Label="DeviceSearchCommon" SlotName="SearchScenario">
+      <Item Value="Email">   [{SearchPhrase}] [{all|any}] [{my|of my}] {EmailPhrase} {SearchType} {AllContactNames}                                              </Item>
+      <Item Value="Email">   [{SearchPhrase}] [{all|any}] [{my|of my}] {EmailPhrase} {SearchDictationType} {DictationPhrase}                                     </Item>
+      <Item Value="Email">   [{SearchPhrase}] [{all|any}] [{my|of my}] {EmailPhrase} {SearchType} {AllContactNames} {SearchDictationType} {DictationPhrase}      </Item>
+      <Item Value="Contact"> {PeopleSearchPhrase}                                                                                                                </Item>
+      <Item Value="Message"> [{SearchPhrase}] [{all|any}] [{my|of my}] {MessagePhrase} {SearchType} {AllContactNames}                                            </Item>
+      <Item Value="Message"> [{SearchPhrase}] [{all|any}] [{my|of my}] {MessagePhrase} {SearchDictationType} {DictationPhrase}                                   </Item>
+      <Item Value="Message"> [{SearchPhrase}] [{all|any}] [{my|of my}] {MessagePhrase} {SearchType} {AllContactNames} {SearchDictationType} {DictationPhrase}    </Item>
+      <Item Value="Setting"> [{SearchPhrase}] {AllSettingNames} Settings                                                                                         </Item>
+    </PhraseList>
+
+    <PhraseList Label="PeopleSearchPhrase">
+      <Item> [{SearchPhrase}] Contact {AllContactNames} </Item>
+      <Item> [can] [you] tell me more [about] {AllContactNames} [{PersonInfo}] </Item>
+      <Item> who {'s|is} {AllContactNames} </Item>
+      <Item> {who|what|where} {'s|is} {AllContactNames} ['s] {PersonInfo} </Item>
+    </PhraseList>
+
+    <PhraseList Label="PersonInfo" SlotName="PersonInfo">
+      <Item Value="Email"> {emails|mails|email|mail} [address] </Item>
+      <Item Value="Office"> office [number] </Item>
+      <Item Value="JobTitle"> job [{title|name}] </Item>
+    </PhraseList>
+
+    <PhraseList Label="SearchType" SlotName="SearchType">
+      <Item Value="From">   from                 </Item>
+      <Item Value="From">   sent by              </Item>
+    </PhraseList>
+
+    <PhraseList Label="SearchDictationType" SlotName="SearchDictationType">
+      <Item Value="About">   about               </Item>
+      <Item Value="About">   regarding           </Item>
+      <Item Value="About">   containing          </Item>
+      <Item Value="About">   that {has|contains} </Item>
+      <Item Value="About">   with                </Item>
+    </PhraseList>
+
+    <PhraseList Label="SearchPhrase" SlotName="SearchPhrase">
+      <Item Value="From">   find          </Item>
+      <Item Value="From">   look for      </Item>
+      <Item Value="From">   search [for]  </Item>
+      <Item Value="From">   show [me]     </Item>
+      <Item Value="From">   get [me]      </Item>
+      <Item Value="From">   do I have     </Item>
+    </PhraseList>
+
+    <PhraseList Label="AllContactNames" SlotName="Contact">
+      <Item out="rules.latest()">   {s:Contacts}                        </Item>
+    </PhraseList>
+
+    <PhraseList Label="AllSettingNames" SlotName="SettingName">
+      <Item out="rules.latest()">   {g:AllSettingNames}                 </Item>
+    </PhraseList>
+
+    <PhraseList Label="EmailPhrase">
+      <Item>   emails                   </Item>
+      <Item>   mails                    </Item>
+      <Item>   email                    </Item>
+      <Item>   mail                     </Item>
+    </PhraseList>
+
+    <PhraseList Label="MessagePhrase">
+      <Item>   messages                 </Item>
+      <Item>   message                  </Item>
+      <Item>   text                     </Item>
+      <Item>   texts                    </Item>
+      <Item>   text message             </Item>
+      <Item>   text messages            </Item>
+      <Item>   SMS                      </Item>
+    </PhraseList>
+
+    <DynamicPhraseList Label="SelectedContacts" SlotName="ContactIds" HackId="1"/>
+
+    <Dictation Label="DictationPhrase" SlotName="DictationPhrase" />
+
+  </Domain>
+
+</VoiceCommands>

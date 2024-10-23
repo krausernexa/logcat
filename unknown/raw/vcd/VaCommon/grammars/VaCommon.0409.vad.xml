@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.0" xmlns:x="http://schemas.thinkman.com/voicecommands/extensions/1.0">
+
+    
+    
+  <Domain Name="InternalCommon"  ClassName="VaCommonRes">
+
+    <!-- TODO: add more common ways to say these grammars -->
+      
+      
+    <Intent Name="noreco" Scope="g:NoReco">
+      <ListenFor >   {*}                            </ListenFor>
+        
+      <String Name="NoReco">
+          <Value> <Gui>   {g:GTPromptError{}}I didn't get that.                                             </Gui> </Value>
+          <Value> <Gui>   {g:GTPromptError{}}I didn't catch that.                                           </Gui> </Value>
+      </String>
+        
+      <String Name="NoRecoServerDisabled">
+          <Gui>   {g:PromptError{}}I couldn’t recognize what was said. Try enabling Speech Recognition Service in Speech settings.</Gui>
+      </String>
+        
+      <String Name="ShowWebAnswer">       <Gui>   {g:Prompt{}}Searching for '{UserSaid}'.                                           </Gui></String>
+        
+      <!-- internal.. should not happen -->
+      <String Name="ServerBypassed">      <Gui>   No reco, and server not checked error                                             </Gui></String>
+    </Intent>
+      
+      
+    <Intent Name="cancel" Scope="g:SpeechRoot, g:TextRoot, g:ModalRoot">
+      <ListenFor>  {cancel|disregard|stop|nevermind} [{that|it}]         </ListenFor>
+    </Intent>
+      
+    <Intent Name="restart" Scope="g:ModalRoot">
+      <ListenFor> [{I want to | let's | let me | no [no] }] {start over | go back | go home} </ListenFor>
+    </Intent>
+
+    <Intent Name="tryagain" Scope="g:ModalRoot">
+      <ListenFor>   [let's] {try again|retry|redo}              </ListenFor>
+    </Intent>
+      
+    <Intent Name="repeat" Scope="g:ModalRoot">
+      <ListenFor>   repeat that                                 </ListenFor>
+    </Intent>
+            
+      
+    <Intent Name="help" Scope="g:SpeechRoot, g:TextRoot">
+      <ListenFor>   What can you do [for me]                    </ListenFor>
+      <ListenFor>   [How] [can you] help [me]                   </ListenFor>
+      <ListenFor>   What can I say                              </ListenFor>
+    </Intent>
+
+
+    
+
+  </Domain>
+
+
+</VoiceCommands>
+
+
+
+  

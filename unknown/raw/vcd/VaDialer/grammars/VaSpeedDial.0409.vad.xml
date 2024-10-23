@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.0" xmlns:x="http://schemas.thinkman.com/voicecommands/extensions/1.0">
+
+  <Domain Name="WpDialer" ClassName="SpeedDialRes">
+
+    <Intent Name="SpeedDial" Scope="g:Accessibility">
+      <ListenFor> [{tell me|do you know}] what [phone] number is speed dial {SpeedDialNumber} [set to]                      </ListenFor>        
+      <ListenFor> [tell me] {g:WhatIs} [the [phone] number] speed dial {SpeedDialNumber} [[is] set to]                      </ListenFor>
+      <ListenFor> [tell me] is speed dial {SpeedDialNumber} set                                                             </ListenFor>
+      <ListenFor> [tell me] is a speed dial [number] set                                                                    </ListenFor>
+      <ListenFor> speed dial {SpeedDialNumber} is [set to] what                                                             </ListenFor>
+        
+      <!-- Set -->
+      <ListenFor> {EnableDisable} [{the|a}] speed dial [number] [{SpeedDialNumber}] [ [to [{be|call}]] [the [phone] number] {PhoneNumber} ]  </ListenFor>
+
+      <String Name="Disabled">                  <Gui>   {g:Prompt{}}To turn on speed dial, go to Ease of Access settings.               </Gui></String>
+      <String Name="QuerySpeedDial">            <Gui>   {g:PromptSorry{}}I didn't catch the speed dial shortcut.                        </Gui></String>
+      <String Name="QuerySpeedDialNumber">      <Gui>   {g:Prompt{}}Speed dial {SpeedDialNumber} is currently set to {PhoneNumber}.     </Gui></String>
+      <String Name="QuerySpeedDialNotSet">      <Gui>   {g:Prompt{}}Speed dial {SpeedDialNumber} is currently not set.                  </Gui></String>
+
+      <String Name="TurnedOn">                  <Gui>   {g:PromptAck{}}Setting speed dial {SpeedDialNumber} to be {PhoneNumber}.        </Gui></String>
+      <String Name="TurnedOff">                 <Gui>   {g:PromptAck{}}Clearing speed dial {SpeedDialNumber}.                           </Gui></String>        
+      <String Name="TurnedOff_NotFound">        <Gui>   {g:PromptAck{}}Speed dial {SpeedDialNumber} isn't set.                          </Gui></String>        
+      <String Name="Cancelled">                 <Gui>   {g:PromptCancelled{}}Cancelled.                                                 </Gui></String>        
+
+      <String Name="SpeedDialPickerLabel">      <Gui> Speed Dial Number                             </Gui></String>
+      <String Name="PhoneNumberEditBoxLabel">   <Gui> Phone Number                                  </Gui></String>
+      <String Name="ContactNameTemplate">       <Gui> Speed Dial {SpeedDialNumber}                  </Gui></String>
+    </Intent>
+
+    
+    <Intent Name="SpeedDial" Scope="WhatSpeedDialNumber">
+      <ListenFor> [ {EnableDisable} [the] speed dial [number] ] {SpeedDialNumber} [ [to [be]] [the [phone] number] {PhoneNumber} ]  </ListenFor>
+        
+      <String Name="SetWhatSpeedDialNumber">                      
+        <Gui>   {g:PromptAck{}}Set which speed dial from 1 to 10?                                          </Gui> 
+        <Tts>   {g:PromptAck{}}set which speed dial from 1 to 10?                                          </Tts> 
+      </String>
+        
+      <String Name="SetWhatSpeedDialNumber_Title">
+        <Value><Gui>    SPEED DIAL          </Gui></Value>
+      </String>
+
+        
+      <String Name="DisableWhatSpeedDialNumber">                      
+        <Gui>   {g:PromptAck{}}Clear which speed dial from 1 to 10?                                        </Gui> 
+        <Tts>   {g:PromptAck{}}Clear which speed dial from 1 to 10?  .                                     </Tts> 
+      </String>
+        
+      <String Name="DisableWhatSpeedDialNumber_Title">
+        <Value><Gui>    SPEED DIAL          </Gui></Value>
+      </String>
+
+    </Intent>
+
+            
+    <Intent Name="SpeedDial" Scope="WhatPhoneNumber, Confirm">
+      <ListenFor> [[phone] number]  {PhoneNumber}   </ListenFor>
+        
+      <String Name="WhatPhoneNumber">                      
+        <Gui>   {g:PromptAck{}}What phone number?                                                       </Gui>
+        <Tts>   {g:PromptAck{}}Setting speed dial {SpeedDialNumber}. What phone number?                 </Tts> 
+      </String>
+
+      <String Name="WhatPhoneNumber_Title">
+        <Value><Gui>    SPEED DIAL          </Gui></Value>
+      </String>
+        
+      <String Name="WhatPhoneNumber_ButtonCancel">
+        <Value><Gui>    Cancel              </Gui></Value>
+      </String>
+
+      <String Name="WhatPhoneNumber_ButtonSubmit">
+        <Value><Gui>    Turn On             </Gui></Value>
+      </String>
+    </Intent>
+
+      
+    <Intent Name="SpeedDial" Scope="Confirm">
+      <ListenFor> {Confirm}                   </ListenFor>
+        
+      <String Name="Confirm">                     
+        <Gui>   {g:PromptAck{}}Set speed dial?        </Gui>
+        <Tts>   {g:PromptAck{}}I'll set {SpeedDialNumber} to  be {PhoneNumber}.  Say yes, no, or provide a different phone number.    </Tts>
+      </String>
+        
+      <String Name="Confirm_ButtonCancel">
+        <Value><Gui>    Cancel                  </Gui></Value>
+      </String>
+        
+      <String Name="Confirm_ButtonSubmit">
+        <Value><Gui>    Turn On                 </Gui></Value>
+      </String>
+                
+      <String Name="Confirm_Title">
+        <Value><Gui>    SPEED DIAL              </Gui></Value>
+      </String>
+    </Intent>
+
+      
+    <PhraseList Label="SpeedDialNumber" SlotName="SpeedDialNumber">
+        <Item out="1">               1               </Item>
+        <Item out="2">               2               </Item>
+        <Item out="3">               3               </Item>
+        <Item out="4">               4               </Item>
+        <Item out="5">               5               </Item>
+        <Item out="6">               6               </Item>
+        <Item out="7">               7               </Item>
+        <Item out="8">               8               </Item>
+        <Item out="9">               9               </Item>
+        <Item out="10">             10               </Item>
+    </PhraseList>
+      
+    <PhraseList Label="EnableDisable" SlotName="EnableDisable">
+        <Item Value="true">     {set|setup}         </Item>
+        <Item Value="true">     enable              </Item>
+        <Item Value="true">     turn on             </Item>
+        <Item Value="true">     save                </Item>
+        <Item Value="false">    disable             </Item>
+        <Item Value="false">    cancel              </Item>
+        <Item Value="false">    remove              </Item>
+        <Item Value="false">    delete              </Item>
+        <Item Value="true">     turn off            </Item>
+   </PhraseList>
+      
+    <PhraseList Label="Confirm" SlotName="Confirm">
+        <Item Value="true">     { yes | submit [it] | o k }            </Item>
+        <Item Value="false">    no                                     </Item>
+   </PhraseList>
+
+      
+    <PhraseList Label="PhoneNumber" SlotName="PhoneNumber">
+        <Item out="rules.latest()">   {g:PhoneNumber}                   </Item>
+    </PhraseList>
+      
+
+  </Domain>
+
+    
+</VoiceCommands>
+
+
+
+  

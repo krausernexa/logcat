@@ -1,0 +1,5 @@
+# jasonvo: this is not a WP file
+
+#[Call-Form-Url]	tel:{NoReco}
+
+TextMessageCommunicationSuccess Sent

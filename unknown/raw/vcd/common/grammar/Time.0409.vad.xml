@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.0" xmlns:x="http://schemas.thinkman.com/voicecommands/extensions/1.0">
+
+    <!-- hm12 examples:
+        "1/15/am/"      1:15 am
+         "11/pm/"       11:00 pm
+         "2/"           2:00 and am/pm is unknown
+
+         mbah12 examples:
+         "15/-1/11/am/" 10:45 am - "quarter to 11 am"
+         "33/1/2/"      2:33 and am/pm is unknown - "33 minutes after 2"
+
+         hm24 examples:
+         "22/15/"       22:15
+         "19/"          19:00
+         "0/"           0:00 - "midnight"
+ 
+         mbah24 examples:
+         "15/-1/15/"    14:45 - "quarter to 15 hundred"
+         "30/1/12/"     12:30 - "half past noon"
+    -->
+    
+    <Domain Name="Common">   
+        <PhraseList Label="g:Time">
+            <Item out="rules.latest()">             {g:TimeHoursMinutes}            </Item>
+            <Item out="rules.latest()">             {g:TimeFromNow}                 </Item>
+            <Item out="rules.latest()">             {g:TimeOfDay}                   </Item>
+        </PhraseList>
+
+        <PhraseList Label="g:TimeHoursMinutes">
+            <Item out="rules.latest()">             {HourMinute}                    </Item>
+            <Item out="rules.latest()">             {MinutesBeforeAfterHour}        </Item>
+            <Item out="rules.latest()">             {HourMinute24}                  </Item>
+            <Item out="rules.latest()">             {MinutesBeforeAfterHour24}      </Item>
+        </PhraseList>
+
+        <PhraseList Label="g:TimeHoursMinutesLimited">
+            <!-- Absolute time without statements such as "ten to ten" -->
+            <Item out="rules.latest()">             {HourMinute}                    </Item>
+            <Item out="rules.latest()">             {HourMinute24}                  </Item>
+        </PhraseList>
+
+        <PhraseList Label="g:TimeFromNow">
+            <Item out="rules.latest()">             [in] {g:RelativeTime} [{time|from now}]     </Item>
+        </PhraseList>
+
+        <PhraseList Label="g:RelativeTime" initout="''">
+            <Item foreach="out+rules.latest()+'/'"> {RelativeHours}                             </Item>
+            <Item foreach="out+rules.latest()+'/'"> {RelativeMinutes}                           </Item>
+            <Item foreach="out+rules.latest()+'/'"> {RelativeHours} [and] {RelativeMinutes}     </Item>
+        </PhraseList>
+
+        <PhraseList Label="RelativeHours" initout="0" postout="'relative_hours:'+out">
+            <Item out="1">                          {1|an} hour                                 </Item>
+            <Item out="rules.latest()">             {g:Number2to99} hours                       </Item>
+        </PhraseList>
+
+        <PhraseList Label="RelativeMinutes" initout="0" postout="'relative_minutes:'+out">
+            <Item out="1">                          {1|a} minute                                </Item>
+            <Item out="rules.latest()">             {g:Number2to99} minutes                     </Item>
+        </PhraseList>
+
+        <PhraseList Label="OClock" initout="''">
+            <Item value="">                         o'clock                 </Item>
+        </PhraseList>
+
+        <PhraseList Label="AmPm" initout="''" postout="'ampm:'+out">
+            <Item value="am">                       {a m|am}                </Item>
+            <Item value="pm">                       {p m|pm}                </Item>
+        </PhraseList>
+
+        <PhraseList Label="g:TimePeriodMornAftEve" initout="''" postout="'time_period:'+out">
+            <Item value="morning">                  morning                 </Item>
+            <Item value="afternoon">                afternoon               </Item>
+            <Item value="evening">                  evening                 </Item>
+        </PhraseList>
+
+        <!-- Night has different sentence usage than morning, afternoon, evening so it is by itself -->
+        <PhraseList Label="g:TimePeriodNight" initout="''" postout="'time_period:'+out">
+            <Item value="night">                    night                   </Item>
+        </PhraseList>
+
+        <PhraseList Label="g:TimePeriodTonight" initout="''" postout="'time_period:night/date_period:today'">
+            <Item>                                  tonight                 </Item>
+        </PhraseList>
+
+        <PhraseList Label="This" initout="''" postout="'date_period:today'">
+            <Item>                                  this                    </Item>
+        </PhraseList>
+
+        <!-- This PhraseList has crossover with dates, so the slot outputs may contain date and time parts.  -->
+        <PhraseList Label="g:TimeOfDay" initout="''">
+            <Item foreach="out+rules.latest()+'/'"> {g:TimeOfDayWithoutDaysOfWeek}                                              </Item>
+            <Item foreach="out+rules.latest()+'/'"> {g:TomorrowOrDayOfWeek} [{g:TimeOfDayMornAftEveNight}]                      </Item>
+        </PhraseList>
+
+        <PhraseList Label="g:TimeOfDayWithoutDaysOfWeek" initout="''">
+            <Item foreach="out+rules.latest()+'/'"> in the {g:TimePeriodMornAftEve}                                             </Item>
+            <Item foreach="out+rules.latest()+'/'"> {This} {g:TimePeriodMornAftEve}                                             </Item>
+            <Item foreach="out+rules.latest()+'/'"> at {g:TimePeriodNight}                                                      </Item>
+            <Item foreach="out+rules.latest()+'/'"> {g:TimePeriodTonight}                                                       </Item>
+        </PhraseList>
+
+        <PhraseList Label="g:TimeOfDayMornAftEveNight" initout="''">
+            <Item foreach="out+rules.latest()+'/'"> {g:TimePeriodMornAftEve}                                                    </Item>
+            <Item foreach="out+rules.latest()+'/'"> {g:TimePeriodNight}                                                         </Item>
+        </PhraseList>
+
+        <PhraseList Label="HourMinute">
+            <Item out="rules.latest()">             {HourOClockTimeOfDay}                                                       </Item>
+            <Item out="rules.latest()">             {HourMinuteTimeOfDay}                                                       </Item>
+        </PhraseList>
+
+        <PhraseList Label="MinutesBeforeAfterHour" initout="''">
+            <Item foreach="out+rules.latest()+'/'"> {MinutesBeforeAfter} {Hours12} [{OClock}] [{{g:TimeOfDay}|{AmPm}}]          </Item>
+            <Item foreach="out+rules.latest()+'/'"> {g:TimeOfDay} [at] {MinutesBeforeAfter} {Hours12} [{OClock}] [{AmPm}]       </Item>
+            <Item foreach="out+rules.latest()+'/'"> {MinutesBeforeAfter} {HoursNoonMidnight}                                   </Item>
+        </PhraseList>
+
+        <PhraseList Label="HourOClockTimeOfDay" initout="''">
+            <Item foreach="out+rules.latest()+'/'"> {Hours12} [{OClock}] [{{g:TimeOfDay}|{AmPm}}]                              </Item>
+            <Item foreach="out+rules.latest()+'/'"> {g:TimeOfDay} [at] {Hours12} [{OClock}] [{AmPm}]                           </Item>
+        </PhraseList>
+
+        <PhraseList Label="HourMinuteTimeOfDay" initout="''">
+            <Item foreach="out+rules.latest()+'/'"> {Hours12} {MinutesOh1To59} [{{g:TimeOfDay}|{AmPm}}]                        </Item>
+            <Item foreach="out+rules.latest()+'/'"> {g:TimeOfDay} [at] {Hours12} {MinutesOh1To59} [{AmPm}]                     </Item>
+        </PhraseList>
+
+        <PhraseList Label="HourMinute24" initout="''">
+            <Item foreach="out+rules.latest()+'/'"> {HoursNoonMidnight}                                                        </Item>
+            <Item foreach="out+rules.latest()+'/'"> {Hours0and13to23} {MinutesOh1To59}                                         </Item>
+            <Item foreach="out+rules.latest()+'/'"> {Hours24} hundred [[and] {MinutesOh1To59} [minutes]]                       </Item>
+        </PhraseList>
+
+        <PhraseList Label="MinutesBeforeAfterHour24" initout="''">
+            <Item foreach="out+rules.latest()+'/'"> {MinutesBeforeAfter} {Hours24} hundred                                     </Item>
+        </PhraseList>
+
+        <PhraseList Label="MinutesBeforeAfter" initout="''">
+            <Item foreach="out+rules.latest()+'/'"> {Minutes1to59} [minutes] {BeforeOrAfter}                                   </Item>
+            <Item foreach="out+rules.latest()+'/'"> {MinutesQuarter} {BeforeOrAfter}                                           </Item>
+            <Item foreach="out+rules.latest()+'/'"> {MinutesHalfOrThreeQuarters} {After}                                       </Item>
+        </PhraseList>
+
+        <PhraseList Label="BeforeOrAfter">
+            <Item out="rules.latest()">    {Before}      </Item>
+            <Item out="rules.latest()">    {After}       </Item>
+        </PhraseList>
+
+        <PhraseList Label="Before" initout="0" postout="'before_after:'+out">
+            <Item out="-1">     before      </Item>
+            <Item out="-1">     of          </Item>
+            <Item out="-1">     to          </Item>
+        </PhraseList>
+      
+        <PhraseList Label="After" initout="0" postout="'before_after:'+out">
+            <Item out="1">      after       </Item>
+            <Item out="1">      past        </Item>
+        </PhraseList>
+
+        <PhraseList Label="MinutesOh1To59" initout="0" postout="'minutes:'+out">
+            <Item out="rules.latest()"> oh {g:Number1to9}  </Item>
+            <Item out="rules.latest()"> {Number10to59}     </Item>
+        </PhraseList>
+
+        <PhraseList Label="Minutes1to59" initout="0" postout="'minutes:'+out">
+           <Item out="rules.latest()">  {g:Number1to9}     </Item>
+           <Item out="rules.latest()">  {Number10to59}     </Item>
+        </PhraseList>
+
+        <PhraseList Label="MinutesQuarter" initout="0" postout="'minutes:'+out">
+            <Item out="15">          quarter               </Item>
+        </PhraseList>
+
+        <PhraseList Label="MinutesHalfOrThreeQuarters" initout="0" postout="'minutes:'+out">
+            <Item out="30">          half                  </Item>
+            <Item out="45">          three quarters        </Item>
+        </PhraseList>
+
+        <PhraseList Label="Hours24" initout="0" postout="'hours24:'+out">
+            <Item out="rules.latest()"> {Number0to23}      </Item>
+        </PhraseList>
+
+        <PhraseList Label="Hours0and13to23" initout="0" postout="'hours24:'+out">
+            <Item value="13">           thirteen           </Item>
+            <Item value="14">           fourteen           </Item>
+            <Item value="15">           fifteen            </Item>
+            <Item value="16">           sixteen            </Item>
+            <Item value="17">           seventeen          </Item>
+            <Item value="18">           eighteen           </Item>
+            <Item value="19">           nineteen           </Item>
+            <Item value="20">           twenty             </Item>
+            <Item value="21">           twenty one         </Item>
+            <Item value="22">           twenty two         </Item>
+            <Item value="23">           twenty three       </Item>
+        </PhraseList>
+
+        <PhraseList Label="HoursNoonMidnight" initout="0" postout="'hours24:'+out">
+            <Item out="0">              midnight           </Item>
+            <Item out="12">             noon               </Item>
+        </PhraseList>
+
+        <PhraseList Label="Hours12" initout="0" postout="'hours12:'+out">
+            <Item out="rules.latest()">  {g:Number1to9}    </Item>
+            <Item out="10">             10                 </Item>
+            <Item out="11">             11                 </Item>
+            <Item out="12">             12                 </Item>
+        </PhraseList>
+
+         <PhraseList Label="Number0to23">          
+             <Item out="0">                          {0|oh|zero}                             </Item>
+             <Item out="rules.latest()">             {g:Number1to9}                          </Item>
+             <Item out="rules.latest()">             {g:NumberTeen}                          </Item>
+             <Item value="20">                       twenty                                  </Item>
+             <Item value="21">                       twenty one                              </Item>
+             <Item value="22">                       twenty two                              </Item>
+             <Item value="23">                       twenty three                            </Item>
+         </PhraseList>
+
+        <PhraseList Label="Number10to59" initout="0">
+            <Item out="rules.latest()">             {g:NumberTeen}                          </Item>
+            <Item foreach="out+rules.latest()">     {g:Number20to50inTens} [{g:Number1to9}] </Item>
+        </PhraseList>
+
+    </Domain>    
+    
+</VoiceCommands>
+
+            
+
+

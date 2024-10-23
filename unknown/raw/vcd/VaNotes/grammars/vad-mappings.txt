@@ -1,0 +1,24 @@
+# -- MAPPINGS FILE --
+# Used by "vad-generate.cmd"
+
+# Template Mappings
+[Acknowledgement-phrase]	{g:PromptAck{}}
+[Acknowledgement phrase]	{g:PromptAck{}}
+[Acknowledgment-phrase]	{g:PromptAck{}}
+[Acknowledgement]	{g:PromptAck{}}
+[Save-Phrase]	{g:PromptSuccess{}}
+[Success-acknowledgement-phrase]	{g:PromptSuccess{}}
+[Cancel-empty-phrase]	{g:PromptCancelled{}}
+[X-RequiredSlots]	Body
+
+# Earcon Mappings
+[success earcon]	{EarConSuccess}
+[success-earcon]	{EarConSuccess}
+
+# Slot Mappings
+[note-body]	{note_body}
+
+# String Name Mappings
+AskForBodyNote	AskForNote
+CreateNoteSuccess	Success
+CreateNoteError	CancelNote

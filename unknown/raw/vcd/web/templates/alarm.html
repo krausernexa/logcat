@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="vcd.css" />
+    <script type="text/javascript" src="vcd.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
+    <meta http-equiv="Pragma" content="no-cache">
+</head>
+<body style="background:#{BgColor};color:#{FgColor};">
+    <div style="margin: 0px 0px 0px 12px; ">
+        <div id="WeSaid" class="AccentHighBrush TitleTextBlockStyle">
+            {Gui}
+        </div>
+        <div id="TitleContent" class="SecondaryForegroundBrush_Dark CaptionTextBlockStyle">
+        </div>
+        <div>
+            <div id="HeaderTitle" class="SecondaryForegroundBrush_Dark CaptionTextBlockStyle">
+                <div class="ImageBk" style="background-color:#{FgColor};"><img id="ImageSrc" class="Invert" src="{Domain}.png" /></div>
+                <div id="Title" class="Dark">{RollupTitle}</div> 
+            </div>
+            
+        </div>
+        <form action="ms-app://{Domain}/{Intent}">
+            <!-- time picker-->
+            <input id="StartTime" name="StartTime" value="Time" type="text" style="visibility:hidden;" class="Dark" />
+            <div class="SecondaryForegroundBrush_Dark">On: {Domain}</div>
+            <div class="SecondaryForegroundBrush_Dark">{RecurrenceLabel}</div>
+            <input type="submit" name="Result" value="{AskForTimeToTurnOnGui_ButtonSubmit}" />
+            <input type="submit" name="Result" value="cancel" />
+        </form>
+        <span style="line-height:5"><a style="color:#{FgColor}" href="bing://search?q={UserSaid}">{SerpLinkLabel}</a></span>
+    </div>
+
+    <script type="text/javascript">
+        setFormArgs();
+    </script>
+</body>
+</html>

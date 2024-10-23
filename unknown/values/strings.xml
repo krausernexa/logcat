@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cortana for Android</string>
+    <string name="edit_message">Enter a message</string>
+    <string name="button_send">Send</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_devices">Devices</string>
+    <string name="action_home">Home</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="response_text"></string>
+    <string name="suggestion_text"></string>
+    <color name="default_fg_color">#1BA1E2</color>
+    <color name="default_bg_color">#000000</color>
+</resources>

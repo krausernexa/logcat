@@ -1,0 +1,158 @@
+
+#WeSaid {
+    margin: 0px 0px 12px; 
+    text-align: left;
+}
+
+#TitleContent {
+    margin: 0px 0px 11px 0px;
+}
+
+#HeaderTitle {
+    text-transform: uppercase;
+    margin: 0px 0px 12px 0px;
+    display:table;
+}
+
+.Dark {
+    background-color: #000;
+    color:#FFF;
+}
+
+.Invert {
+    filter: invert(100%);
+    -webkit-filter: invert(100%);
+    -moz-filter: invert(100%);
+    -o-filter: invert(100%);
+    -ms-filter: 'invert(100)';
+}
+
+.ImageBk {
+    background-color:#FFF;
+    display:inline-block;
+}
+
+#ImageSrc {
+    padding: 1px; 
+    width:78px;
+    height:78px;
+}
+
+#Title {
+    display:table-cell;
+    vertical-align:middle;
+}
+
+.AccentHighBrush {
+    color:#0077D6;
+}
+
+.TitleTextBlockStyle {
+    font-size:24px;
+    font-weight:normal;
+}
+
+.SecondaryForegroundBrush_Dark {
+    color:rgba(255,255,255,.6);
+}
+
+.SecondaryForegroundBrush_Light {
+    color:rgba(0,0,0,.6);
+}
+
+.CaptionTextBlockStyle {
+    font-size:16px;
+    font-weight:normal;
+}
+
+html,body{
+    font-weight:300;
+}
+html,body,cite .b_secondaryText,.b_groupLabel,.b_demoteText,.b_demoteText *:not(.b_promoteText),.b_paragraph.b_focusTextExtraSmall,.csrc,.csth:after,.qcard .factsItem{
+    color:rgba(255,255,255,.6)
+}
+.ctxtb,:-ms-input-placeholder{
+    color:rgba(0,0,0,.6)
+}
+.pushpin{
+    color:rgba(0,0,0,.87)
+}
+a,strong,.b_promoteText,.b_factLabel,.b_focusTextLarge,.b_focusTextMedium,.b_focusTextSmall,.b_focusTextExtraSmall,.b_prominentFocusLabel,.cstf,.qcard h1,.qcard h2,.qcard h2 a,.qcard h3,.qcard .factsLabel{color:#fff}
+
+input[type=text], select{
+    font-size:24px;
+    border:0px;
+    margin: 0px 0px 12px 0px;
+}
+
+input[type=text]{
+    border-bottom-style:dotted;
+    border-bottom-width:1px;
+    display:block;
+}
+
+input[type=button],input[type=submit]{
+    background-color:#333333;
+    color:#E0E0E0;
+    height:42px;
+    padding:0 12px;
+    width:30%;
+    font-size:18px;
+    border:0px;
+}
+
+select{
+    border-color:#000;
+    background-color: #000;
+    display:block;
+}
+
+.btns li{background-color:#333}
+.b_touchable,.b_touchable>li{border-color:rgba(255,255,255,.6)}
+html,body,h1,h2,h3,h4,h5,h6,p,img,ol,ul,li,form,table,tr,th,td{
+    border:0;
+    border-collapse:collapse;
+    border-spacing:0;
+    list-style:none;
+    margin:0;padding:0;
+    -ms-user-select:none
+}
+
+h3 {
+    line-height:5;
+}
+html{overflow-y:scroll}
+body{-ms-hyphens:auto;-ms-hyphenate-limit-zone:100%;word-wrap:break-word}
+.b_footnote,.b_moreLink,.b_action,.qcard .factsItem{padding-bottom:25px}
+.qcard .factsItem{line-height:40px}
+.b_address{padding-bottom:5px;display:inline-block}
+h2,.b_attribution,.b_label,.btns,.b_poiPair,.b_focusTextLarge,.b_focusTextMedium,.b_focusTextSmall,.b_focusTextExtraSmall{
+    padding-bottom:5px
+}
+.b_imagePair{padding-bottom:17px}
+.b_focusLabel,
+.b_secondaryFocus{padding-bottom:10px}
+h4,label,table,.qcard .factsLabel{padding-bottom:5px}
+label,.b_moreLink{display:block}
+.b_imagePair h4{margin-top:-5px}
+.b_rich{padding:15px 0 25px 0}
+.b_caption{padding-bottom:25px}
+.b_factrow{padding-bottom:5px}
+#b_results>li{padding-bottom:20px}
+.b_groupLabel{padding-bottom:10px}
+.b_anno{padding-bottom:32px}
+.b_hList,.b_vPanel>div,.b_vList>li{padding-bottom:17px}
+.qcard .b_infocard .b_vPanel>div,.qcard .b_infocard .b_vList>li{padding-bottom:35px}
+#b_pole{padding-bottom:32px}
+#b_results>li.si_pp,.sb_hbop,.b_hide,#scope-web,#scope-images,#scope-video,#fRmsDefer,#b_error,#b_loadingmsg,select::-ms-expand{display:none}
+.b_caption>*:last-child,.b_rich>*:last-child,.b_rich>.b_vList:not(.b_touchable):last-child>li:last-child,.b_rich>.b_vPanel:last-child>div:last-child,.b_vPanel .b_vList:not(.b_touchable):last-child>li:last-child,.b_vList .b_vPanel>div:last-child,.b_hList .b_vList>li:last-child,.b_hList .b_vPanel>div:last-child,.b_vList>li>*:last-child,.b_vPanel>div>*:last-child,.b_vlist2col li>*:last-child,.b_vList tr:last-child td,.b_vPanel tr:last-child td,.b_imagePair .b_footnote{padding-bottom:0}
+.b_vList>li>.b_action:last-child{padding-bottom:8px}
+.b_vlist2col{display:-ms-flexbox;display:flex;-ms-flex-flow:row wrap;flex-flow:row wrap}
+ol.b_vlist2col{margin-bottom:-18px}
+div.b_vlist2col li{padding:0 0 25px}
+.b_vlist2col ul{min-width:40%}
+.b_vlist2col ul:first-child{padding-right:36px}
+.b_rich .b_vlist2col{margin-bottom:-25px}.b_touchable{border-width:1px 0 0;border-style:solid;padding:17px 0 0}.b_touchable>li{border-width:0 0 1px;border-style:solid;margin-bottom:17px}.b_rich>.b_touchable:last-child>li:last-child,.b_vPanel .b_touchable:last-child>li:last-child{margin-bottom:0}.b_hPanel>span:not(:last-child),.b_hList>li:not(:last-child){padding-right:12px}.b_suffix{padding-left:12px}.b_poiPair,.b_imagePair{display:-ms-flexbox;display:flex}.b_poiPair>*,.b_imagePair>*{-ms-flex-negative:0;flex-shrink:0}.b_poiPair>*:last-child,.b_imagePair>*:last-child,.b_imagePair.reverse>*:first-child{-ms-flex:0 1 100%;flex:0 1 100%}.b_imagePair.reverse>*:last-child{-ms-flex:0 0 auto;flex:0 0 auto}.b_imagePair>*:last-child{margin-left:12px}.b_poiPair>*:last-child{margin-left:30px}.b_poiPair>*:first-child,.b_imagePair>*:first-child{margin-left:0}button,.button{border-width:3px;border-style:solid;padding:8px 18px 12px}.b_hPanel>span,.b_footnote .cico,.b_hList>li,.b_title div{display:inline-block}#sw_footL li,.b_title h2{display:inline}.b_relative{position:relative}.b_rightbottom{position:absolute;right:-3px;bottom:-8px}.b_footnote .cico{padding-left:10px}#b_loadingmsg,#b_error div{padding-bottom:20px}.b_float{float:left}.b_floatR{float:right}table{word-wrap:break-word;width:100%;table-layout:fixed}th,td{padding-bottom:12px;-ms-hyphenate-limit-zone:0}.b_hList>li{vertical-align:top}th{text-align:left}.b_rTxt,.rl{text-align:right}.b_cTxt{text-align:center}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        .b_logo{vertical-align:text-top}@font-face{font-family:Segoe;font-weight:200;src:local("Segoe WP Light"),local("Segoe UI Light")}@font-face{font-family:Segoe;font-weight:300;src:local("Segoe WP Semilight"),local("Segoe UI Semilight")}@font-face{font-family:Segoe;font-weight:400;src:local("Segoe WP"),local("Segoe UI")}@font-face{font-family:Segoe;font-weight:600;src:local("Segoe WP Semibold"),local("Segoe UI Semibold")}@font-face{font-family:Segoe;font-weight:700;src:local("Segoe WP Bold"),local("Segoe UI Bold")}
+body,button{font-family:Segoe;font-weight:300;-ms-text-size-adjust:none;font-size:21px;line-height:23px}h3,h4,h5,.b_focusLabel{font-family:Segoe;font-weight:300;-ms-text-size-adjust:none;font-size:23px;}.b_focusTextExtraSmall{font-weight:300;font-size:23px;line-height:28px}strong,.b_strong{font-weight:300}cite{font-style:normal;white-space:nowrap;display:inline-block}h1 strong,h2 strong,h3 strong,.ansTtl strong,#b_error strong,.b_focusLabel strong,.b_focusTextLarge strong,.b_focusTextMedium strong,.b_focusTextExtraSmall strong{font-family:"Segoe";font-weight:600}cite strong{font-weight:700}a,a:hover{text-decoration:none}.b_footnote{font-size:15px;line-height:17px}.b_ans .b_moreLink,.b_poleContent .b_moreLink,.b_action{font-size:25px;line-height:27px;opacity:.85}h1,h2,.ansTtl{font-size:32px;font-weight:200;line-height:34px}.b_anno{font-size:32px;font-weight:400;line-height:37px}.b_prominentFocusLabel,.b_focusTextSmall{font-size:32px;font-weight:200;line-height:38px}#b_results>li:first-child h2{line-height:38px}#b_error,#b_loadingmsg{font-size:35px;font-weight:200;line-height:40px}.qcard .factsLabel{font-size:37px;font-weight:200;line-height:39px}.b_focusTextMedium{font-size:42px;font-weight:200;line-height:50px}.b_focusTextLarge{font-size:60px;font-weight:200;line-height:72px}.b_groupLabel,.b_lower{text-transform:lowercase}.qs strong{font-weight:400}
+.logo{background:url('/sa/simg/h/logo.png') -113px -33px no-repeat;background-size:172px 67px;width:59px;height:21px}.sw_play,.sw_playd{background-repeat:no-repeat}.pushpin,.tptwt,.tpfb,.tplnkn{background-repeat:no-repeat;display:inline-block}.pushpin{background-size:32px 65px;width:32px;height:65px;padding-top:6px;margin-top:5px;text-align:center}.sw_play,.sw_playd{background-size:48px 24px;width:24px;height:24px}.sw_playd{background-position-x:-24px}.tptwt,.tpfb,.tplnkn{background-size:276px 43px}.tptwt,.tpfb,.tplnkn{width:43px;height:43px}.tpfb{background-position-x:-43px}.tplnkn{background-position-x:-233px}@media(max-width:480px){.pushpin{background-image:url('/sa/simg/h/pushpin480Dark.png')}.sw_play,.sw_playd{background-image:url('/sa/simg/h/play480Dark.png')}.tptwt,.tpfb,.tplnkn{background-image:url('/sa/simg/h/social480Dark.png');background-size:282px 43px}.tplnkn{background-position-x:-239px}}@media(min-width:481px)and (max-width:720px){.pushpin{background-image:url('/sa/simg/h/pushpin481Dark.png')}.sw_play,.sw_playd{background-image:url('/sa/simg/h/play481Dark.png')}.tptwt,.tpfb,.tplnkn{background-image:url('/sa/simg/h/social481Dark.png')}}@media(min-width:721px)and (max-width:768px){.pushpin{background-image:url('/sa/simg/h/pushpin721Dark.png')}.sw_play,.sw_playd{background-image:url('/sa/simg/h/play721Dark.png')}.tptwt,.tpfb,.tplnkn{background-image:url('/sa/simg/h/social721Dark.png')}}@media(min-width:769px){.pushpin{background-image:url('/sa/simg/h/pushpin769Dark.png')}.sw_play,.sw_playd{background-image:url('/sa/simg/h/play769Dark.png');background-size:24px 24px}.tptwt,.tpfb{width:42px}.tptwt,.tpfb,.tplnkn{background-image:url('/sa/simg/h/social769Dark.png')}.logo{background:url('/sa/simg/h/logo769Dark.png') 0 0 no-repeat;background-size:59px 21px}}#b_results>li>*,#b_results>li .ad>*,#b_results>li>ul>li>*{animation-duration:.5s;animation-timing-function:cubic-bezier(0,0,0,1)}.feather-rl #b_results>li>*,.feather-rl li .ad>*,.feather-rl li>ul>li>*{animation-name:rl-t}.feather-lr #b_results>li>*,.feather-lr li .ad>*,.feather-lr li>ul>li>*{animation-name:lr-t}.feather-rl #b_results>li>*:nth-child(2),.feather-rl li .ad>*:nth-child(2),.feather-rl li>ul>li>*:nth-child(2){animation-name:rl-s}.feather-lr #b_results>li>*:nth-child(2),.feather-lr li .ad>*:nth-child(2),.feather-lr li>ul>li>*:nth-child(2){animation-name:lr-s}.feather-rl #b_results>li>*:nth-child(1),.feather-lr #b_results>li>*:nth-child(1),.feather-rl li .ad>*:nth-child(1),.feather-lr li .ad>*:nth-child(1),.feather-rl li>ul>li>*:nth-child(1),.feather-lr li>ul>li>*:nth-child(1),#b_results>li.b_ad>*,#b_results>li>ul{animation-name:none}@-ms-keyframes lr-s{from{-ms-transform:translateX(-80%)}to{-ms-transform:translateX(0%)}}@-ms-keyframes rl-s{from{-ms-transform:translateX(80%)}to{-ms-transform:translateX(0%)}}@-ms-keyframes lr-t{from{-ms-transform:translateX(-100%)}to{-ms-transform:translateX(0%)}}@-ms-keyframes rl-t{from{-ms-transform:translateX(100%)}to{-ms-transform:translateX(0%)}}.b_accentColor,.b_accentColor strong,strong.b_accentColor,strong .b_accentColor,.qcard a,#sb_feedback,.b_anno,.appifyCaptionAccent{color:#00A1E2;}.b_accentColorStroke{stroke:#00A1E2;}.b_accentColorFill{fill:#00A1E2;}.b_accentColorBackground{background-color:#00A1E2;}select:active{background-color:#00A1E2;}.b_poleContent cite, .b_poleContent cite strong,.appifyCaption cite, .appifyCaption cite strong{color: inherit;}cite,cite strong{color:#00A1E2;}

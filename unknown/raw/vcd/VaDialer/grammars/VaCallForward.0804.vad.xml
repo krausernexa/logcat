@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.0" xmlns:x="http://schemas.thinkman.com/voicecommands/extensions/1.0">
+
+  <Domain Name="WpDialer" ClassName="CallForwardRes">
+
+    <!--
+        **********************************************************************
+        *
+        * Call Forwarding  
+        *
+        **********************************************************************  
+    -->
+    <Intent Name="Forward" Scope="g:SpeechRoot, g:TextRoot">
+
+      <!-- Query -->
+      <ListenFor> [tell me] {g:WhatIs} {the|my} [current] call forwarding {setting|status|number} [set to]                  </ListenFor>        
+      <ListenFor> [tell me] {g:WhatIs} the [current] status [of {my|the}] call forwarding [setting]                         </ListenFor>        
+      <ListenFor> [tell me] {if|is} [my] call fowarding [setting] [currently] [turned] {on|enabled} [or {off|disabled}]     </ListenFor>
+      <ListenFor> [tell me] {if|is} [my] call fowarding [setting] [currently] [turned] {off|disabled}                       </ListenFor>
+
+      <!-- Set -->
+      <ListenFor> {set|setup} call forwarding [to [be] {OnOff} [and {to|use}]] [the] [phone] [number] {PhoneNumber}         </ListenFor>
+      <ListenFor> [turn] call forwarding {OnOff} [ {to|and use} [the] [phone] [number] {PhoneNumber} ]                      </ListenFor>
+      <ListenFor> turn {OnOff} call forwarding [ {to|and use} [the] [phone] [number] {PhoneNumber} ]                        </ListenFor>
+      <ListenFor> {EnableDisable} call forwarding [ {to|and use} [the] [phone] [number] {PhoneNumber} ]                     </ListenFor>
+
+        
+      <String Name="Query_On">                          <Gui>   {g:Prompt{}}Your calls are being forwarded to {PhoneNumber}.    </Gui></String>
+      <String Name="Query_Off">                         <Gui>   {g:Prompt{}}Your calls are not being forwarded.                 </Gui></String>
+        
+      <String Name="TurnOn_Disabled">                   <Gui>   {g:Prompt{}}The call forwarding feature is disabled.        </Gui></String>
+      <String Name="TurningOn">                         <Gui>   {g:PromptAck{}}Turning call forwarding on.                  </Gui></String>
+      <String Name="TurningOff">                        <Gui>   {g:PromptAck{}}Turning call forwarding off.                 </Gui></String>
+      <String Name="Cancelled">                         <Gui>   {g:PromptCancelled{}}Cancelled.                             </Gui></String>        
+
+      <String Name="TurnOn_Failed">                     <Gui>   {g:PromptError{}}I can't turn on call forwarding. Try again later. {g:PhError_{0}}      </Gui></String>
+      <String Name="TurnOff_Failed">                    <Gui>   {g:PromptError{}}I can't turn off call forwarding. Try again later. {g:PhError_{0}}     </Gui></String>
+              
+      <String Name="TurnedOn">                          <Gui>   {g:Prompt{}}OK, I'll forward your calls.                 </Gui></String>
+      <String Name="TurnedOff">                         <Gui>   {g:Prompt{}}OK, I won't forward your calls.              </Gui></String>        
+        
+      <String Name="PhoneNumberEditBoxLabel">           <Gui> Forward to             </Gui>        </String>
+        
+    </Intent>
+
+    <Intent Name="Forward" Scope="WhatNumber, Confirm">
+        <ListenFor> [ [turn] call forwarding {OnOff} [ {to|and use} [the] [phone] [number] ] ] {PhoneNumber}      </ListenFor>
+        <ListenFor> {EnableDisable} call forwarding [ {to|and use} [the] [phone] [number] ] {PhoneNumber}         </ListenFor>
+        
+        <String Name="WhatNumber">          <Gui>   {g:PromptAck{}}Forward your calls to what number?             </Gui> </String>
+        
+        <String Name="WhatNumber_ButtonCancel">            
+          <Gui>     Cancel                  </Gui>
+        </String>
+        
+        <String Name="WhatNumber_ButtonSubmit">            
+          <Gui>     Turn On                 </Gui>
+        </String>
+
+        <String Name="WhatNumber_Title">
+            <Value><Gui>    CALL FORWARDING </Gui></Value>
+        </String>
+    </Intent>
+
+
+    <!--
+        **********************************************************************
+        *
+        *  Confirmation step 
+        *
+        **********************************************************************  
+    -->
+    <Intent Name="Forward" Scope="Confirm">
+        <ListenFor> {Confirm}                   </ListenFor>
+        
+        <String Name="Confirm">                     
+                <Gui>   {g:PromptAck{}}Forward your calls to this number?                                                           </Gui>
+                <Tts>   {g:PromptAck{}}I'll forward your calls to {PhoneNumber}. Say yes, no, or provide a different phone number.  </Tts>
+        </String>
+
+        <String Name="Confirm_Tip">
+            <Value><Gui>    try Yes or No   </Gui></Value>
+        </String>
+
+        <String Name="Confirm_ButtonCancel">            
+          <Gui>     Cancel                  </Gui>
+        </String>
+        
+        <String Name="Confirm_ButtonSubmit">            
+          <Gui>     Turn On                 </Gui>
+        </String>
+        
+        <String Name="Confirm_Title">
+          <Gui>     CALL FORWARDING         </Gui>
+        </String>
+            
+    </Intent>
+
+
+
+    <!--
+        **********************************************************************
+        *
+        *  Support grammars
+        *
+        **********************************************************************  
+    -->
+    <PhraseList Label="OnOff" SlotName="OnOff">
+        <Item Value="true">     on                  </Item>
+        <Item Value="false">    off                 </Item>
+    </PhraseList>
+
+    <PhraseList Label="EnableDisable" SlotName="EnableDisable">
+        <Item Value="true">     set                 </Item>
+        <Item Value="true">     set up              </Item>
+        <Item Value="true">     enable              </Item>
+        <Item Value="false">    disable             </Item>
+        <Item Value="false">    cancel              </Item>
+   </PhraseList>
+
+    <PhraseList Label="Confirm" SlotName="Confirm">
+        <Item Value="true">     { yes | submit [it] | o k }            </Item>
+        <Item Value="false">    no                                     </Item>
+   </PhraseList>
+
+    <PhraseList Label="PhoneNumber" SlotName="PhoneNumber">
+        <Item out="rules.latest()">   {g:PhoneNumber}                   </Item>
+    </PhraseList>
+      
+
+  </Domain>
+
+    
+</VoiceCommands>
+
+
+
+  

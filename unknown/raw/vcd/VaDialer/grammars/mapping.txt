@@ -1,0 +1,17 @@
+# jasonvo: this is not a WP file
+
+#[Call-Form-Url]	tel:{Name}
+#InvokeCall	Calling
+#ClarifyCommunicationName	tel:{Name}
+ClarifyCommunicationNamePhraseList	AllContactNames
+ClarifyNameCommunicationCall	AskForNameCall
+ClarifyNameCommunicationTextMessage	AskForNameCall
+ClarifyPhoneNumberCommunicationCall	WhichNumber
+ClarifyPhoneNumberCommunicationTextMessage	WhichNumber
+ClarifyCommunicationContactPhraseList	s:Contacts
+ClarifyCommunicationNamePhraseList	s:Contacts
+ClarifyCommunicationContactSlot	Name
+NotRecognizedCommunicationCall	AskForNameCall_IsNoReco
+NotRecognizedCommunicationTextMessage	Who_IsNoReco
+CancelCommunication	Cancelled
+CompleteCommunicationCall	InvokeCall

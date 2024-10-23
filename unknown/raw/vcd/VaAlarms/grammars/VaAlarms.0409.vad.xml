@@ -1,0 +1,496 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands 
+  xmlns="http://schemas.microsoft.com/voicecommands/1.0" 
+  xmlns:x="http://schemas.thinkman.com/voicecommands/extensions/1.0">
+
+  <Domain Name="Alarm" ClassName="AlarmsRes" CortanaOnly="true">
+
+    <Intent Name="Create" Scope="g:Nop">
+      <ListenFor> {turn on|set|make|enable|create|add} [{a|an}] alarm {StartTimeOn}</ListenFor>
+    </Intent>
+
+    <Intent Name="Create" Scope="StartTime">
+      <ListenFor> {StartTimeOn} </ListenFor>
+    </Intent>
+
+    <Intent Name="Create" Scope="DisambigTurnOn">
+      <ListenFor> {DisambigAlarms} </ListenFor>
+    </Intent>
+
+    <Intent Name="Off" Scope="g:Nop">
+      <ListenFor> {turn off|unset|disable} [{a|an}] alarm {StartTimeOff}</ListenFor>
+    </Intent>
+
+    <Intent Name="Off" Scope="StartTime">
+      <ListenFor> {StartTimeOff} </ListenFor>
+    </Intent>
+
+    <Intent Name="Off" Scope="DisambigTurnOff">
+      <ListenFor> {DisambigAlarms} </ListenFor>
+    </Intent>
+
+    <Intent Name="Review" Scope="g:Nop">
+      <ListenFor> show [me] [all] [my] alarms </ListenFor>
+      <ListenFor> what are my alarms </ListenFor>
+    </Intent>
+
+    <PhraseList Label="DisambigAlarms" >
+      <Item value="select"> [the] {DisambigAlarmsList} [one] </Item>
+      <Item value="none" > {g:NoneOfThose} [alarms] </Item>
+      <Item value="all" > all of {g:ThemThose} [alarms] </Item>
+      <Item value="all" > both of {g:ThemThose} [alarms] </Item>
+    </PhraseList>
+
+    <PhraseList Label="AlarmTimeHoursMinutes" SlotName="StartTime">
+      <Item> {g:TimeHoursMinutes} </Item>
+    </PhraseList>
+
+    <PhraseList Label="AlarmRelativeTime" SlotName="StartTime">
+      <Item> {g:RelativeTime} </Item>
+    </PhraseList>
+
+    <PhraseList Label="AlarmTimePeriodMornAftEve" SlotName="StartTime">
+      <Item> {g:TimePeriodMornAftEve} </Item>
+    </PhraseList>
+
+    <PhraseList Label="AlarmTimePeriodTonight" SlotName="StartTime">
+      <Item> {g:TimePeriodTonight} </Item>
+    </PhraseList>
+
+    <PhraseList Label="StartTimeOn">
+      <Item out="rules.latest()"> {AlarmTimeHoursMinutes} </Item>
+      <Item out="rules.latest()"> {for|at} {AlarmTimeHoursMinutes} </Item>
+      <Item out="rules.latest()"> set it {for|at} {AlarmTimeHoursMinutes} </Item>
+      <Item out="rules.latest()"> wake me [up] at {AlarmTimeHoursMinutes} </Item>
+
+      <Item out="rules.latest()"> {AlarmRelativeTime} from now </Item>
+      <Item out="rules.latest()"> {for|in} {AlarmRelativeTime} from now </Item>
+      <Item out="rules.latest()"> set it [{for|in}] {AlarmRelativeTime} from now </Item>
+      <Item out="rules.latest()"> wake me [up] [in] {AlarmRelativeTime} from now </Item>
+
+      <Item out="rules.latest()"> {AlarmRelativeTime} [time] </Item>
+      <Item out="rules.latest()"> {for|in} {AlarmRelativeTime} [time] </Item>
+      <Item out="rules.latest()"> set it {for|in} {AlarmRelativeTime} [time] </Item>
+      <Item out="rules.latest()"> wake me [up] in {AlarmRelativeTime} [time] </Item>
+
+      <Item out="rules.latest()"> the {AlarmTimePeriodMornAftEve} </Item>
+      <Item out="rules.latest()"> {in|for} the {AlarmTimePeriodMornAftEve} </Item>
+      <Item out="rules.latest()"> set it {in|for} the {AlarmTimePeriodMornAftEve} </Item>
+      <Item out="rules.latest()"> wake me [up] in the {AlarmTimePeriodMornAftEve} </Item>
+
+      <Item out="rules.latest()"> [for] {AlarmTimePeriodTonight} </Item>
+      <Item out="rules.latest()"> set it [for] {AlarmTimePeriodTonight} </Item>
+    </PhraseList>
+
+    <PhraseList Label="StartTimeOff">
+      <Item out="rules.latest()"> [at] {AlarmTimeHoursMinutes} </Item>
+      <Item out="rules.latest()"> {its|the one|my one} at {AlarmTimeHoursMinutes} </Item>
+      <Item out="rules.latest()"> {the|my} {AlarmTimeHoursMinutes} one </Item>
+
+      <Item out="rules.latest()"> {its|the one|my one} {AlarmRelativeTime} from now </Item>
+      <Item out="rules.latest()"> {its|the one|my one} in {AlarmRelativeTime} [time] </Item>
+
+      <Item out="rules.latest()"> {the|my} {AlarmTimePeriodMornAftEve} one </Item>
+      <Item out="rules.latest()"> {the|my} one in the {AlarmTimePeriodMornAftEve} </Item>
+
+      <Item out="rules.latest()"> {its|the one|my one} {AlarmTimePeriodTonight} </Item>
+    </PhraseList>
+
+    <DynamicPhraseList Label="DisambigAlarmsList" SlotName="DisambigChosenAlarm" HackId="1"/>
+
+    <Intent Name="Common" Scope="g:Nop">
+
+      <String Name="LfAmPm">
+        <Value><Gui> {LfAmPm_{LfAmPm_Condition}} </Gui></Value>
+      </String>
+      
+      <String Name="LfAmPm_am">
+        <Value><Gui> a.m. </Gui></Value>
+      </String>
+
+      <String Name="LfAmPm_pm">
+        <Value><Gui> p.m. </Gui></Value>
+      </String>
+
+      <String Name="LfAlarmDisambigTemplate">
+        <Value><Gui> number {Number} </Gui></Value>
+        <Value><Gui> [the] {NumberTh} [one] </Gui></Value>
+        <Value><Gui> [the] {Hour12} {AmPm} [one] </Gui></Value>
+        <Value><Gui> [the] {Hour12} o'clock [{AmPm}] [one] </Gui></Value>
+        <Value><Gui> [the] {Hour12} oh {Minute} [{AmPm}] [one] </Gui></Value>
+        <Value><Gui> [the] {Hour12} {Minute} [{AmPm}] [one] </Gui></Value>
+      </String>
+
+      <!-- Additional Strings -->
+      <String Name="QueryMorning"><Gui> the morning </Gui></String>
+      <String Name="QueryAfternoon"><Gui> the afternoon </Gui></String>
+      <String Name="QueryEvening"><Gui> the evening </Gui></String>
+
+      <!-- GENERATED STRINGS - START -->
+      <!-- !# alarms/templates/Alarm-Disambig-Template -->
+      <String Name="AlarmDisambigTemplate">
+          <Value><Tts> {AlarmDisambigTemplate_{AlarmDisambigTemplate_Condition}} </Tts></Value>
+      </String>
+
+      <String Name="AlarmDisambigTemplate_2Matches">
+          <!-- 2 matches -->
+          <Value><Tts> {d_DisambigTime1} or {d_DisambigTime2} </Tts></Value>
+      </String>
+
+      <String Name="AlarmDisambigTemplate_3Matches">
+          <!-- 3 matches -->
+          <Value><Tts> {d_DisambigTime1}, {d_DisambigTime2} or {d_DisambigTime3} </Tts></Value>
+      </String>
+
+      <!-- !# alarms/turnalarmon/gettimetoturnon -->
+      <String Name="AskForStartTimeCreate">
+          <Value>
+              <Tts> {g:PromptAck{}} what time would you like your alarm? </Tts>
+              <Gui> What time would you like your alarm? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} what time should I set the alarm? </Tts>
+              <Gui> What time should I set the alarm? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} set an alarm for what time? </Tts>
+              <Gui> Set an alarm for what time? </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} Set your alarm for what time? </Tts>
+              <Gui> Set your alarm for what time? </Gui>
+          </Value>
+      </String>
+
+      <String Name="AskForStartTimeCreate_RetryX">
+          <Value>
+              <Tts> {g:Reprompt{}} What time did you want the alarm? </Tts>
+              <Gui> What time did you want the alarm? </Gui>
+          </Value>
+      </String>
+
+      <String Name="AskForStartTimeCreate_Tip">
+          <Value><Gui> try 5 o'clock </Gui></Value>
+          <Value><Gui> try 8 in the morning </Gui></Value>
+          <Value><Gui> try Midnight </Gui></Value>
+      </String>
+
+      <!-- !# alarms/turnalarmon/confirmalarm -->
+      <String Name="ConfirmAlarm">
+          <Value>
+              <Tts> {g:PromptAck{}} I've set an alarm for {StartTime}. </Tts>
+              <Gui> I've set an alarm for {StartTime}. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} your alarm is set for {StartTime}. </Tts>
+              <Gui> Your alarm is set for {StartTime}. </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} I set an alarm for {StartTime}. </Tts>
+              <Gui> I set an alarm for {StartTime}. </Gui>
+          </Value>
+      </String>
+
+      <String Name="ConfirmAlarm_Tip">
+          <Value><Gui> try Show my alarms </Gui></Value>
+          <Value><Gui> try Set my alarm for 7:10 AM </Gui></Value>
+      </String>
+
+      <!-- !# alarms/turnalarmon/confirmandaddname -->
+      <String Name="ConfirmAndAddName">
+          <Value>
+              <Tts> {g:Prompt{}} I've set an alarm for {StartTime}. You can tap it to add a name. </Tts>
+              <Gui> I've set an alarm for {StartTime}. </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} I've set your alarm for {StartTime}. </Tts>
+              <Gui> I've set your alarm for {StartTime}. </Gui>
+          </Value>
+      </String>
+
+      <String Name="ConfirmAndAddName_Tip">
+          <Value><Gui> tap the alarm to add a name </Gui></Value>
+      </String>
+
+      <!-- !# alarms/turnalarmon/alarmstatuson -->
+      <String Name="AlarmStatusOn">
+          <Value>
+              <Tts> {g:PromptAck{}} your {StartTime} alarm is now on. </Tts>
+              <Gui> Your {StartTime} alarm is now on. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} I've turned on your {StartTime} alarm. </Tts>
+              <Gui> I've turned on your {StartTime} alarm. </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} Your {StartTime} alarm is on. </Tts>
+              <Gui> Your {StartTime} alarm is on. </Gui>
+          </Value>
+      </String>
+
+      <!-- !# alarms/turnalarmon/toomanyalarms -->
+      <String Name="TooManyAlarms">
+          <Value>
+              <Tts> {g:Prompt{}}{EmoteSensitive} I'm sorry, I can't create any more alarms. </Tts>
+              <Gui> I'm sorry, I can't create any more alarms. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}}{EmoteSensitive} Oops, I can't add any more alarms. </Tts>
+              <Gui> Oops, I can't add any more alarms. </Gui>
+          </Value>
+      </String>
+
+      <!-- !# alarms/turnalarmoff/gettimetoturnoff -->
+      <String Name="AskForStartTimeOff">
+          <Value>
+              <Tts> {g:PromptAck{}} turn off the alarm for what time? </Tts>
+              <Gui> Turn off the alarm for what time? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} I can turn off your alarm. Which one? </Tts>
+              <Gui> I can turn off your alarm. Which one? </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} Turn off the alarm for what time? </Tts>
+              <Gui> Turn off the alarm for what time? </Gui>
+          </Value>
+      </String>
+
+      <String Name="AskForTimeToTurnOff_RetryX">
+          <Value>
+              <Tts> {g:Reprompt{}} Turn off the alarm for what time? </Tts>
+              <Gui> Turn off the alarm for what time? </Gui>
+          </Value>
+      </String>
+
+      <String Name="AskForTimeToTurnOff_Tip">
+          <Value><Gui> try {d_ExistingAlarmTimeForTips:@} </Gui></Value>
+      </String>
+
+      <!-- !# alarms/turnalarmoff/alarmstatusoff -->
+      <String Name="AlarmStatusOff">
+          <Value>
+              <Tts> {g:PromptAck{}} your {TimeToTurnOff} alarm is now off. </Tts>
+              <Gui> Your {TimeToTurnOff} alarm is now off. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} I've turned off your {TimeToTurnOff} alarm. </Tts>
+              <Gui> I've turned off your {TimeToTurnOff} alarm. </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} Your {TimeToTurnOff} alarm is off. </Tts>
+              <Gui> Your {TimeToTurnOff} alarm is off. </Gui>
+          </Value>
+      </String>
+
+      <!-- !# alarms/turnalarmoff/noalarms -->
+      <String Name="NoAlarmsToTurnOff">
+          <Value>
+              <Tts> {g:Prompt{}}{EmoteSensitive} You don't have any alarms for {d_AlarmQuery}. </Tts>
+              <Gui> You don't have any alarms for {d_AlarmQuery}. </Gui>
+          </Value>
+      </String>
+
+      <String Name="NoAlarmsToTurnOff_Tip">
+          <Value><Gui> try Set an alarm for 5 AM </Gui></Value>
+          <Value><Gui> try Turn off my {d_ExistingAlarmTimeForTips:@} alarm </Gui></Value>
+          <Value><Gui> try Wake me up at 10:10 AM </Gui></Value>
+      </String>
+
+      <!-- !# alarms/disambigalarmon/offertimeforon -->
+      <String Name="OfferTimeForOn">
+          <Value>
+              <Tts> {g:PromptAck{}} which alarm do you wanna turn on? {AlarmDisambigTemplate{}} </Tts>
+              <Gui> Which alarm do you want to turn on? </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} Turn on which one? {AlarmDisambigTemplate{}} </Tts>
+              <Gui> Turn on which one? </Gui>
+          </Value>
+      </String>
+
+      <String Name="OfferTimeForOn_RetryX">
+          <Value>
+              <Tts> {g:Reprompt{}} Which alarm did you wanna turn on? {AlarmDisambigTemplate{}} </Tts>
+              <Gui> Which alarm did you want to turn on? </Gui>
+          </Value>
+      </String>
+
+      <String Name="OfferTimeForOn_Tip">
+          <Value><Gui> try {d_DisambigTimeForTips:@} </Gui></Value>
+          <Value><Gui> try The first one </Gui></Value>
+      </String>
+
+      <!-- !# alarms/disambigalarmon/screendisambigon -->
+      <String Name="ScreenDisambigOn">
+          <Value>
+              <Tts> {g:Prompt{}} You have multiple alarms at that time. Tap the one you wanna turn on. </Tts>
+              <Gui> Tap the alarm you want to turn on. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} I see more than one alarm at that time. Tap the one you wanna turn on. </Tts>
+              <Gui> Tap the alarm you want to turn on. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} You've got more than one alarm at that time. Tap the one you wanna turn on. </Tts>
+              <Gui> Tap the alarm you want to turn on. </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} Tap the alarm you wanna turn on. </Tts>
+              <Gui> Tap the alarm you want to turn on. </Gui>
+          </Value>
+      </String>
+
+      <!-- !# alarms/disambigalarmoff/offertimeforoff -->
+      <String Name="OfferTimeForOff">
+          <Value>
+              <Tts> {g:PromptAck{}} which alarm do you wanna turn off? {AlarmDisambigTemplate{}} </Tts>
+              <Gui> Which alarm do you want to turn off? </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} Turn off which one? {AlarmDisambigTemplate{}} </Tts>
+              <Gui> Turn off which one? </Gui>
+          </Value>
+      </String>
+
+      <String Name="OfferTimeForOff_RetryX">
+          <Value>
+              <Tts> {g:Reprompt{}} Which alarm did you wanna turn off? {AlarmDisambigTemplate{}} </Tts>
+              <Gui> Which alarm did you want to turn off? </Gui>
+          </Value>
+      </String>
+
+      <String Name="OfferTimeForOff_Tip">
+          <Value><Gui> try {d_DisambigTimeForTips:@} </Gui></Value>
+          <Value><Gui> try The first one </Gui></Value>
+      </String>
+
+      <!-- !# alarms/disambigalarmoff/screendisambigoff -->
+      <String Name="ScreenDisambigOff">
+          <Value>
+              <Tts> {g:Prompt{}} You have multiple alarms at that time. Tap the one you wanna turn off. </Tts>
+              <Gui> Tap the alarm you want to turn off. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} I see more than one alarm at that time. Tap the one you wanna turn off. </Tts>
+              <Gui> Tap the alarm you want to turn off. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} You've got more than one alarm at that time. Tap the one you wanna turn off. </Tts>
+              <Gui> Tap the alarm you want to turn off. </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} Tap the alarm you wanna turn off. </Tts>
+              <Gui> Tap the alarm you want to turn off. </Gui>
+          </Value>
+      </String>
+
+      <!-- !# alarms/showalarms/screensetup -->
+      <String Name="ScreenSetUp">
+          <Value Weight="1.0">
+              <Tts> {g:Prompt{}} Here are your alarms. Tap the one you wanna change. </Tts>
+              <Gui> Tap the alarm you want to change. </Gui>
+          </Value>
+          <Value Weight="0.1">
+              <Tts> {g:Prompt{}} Voilà, all of your alarms. Tap the one you wanna change. </Tts>
+              <Gui> Tap the alarm you want to change. </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} Tap an alarm to change it. </Tts>
+              <Gui> Tap an alarm to change it. </Gui>
+          </Value>
+      </String>
+
+      <!-- !# alarms/showalarms/noalarmstochange -->
+      <String Name="NoAlarmsToChange">
+          <Value>
+              <Tts> {g:Prompt{}} You don't have any alarms. </Tts>
+              <Gui> You don't have any alarms. </Gui>
+          </Value>
+      </String>
+
+      <String Name="NoAlarmsToChange_Tip">
+          <Value><Gui> try Set my alarm for 7 AM </Gui></Value>
+          <Value><Gui> try Wake me at 8 AM tomorrow </Gui></Value>
+          <Value><Gui> try Wake me up in 20 minutes </Gui></Value>
+      </String>
+
+      <!-- !# alarms/showalarms/reviewalarms -->
+      <String Name="ReviewAlarms">
+          <Value>
+              <Tts> {g:Prompt{}} Here are your alarms. </Tts>
+              <Gui> Here are your alarms. </Gui>
+          </Value>
+      </String>
+
+      <!-- GENERATED STRINGS - END -->
+      
+      <String Name="AskForTimeToTurnOnGui">
+        <Value><Gui> {AskForTimeToTurnOn{}} </Gui></Value>
+      </String>
+
+      <String Name="AskForTimeToTurnOnGui_ButtonCancel">
+        <Value><Gui> cancel </Gui></Value>
+      </String>
+
+      <String Name="AskForTimeToTurnOnGui_ButtonSubmit">
+        <Value><Gui> set </Gui></Value>
+      </String>
+      
+      <String Name="CancelCreate">
+        <Value><Gui> {Cancelled} </Gui></Value>
+      </String>
+      
+      <String Name="CancelOff">
+        <Value><Gui> {Cancelled} </Gui></Value>
+      </String>
+        
+      <String Name="Cancelled">
+        <Value><Gui> {g:PromptCancelled{}}Cancelled. </Gui></Value>
+      </String>
+
+      <String Name="TimePlaceHolder">
+        <Value><Gui> Time </Gui></Value>
+      </String>
+      
+      <String Name="RecurrenceLabel">
+        <Value><Gui> only once </Gui></Value>
+      </String>
+
+      <String Name="ReviewAlarms_HeaderTitle">
+        <Value><Gui> {HeaderImageAlarms} ALARMS </Gui></Value>
+      </String>
+
+      <String Name="ScreenSetUp_Title">
+        <Value><Gui> {TitleImageAlarms} ALARMS </Gui></Value>
+      </String>
+
+      <String Name="OfferTimeForOn_Title">
+        <Value><Gui> {TitleImageAlarms} ALARMS </Gui></Value>
+      </String>
+
+      <String Name="ScreenDisambigOn_Title">
+        <Value><Gui> {TitleImageAlarms} ALARMS </Gui></Value>
+      </String>
+
+      <String Name="OfferTimeForOff_Title">
+        <Value><Gui> {TitleImageAlarms} ALARMS </Gui></Value>
+      </String>
+
+      <String Name="ScreenDisambigOff_Title">
+        <Value><Gui> {TitleImageAlarms} ALARMS </Gui></Value>
+      </String>
+      
+       <String Name="AskForTimeToTurnOnGui_Title">
+        <Value><Gui> {TitleImageAlarms} ALARM </Gui></Value>
+      </String>
+
+      <String Name="RollupTitle">
+        <Value><Gui> ALARMS </Gui></Value>
+      </String>
+
+    </Intent>
+
+  </Domain>
+
+</VoiceCommands>

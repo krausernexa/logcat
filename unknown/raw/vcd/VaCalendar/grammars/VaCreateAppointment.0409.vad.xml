@@ -1,0 +1,936 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands 
+  xmlns="http://schemas.microsoft.com/voicecommands/1.0" 
+  xmlns:x="http://schemas.thinkman.com/voicecommands/extensions/1.0">
+
+  <Domain Name="Calendar"  ClassName="CreateAppointmentRes" CortanaOnly="true">
+
+    <Intent Name="CreateAppointment" Scope="g:Nop" EmitGrxml="false">
+
+      <ListenFor> create [an] appointment </ListenFor>
+
+    </Intent>
+
+
+    <!-- Ask For Appointment Title Dialog -->
+    <Intent Name="CreateAppointment" Scope="Title">
+      <!-- Listen Fors -->
+      <ListenFor> {TitleDictation} </ListenFor>
+
+    </Intent>
+
+    <Dictation Label="TitleDictation" SlotName="Title" />
+
+
+    <!-- Ask For Start Date Time Dialog -->
+    <Intent Name="CreateAppointment" Scope="StartTime">
+      
+      <!-- starts and ends -->
+      <ListenFor> [[it] starts] {StartTimeStandalone} </ListenFor>
+      <ListenFor> [[it] starts] {StartTimeStandalone} and [it] {goes for|lasts} {Duration} </ListenFor>
+      <ListenFor> [[it] starts] {StartTimeStandalone} and [it] ends {EndTimeStandalone} </ListenFor>
+
+      <ListenFor> [[it] starts] [on] {StartDate} </ListenFor>
+      <ListenFor> [[it] starts] [on] {StartDate} and [it] {goes for|lasts} {Duration} </ListenFor>
+      <ListenFor> [[it] starts] [on] {StartDate} and [it] {goes|lasts} {AllDay} </ListenFor>
+      <ListenFor> [[it] starts] [on] {StartDate} and [it] ends [on] {EndDate} </ListenFor>
+
+      <ListenFor> [[it] starts] {StartTime} [on] {StartDate} </ListenFor>
+      <ListenFor> [[it] starts] [on] {StartDate} {StartTime} </ListenFor>
+
+      <ListenFor> [[it] starts] {StartTime} [on] {StartDate} and [it] ends {EndTimeStandalone} </ListenFor>
+      <ListenFor> [[it] starts] [on] {StartDate} {StartTime} and [it] ends {EndTimeStandalone} </ListenFor>
+
+      <ListenFor> [[it] starts] {StartTime} [on] {StartDate} and [it] ends {EndTime} [on] {EndDate} </ListenFor>
+      <ListenFor> [[it] starts] [on] {StartDate} {StartTime} and [it] ends {EndTime} [on] {EndDate} </ListenFor>
+
+      <ListenFor> [[it] starts] {StartTime} [on] {StartDate} and [it] ends [on] {EndDate} {EndTime} </ListenFor>
+      <ListenFor> [[it] starts] [on] {StartDate} {StartTime} and [it] ends [on] {EndDate} {EndTime} </ListenFor>
+
+      <ListenFor> [[it] starts] {StartTime} [on] {StartDate} and [it] {goes for|lasts} {Duration} </ListenFor>
+      <ListenFor> [[it] starts] [on] {StartDate} {StartTime} and [it] {goes for|lasts} {Duration} </ListenFor>
+
+      <!-- from/to -->
+      <ListenFor> [[it] goes] [from] {StartTimeFromTo} {to|till} {EndTimeFromTo} </ListenFor>
+      <ListenFor> [[it] goes] [from] {StartDate} {to|till} {EndDate} </ListenFor>
+
+      <ListenFor> [[it] goes] [from] {StartTimeFromTo} {to|till} {EndTimeFromTo} [on] {StartDate} </ListenFor>
+      <ListenFor> [[it] starts] [on] {StartDate} [from] {StartTimeFromTo} {to|till} {EndTimeFromTo} </ListenFor>
+
+      <ListenFor> [[it] goes] [from] {StartTime} [on] {StartDate} {to|till} {EndTime} [on] {EndDate} </ListenFor>
+      <ListenFor> [[it] goes] [from] {StartDate} {StartTime} {to|till} {EndTime} [on] {EndDate} </ListenFor>
+
+      <ListenFor> [[it] goes] [from] {StartTime} [on] {StartDate} {to|till} {EndDate} {EndTime} </ListenFor>
+      <ListenFor> [[it] goes] [from] {StartDate} {StartTime} {to|till} {EndDate} {EndTime} </ListenFor>
+
+      <!-- All day -->
+      <ListenFor> {AllDay} </ListenFor>
+      <ListenFor> [on] {StartDate} {AllDay} </ListenFor>
+      <ListenFor> {AllDay} [on] {StartDate} </ListenFor>
+
+    </Intent>
+
+    <PhraseList Label="StartDate" SlotName="Date">
+      <Item out="rules.latest()"> {g:CalendarDate} </Item>
+    </PhraseList>
+
+    <PhraseList Label="StartTime" SlotName="StartTime">
+      <Item out="rules.latest()"> [at] {g:TimeHoursMinutesLimited}      </Item>
+      <Item out="rules.latest()"> [in the] {g:TimePeriodMornAftEve}       </Item>
+      <Item out="rules.latest()"> the {g:TimePeriodMornAftEve} of       </Item>
+      <Item out="rules.latest()"> [at] {g:TimePeriodNight} [time]       </Item>
+    </PhraseList>
+
+    <PhraseList Label="EndDate" SlotName="EndDate">
+      <Item out="rules.latest()"> {g:CalendarDate} </Item>
+    </PhraseList>
+
+    <PhraseList Label="EndTime" SlotName="EndTime">
+      <Item out="rules.latest()"> [at] {g:TimeHoursMinutesLimited}      </Item>
+      <Item out="rules.latest()"> [in the] {g:TimePeriodMornAftEve}       </Item>
+      <Item out="rules.latest()"> the {g:TimePeriodMornAftEve} of       </Item>
+      <Item out="rules.latest()"> [at] {g:TimePeriodNight} [time]       </Item>
+    </PhraseList>
+
+    <!-- The [Start|End]TimeStandalone PhraseLists are used when a time is specified without a date. -->
+    <PhraseList Label="StartTimeStandalone" SlotName="StartTime">
+      <Item out="rules.latest()"> [at] {g:TimeHoursMinutesLimited}    </Item>
+      <Item out="rules.latest()"> {g:TimeOfDayWithoutDaysOfWeek}      </Item>
+    </PhraseList>
+
+    <PhraseList Label="EndTimeStandalone" SlotName="EndTime">
+      <Item out="rules.latest()"> [at] {g:TimeHoursMinutesLimited}    </Item>
+      <Item out="rules.latest()"> {g:TimeOfDayWithoutDaysOfWeek}      </Item>
+    </PhraseList>
+
+    <!-- The [Start|End]TimeFromTo PhraseLists are used in "from {StartTime} to {EndTime}"
+         scenarios, to allow for phrases like "from morning to night" -->
+    <PhraseList Label="StartTimeFromTo" SlotName="StartTimeFromTo">
+      <Item out="rules.latest()"> {g:TimeHoursMinutesLimited}     </Item>
+      <Item out="rules.latest()"> {g:TimeOfDay}                   </Item>
+      <Item out="rules.latest()"> {g:TimeOfDayMornAftEveNight}    </Item>
+    </PhraseList>
+
+    <PhraseList Label="EndTimeFromTo" SlotName="EndTimeFromTo">
+      <Item out="rules.latest()"> {g:TimeHoursMinutesLimited}     </Item>
+      <Item out="rules.latest()"> {g:TimeOfDay}                   </Item>
+      <Item out="rules.latest()"> {g:TimeOfDayMornAftEveNight}    </Item>
+    </PhraseList>
+
+    <PhraseList Label="Duration" SlotName="Duration">
+      <Item out="rules.latest()"> {g:RelativeTime} </Item>
+    </PhraseList>
+
+    <!-- Ask For Start Time Dialog -->
+    <Intent Name="CreateAppointment" Scope="CreateAppointment_AskForStartTime">
+      <!-- Listen Fors -->
+      <ListenFor> [[it] starts] {StartTime} </ListenFor>
+      <ListenFor> [[it] starts] {StartTime} and [it] {goes for|lasts} {Duration} </ListenFor>
+
+      <ListenFor> {it's|it is|is} {AllDay} </ListenFor>
+      <ListenFor> [it] goes {AllDay} </ListenFor>
+
+    </Intent>
+
+    <PhraseList Label="AllDay" SlotName="AllDay">
+      <Item Value="true"> all day </Item>
+    </PhraseList>
+
+
+    <!-- Ask For End Time Dialog -->
+    <Intent Name="CreateAppointment" Scope="CreateAppointment_AskForEndTime">
+      <!-- Listen Fors -->
+      <ListenFor> [[it] ends] {EndTime} </ListenFor>
+
+    </Intent>
+
+
+    <!-- Ask For Location Dialog -->
+    <Intent Name="CreateAppointment" Scope="CreateAppointment_AskForLocation">
+      <!-- Listen Fors -->
+      <ListenFor> {LocationDictation} </ListenFor>
+
+    </Intent>
+
+    <Dictation Label="LocationDictation" SlotName="Location" />
+
+
+    <!-- Confirm Dialog -->
+    <Intent Name="CreateAppointment" Scope="CreateAppointment_Confirm" >
+      <ListenFor> {ConfirmCancelOrChange} </ListenFor>
+    </Intent>
+
+    <PhraseList Label="ConfirmCancelOrChange" SlotName="ButtonSubmit">
+      <Item value="true"> {g:Affirmative} </Item>
+      <Item value="true"> [{g:Affirmative}] create [{it | that | this}] </Item>
+      <Item value="true"> [{g:Affirmative}] add [{it | that | this}] </Item>
+      
+      <Item value="false"> cancel </Item>
+      <Item value="false"> never-mind </Item>
+
+      <Item Value="change"> {modify|change} [{it|appointment}] </Item>
+      <Item value="change"> {g:Negative} </Item>
+    </PhraseList>
+
+
+    <!-- Change Dialog -->
+    <Intent Name="CreateAppointment" Scope="CreateAppointment_Change">
+      <ListenFor> [the] {TitleTimeOrLocation} </ListenFor>
+
+    </Intent>
+
+    <PhraseList Label="TitleTimeOrLocation" SlotName="TitleTimeOrLocation">
+      <Item Value="title"> [change] [the] title </Item>
+      <Item Value="time"> [change] [the] time </Item>
+      <Item Value="location"> [change] [the] location </Item>
+      <Item value="none"> {g:NoneOfThose} [options] </Item>
+    </PhraseList>
+
+    <!-- Strings -->
+    <Intent Name="CreateAppointment" Scope="g:Nop">
+      <ListenFor> {g:Prefix} {g:Suffix} </ListenFor>
+
+      <!-- GENERATED STRINGS - START -->
+      <!-- !# createappointment/getappointmenttitle/gettitle -->
+      <String Name="AskForTitle">
+          <Value>
+              <Tts> {g:PromptAck{}} what do you wanna call it? </Tts>
+              <Gui> What do you want to call it? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} What do you wanna call it? </Tts>
+              <Gui> What do you want to call it? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} What should I call it? </Tts>
+              <Gui> What should I call it? </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} What's the title? </Tts>
+              <Gui> What's the title? </Gui>
+          </Value>
+      </String>
+
+      <String Name="AskForTitle_RetryX">
+          <Value>
+              <Tts> {g:Reprompt{}} What was the title? </Tts>
+              <Gui> What was the title? </Gui>
+          </Value>
+      </String>
+
+      <!-- !# createappointment/getappointmentrstart/getstart -->
+      <String Name="AskForStartTimeCreateAppointment">
+          <Value>
+              <Tts> {g:PromptAck{}} when's your event? </Tts>
+              <Gui> When's your event? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} When should I schedule the event? </Tts>
+              <Gui> When should I schedule the event? </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} When's your event? </Tts>
+              <Gui> When's your event? </Gui>
+          </Value>
+      </String>
+
+      <String Name="AskForStartTime_RetryX">
+          <Value>
+              <Tts> {g:Reprompt{}} When's the event? </Tts>
+              <Gui> When's the event? </Gui>
+          </Value>
+      </String>
+
+      <String Name="AskForStartDateTime_Tip">
+          <Value><Gui> try Tonight at 9 o'clock </Gui></Value>
+          <Value><Gui> try From 3 to 5 PM today </Gui></Value>
+          <Value><Gui> try At 2 PM on Friday </Gui></Value>
+          <Value><Gui> try At 4 PM on July 28th </Gui></Value>
+      </String>
+
+      <!-- !# createappointment/getappointmentrstart/getstarttime -->
+      <String Name="AskForStartTimeCreateAppointment">
+          <Value>
+              <Tts> {g:PromptAck{}} what time does it start? </Tts>
+              <Gui> What time does it start? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} what time does it kick off? </Tts>
+              <Gui> What time does it kick off? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} what's the start time? </Tts>
+              <Gui> What's the start time? </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} What's the start time? </Tts>
+              <Gui> What's the start time? </Gui>
+          </Value>
+      </String>
+
+      <String Name="AskForStartTimeCreateAppointment_RetryX">
+          <Value>
+              <Tts> {g:Reprompt{}} What was the start time? </Tts>
+              <Gui> What was the start time? </Gui>
+          </Value>
+      </String>
+
+      <String Name="AskForStartTimeCreateAppointment_Tip">
+          <Value><Gui> try At 2 PM </Gui></Value>
+          <Value><Gui> try At noon </Gui></Value>
+          <Value><Gui> try At 5 o'clock in the morning </Gui></Value>
+      </String>
+
+      <!-- !# createappointment/getappointmentrstart/inferendtime/getendtime -->
+      <String Name="AskForEndTime">
+          <Value>
+              <Tts> {g:PromptAck{}} what time does it end? </Tts>
+              <Gui> What time does it end? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} when does it wrap up? </Tts>
+              <Gui> When does it wrap up? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} what time is it over? </Tts>
+              <Gui> What time is it over? </Gui>
+          </Value>
+      </String>
+
+      <String Name="AskForEndTime_RetryX">
+          <Value>
+              <Tts> {g:Reprompt{}} What time did your event end? </Tts>
+              <Gui> What time did your event end? </Gui>
+          </Value>
+      </String>
+
+      <String Name="AskForEndTime_Tip">
+          <Value><Gui> try At 5 PM </Gui></Value>
+          <Value><Gui> try At noon </Gui></Value>
+          <Value><Gui> try At 10 AM </Gui></Value>
+      </String>
+
+      <!-- !# createappointment/confirmappointment/samedayappointment/confirmwithstarttime -->
+      <String Name="ConfirmAppointmentStartTime">
+          <Value>
+              <Tts> {g:PromptAck{}} I'll add {Title} to your calendar at {StartTime}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} I can add {Title} to your calendar at {StartTime}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} add {Title} to your calendar at {StartTime}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} Add {Title} to your calendar at {StartTime}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+      </String>
+
+      <String Name="ConfirmAppointmentStartTime_RetryX">
+          <Value>
+              <Tts> {g:Reprompt{}} Should I add this to your calendar? </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+      </String>
+
+      <String Name="ConfirmAppointmentStartTime_Tip">
+          <Value><Gui> you can say Yes, No, or Cancel </Gui></Value>
+      </String>
+
+      <!-- !# createappointment/confirmappointment/samedayappointment/confirmallday -->
+      <String Name="ConfirmAllDay">
+          <Value>
+              <Tts> {g:PromptAck{}} I'll add {Title} to your calendar for all day {data_StartDayOrDate}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} I can add {Title} to your calendar for all day {data_StartDayOrDate}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} add {Title} to your calendar for all day {data_StartDayOrDate}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} Add {Title} to your calendar for all day {data_StartDayOrDate}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+      </String>
+
+      <String Name="ConfirmAllDay_RetryX">
+          <Value>
+              <Tts> {g:Reprompt{}} Should I add this to your calendar? </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+      </String>
+
+      <String Name="ConfirmAllDay_Tip">
+          <Value><Gui> you can say Yes, No, or Cancel </Gui></Value>
+      </String>
+
+      <!-- !# createappointment/confirmappointment/samedayappointment/confirmwithstartandendtime -->
+      <String Name="ConfirmWithStartAndEndTime">
+          <Value>
+              <Tts> {g:PromptAck{}} I'll add {Title} to your calendar from {data_FromToTime} {data_StartDayOrDate}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} I can add {Title} to your calendar from {data_FromToTime} {data_StartDayOrDate}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} add {Title} to your calendar from {data_FromToTime} {data_StartDayOrDate}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} Add {Title} to your calendar from {data_FromToTime} {data_StartDayOrDate}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+      </String>
+
+      <String Name="ConfirmWithStartAndEndTime_RetryX">
+          <Value>
+              <Tts> {g:Reprompt{}} Should I add this to your calendar? </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+      </String>
+
+      <String Name="ConfirmWithStartAndEndTime_Tip">
+          <Value><Gui> you can say Yes, No, or Cancel </Gui></Value>
+      </String>
+
+      <!-- !# createappointment/confirmappointment/samedayappointment/confirmwithstarttimeandlocation -->
+      <String Name="ConfirmWithStartTimeAndLocation">
+          <Value>
+              <Tts> {g:PromptAck{}} I'll add {Title} at {data_Location} at {StartTime}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} I can add {Title} at {data_Location} at {StartTime}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} add {Title} at {data_Location} to the calendar at {StartTime}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} Add {Title} at {data_Location} to your calendar at {StartTime}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+      </String>
+
+      <String Name="ConfirmWithStartTimeAndLocation_RetryX">
+          <Value>
+              <Tts> {g:Reprompt{}} Should I add this to your calendar? </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+      </String>
+
+      <String Name="ConfirmWithStartTimeAndLocation_Tip">
+          <Value><Gui> you can say Yes, No, or Cancel </Gui></Value>
+      </String>
+
+      <!-- !# createappointment/confirmappointment/samedayappointment/confirmalldayandlocation -->
+      <String Name="ConfirmAllDayWithLocation">
+          <Value>
+              <Tts> {g:PromptAck{}} I'll add {Title} at {data_Location} to your calendar for all day {data_StartDayOrDate}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} I can add {Title} at {data_Location} for all day {data_StartDayOrDate}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} add {Title} at {data_Location} to your calendar for all day {data_StartDayOrDate}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} Add {Title} at {data_Location} to your calendar for all day {data_StartDayOrDate}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+      </String>
+
+      <String Name="ConfirmAllDayWithLocation_RetryX">
+          <Value>
+              <Tts> {g:Reprompt{}} Should I add this to your calendar? </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+      </String>
+
+      <String Name="ConfirmAllDayWithLocation_Tip">
+          <Value><Gui> you can say Yes, No, or Cancel </Gui></Value>
+      </String>
+
+      <!-- !# createappointment/confirmappointment/samedayappointment/confirmwithstartandendtimeandlocation -->
+      <String Name="ConfirmWithStartAndEndTimeAndLocation">
+          <Value>
+              <Tts> {g:PromptAck{}} I'll add {Title} at {data_Location} to your calendar from {data_FromToTime} {data_StartDayOrDate}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} I can add {Title} at {data_Location} from {data_FromToTime} {data_StartDayOrDate}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} add {Title} at {data_Location} to your calendar from {data_FromToTime} {data_StartDayOrDate}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} Add {Title} at {data_Location} to your calendar from {data_FromToTime} {data_StartDayOrDate}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+      </String>
+
+      <String Name="ConfirmWithStartAndEndTimeAndLocation_RetryX">
+          <Value>
+              <Tts> {g:Reprompt{}} Should I add this to your calendar? </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+      </String>
+
+      <String Name="ConfirmWithStartAndEndTimeAndLocation_Tip">
+          <Value><Gui> you can say Yes, No, or Cancel </Gui></Value>
+      </String>
+
+      <!-- !# createappointment/confirmappointment/mult-dayappointment/confirmmulti-day -->
+      <String Name="ConfirmMultiday">
+          <Value>
+              <Tts> {g:PromptAck{}} I'll add {Title} to your calendar from {data_StartDayOrDate} to {data_EndDayOrDate}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} I can add {Title} from {data_StartDayOrDate} to {data_EndDayOrDate}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} add {Title} to your calendar from {data_StartDayOrDate} to {data_EndDayOrDate}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} Add {Title} to your calendar from {data_StartDayOrDate} to {data_EndDayOrDate}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+      </String>
+
+      <String Name="ConfirmMultiday_RetryX">
+          <Value>
+              <Tts> {g:Reprompt{}} Should I add this to your calendar? </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+      </String>
+
+      <String Name="ConfirmMultiday_Tip">
+          <Value><Gui> you can say Yes, No, or Cancel </Gui></Value>
+      </String>
+
+      <!-- !# createappointment/confirmappointment/mult-dayappointment/confirmmulti-day-withstartandendtimes -->
+      <String Name="ConfirmMultidayWithTime">
+          <Value>
+              <Tts> {g:PromptAck{}} I'll add {Title} to your calendar from {data_StartDayOrDate} at {StartTime} to {data_EndDayOrDate} at {data_EndTime}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} I can add {Title} from {data_StartDayOrDate} at {StartTime} to {data_EndDayOrDate} at {data_EndTime}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} add {Title} to your calendar from {data_StartDayOrDate} at {StartTime} to {data_EndDayOrDate} at {data_EndTime}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} Add {Title} to your calendar from {data_StartDayOrDate} at {StartTime} to {data_EndDayOrDate} at {data_EndTime}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+      </String>
+
+      <String Name="ConfirmMultidayWithTime_RetryX">
+          <Value>
+              <Tts> {g:Reprompt{}} Should I add this to your calendar? </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+      </String>
+
+      <String Name="ConfirmMultidayWithTime_Tip">
+          <Value><Gui> you can say Yes, No, or Cancel </Gui></Value>
+      </String>
+
+      <!-- !# createappointment/confirmappointment/mult-dayappointment/confirmmulti-day-at-location -->
+      <String Name="ConfirmMultidayWithLocation">
+          <Value>
+              <Tts> {g:PromptAck{}} I'll add {Title} at {data_Location} to your calendar from {data_StartDayOrDate} to {data_EndDayOrDate}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} I can add {Title} at {data_Location} from {data_StartDayOrDate} to {data_EndDayOrDate}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} add {Title} at {data_Location} to your calendar from {data_StartDayOrDate} to {data_EndDayOrDate}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} Add {Title} at {data_Location} to your calendar from {data_StartDayOrDate} to {data_EndDayOrDate}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+      </String>
+
+      <String Name="ConfirmMultidayWithLocation_RetryX">
+          <Value>
+              <Tts> {g:Reprompt{}} Should I add this to your calendar? </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+      </String>
+
+      <String Name="ConfirmMultidayWithLocation_Tip">
+          <Value><Gui> you can say Yes, No, or Cancel </Gui></Value>
+      </String>
+
+      <!-- !# createappointment/confirmappointment/mult-dayappointment/confirmmulti-day-withstartandendtimes-at-location -->
+      <String Name="ConfirmMultidayWithTimeAndLocation">
+          <Value>
+              <Tts> {g:PromptAck{}} I'll add {Title} at {data_Location} from {data_StartDayOrDate} at {StartTime} to {data_EndDayOrDate} at {data_EndTime}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} I can add {Title} at {data_Location} from {data_StartDayOrDate} at {StartTime} to {data_EndDayOrDate} at {data_EndTime}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} add {Title} at {data_Location} from {data_StartDayOrDate} at {StartTime} to {data_EndDayOrDate} at {data_EndTime}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} Add {Title} at {data_Location} from {data_StartDayOrDate} at {StartTime} to {data_EndDayOrDate} at {data_EndTime}. {g:RequestConfirmation{}} </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+      </String>
+
+      <String Name="ConfirmMultidayWithTimeAndLocation_RetryX">
+          <Value>
+              <Tts> {g:Reprompt{}} Should I add this to your calendar? </Tts>
+              <Gui> Add this to your calendar? </Gui>
+          </Value>
+      </String>
+
+      <String Name="ConfirmMultidayWithTimeAndLocation_Tip">
+          <Value><Gui> you can say Yes, No, or Cancel </Gui></Value>
+      </String>
+
+      <!-- !# createappointment/confirmappointment/appointmentsuccess -->
+      <String Name="AppointmentSuccess">
+          <Value>
+              <Tts> {g:Prompt{}}{EmoteSatisfied} Got it. {EarConSuccess} </Tts>
+              <Gui> I've added this. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}}{EmoteSatisfied} Great. {EarConSuccess} </Tts>
+              <Gui> I've added this. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}}{EmoteSatisfied} Sure thing. {EarConSuccess} </Tts>
+              <Gui> I've added this. </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}}{EmoteSatisfied} {EarConSuccess} </Tts>
+              <Gui> I've added this. </Gui>
+          </Value>
+      </String>
+
+      <!-- !# createappointment/confirmappointment/mentionconflict/1conflict -->
+      <String Name="OneConflict">
+          <Value>
+              <Tts> {g:Prompt{}}{EmoteSensitive} OK, I've added it. {EarConSuccess} {g:InformIntro{}} you have {data_ConflictTitle} at the same time. </Tts>
+              <Gui> I've added it. {g:InformIntro{}} you have this at the same time. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}}{EmoteSensitive} Alright, I've added it. {EarConSuccess} {g:InformIntro{}} you have {data_ConflictTitle} at the same time. </Tts>
+              <Gui> I've added it. {g:InformIntro{}} you have this at the same time. </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}}{EmoteSensitive} I've added it. {EarConSuccess} {g:InformIntro{}} you have {data_ConflictTitle} at the same time. </Tts>
+              <Gui> I've added it. {g:InformIntro{}} you have this at the same time. </Gui>
+          </Value>
+      </String>
+
+      <String Name="OneConflict_Tip">
+          <Value><Gui> tap an event to change the time </Gui></Value>
+      </String>
+
+      <!-- !# createappointment/confirmappointment/mentionconflict/manyconflict -->
+      <String Name="ManyConflicts">
+          <Value>
+              <Tts> {g:Prompt{}}{EmoteSensitive} Great, I've added that. {EarConSuccess} {g:InformIntro{}} you have {data_NumConflicts} other events at the same time. </Tts>
+              <Gui> Great, I've added that. {g:InformIntro{}} you have {data_NumConflicts} others at the same time. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}}{EmoteSensitive} OK, added that. {EarConSuccess} {g:InformIntro{}} you have {data_NumConflicts} other events at the same time. </Tts>
+              <Gui> OK, added that. {g:InformIntro{}} you have {data_NumConflicts} others at the same time. </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}}{EmoteSensitive} I've added that. {EarConSuccess} {g:InformIntro{}} you have {data_NumConflicts} other events at that same time. </Tts>
+              <Gui> I've added that. {g:InformIntro{}} you have {data_NumConflicts} others at that same time. </Gui>
+          </Value>
+      </String>
+
+      <String Name="ManyConflicts_Tip">
+          <Value><Gui> tap an event to change the time </Gui></Value>
+      </String>
+
+      <!-- !# createappointment/confirmappointment/appointmentcanelled -->
+      <String Name="CancelAppointment">
+          <Value>
+              <Tts> {g:PromptCancelled{}}{EmoteSensitive} OK, scratch that. </Tts>
+              <Gui> Scratch that. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptCancelled{}}{EmoteSensitive} Alright, I cancelled that. </Tts>
+              <Gui> Alright, I cancelled that. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptCancelled{}}{EmoteSensitive} Cancelled. </Tts>
+              <Gui> Cancelled. </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptCancelled{}}{EmoteSensitive} </Tts>
+              <Gui> Cancelled. </Gui>
+          </Value>
+      </String>
+
+      <!-- !# createappointment/confirmappointment/changeappointment/change-withoutlocationoption -->
+      <String Name="ChangeWhat">
+          <Value>
+              <Tts> {g:PromptChange{}} do you wanna change the title or the time? </Tts>
+              <Gui> Do you want to change the title or the time? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptChange{}} change the title or the time? </Tts>
+              <Gui> Change the title or the time? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptChange{}} what has to change, title or time? </Tts>
+              <Gui> What has to change, title or time? </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} What did you wanna change? </Tts>
+              <Gui> What did you want to change? </Gui>
+          </Value>
+      </String>
+
+      <String Name="ChangeWhat_RetryX">
+          <Value>
+              <Tts> {g:Reprompt{}} Did you wanna change the title or the time? </Tts>
+              <Gui> Did you want to change the title or the time? </Gui>
+          </Value>
+      </String>
+
+      <String Name="ChangeWhat_Tip">
+          <Value><Gui> you can say The title, The time, or Cancel </Gui></Value>
+      </String>
+
+      <!-- !# createappointment/confirmappointment/changeappointment/change-withlocationoption -->
+      <String Name="ChangeWhatWithLocation">
+          <Value>
+              <Tts> {g:PromptChange{}} do you wanna change the title, time or location? </Tts>
+              <Gui> Do you want to change the title, time or location? </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} What did you wanna change? </Tts>
+              <Gui> What did you want to change? </Gui>
+          </Value>
+      </String>
+
+      <String Name="ChangeWhatWithLocation_RetryX">
+          <Value>
+              <Tts> {g:Reprompt{}} Did you wanna change the title, time or location? </Tts>
+              <Gui> Did you want to change the title, time or location? </Gui>
+          </Value>
+      </String>
+
+      <String Name="ChangeWhatWithLocation_Tip">
+          <Value><Gui> you can say The title, The time, The location, or Cancel </Gui></Value>
+      </String>
+
+      <!-- !# createappointment/confirmappointment/changeappointment/getappointmentlocation/getlocation -->
+      <String Name="AskForLocation">
+          <Value>
+              <Tts> {g:PromptChange{}} where's the location? </Tts>
+              <Gui> Where's the location? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptChange{}} where's it located? </Tts>
+              <Gui> Where's it located? </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} Where's the location? </Tts>
+              <Gui> Where's the location? </Gui>
+          </Value>
+      </String>
+
+      <String Name="AskForLocation_RetryX">
+          <Value>
+              <Tts> {g:Reprompt{}} What was the location? </Tts>
+              <Gui> What was the location? </Gui>
+          </Value>
+      </String>
+
+      <String Name="AskForLocation_Tip">
+          <Value><Gui> try At {MeetingPlacesTemplate{}} </Gui></Value>
+          <Value><Gui> try At work </Gui></Value>
+          <Value><Gui> try At 42 Wallaby Way </Gui></Value>
+      </String>
+
+      <!-- !# shared/locationtemplates/Meeting-Places-Template -->
+      <String Name="MeetingPlacesTemplate">
+          <Value><Tts> Los Pollos Hermanos </Tts></Value>
+          <Value><Tts> the movie theatre </Tts></Value>
+          <Value><Tts> the gym </Tts></Value>
+          <Value><Tts> the diner </Tts></Value>
+          <Value><Tts> the doctor's office </Tts></Value>
+          <Value><Tts> the school </Tts></Value>
+          <Value><Tts> mom's house </Tts></Value>
+          <Value><Tts> the library </Tts></Value>
+          <Value><Tts> the park </Tts></Value>
+          <Value><Tts> the coffee shop </Tts></Value>
+      </String>
+
+      <!-- GENERATED STRINGS - END -->
+
+      <String Name="AllDayCheckBoxLabel">
+        <Value><Gui> All day event </Gui></Value>
+      </String>
+
+      <!-- This is for <starttime> to <endtime> when creating an appointment -->
+      <String Name="TimeSeperator">
+        <Value><Gui> to </Gui></Value>
+      </String>
+      
+      
+      <!-- Dialog Titles - Will be moved into generated strings soon -->
+      <String Name="ConfirmWithStartTime_Title">
+          <Value><Gui> {TitleImageCalendar} EVENT              </Gui></Value>
+      </String>
+  
+      <String Name="ConfirmWithStartTime_ButtonSubmit">
+          <Value><Gui> Add                                     </Gui></Value>
+      </String>
+
+      <String Name="ConfirmWithStartTime_ButtonCancel">
+          <Value><Gui> Cancel                                  </Gui></Value>
+      </String>
+
+      <String Name="ConfirmAllDay_Title">
+          <Value><Gui> {TitleImageCalendar} EVENT              </Gui></Value>
+      </String>
+        
+      <String Name="ConfirmAllDay_ButtonSubmit">
+          <Value><Gui> Add                                     </Gui></Value>
+      </String>
+
+      <String Name="ConfirmAllDay_ButtonCancel">
+          <Value><Gui> Cancel                                  </Gui></Value>
+      </String>
+
+      <String Name="ConfirmWithStartAndEndTime_Title">
+          <Value><Gui> {TitleImageCalendar} EVENT              </Gui></Value>
+      </String>
+        
+      <String Name="ConfirmWithStartAndEndTime_ButtonSubmit">
+          <Value><Gui> Add                                     </Gui></Value>
+      </String>
+
+      <String Name="ConfirmWithStartAndEndTime_ButtonCancel">
+          <Value><Gui> Cancel                                  </Gui></Value>
+      </String>
+
+      <String Name="ConfirmWithStartTimeAndLocation_Title">
+          <Value><Gui> {TitleImageCalendar} EVENT              </Gui></Value>
+      </String>
+  
+      <String Name="ConfirmWithStartTimeAndLocation_ButtonSubmit">
+          <Value><Gui> Add                                     </Gui></Value>
+      </String>
+
+      <String Name="ConfirmWithStartTimeAndLocation_ButtonCancel">
+          <Value><Gui> Cancel                                  </Gui></Value>
+      </String>
+
+      <String Name="ConfirmAllDayWithLocation_Title">
+          <Value><Gui> {TitleImageCalendar} EVENT              </Gui></Value>
+      </String>
+
+      <String Name="ConfirmAllDayWithLocation_ButtonSubmit">
+          <Value><Gui> Add                                     </Gui></Value>
+      </String>
+
+      <String Name="ConfirmAllDayWithLocation_ButtonCancel">
+          <Value><Gui> Cancel                                  </Gui></Value>
+      </String>
+
+      <String Name="ConfirmWithStartAndEndTimeAndLocation_Title">
+          <Value><Gui> {TitleImageCalendar} EVENT              </Gui></Value>
+      </String>
+      
+      <String Name="ConfirmWithStartAndEndTimeAndLocation_ButtonSubmit">
+          <Value><Gui> Add                                     </Gui></Value>
+      </String>
+
+      <String Name="ConfirmWithStartAndEndTimeAndLocation_ButtonCancel">
+          <Value><Gui> Cancel                                  </Gui></Value>
+      </String>
+
+      <String Name="ConfirmMultiday_Title">
+          <Value><Gui> {TitleImageCalendar} EVENT              </Gui></Value>
+      </String>
+      
+      <String Name="ConfirmMultiday_ButtonSubmit">
+          <Value><Gui> Add                                     </Gui></Value>
+      </String>
+
+      <String Name="ConfirmMultiday_ButtonCancel">
+          <Value><Gui> Cancel                                  </Gui></Value>
+      </String>
+
+      <String Name="ConfirmMultidayWithTime_Title">
+          <Value><Gui> {TitleImageCalendar} EVENT              </Gui></Value>
+      </String>
+      
+      <String Name="ConfirmMultidayWithTime_ButtonSubmit">
+          <Value><Gui> Add                                     </Gui></Value>
+      </String>
+
+      <String Name="ConfirmMultidayWithTime_ButtonCancel">
+          <Value><Gui> Cancel                                  </Gui></Value>
+      </String>
+
+      <String Name="ConfirmMultidayWithLocation_Title">
+          <Value><Gui> {TitleImageCalendar} EVENT              </Gui></Value>
+      </String>
+      
+      <String Name="ConfirmMultidayWithLocation_ButtonSubmit">
+          <Value><Gui> Add                                     </Gui></Value>
+      </String>
+
+      <String Name="ConfirmMultidayWithLocation_ButtonCancel">
+          <Value><Gui> Cancel                                  </Gui></Value>
+      </String>
+
+      <String Name="ConfirmMultidayWithTimeAndLocation_Title">
+          <Value><Gui> {TitleImageCalendar} EVENT              </Gui></Value>
+      </String>
+      
+      <String Name="ConfirmMultidayWithTimeAndLocation_ButtonSubmit">
+          <Value><Gui> Add                                     </Gui></Value>
+      </String>
+
+      <String Name="ConfirmMultidayWithTimeAndLocation_ButtonCancel">
+          <Value><Gui> Cancel                                  </Gui></Value>
+      </String>
+
+    </Intent>
+
+  </Domain>
+</VoiceCommands>

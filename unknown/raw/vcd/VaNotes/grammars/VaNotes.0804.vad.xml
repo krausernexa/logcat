@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands 
+  xmlns="http://schemas.microsoft.com/voicecommands/1.0" 
+  xmlns:x="http://schemas.thinkman.com/voicecommands/extensions/1.0">
+
+  <Domain Name="Note" ClassName="NotesRes">
+
+    <Intent Name="Create" Scope="g:Nop">
+      <!-- Listen Fors -->
+      <ListenFor> [{make|create} [a]] note </ListenFor>
+    </Intent>
+
+    <Intent Name="Create" Scope="GetNoteBody">
+      <!-- Listen Fors -->
+      <ListenFor> {DictateNote} </ListenFor>
+    </Intent>
+
+    <Dictation Label="DictateNote" SlotName="Body" />
+
+    <!-- Finished Dialog -->
+    <Intent Name="Create" Scope="g:Nop">
+
+      <String Name="Saving" CortanaOnly="true">
+        <Value>
+          <Tts> {EmoteThinking} Saving your note. </Tts>
+          <Gui> Saving your note... </Gui>
+        </Value>
+      </String>
+
+      <!-- GENERATED STRINGS - START -->
+      <!-- !# createnote/getnotebody/getnote -->
+      <String Name="AskForNote" CortanaOnly="true">
+          <Value>
+              <Tts> {g:PromptAck{}} I'll take a note. </Tts>
+              <Gui> I'll take a note. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} what's your note? </Tts>
+              <Gui> What's your note? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} Taking a note. </Tts>
+              <Gui> Taking a note. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptAck{}} what's on your mind? </Tts>
+              <Gui> What's on your mind? </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}} Tell me your note. </Tts>
+              <Gui> Tell me your note. </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}} What's your note? </Tts>
+              <Gui> What's your note? </Gui>
+          </Value>
+      </String>
+
+      <String Name="AskForNote_RetryX">
+          <Value>
+              <Tts> {g:Reprompt{}} What should your note say? </Tts>
+              <Gui> What should your note say? </Gui>
+          </Value>
+      </String>
+
+      <!-- !# createnote/confirmnote/success -->
+      <String Name="Success" CortanaOnly="true">
+          <Value>
+              <Tts> {g:Prompt{}}{EmoteSatisfied} Got it. {EarConSuccess} </Tts>
+              <Gui> Here's your note. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}}{EmoteSatisfied} Got it. {EarConSuccess} </Tts>
+              <Gui> Here's your note. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:Prompt{}}{EmoteSatisfied} Here's what I got. {EarConSuccess} </Tts>
+              <Gui> Here's what I got. </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptTapered{}}{EmoteSatisfied} {EarConSuccess} </Tts>
+              <Gui> Here's your note. </Gui>
+          </Value>
+      </String>
+
+      <String Name="Success_Tip">
+          <Value><Gui> you can tap to edit your note </Gui></Value>
+      </String>
+
+      <!-- !# createnote/confirmnote/cancelnote -->
+      <String Name="CancelNote" CortanaOnly="true">
+          <Value>
+              <Tts> {g:PromptCancelled{}}{EmoteSatisfied} I'll cancel that note. </Tts>
+              <Gui> I'll cancel that note. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptCancelled{}}{EmoteSatisfied} Cancelling the note. </Tts>
+              <Gui> Cancelling the note. </Gui>
+          </Value>
+          <Value>
+              <Tts> {g:PromptCancelled{}}{EmoteSatisfied} Note cancelled. </Tts>
+              <Gui> Note cancelled. </Gui>
+          </Value>
+          <Value Weight="0.0">
+              <Tts> {g:PromptCancelled{}}{EmoteSatisfied} </Tts>
+              <Gui> OK, cancelled. </Gui>
+          </Value>
+      </String>
+
+      <!-- GENERATED STRINGS - END -->
+
+      <String Name="TitleEditbox_Placeholder" CortanaOnly="true">
+        <Value><Gui> Title </Gui></Value>
+      </String>
+      
+      <String Name="NoteEditbox_Placeholder" CortanaOnly="true">
+        <Value><Gui> Note </Gui></Value>
+      </String>
+
+      <!-- AskForNote template - START -->
+      <String Name="AskForNoteGui" CortanaOnly="true">
+        <Value><Gui> {AskForNote{}} </Gui></Value>
+      </String>
+      
+      <!-- The following strings with "_" suffix are used by LgResult to create form for AskForNote string -->      
+      <String Name="AskForNoteGui_Title">
+        <Value><Gui> {TitleImageNotes} NOTE </Gui></Value>
+      </String>
+
+      <String Name="AskForNoteGui_ButtonSubmit">
+        <Value><Gui> add </Gui></Value>
+      </String>
+
+      <String Name="AskForNoteGui_ButtonCancel">
+        <Value><Gui> cancel </Gui></Value>
+      </String>
+
+      <!-- AskForNote template - END -->
+      
+      <String Name="Success_HeaderTitle">
+        <Value><Gui> {HeaderImageNotes} ONENOTE </Gui></Value>
+      </String>
+
+      <String Name="Success_Header">
+        <Value><Gui> {d_NoteBody} </Gui></Value>
+      </String>
+
+      <String Name="Success_Header2">
+        <Value><Gui> {d_NoteTitle} </Gui></Value>
+      </String>
+
+      <!-- Only for non-Cortana case - START -->
+      <String Name="NonCortanaPrefix">
+        <Value><Gui>  </Gui></Value>
+      </String>
+
+      <String Name="NoteBodyEmpty">
+        <Value><Gui>  </Gui></Value>
+      </String>
+      <!-- Only for non-Cortana case - END-->
+    </Intent>
+    
+  </Domain>
+
+</VoiceCommands>
